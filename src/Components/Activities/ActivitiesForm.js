@@ -43,6 +43,7 @@ const ActivitiesForm = () => {
 				onChange={handleChange}
 				placeholder="Write some activity description"
 			/>
+			<label htmlFor="image">Upload Image:</label>
 			<input type="file" name="image" ref={imageInput} />
 			<button className="submit-btn" type="submit">
 				Send
