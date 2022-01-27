@@ -7,19 +7,30 @@ import * as Yup from "yup";
 
 const CategoriesForm = () => {
   const initialValues = {
-    nameArticle: "",
+    name: "",
     description: "",
-    // image: "",
+    image: "",
   };
+
+  const SUPPORTED_FORMATS = ["image/jpg", "image/png"];
 
   const validationSchema = Yup.object().shape({
     description: Yup.string()
       .min(1)
       .max(150, "No se pueden exceder los 150 caracteres")
       .required("El campo descripción es obligatorio."),
-    nameArticle: Yup.string()
+    name: Yup.string()
       .required("El campo nombre es obligatorio.")
       .min(4, "El nombre debe contener almenos 4 caracteres"),
+    image: Yup.mixed()
+      .required("ingrese una imagen.")
+      .test(
+        "fileType",
+        "Formato incorrecto. Sólo se aceptan archivos .jpg, .jpeg, .png",
+        (value) => {
+          if (value) return SUPPORTED_FORMATS.includes(value.type);
+        }
+      ),
   });
 
   const inputHandler = (event, editor) => {
@@ -40,12 +51,12 @@ const CategoriesForm = () => {
         <Field
           className="input-field"
           type="text"
-          name="nameArticle"
+          name="name"
           placeholder="Ingrese nombre de categoría"
         />
         <ErrorMessage
           className="field-error text-danger"
-          name="nameArticle"
+          name="name"
           component="div"
         />
 
@@ -59,6 +70,21 @@ const CategoriesForm = () => {
         <ErrorMessage
           className="field-error text-danger"
           name="description"
+          component="div"
+        />
+
+        <input
+          className="input-field"
+          name="image"
+          type="file"
+          onChange={(e) => {
+            formik.setFieldValue("image", e.currentTarget.files[0]);
+          }}
+        />
+
+        <ErrorMessage
+          className="field-error text-danger"
+          name="image"
           component="div"
         />
 
