@@ -3,6 +3,12 @@ import "../FormStyles.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Form, Field, ErrorMessage, useFormik, FormikProvider } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getCategory,
+  postCategoy,
+  editCategory,
+} from "../../app/slices/category";
 import * as Yup from "yup";
 
 const CategoriesForm = () => {
@@ -19,9 +25,11 @@ const CategoriesForm = () => {
       .min(1)
       .max(150, "No se pueden exceder los 150 caracteres")
       .required("El campo descripción es obligatorio."),
+
     name: Yup.string()
       .required("El campo nombre es obligatorio.")
       .min(4, "El nombre debe contener almenos 4 caracteres"),
+
     image: Yup.mixed()
       .required("ingrese una imagen.")
       .test(
@@ -81,7 +89,6 @@ const CategoriesForm = () => {
             formik.setFieldValue("image", e.currentTarget.files[0]);
           }}
         />
-
         <ErrorMessage
           className="field-error text-danger"
           name="image"
