@@ -29,7 +29,7 @@ const RegisterForm = () => {
             errors.password = '* a longitud minima es 6'
         }
         if (!/^(?=.*\d)(?=.*[a-zA-Záéíóúüñ])(?=.*[$-/:-?{-~!"^_`\[\]])/.test(values.password)) {
-            errors.password = '* contraseña incorrecta'
+            errors.password = '* la contraseña no cumple los parametros solicitados'           
         }
 
         return errors
