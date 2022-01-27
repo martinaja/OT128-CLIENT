@@ -1,50 +1,70 @@
-import React, { useState } from "react";
+import React from "react";
 import "../FormStyles.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { Form, Field, ErrorMessage, useFormik, FormikProvider } from "formik";
+import * as Yup from "yup";
 
 const CategoriesForm = () => {
-  const [initialValues, setInitialValues] = useState({
-    name: "",
+  const initialValues = {
+    nameArticle: "",
     description: "",
+    // image: "",
+  };
+
+  const validationSchema = Yup.object().shape({
+    description: Yup.string()
+      .min(1)
+      .max(150, "No se pueden exceder los 150 caracteres")
+      .required("El campo descripción es obligatorio."),
+    nameArticle: Yup.string()
+      .required("El campo nombre es obligatorio.")
+      .min(4, "El nombre debe contener almenos 4 caracteres"),
   });
 
-  const handleChange = (e) => {
-    if (e.target.name === "name") {
-      setInitialValues({ ...initialValues, name: e.target.value });
-    }
-    if (e.target.name === "description") {
-      setInitialValues({ ...initialValues, description: e.target.value });
-    }
+  const inputHandler = (event, editor) => {
+    formik.setFieldValue("description", editor.getData());
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(initialValues);
+  const onSubmit = (values) => {
+    const fd = new FormData();
+    fd.append("description", values.description);
+    console.log(values);
   };
+
+  const formik = useFormik({ initialValues, onSubmit, validationSchema });
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
-      <input
-        className="input-field"
-        type="text"
-        name="name"
-        value={initialValues.name}
-        onChange={handleChange}
-        placeholder="Title"
-      />
-      <input
-        className="input-field"
-        type="text"
-        name="description"
-        value={initialValues.description}
-        onChange={handleChange}
-        placeholder="Write some description"
-      />
-      <button className="submit-btn" type="submit">
-        Send
-      </button>
-    </form>
+    <FormikProvider value={formik}>
+      <Form className="form-container">
+        <Field
+          className="input-field"
+          type="text"
+          name="nameArticle"
+          placeholder="Ingrese nombre de categoría"
+        />
+        <ErrorMessage
+          className="field-error text-danger"
+          name="nameArticle"
+          component="div"
+        />
+
+        <CKEditor
+          id="inputText"
+          className="inputText"
+          editor={ClassicEditor}
+          name="description"
+          onChange={inputHandler}
+        />
+        <ErrorMessage
+          className="field-error text-danger"
+          name="description"
+          component="div"
+        />
+
+        <button type="submit">Agregar categoría</button>
+      </Form>
+    </FormikProvider>
   );
 };
 
