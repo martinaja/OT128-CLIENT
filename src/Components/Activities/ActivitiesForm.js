@@ -1,6 +1,8 @@
 import '../FormStyles.css';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const ActivitiesForm = () => {
 	const ALLOWED_FORMATS = ['image/jpeg', 'image/png', 'image/jpg'];
@@ -42,14 +44,13 @@ const ActivitiesForm = () => {
 				error={formik.errors.name}
 			/>
 			{formik.errors.name}
-			<input
-				className="input-field"
-				type="text"
-				name="description"
-				value={formik.values.description}
-				onChange={formik.handleChange}
-				placeholder="Write some activity description"
-				error={formik.errors.description}
+			<CKEditor
+				editor={ClassicEditor}
+				data={formik.values.description}
+				onChange={(event, editor) => {
+					const data = editor.getData();
+					formik.setFieldValue('description', data);
+				}}
 			/>
 			{formik.errors.description}
 			<label htmlFor="image">Upload Image:</label>
