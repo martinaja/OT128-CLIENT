@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../../Components/FormStyles.css';
-import axios from 'axios';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {
@@ -16,67 +15,49 @@ import {
   Box,
   Button,
   Input,
-  // Paper,
 } from '@mui/material';
+import { toBase64 } from '../../utils/toBase64';
+import getCategories from '../../Services/getCategories';
+import getANews from '../../Services/getANews';
+import putANews from '../../Services/putANews';
+import postANews from '../../Services/postANews';
 
 const NewsForm = () => {
-  // const SUPPORTED_FORMATS = ['image/jpg', 'image/png'];
-  const toBase64 = (file) =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
   const { newsId } = useParams();
-  console.log('PARAM', newsId);
   const history = useHistory();
+
   const [news, setNew] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [isEdit, setIsEdit] = useState(false);
-  const [img, setImg] = useState(null);
-  const [previewImg, setPreviewImg] = useState(null);
+  const [isEditable, setIsEdit] = useState(false);
+  const [imgUploaded, setImgUploaded] = useState(null);
+  const [previewImgUploaded, setPreviewImgUploaded] = useState(null);
   const [loader, setLoader] = useState(false);
-
-  async function gettingCategories() {
-    try {
-      setLoader(true);
-      const request = await axios.get(process.env.REACT_APP_API_CATEGORIES_GET); // REFACTORIZAR
-      const data = request?.data.data;
-      setCategories(data);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      setLoader(false);
-    }
-  }
-
-  // Check the uploaded img
-  useEffect(() => {
-    if (!img) return;
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setPreviewImg(reader.result);
-    };
-    reader.readAsDataURL(img);
-  }, [img]);
 
   // Fetch categories
   useEffect(() => {
-    gettingCategories();
-  }, []);
-
-  // Checking that exist an id for news. In case true, upload a news data
-  useEffect(() => {
-    if (!newsId) return;
-    async function gettingNews(id) {
+    (async () => {
       try {
         setLoader(true);
-        const request = await axios.get(
-          `http://ongapi.alkemy.org/api/news/${id}` // REFACTORIZAR
-        );
-        const data = request?.data.data;
+        const fetch = await getCategories();
+        const data = fetch?.data;
+        console.log('CATEGORIES', data);
+        setCategories(data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoader(false);
+      }
+    })();
+  }, []);
+
+  // Checking that exist an id from a news. In case true, upload a news data
+  useEffect(() => {
+    if (!newsId) return;
+    (async () => {
+      try {
+        setLoader(true);
+        const fetch = await getANews(newsId);
+        const data = fetch?.data;
         console.log('DATA FROM NEWS BY ID', data);
         if (data) {
           setNew(data);
@@ -89,63 +70,70 @@ const NewsForm = () => {
       } finally {
         setLoader(false);
       }
-    }
-
-    gettingNews(newsId);
+    })();
   }, [newsId, history]);
+
+  // Preview the uploaded image
+  useEffect(() => {
+    if (!imgUploaded) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImgUploaded(reader.result);
+    };
+    reader.readAsDataURL(imgUploaded);
+  }, [imgUploaded]);
 
   const sendNews = async (data) => {
     console.log('DATA DE FORMIK ANTES DE MANDAR', data);
+    // let newsToSend = data;
+    //  If  user has uploaded a new image, parse it to send
+    // if (imgUploaded) {
+    //   const parseImg = await toBase64(data.image);
+    //   newsToSend = {
+    //     ...data,
+    //     image: parseImg,
+    //   };
+    // }
+
     const parseImg = await toBase64(data.image);
-    const newToSend = {
+    const newsToSend = {
       ...data,
       image: parseImg,
     };
-    console.log('PARA HACER SEND', newToSend);
-    console.log('IS EDIT?', isEdit);
-    if (isEdit) {
-      // PUT
-      const puttingNews = async (data) => {
+
+    console.log('DATA LISTA PARA ENVIAR', newsToSend);
+    if (isEditable) {
+      // Putting a news
+      (async () => {
         try {
           setLoader(true);
-          const request = await axios.put(
-            `http://ongapi.alkemy.org/api/news/${newsId}`, // REFACTORIZAR
-            data
-          );
-          console.log('REQ PUT', request);
+          const request = await putANews(newsId, newsToSend);
+          console.log('REQUEST PUT NEWS', request);
         } catch (e) {
-          console.error('PUT ERROR', e);
+          console.error('REQUEST PUT ERROR', e);
         } finally {
           // Check the changes
-          const request = await axios.get(
-            `http://ongapi.alkemy.org/api/news/${newsId}` // REFACTORIZAR
-          );
-          const data = request?.data.data;
+          const fetch = await getANews(newsId);
+          const data = fetch?.data;
           console.log('DATA FROM NEWS BY ID', data);
           setNew(data);
           setLoader(false);
         }
-      };
-
-      puttingNews(newToSend);
+      })();
     } else {
-      // POST
-      const postingNews = async (data) => {
+      // Posting a news
+      (async () => {
         try {
           setLoader(true);
-          const request = await axios.post(
-            `http://ongapi.alkemy.org/api/news`, // REFACTORIZAR
-            data
-          );
-          console.log('REQ POST', request);
+          const request = await postANews(newsToSend);
+          console.log('REQUEST POST NEWS', request);
+          // ---> It should redirect to the link of the new news
         } catch (e) {
           console.error('POST ERROR', e);
         } finally {
           setLoader(false);
-          // Should redirect the newly created news
         }
-      };
-      postingNews(newToSend);
+      })();
     }
   };
 
@@ -157,15 +145,8 @@ const NewsForm = () => {
       )
       .required('La noticia debe tener un título'),
     content: Yup.string().required('No podés enviar una noticia sin cuerpo'),
-    image: Yup.string().required('Ingresá una imagen'),
-    // .test(
-    //   'fileType',
-    //   'Formato incorrecto. Sólo se aceptan archivos .jpg, .jpeg, .png',
-    //   (value) => {
-    //     if (value) return SUPPORTED_FORMATS.includes(value.type);
-    //   }
-    // ),
-    category_id: Yup.string().required('Campo requerido'),
+    image: Yup.string().required('Imagen requerida'),
+    category_id: Yup.string().required('Categoría requerida'),
   });
 
   return loader ? (
@@ -196,10 +177,10 @@ const NewsForm = () => {
       }) => (
         <Container>
           <Box sx={{ boxShadow: 5, p: 5 }}>
-            {previewImg || news.image ? (
+            {previewImgUploaded || news.image ? (
               <img
                 style={{ maxWidth: '100%' }}
-                src={previewImg || news.image}
+                src={previewImgUploaded || news.image}
                 alt=''
               />
             ) : null}
@@ -210,10 +191,10 @@ const NewsForm = () => {
                 id='name'
                 name='name'
                 label='Título'
-                value={values.title}
+                value={values.name}
                 onChange={handleChange}
-                error={touched.title && Boolean(errors.title)}
-                helperText={touched.title && errors.title}
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
                 onBlur={handleBlur}
               />
               <TextField
@@ -238,13 +219,12 @@ const NewsForm = () => {
                 name='content'
                 editor={ClassicEditor}
                 data={values.content}
-                onChange={(event, editor) => {
+                onChange={(e, editor) => {
                   const data = editor.getData();
                   setFieldValue('content', data);
                 }}
               />
               <ErrorMessage component='small' name='content' />
-
               <label htmlFor='image'>
                 <Input
                   name='image'
@@ -255,18 +235,17 @@ const NewsForm = () => {
                   onChange={(e) => {
                     const file = e.currentTarget.files[0];
                     setFieldValue('image', file);
-                    setImg(file);
+                    setImgUploaded(file);
                   }}
                   style={{ display: 'none' }}
                 />
                 <Button fullWidth variant='outlined' component='span'>
-                  {!previewImg ? 'Subir imagen' : 'Subir otra imagen'}
+                  {!previewImgUploaded ? 'Subir imagen' : 'Subir otra imagen'}
                 </Button>
                 <ErrorMessage component='small' name='image' />
               </label>
-
               <Button type='submit' variant='contained' fullWidth>
-                {isEdit ? 'Editar noticia' : 'Crear noticia'}
+                {isEditable ? 'Editar noticia' : 'Crear noticia'}
               </Button>
             </form>
           </Box>
