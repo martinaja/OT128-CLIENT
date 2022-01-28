@@ -1,6 +1,10 @@
 span{
     color: red;
-    padding: 0px;
+}
+
+.strong{
+    color: black;
+    font-weight: bold;
 }
 
 .form-container{
