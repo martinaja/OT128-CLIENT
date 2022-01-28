@@ -19,8 +19,16 @@ function App() {
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
           <Route path="/create-activity" component={ActivitiesForm} />
-          <Route path="/create-category" component={CategoriesForm} />
-          <Route path="/backoffice/create-news" component={NewsForm} />
+          <Route
+            exact
+            path="/backoffice/create-category/"
+            component={CategoriesForm}
+          />
+          <Route
+            path="/backoffice/create-category/:id"
+            component={CategoriesForm}
+          />
+          <Route path="/create-news" component={NewsForm} />
           <Route path="/backoffice/create-slide" component={SlidesForm} />
           <Route path="/create-testimonials" component={TestimonialForm} />
           <Route path="/create-user" component={UserForm} />
@@ -28,6 +36,7 @@ function App() {
           <Route path="/create-project" component={ProjectsForm} />
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
+          <Route path="/set-user" component={LoginForm} />
         </Switch>
       </BrowserRouter>
       <div className="App"></div>

@@ -1,27 +1,65 @@
-import React from "react";
-import "../FormStyles.css";
+import React, { useEffect, useState } from "react";
+import "../../Components/FormStyles.css";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Form, Field, ErrorMessage, useFormik, FormikProvider } from "formik";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { ErrorMessage, Formik } from "formik";
+import * as Yup from "yup";
+import { Container, TextField, Box, Button, Input } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCategory,
   postCategoy,
   editCategory,
 } from "../../app/slices/category";
-import * as Yup from "yup";
 
-const CategoriesForm = () => {
+const CategoriesForm = (props) => {
+  const idCategory = props.match.params.id;
+  const [isEditing, setIsEditing] = useState(false);
+  const [baseImage, setBaseImage] = useState("");
+  const [previewImg, setPreviewImg] = useState(null);
+  const history = useHistory();
+
   const dispatch = useDispatch();
   const state = useSelector((state) => state.category);
 
-  const initialValues = {
-    name: "",
-    description: "",
-    image: "",
+  useEffect(() => {
+    console.log(idCategory);
+    if (idCategory) {
+      setIsEditing(true);
+      dispatch(getCategory(idCategory));
+      if (state.error === true) {
+        history.push("/backoffice/create-category");
+      }
+    }
+  }, [idCategory, dispatch]);
+
+  useEffect(() => {
+    if (!baseImage) return;
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImg(reader.result);
+    };
+    reader.readAsDataURL(baseImage);
+  }, [baseImage]);
+
+  // Función para convertir la imagen subida a un formato que se acepte en la api
+  const convertBase64 = async (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
   };
 
-  const SUPPORTED_FORMATS = ["image/jpg", "image/png"];
+  const SUPPORTED_FORMATS = ["image/jpg", "image/png", "image/jpeg"];
 
   const validationSchema = Yup.object().shape({
     description: Yup.string()
@@ -44,68 +82,103 @@ const CategoriesForm = () => {
       ),
   });
 
-  const inputHandler = (event, editor) => {
-    formik.setFieldValue("description", editor.getData());
-  };
-
-  const onSubmit = (values) => {
+  const sendCategory = async (values) => {
     const fd = new FormData();
     fd.append("description", values.description);
-    console.log(values);
-    dispatch(getCategory(1541));
+    const base64 = await convertBase64(values.image);
+    const newToSend = {
+      ...values,
+      image: base64,
+    };
+    if (!isEditing) {
+      dispatch(postCategoy(newToSend));
+    } else {
+      dispatch(editCategory(idCategory, newToSend));
+    }
   };
 
-  const formik = useFormik({ initialValues, onSubmit, validationSchema });
-
   return (
-    <>
-      <FormikProvider value={formik}>
-        <Form className="form-container">
-          <Field
-            className="input-field"
-            type="text"
-            name="name"
-            placeholder="Ingrese nombre de categoría"
-          />
-          <ErrorMessage
-            className="field-error text-danger"
-            name="name"
-            component="div"
-          />
-
-          <CKEditor
-            id="inputText"
-            className="inputText"
-            editor={ClassicEditor}
-            name="description"
-            onChange={inputHandler}
-          />
-          <ErrorMessage
-            className="field-error text-danger"
-            name="description"
-            component="div"
-          />
-
-          <input
-            className="input-field"
-            name="image"
-            type="file"
-            onChange={(e) => {
-              formik.setFieldValue("image", e.currentTarget.files[0]);
-            }}
-          />
-          <ErrorMessage
-            className="field-error text-danger"
-            name="image"
-            component="div"
-          />
-
-          <button type="submit">Agregar categoría</button>
-
-          {state.loader ? <p>loading...</p> : <p>{state.category.name}</p>}
-        </Form>
-      </FormikProvider>
-    </>
+    <Formik
+      enableReinitialize
+      initialValues={{
+        name: state.category.name || "",
+        description: state.category.description || "",
+        image: "",
+      }}
+      validationSchema={validationSchema}
+      onSubmit={(values) => {
+        sendCategory(values);
+      }}
+    >
+      {({
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        values,
+        errors,
+        setFieldValue,
+        touched,
+      }) => (
+        <Container>
+          <Box sx={{ boxShadow: 5, p: 5 }}>
+            {previewImg || state.category.image ? (
+              <img
+                style={{ maxWidth: "100%" }}
+                src={previewImg || state.category.image}
+                alt=""
+              />
+            ) : null}
+            <form onSubmit={handleSubmit}>
+              <TextField
+                margin="normal"
+                fullWidth
+                id="name"
+                name="name"
+                label="Título"
+                value={values.name}
+                onChange={handleChange}
+                error={touched.name && Boolean(errors.name)}
+                helperText={touched.name && errors.name}
+                onBlur={handleBlur}
+              />
+              <CKEditor
+                name="description"
+                editor={ClassicEditor}
+                data={values.description}
+                onChange={(event, editor) => {
+                  const data = editor.getData();
+                  setFieldValue("description", data);
+                }}
+              />
+              <ErrorMessage component="small" name="description" />
+              <label htmlFor="image">
+                <Input
+                  name="image"
+                  accept="image/*"
+                  id="image"
+                  multiple
+                  type="file"
+                  onChange={(e) => {
+                    const file = e.currentTarget.files[0];
+                    setFieldValue("image", file);
+                    setBaseImage(file);
+                  }}
+                  style={{ display: "none" }}
+                />
+                <Button fullWidth variant="outlined" component="span">
+                  {!previewImg ? "Subir imagen" : "Subir otra imagen"}
+                </Button>
+                <ErrorMessage component="small" name="image" />
+              </label>
+              <br />
+              <Button type="submit" variant="contained" fullWidth>
+                {isEditing ? "Editar Categoría" : "Crear Categoría"}
+              </Button>
+            </form>
+          </Box>
+        </Container>
+      )}
+    </Formik>
   );
 };
 

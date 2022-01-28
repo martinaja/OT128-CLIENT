@@ -10,6 +10,8 @@ export const categorySlice = createSlice({
       description: "",
       image: "",
     },
+    loader: false,
+    error: false,
   },
 
   reducers: {
@@ -33,14 +35,19 @@ export const categorySlice = createSlice({
           break;
       }
     },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
   },
 });
 
-export const { setMessage, setCategory, setLoader } = categorySlice.actions;
+export const { setMessage, setCategory, setLoader, setError } =
+  categorySlice.actions;
 
 export default categorySlice.reducer;
 
 export const postCategoy = (newCategory) => (dispatch) => {
+  dispatch(setError(false));
   dispatch(setLoader());
   axios
     .post(process.env.REACT_APP_API_CATEGORIES_POST, {
@@ -49,10 +56,16 @@ export const postCategoy = (newCategory) => (dispatch) => {
       image: newCategory.image,
     })
     .then((response) => {
-      if (response.success) dispatch(setMessage(response.message));
+      if (response.data.success === true) {
+        dispatch(setMessage(response.data.message));
+      } else {
+        console.log(response.data.message);
+        dispatch(setMessage(response.data.message));
+      }
     })
     .catch((error) => {
       console.log(error);
+      error.log(error);
     })
     .finally(() => {
       dispatch(setLoader());
@@ -60,6 +73,7 @@ export const postCategoy = (newCategory) => (dispatch) => {
 };
 
 export const getCategory = (id) => (dispatch) => {
+  dispatch(setError(false));
   dispatch(setLoader());
   const incomingCategory = {};
   axios
@@ -73,6 +87,7 @@ export const getCategory = (id) => (dispatch) => {
       }
     })
     .catch((error) => {
+      dispatch(setError(true));
       console.log(error);
     })
     .finally(() => {
@@ -81,8 +96,9 @@ export const getCategory = (id) => (dispatch) => {
 };
 
 export const editCategory =
-  ({ id, name, description, image }) =>
+  (id, { name, description, image }) =>
   (dispatch) => {
+    dispatch(setError(false));
     dispatch(setLoader());
     axios
       .put(`${process.env.REACT_APP_API_CATEGORIES_GET}/${id}`, {
@@ -91,7 +107,7 @@ export const editCategory =
         image: image,
       })
       .then((response) => {
-        if (response.success) dispatch(setMessage(response.message));
+        if (response.data.success) dispatch(setMessage(response.data.message));
       })
       .catch((error) => {
         console.log(error);
