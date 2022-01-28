@@ -61,18 +61,14 @@ export const postCategoy = (newCategory) => (dispatch) => {
 
 export const getCategory = (id) => (dispatch) => {
   dispatch(setLoader());
-  const incomingCategory = {
-    name: "",
-    category: "",
-    img: "",
-  };
+  const incomingCategory = {};
   axios
     .get(`${process.env.REACT_APP_API_CATEGORIES_GET}/${id}`)
     .then((response) => {
-      if (response.success) {
-        incomingCategory.name = response.data.name;
-        incomingCategory.description = response.data.description;
-        incomingCategory.image = response.data.image;
+      if (response.data.success === true) {
+        incomingCategory.name = response.data.data.name;
+        incomingCategory.description = response.data.data.description;
+        incomingCategory.image = response.data.data.image;
         dispatch(setCategory(incomingCategory));
       }
     })

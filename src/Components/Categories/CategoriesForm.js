@@ -12,6 +12,9 @@ import {
 import * as Yup from "yup";
 
 const CategoriesForm = () => {
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state.category);
+
   const initialValues = {
     name: "",
     description: "",
@@ -49,55 +52,60 @@ const CategoriesForm = () => {
     const fd = new FormData();
     fd.append("description", values.description);
     console.log(values);
+    dispatch(getCategory(1541));
   };
 
   const formik = useFormik({ initialValues, onSubmit, validationSchema });
 
   return (
-    <FormikProvider value={formik}>
-      <Form className="form-container">
-        <Field
-          className="input-field"
-          type="text"
-          name="name"
-          placeholder="Ingrese nombre de categoría"
-        />
-        <ErrorMessage
-          className="field-error text-danger"
-          name="name"
-          component="div"
-        />
+    <>
+      <FormikProvider value={formik}>
+        <Form className="form-container">
+          <Field
+            className="input-field"
+            type="text"
+            name="name"
+            placeholder="Ingrese nombre de categoría"
+          />
+          <ErrorMessage
+            className="field-error text-danger"
+            name="name"
+            component="div"
+          />
 
-        <CKEditor
-          id="inputText"
-          className="inputText"
-          editor={ClassicEditor}
-          name="description"
-          onChange={inputHandler}
-        />
-        <ErrorMessage
-          className="field-error text-danger"
-          name="description"
-          component="div"
-        />
+          <CKEditor
+            id="inputText"
+            className="inputText"
+            editor={ClassicEditor}
+            name="description"
+            onChange={inputHandler}
+          />
+          <ErrorMessage
+            className="field-error text-danger"
+            name="description"
+            component="div"
+          />
 
-        <input
-          className="input-field"
-          name="image"
-          type="file"
-          onChange={(e) => {
-            formik.setFieldValue("image", e.currentTarget.files[0]);
-          }}
-        />
-        <ErrorMessage
-          className="field-error text-danger"
-          name="image"
-          component="div"
-        />
+          <input
+            className="input-field"
+            name="image"
+            type="file"
+            onChange={(e) => {
+              formik.setFieldValue("image", e.currentTarget.files[0]);
+            }}
+          />
+          <ErrorMessage
+            className="field-error text-danger"
+            name="image"
+            component="div"
+          />
 
-        <button type="submit">Agregar categoría</button>
-      </Form>
-    </FormikProvider>
+          <button type="submit">Agregar categoría</button>
+
+          {state.loader ? <p>loading...</p> : <p>{state.category.name}</p>}
+        </Form>
+      </FormikProvider>
+    </>
   );
 };
 
