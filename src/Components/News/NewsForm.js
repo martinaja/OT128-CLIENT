@@ -101,7 +101,7 @@ const NewsForm = () => {
       ...data,
       image: parseImg,
     };
-    console.log('PARA HACER POST', newToSend);
+    console.log('PARA HACER SEND', newToSend);
     console.log('IS EDIT?', isEdit);
     if (isEdit) {
       // PUT
@@ -127,7 +127,7 @@ const NewsForm = () => {
         }
       };
 
-      puttingNews();
+      puttingNews(newToSend);
     } else {
       // POST
       const postingNews = async (data) => {
