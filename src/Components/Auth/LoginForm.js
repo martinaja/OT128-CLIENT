@@ -1,4 +1,3 @@
-
 import React from 'react';
 import '../FormStyles.css';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -40,17 +39,18 @@ return (
         >
             {({ isSubmitting }) => (
  <Form className='form-container'>
+ 
                     <Field type="email" name="email" className='input-field' placeholder="Ingrese email" />
                     <ErrorMessage name="email" component="div" />
                     <Field type="password" name="password" className='input-field' placeholder="Ingrese contraseña" />
                     <ErrorMessage name="password" component="div" />
-                    <Button color="inherit" type="submit-btn" disabled={isSubmitting}>
-                        Registrarse
-                    </Button>
+                    <button className="submit-btn" type="submit">Log In</button>
                 </Form>
             )}
         </Formik>
+        
     );
 }
 
 export default LoginForm; 
+
