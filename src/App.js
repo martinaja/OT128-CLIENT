@@ -1,4 +1,6 @@
 import React from 'react';
+
+import './App.css';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ActivitiesForm from './Components/Activities/ActivitiesForm';
 import CategoriesForm from './Components/Categories/CategoriesForm';
@@ -12,11 +14,12 @@ import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import LoginForm from './Components/Auth/LoginForm';
 
-
-
 function App() {
   return (
     <>
+    
+    <div className="App">
+      <header className="App-header">
       <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
@@ -31,10 +34,9 @@ function App() {
           <Route path="/school-campaign" component={SchoolCampaign} />
           <Route path="/toys-campaign" component={ToysCampaign} />
           <Route path="/set-user" component={LoginForm} />
-           </Switch>
+        </Switch>
       </BrowserRouter>
-    <div className="App">
- 
+      </header>
     </div>
     </>
   );

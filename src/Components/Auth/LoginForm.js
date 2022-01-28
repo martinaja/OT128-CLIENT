@@ -2,10 +2,9 @@ import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 const LoginForm = () => {
 const validateFields = (values) => {     // Checks user input is valid
+const errors = {}
 
-    const errors = {}
-
-    if (!values.email) {
+ if (!values.email) {
         errors.email = '* campo obligatorio'
     }
     if (!values.password) {
@@ -51,7 +50,7 @@ const handleSubmit = (values) => {
                     <ErrorMessage name="email" component="div" />
                     <Field type="password" name="password" className='input-field' placeholder="Ingrese contraseña" />
                     <ErrorMessage name="password" component="div" />
-                    <button type="submit-btn" disabled={isSubmitting}>
+                    <button type="submit-btn" className='submit-btn' disabled={isSubmitting}>
                         Registrarse
                     </button>
                 </Form>
