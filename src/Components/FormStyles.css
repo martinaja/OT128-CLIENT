@@ -1,3 +1,10 @@
+
+
+.strong{
+    color: black;
+    font-weight: bold;
+}
+
 .form-container{
   width: 30%;
   margin: 15px auto;

@@ -1,10 +1,7 @@
-import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useState } from "react";
+import React, { useState } from "react";
+import { alertServiceConfirm, alertServiceInfoTimer, alertServiceError } from "../AlertService"
 import Spinner from "../Spinner";
-
-
-
 
 const LoginForm = () => {
     
@@ -17,6 +14,7 @@ const LoginForm = () => {
     }
     if (!values.password) {
       errors.password = "* Campo obligatorio";
+
     }
     if (!values.confirmPassword) {
       errors.confirmPassword = "* Campo obligatorio";
@@ -80,13 +78,16 @@ const LoginForm = () => {
           >
             Registrarse
           </button>
-          <button onClick={()=>setLoading(true)}>Sarasa</button>
+          <button type="button" onClick={()=>setLoading(true)}>Spinner</button>
           {
               loading && <Spinner/>
           }
+          <button type="button" onClick={()=>alertServiceInfoTimer('top-end','sucess',"HTML example text", false, 2000)}>Alert</button>
         </Form>
       )}
     </Formik>
   );
 };
+
 export default LoginForm;
+
