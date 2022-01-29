@@ -7,14 +7,18 @@ import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
 import { Container, TextField, Box, Button, Input } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCategory,
-  postCategoy,
-  editCategory,
-} from "../../app/slices/category";
+// import {
+//   getCategory,
+//   postCategoy,
+//   editCategory,
+// } from "../../app/slices/category";
+import { toBase64 } from "../../utils/base64";
+import { getCategory } from "../../Services/CategoryApiService";
 
 const CategoriesForm = (props) => {
   const idCategory = props.match.params.id;
+  const [loader, setLoader] = useState(false);
+  const [category, setCategory] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [baseImage, setBaseImage] = useState("");
   const [previewImg, setPreviewImg] = useState(null);
@@ -23,16 +27,27 @@ const CategoriesForm = (props) => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.category);
 
+  // if params.id exist set the component to edit
   useEffect(() => {
-    console.log(idCategory);
-    if (idCategory) {
-      setIsEditing(true);
-      dispatch(getCategory(idCategory));
-      if (state.error === true) {
+    if (!idCategory) return;
+    (async () => {
+      try {
+        setLoader(true);
+        const fetch = await getCategory(idCategory);
+        const data = fetch?.data;
+        if (data) {
+          setCategory(data);
+          setIsEditing(true);
+        }
+      } catch (e) {
+        console.error(e);
         history.push("/backoffice/create-category");
+        setIsEditing(false);
+      } finally {
+        setLoader(false);
       }
-    }
-  }, [idCategory, dispatch]);
+    })();
+  }, [history, idCategory]);
 
   useEffect(() => {
     if (!baseImage) return;
@@ -42,22 +57,6 @@ const CategoriesForm = (props) => {
     };
     reader.readAsDataURL(baseImage);
   }, [baseImage]);
-
-  // Función para convertir la imagen subida a un formato que se acepte en la api
-  const convertBase64 = async (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
 
   const SUPPORTED_FORMATS = ["image/jpg", "image/png", "image/jpeg"];
 
@@ -82,19 +81,20 @@ const CategoriesForm = (props) => {
       ),
   });
 
+  //function that format data to be sended to endpoints
   const sendCategory = async (values) => {
     const fd = new FormData();
     fd.append("description", values.description);
-    const base64 = await convertBase64(values.image);
+    const base64 = await toBase64(values.image);
     const newToSend = {
       ...values,
       image: base64,
     };
-    if (!isEditing) {
-      dispatch(postCategoy(newToSend));
-    } else {
-      dispatch(editCategory(idCategory, newToSend));
-    }
+    // if (!isEditing) {
+    //   dispatch(postCategoy(newToSend));
+    // } else {
+    //   dispatch(editCategory(idCategory, newToSend));
+    // }
   };
 
   return (
