@@ -40,7 +40,6 @@ function App() {
           <Route path="/set-user" component={LoginForm} />
         </Switch>
       </BrowserRouter>
-      <div className="App"></div>
     </>
   );
 }
