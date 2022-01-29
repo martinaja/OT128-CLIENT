@@ -1,8 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useState } from "react";
+import React, { useState } from "react";
 import Spinner from "../Spinner";
-
-
 
 const LoginForm = () => {
     
@@ -15,6 +13,7 @@ const LoginForm = () => {
     }
     if (!values.password) {
       errors.password = "* Campo obligatorio";
+
     }
     if (!values.confirmPassword) {
       errors.confirmPassword = "* Campo obligatorio";
@@ -87,4 +86,6 @@ const LoginForm = () => {
     </Formik>
   );
 };
+
 export default LoginForm;
+
