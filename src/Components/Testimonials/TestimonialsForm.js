@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { testimonialsExist } from '../../Services/testimonialsFormServices';
 
 const TestimonialForm = () => {
 	const ALLOWED_IMAGE_FORMATS = [
@@ -46,7 +47,9 @@ const TestimonialForm = () => {
 		initialValues: formikInitialValues,
 		validationSchema: formikValidationSchema,
 		onSubmit: async formData => {
-			console.log(formData);
+			const imageBase64 = await convertBase64(formData.image);
+			const idExist = await testimonialsExist(formData.name);
+			idExist ? console.log(idExist) : console.log('no existe');
 		}
 	});
 
@@ -58,7 +61,7 @@ const TestimonialForm = () => {
 				name="name"
 				value={formik.values.name}
 				onChange={formik.handleChange}
-				placeholder="Activity Title"
+				placeholder="Testimonial Title"
 				error={formik.errors.name}
 			/>
 			{formik.errors.name}
