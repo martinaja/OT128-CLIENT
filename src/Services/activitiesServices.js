@@ -4,22 +4,17 @@ const apiUrlGet = process.env.REACT_APP_API_ACTIVITY_GET;
 const apiUrlPost = process.env.REACT_APP_API_ACTIVITY_POST;
 const apiUrlPut = process.env.REACT_APP_API_ACTIVITY_PUT;
 
-let id = undefined;
-let data = undefined;
-let error = undefined;
-
 const compareActivitieExist = async formDataName => {
 	try {
 		const response = await axios.get(apiUrlGet);
 		const dataApi = response.data.data;
-
-		if (response) {
-			id = dataApi.find(value => value.name === formDataName).id;
-		}
+		const activitieExists = dataApi.find(
+			activitie => activitie.name === formDataName
+		);
+		return activitieExists ? activitieExists.id : false;
 	} catch (err) {
-		if (err) error = 'Error, could not complete the action';
+		console.log(err);
 	}
-	return id;
 };
 
 const putActivitie = async (id, formData) => {
@@ -28,26 +23,18 @@ const putActivitie = async (id, formData) => {
 			...formData,
 			id
 		});
-		if (responseServer) {
-			data = responseServer;
-		}
+		return responseServer ? responseServer : false;
 	} catch (err) {
-		if (err) error = 'Error, could not complete the action';
-	} finally {
-		return [data, error];
+		console.log(err);
 	}
 };
 
 const postActivitie = async formData => {
 	try {
 		const responseServer = await axios.post(apiUrlPost, formData);
-		if (responseServer) {
-			data = responseServer;
-		}
+		return responseServer ? responseServer : false;
 	} catch (err) {
-		if (err) error = 'Error, could not complete the action';
-	} finally {
-		return [data, error];
+		console.log(err);
 	}
 };
 

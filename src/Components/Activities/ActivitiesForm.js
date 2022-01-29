@@ -7,7 +7,7 @@ import {
 	compareActivitieExist,
 	putActivitie,
 	postActivitie
-} from './activitiesServices';
+} from '../../Services/activitiesServices';
 
 const ActivitiesForm = () => {
 	const ALLOWED_IMAGE_FORMATS = [
@@ -31,44 +31,41 @@ const ActivitiesForm = () => {
 		});
 	};
 
+	const formikInitialValues = {
+		name: '',
+		description: '',
+		image: undefined
+	};
+	const formikValidationSchema = Yup.object({
+		name: Yup.string().required('Required'),
+		description: Yup.string(),
+		image: Yup.mixed()
+			.test('fileType', 'File must be an image jpg or png', value => {
+				if (value)
+					return ALLOWED_IMAGE_FORMATS.includes(value && value.type);
+			})
+			.required('Required')
+	});
+
 	const formik = useFormik({
-		initialValues: {
-			name: '',
-			description: '',
-			image: undefined
-		},
-		validationSchema: Yup.object({
-			name: Yup.string().required('Required'),
-			description: Yup.string(),
-			image: Yup.mixed()
-				.test(
-					'fileType',
-					'File must be an image jpg or png',
-					value => {
-						if (value)
-							return ALLOWED_IMAGE_FORMATS.includes(
-								value && value.type
-							);
-					}
-				)
-				.required('Required')
-		}),
+		initialValues: formikInitialValues,
+		validationSchema: formikValidationSchema,
 		onSubmit: async formData => {
+			let responseServer = undefined;
 			const imageBase64 = await convertBase64(formData.image);
 			const id = await compareActivitieExist(formData.name);
 			if (id) {
-				const [data, errorPut] = await putActivitie(id, {
+				responseServer = await putActivitie(id, {
 					...formData,
 					image: imageBase64
 				});
-				data ? console.log(data) : console.log(errorPut);
 			} else {
-				const [data, errorPost] = await postActivitie({
+				responseServer = await postActivitie({
 					...formData,
 					image: imageBase64
 				});
-				data ? console.log(data) : console.log(errorPost);
 			}
+			console.log(responseServer);
 		}
 	});
 
