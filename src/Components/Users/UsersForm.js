@@ -1,38 +1,101 @@
-import React, { useState } from 'react';
-import '../FormStyles.css';
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-const UserForm = () => {
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        email: '',
-        roleId: ''
-    })
+import "../FormStyles.css";
 
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'email'){
-            setInitialValues({...initialValues, email: e.target.value})
-        }
-    }
+const UserForm = (usuario) => {
+  return (
+    <>
+      <Formik
+        initialValues={{
+          name: usuario.name || "",
+          email: usuario.email || "",
+          role_id: usuario.role_id || "",
+          description: "",
+          photo: "",
+        }}
+        onSubmit={(values) => {
+          if (usuario.id) {
+            console.log("usuario existe");
+            // TODO: hacer peticion put a /users/{id}
+          } else {
+            console.log("usuario no existe");
+            // TODO: hacer peticion post a /users
+          }
+          console.log(values);
+        }}
+        validationSchema={Yup.object({
+          name: Yup.string()
+            .min(4, "Debe tener mínimo 4 caracteres")
+            .required("Campo obligatorio"),
+          email: Yup.string()
+            .email("Debe ingresar un email valido")
+            .required("Campo obligatorio"),
+          role_id: Yup.string().required("Seleccione una opción"),
+          description: Yup.string()
+            .min(10, "Debe tener mínimo 10 caracteres")
+            .required("Campo obligatorio"),
+          photo: Yup.mixed().test(
+            "format",
+            "Formatos permitidos .jpg .jpeg .png",
+            (value) => {
+              if (value !== undefined) {
+                return /(.jpg|.jpeg|.png)$/i.test(value);
+              } else return true;
+            }
+          ),
+        })}
+      >
+        {(formik) => (
+          <Form className="form-container">
+            <Field
+              name="name"
+              type="text"
+              placeholder="name"
+              className="input-field"
+            />
+            <ErrorMessage name="name" component="span" />
+            <Field
+              name="email"
+              type="text"
+              placeholder="email"
+              className="input-field"
+            />
+            <ErrorMessage name="email" component="span" />
+            <label className="strong">Seleccionar rol:</label>
+            <Field
+              name="role_id"
+              as="select"
+              type="text"
+              className="input-field"
+            >
+              <option value="" disabled>
+                Select the role
+              </option>
+              <option value="1">Administrador</option>
+              <option value="2">Usuario</option>
+            </Field>
+            <ErrorMessage name="role_id" component="span" />
+            <label htmlFor="avatar" className="strong">
+              Subir imagen de perfil:
+            </label>
+            <Field name="photo" type="file" className="input-field" />
+            <ErrorMessage name="photo" component="span" />
+            <Field
+              name="description"
+              type="text"
+              placeholder="description"
+              className="input-field"
+            />
+            <ErrorMessage name="description" component="span" />
+            <button className="submit-btn" type="submit">
+              Send
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </>
+  );
+};
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
-
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name || ''} onChange={handleChange} placeholder="Name"></input>
-            <input className="input-field" type="text" name="email" value={initialValues.description || ''} onChange={handleChange} placeholder="Email"></input>
-            <select className="input-field" value={initialValues.roleId || ''} onChange={e => setInitialValues({...initialValues, roleId: e.target.value})}>
-                <option value="" disabled >Select the role</option>
-                <option value="1">Admin</option>
-                <option value="2">User</option>
-            </select>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
-    );
-}
- 
 export default UserForm;
