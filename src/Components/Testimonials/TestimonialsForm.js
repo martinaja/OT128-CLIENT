@@ -1,32 +1,110 @@
-import React, { useState } from 'react';
 import '../FormStyles.css';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {
+	compareTestimonialExist,
+	putTestimony,
+	postTestimony
+} from '../../Services/testimonialsFormServices';
 
 const TestimonialForm = () => {
-    const [initialValues, setInitialValues] = useState({
-       name: '',
-       description: '' 
-    });
+	const ALLOWED_IMAGE_FORMATS = [
+		'image/jpeg',
+		'image/png',
+		'image/jpg'
+	];
 
-    const handleChange = (e) => {
-        if(e.target.name === 'name'){
-            setInitialValues({...initialValues, name: e.target.value})
-        } if(e.target.name === 'description'){
-            setInitialValues({...initialValues, description: e.target.value})
-        }
-    }
+	const convertBase64 = async file => {
+		return new Promise((resolve, reject) => {
+			const fileReader = new FileReader();
+			fileReader.readAsDataURL(file);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(initialValues);
-    }
+			fileReader.onload = () => {
+				resolve(fileReader.result);
+			};
 
-    return (
-        <form className="form-container" onSubmit={handleSubmit}>
-            <input className="input-field" type="text" name="name" value={initialValues.name} onChange={handleChange} placeholder="Testimonial Title"></input>
-            <input className="input-field" type="text" name="description" value={initialValues.description} onChange={handleChange} placeholder="Testimonial description"></input>
-            <button className="submit-btn" type="submit">Send</button>
-        </form>
-    );
-}
- 
+			fileReader.onerror = error => {
+				reject(error);
+			};
+		});
+	};
+
+	const formikInitialValues = {
+		name: '',
+		description: '',
+		image: undefined
+	};
+	const formikValidationSchema = Yup.object({
+		name: Yup.string().min(4).required('Required'),
+		description: Yup.string().required('Required'),
+		image: Yup.mixed()
+			.test('fileType', 'File must be an image jpg or png', value => {
+				if (value)
+					return ALLOWED_IMAGE_FORMATS.includes(value && value.type);
+			})
+			.required('Required')
+	});
+
+	const formik = useFormik({
+		initialValues: formikInitialValues,
+		validationSchema: formikValidationSchema,
+		onSubmit: async formData => {
+			let responseServer = undefined;
+			const imageBase64 = await convertBase64(formData.image);
+			const id = await compareTestimonialExist(formData.name);
+			if (id) {
+				responseServer = await putTestimony(id, {
+					...formData,
+					image: imageBase64
+				});
+			} else {
+				responseServer = await postTestimony({
+					...formData,
+					image: imageBase64
+				});
+			}
+			console.log(responseServer);
+		}
+	});
+
+	return (
+		<form className="form-container" onSubmit={formik.handleSubmit}>
+			<input
+				className="input-field"
+				type="text"
+				name="name"
+				value={formik.values.name}
+				onChange={formik.handleChange}
+				placeholder="Testimonial Title"
+				error={formik.errors.name}
+			/>
+			{formik.errors.name}
+			<CKEditor
+				editor={ClassicEditor}
+				data={formik.values.description}
+				onChange={(event, editor) => {
+					const data = editor.getData();
+					formik.setFieldValue('description', data);
+				}}
+			/>
+			{formik.errors.description}
+			<label htmlFor="image">Upload Image:</label>
+			<input
+				type="file"
+				name="image"
+				onChange={e => {
+					formik.setFieldValue('image', e.target.files[0]);
+				}}
+				error={formik.errors.image}
+			/>
+			{formik.errors.image}
+			<button className="submit-btn" type="submit">
+				Send
+			</button>
+		</form>
+	);
+};
+
 export default TestimonialForm;
