@@ -6,14 +6,13 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
 import { Container, TextField, Box, Button, Input } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-// import {
-//   getCategory,
-//   postCategoy,
-//   editCategory,
-// } from "../../app/slices/category";
-import { toBase64 } from "../../utils/base64";
-import { getCategory } from "../../Services/CategoryApiService";
+import { toBase64 } from "../../utils/toBase64";
+import {
+  getCategory,
+  postCategory,
+  putCategory,
+} from "../../Services/CategoryApiService";
+import Spinner from "../Spinner";
 
 const CategoriesForm = (props) => {
   const idCategory = props.match.params.id;
@@ -23,9 +22,6 @@ const CategoriesForm = (props) => {
   const [baseImage, setBaseImage] = useState("");
   const [previewImg, setPreviewImg] = useState(null);
   const history = useHistory();
-
-  const dispatch = useDispatch();
-  const state = useSelector((state) => state.category);
 
   // if params.id exist set the component to edit
   useEffect(() => {
@@ -42,7 +38,6 @@ const CategoriesForm = (props) => {
       } catch (e) {
         console.error(e);
         history.push("/backoffice/create-category");
-        setIsEditing(false);
       } finally {
         setLoader(false);
       }
@@ -90,95 +85,109 @@ const CategoriesForm = (props) => {
       ...values,
       image: base64,
     };
-    // if (!isEditing) {
-    //   dispatch(postCategoy(newToSend));
-    // } else {
-    //   dispatch(editCategory(idCategory, newToSend));
-    // }
+
+    //depending of the state of isEditing call post or put
+    if (!isEditing) {
+      postCategory(newToSend);
+    } else {
+      putCategory(idCategory, newToSend);
+    }
   };
 
   return (
-    <Formik
-      enableReinitialize
-      initialValues={{
-        name: state.category.name || "",
-        description: state.category.description || "",
-        image: "",
-      }}
-      validationSchema={validationSchema}
-      onSubmit={(values) => {
-        sendCategory(values);
-      }}
-    >
-      {({
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        values,
-        errors,
-        setFieldValue,
-        touched,
-      }) => (
-        <Container>
-          <Box sx={{ boxShadow: 5, p: 5 }}>
-            {previewImg || state.category.image ? (
-              <img
-                style={{ maxWidth: "100%" }}
-                src={previewImg || state.category.image}
-                alt=""
-              />
-            ) : null}
-            <form onSubmit={handleSubmit}>
-              <TextField
-                margin="normal"
-                fullWidth
-                id="name"
-                name="name"
-                label="Título"
-                value={values.name}
-                onChange={handleChange}
-                error={touched.name && Boolean(errors.name)}
-                helperText={touched.name && errors.name}
-                onBlur={handleBlur}
-              />
-              <CKEditor
-                name="description"
-                editor={ClassicEditor}
-                data={values.description}
-                onChange={(event, editor) => {
-                  const data = editor.getData();
-                  setFieldValue("description", data);
-                }}
-              />
-              <ErrorMessage component="small" name="description" />
-              <label htmlFor="image">
-                <Input
-                  name="image"
-                  accept="image/*"
-                  id="image"
-                  multiple
-                  type="file"
-                  onChange={(e) => {
-                    const file = e.currentTarget.files[0];
-                    setFieldValue("image", file);
-                    setBaseImage(file);
-                  }}
-                  style={{ display: "none" }}
-                />
-                <Button fullWidth variant="outlined" component="span">
-                  {!previewImg ? "Subir imagen" : "Subir otra imagen"}
-                </Button>
-                <ErrorMessage component="small" name="image" />
-              </label>
-              <br />
-              <Button type="submit" variant="contained" fullWidth>
-                {isEditing ? "Editar Categoría" : "Crear Categoría"}
-              </Button>
-            </form>
-          </Box>
-        </Container>
+    <>
+      {loader ? (
+        <Box sx={{ mt: "4rem" }}>
+          <Spinner />
+        </Box>
+      ) : (
+        <Formik
+          enableReinitialize
+          initialValues={{
+            name: category.name || "",
+            description: category.description || "",
+            image: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={(values) => {
+            sendCategory(values);
+            setCategory({});
+            setPreviewImg("");
+            history.push("/backoffice/create-category");
+          }}
+        >
+          {({
+            handleSubmit,
+            handleChange,
+            handleBlur,
+            values,
+            errors,
+            setFieldValue,
+            touched,
+          }) => (
+            <Container>
+              <Box sx={{ boxShadow: 5, p: 5, mt: 2 }}>
+                <h1>{isEditing ? "Editar Categoría" : "Crear Categoría"}</h1>
+                {previewImg || category.image ? (
+                  <img
+                    style={{ maxWidth: "100%" }}
+                    src={previewImg || category.image}
+                    alt=""
+                  />
+                ) : null}
+                <form onSubmit={handleSubmit}>
+                  <TextField
+                    margin="normal"
+                    fullWidth
+                    id="name"
+                    name="name"
+                    label="Título Categoría"
+                    value={values.name}
+                    onChange={handleChange}
+                    error={touched.name && Boolean(errors.name)}
+                    helperText={touched.name && errors.name}
+                    onBlur={handleBlur}
+                  />
+                  <CKEditor
+                    name="description"
+                    editor={ClassicEditor}
+                    data={values.description}
+                    onChange={(event, editor) => {
+                      const data = editor.getData();
+                      setFieldValue("description", data);
+                    }}
+                  />
+                  <ErrorMessage component="small" name="description" />
+                  <label htmlFor="image">
+                    <Input
+                      name="image"
+                      accept="image/*"
+                      id="image"
+                      multiple
+                      type="file"
+                      onChange={(e) => {
+                        const file = e.currentTarget.files[0];
+                        setFieldValue("image", file);
+                        setBaseImage(file);
+                      }}
+                      style={{ display: "none" }}
+                    />
+                    <Button fullWidth variant="outlined" component="span">
+                      {!previewImg ? "Subir imagen" : "Subir otra imagen"}
+                    </Button>
+                    <ErrorMessage component="small" name="image" />
+                  </label>
+                  <br />
+                  <Button type="submit" variant="contained" fullWidth>
+                    {isEditing ? "Editar Categoría" : "Crear Categoría"}
+                  </Button>
+                </form>
+              </Box>
+            </Container>
+          )}
+        </Formik>
       )}
-    </Formik>
+    </>
   );
 };
 
