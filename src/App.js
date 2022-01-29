@@ -15,7 +15,8 @@ import LoginForm from "./Components/Auth/LoginForm";
 
 function App() {
   return (
-    <>
+    <div className="App">
+      <header className="App-header">
       <BrowserRouter>
         <Switch>
           {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
@@ -32,8 +33,9 @@ function App() {
           <Route path='/toys-campaign' component={ToysCampaign} />
           <Route path="/set-user" component={LoginForm} />
         </Switch>
-      </BrowserRouter>
-    </>
+        </BrowserRouter>
+        </header>
+    </div>
   );
 }
 
