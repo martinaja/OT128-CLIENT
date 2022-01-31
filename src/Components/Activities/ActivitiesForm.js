@@ -1,4 +1,4 @@
-/*import '../FormStyles.css';
+import '../FormStyles.css';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -107,4 +107,4 @@ const ActivitiesForm = () => {
 	);
 };
 
-export default ActivitiesForm;*/
+export default ActivitiesForm;

@@ -12,6 +12,8 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign';
 import MembersForm from './Components/Members/MembersForm';
 import ProjectsForm from './Components/Projects/ProjectsForm';
 import LoginForm from "./Components/Auth/LoginForm";
+import Activities from './Components/Activities/ActivitiesDetails';
+
 
 function App() {
   return (
@@ -32,6 +34,7 @@ function App() {
           <Route path='/school-campaign' component={SchoolCampaign} />
           <Route path='/toys-campaign' component={ToysCampaign} />
           <Route path="/set-user" component={LoginForm} />
+          <Route path="/activities" component={Activities} />
         </Switch>
         </BrowserRouter>
         </header>
