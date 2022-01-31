@@ -25,8 +25,9 @@ function App() {
             <Route path="/create-activity" component={ActivitiesForm} />
             <Route path="/create-category" component={CategoriesForm} />
             <Route exact path="/backoffice/news" component={NewsForm} />
-            <Route path="/backoffice/news/:newsId" component={NewsForm} />
             <Route path="/novedades/:newsId" component={NewsDetail} />
+            <Route path="/backoffice/news/:newsId" component={NewsForm} />
+            <Route path="/backoffice/members/edit" component={MembersForm} />
             <Route path="/nosotros" component={About} />
             <Route path="/backoffice/create-slide" component={SlidesForm} />
             <Route path="/create-testimonials" component={TestimonialForm} />
