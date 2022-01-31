@@ -7,20 +7,30 @@ import styles from './NewsDetails.module.css'
 
 export default function NewsDetail({ title }) {
   const { newsId } = useParams()
+  const [loader, setLoader] = useState(false)
   const [news, setNews] = useState(null)
 
   useEffect(
     () =>
       (async () => {
-        const request = await getANews(newsId)
-        console.log('data', request)
-        const newsData = request?.data
-        setNews(newsData)
+        try {
+          setLoader(true)
+          const request = await getANews(newsId)
+          const newsData = request?.data
+          if (newsData) setNews(newsData)
+        } catch (e) {
+          console.erorr(e)
+          // Insert alert
+        } finally {
+          setLoader(false)
+        }
       })(),
     [newsId],
   )
 
-  return (
+  return loader ? (
+    'Cargando...'
+  ) : (
     <Container className={[styles.entry]}>
       <div className={[styles['entry_header']]}>
         {title}
