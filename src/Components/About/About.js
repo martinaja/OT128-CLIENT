@@ -29,7 +29,7 @@ export default function About({ title }) {
       {/* <Title>{title}</Title> When Title component exists */}
       <div>
         <h2>Sobre nosotros</h2>
-        <p id="long_description">{organization?.long_description}</p>
+        <p>{organization?.long_description}</p>
       </div>
     </Container>
   )
