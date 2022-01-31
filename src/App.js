@@ -12,6 +12,7 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign'
 import MembersForm from './Components/Members/MembersForm'
 import ProjectsForm from './Components/Projects/ProjectsForm'
 import LoginForm from './Components/Auth/LoginForm'
+import NewsDetail from './Components/News/Detail/NewsDetail'
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
             <Route path="/create-category" component={CategoriesForm} />
             <Route exact path="/backoffice/news" component={NewsForm} />
             <Route path="/backoffice/news/:newsId" component={NewsForm} />
-            <Route path="/novedades/:newsId" component={NewsForm} />
+            <Route path="/novedades/:newsId" component={NewsDetail} />
             <Route path="/backoffice/create-slide" component={SlidesForm} />
             <Route path="/create-testimonials" component={TestimonialForm} />
             <Route path="/create-user" component={UserForm} />
