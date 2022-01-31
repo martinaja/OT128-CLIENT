@@ -1,3 +1,33 @@
+API Request :
+
+Axios instance, baseUrl and token authorization in privateApiService
+
+Api Handlers:
+
+GetHandle
+Use
+
+import { GetHandle } from ....
+
+const {apiResponse} = GetHandle('apiEndPoint, id') // (apiEndPoint:Obligatory, id:optional)
+
+return a response object ={
+data: ...,
+errors: ...  
+}
+
+PostHandle
+Use
+
+import { PostHandle } from ....
+
+const {apiResponse} = PostHandle('apiEndPoint', bodyData) // (apiEndPoint:Obligatory, bodyData:obligatory)
+
+return a response object ={
+data: ...,
+errors: ...  
+}
+
 # Ong Client
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
@@ -43,6 +73,3 @@ The name MuiCircularProgress can be used when providing default props or style o
 
 Demos
 https://mui.com/api/circular-progress/#:~:text=a%20custom%20theme.-,Demos,Progress,-Chip
-
-
-
