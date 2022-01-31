@@ -11,6 +11,18 @@ import '../FormStyles.css'
 const MembersForm = () => {
   const SUPPORTED_FORMATS = ['image/jpg', 'image/png', 'image/jpeg']
 
+  const [memberImg, setMemberImg] = useState(null)
+  const [previewMemberImg, setPreviewMemberImg] = useState(null)
+
+  useEffect(() => {
+    if (!memberImg) return
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      setPreviewMemberImg(reader.result)
+    }
+    reader.readAsDataURL(memberImg)
+  }, [memberImg])
+
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(4, 'Debe tener al menos cuatro caracteres')
