@@ -29,7 +29,11 @@ const RegisterForm = () => {
             errors.password = '* a longitud minima es 6'
         }
         if (!/^(?=.*\d)(?=.*[a-zA-Záéíóúüñ])(?=.*[$-/:-?{-~!"^_`\[\]])/.test(values.password)) {
+<<<<<<< HEAD
+            errors.password = '* contraseña incorrecta'
+=======
             errors.password = '* la contraseña no cumple los parametros solicitados'           
+>>>>>>> 50825b3bc5bee6eefe8856669b538add1d0ba2f4
         }
 
         return errors
@@ -66,4 +70,8 @@ const RegisterForm = () => {
         </Formik>
     );
 }
+<<<<<<< HEAD
 export default RegisterForm;
+=======
+export default RegisterForm;
+>>>>>>> 50825b3bc5bee6eefe8856669b538add1d0ba2f4
