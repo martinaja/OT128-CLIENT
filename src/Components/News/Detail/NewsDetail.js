@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from '@mui/material'
 import parse from 'html-react-parser'
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { useParams } from 'react-router-dom'
 import getANews from '../../../Services/getANews'
+import styles from './NewsDetails.module.css'
 
 export default function NewsDetail({ title }) {
   const { newsId } = useParams()
@@ -20,10 +21,19 @@ export default function NewsDetail({ title }) {
   )
 
   return (
-    <Container>
-      {title}
-      {news && parse(news.content)}
-      {news && <img src={news.image} alt={news.name} />}
+    <Container className={[styles.entry]}>
+      <div className={[styles['entry_header']]}>
+        {title}
+        <small className={[styles['entry__meta']]}>
+          {news && new Date(news.created_at).toLocaleDateString('es-AR')}
+        </small>
+      </div>
+      <div className={[styles['entry__img']]}>
+        {news && <img src={news.image} alt={news.name} />}
+      </div>
+      <div className={[styles['entry__content']]}>
+        {news && parse(news.content)}
+      </div>
     </Container>
   )
 }
