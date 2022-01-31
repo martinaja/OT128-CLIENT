@@ -1,11 +1,11 @@
 import React from 'react';
 import defaultImage from '../assets/defaultImage.jpg';
 
-export const Title = ({ text, image }) => {
+export const Title = ({ children, image }) => {
 	return (
 		<>
-			<h1>{text}</h1>
-			<img src={image || defaultImage} alt={text} />
+			<h1>{children}</h1>
+			<img src={image || defaultImage} alt={children} />
 		</>
 	);
 };
