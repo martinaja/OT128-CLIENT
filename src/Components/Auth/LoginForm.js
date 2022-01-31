@@ -1,12 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
-import "../FormStyles.css";
 import Spinner from "../Spinner";
-import {
-  alertServiceConfirm,
-  alertServiceInfoTimer,
-  alertServiceError,
-} from "../AlertService";
 
 const LoginForm = () => {
   const validateFields = (values) => {
@@ -18,6 +12,7 @@ const LoginForm = () => {
     }
     if (!values.password) {
       errors.password = "* Campo obligatorio";
+
     }
     if (!values.confirmPassword) {
       errors.confirmPassword = "* Campo obligatorio";
