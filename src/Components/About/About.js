@@ -12,11 +12,9 @@ export default function About({ title }) {
         try {
           setLoader(true)
           const request = await getOrganization()
-          const organizationData = request?.data
-          console.log('data', organizationData)
-          if (organizationData) setOrganization(organizationData)
+          if (request.success) setOrganization(request.data)
         } catch (e) {
-          console.log(e)
+          console.error(e)
           // Insert alert
         } finally {
           setLoader(false)
@@ -29,8 +27,10 @@ export default function About({ title }) {
   ) : (
     <Container>
       {/* <Title>{title}</Title> When Title component exists */}
-      <h1>Sobre nosotros</h1>
-      <section id="long_description">{organization?.long_description}</section>
+      <div>
+        <h2>Sobre nosotros</h2>
+        <p id="long_description">{organization?.long_description}</p>
+      </div>
     </Container>
   )
 }
