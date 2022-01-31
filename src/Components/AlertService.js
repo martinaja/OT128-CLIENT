@@ -8,23 +8,31 @@ export function alertServiceInfoTimer(
   timer
 ) {
   Swal.fire({
-    position,
-    icon,
+    position: "top",
+    icon: "info",
     title,
     showConfirmButton,
     timer,
+    background: "black",
+    color: "White",
   });
 }
 
 export function alertServiceConfirm(title, confirmButtonText) {
   Swal.fire({
     title,
+    color: "White",
+    background: "black",
     showDenyButton: true,
     showCancelButton: true,
     denyButtonText: `No ${confirmButtonText || "Confirmar"}`,
     confirmButtonText: confirmButtonText || "Confirmar",
+    confirmButtonColor: "#95CD41",
+    cancelButtonColor: "#92A9BD",
+    width: "600",
+    padding: "30",
+    confirmButtonClass: "btn-danger",
   }).then((result) => {
-    /* Read more about isConfirmed, isDenied below */
     if (result.isConfirmed) {
       Swal.fire(confirmButtonText || "Hecho", "", "success");
     } else if (result.isDenied) {
@@ -37,5 +45,8 @@ export function alertServiceError(title, text) {
     icon: "error",
     title,
     text,
+    color: "White",
+    background: "Black",
+    errorButtonColor: "#072227",
   });
 }
