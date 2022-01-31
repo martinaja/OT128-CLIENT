@@ -1,15 +1,27 @@
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const config = {
-    headers: {
-        Group: 01                //Aqui va el ID del equipo!!
+const authTokenHeaders = (userToken) => (
+    {
+        headers: {
+            Authorization: userToken
+        }
     }
+)
+
+export const GetHandle = (apiEndpoint, id, userToken) => {
+
+    const [response, setResponse] = useState()
+
+    const axiosUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
+
+    useEffect(() => {
+        axios
+            .get(axiosUrl, authTokenHeaders(userToken))
+            .then(res => setResponse(res.data))
+            .catch(err => setResponse({ error: err }))
+    }, []);
+
+    return  response 
 }
 
-const Get = () => {
-    axios.get('https://jsonplaceholder.typicode.com/users', config)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-}
-
-export default Get
