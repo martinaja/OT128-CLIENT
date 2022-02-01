@@ -1,27 +1,42 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const authTokenHeaders = (userToken) => (
-    {
-        headers: {
-            Authorization: userToken
-        }
-    }
-)
+const { token } = JSON.parse(localStorage.getItem('onLoggedUser')) || ''
 
-export const GetHandle = (apiEndpoint, id, userToken) => {
+const apiService = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+})
 
-    const [response, setResponse] = useState()
+if (token !== '') apiService.defaults.headers.common['authorization'] = token
 
-    const axiosUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
+export const GetHandle = (apiEndpoint, id) => {
+  const [response, setResponse] = useState()
 
-    useEffect(() => {
-        axios
-            .get(axiosUrl, authTokenHeaders(userToken))
-            .then(res => setResponse(res.data))
-            .catch(err => setResponse({ error: err }))
-    }, []);
+  const axiosUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
 
-    return  response 
+  useEffect(() => {
+    apiService
+      .get(axiosUrl)
+      .then((res) => setResponse(res.data))
+      .catch((err) => setResponse({ error: err }))
+  }, [])
+
+  if (!response) return null
+
+  return response
 }
 
+export const PostHandle = (apiEndpoint, bodyData) => {
+  const [response, setResponse] = useState()
+
+  useEffect(() => {
+    apiService
+      .post(apiEndpoint, bodyData)
+      .then((res) => setResponse(res.data))
+      .catch((err) => setResponse({ error: err }))
+  }, [])
+
+  if (!response) return null
+
+  return response
+}
