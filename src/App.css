@@ -2,13 +2,9 @@
 
 .App {
   text-align: center;
-
+  width: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -24,6 +20,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   background-color: #35858B;
+width: 100%;
 }
 
 

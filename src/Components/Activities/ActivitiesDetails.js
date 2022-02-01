@@ -1,4 +1,4 @@
-import Title from "../../Titulosynovedades/Title";
+import Title from "../../TitlesAndNews/Title";
 import ActivitiesList from "./ActivitiesList";
 
 
