@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import Spinner from "../Spinner";
 
 const LoginForm = () => {
-    
   const validateFields = (values) => {
     // Checks user input is valid
     const errors = {};
@@ -36,7 +35,6 @@ const LoginForm = () => {
     }
 
     return errors;
-    
   };
   const [loading, setLoading] = useState(false);
 
@@ -48,7 +46,6 @@ const LoginForm = () => {
   };
 
   return (
-  
     <Formik
       initialValues={{ email: "", password: "", confirmPassword: "" }}
       validate={validateFields}
@@ -77,10 +74,50 @@ const LoginForm = () => {
           >
             Registrarse
           </button>
-          <button onClick={()=>setLoading(true)}>Sarasa</button>
-          {
-              loading && <Spinner/>
-          }
+          <button onClick={() => setLoading(true)}>Spinner</button>
+          {loading && <Spinner />}
+          <button
+            type="button"
+            onClick={() =>
+              alertServiceInfoTimer(
+                "top-end",
+                "Sucess",
+                "HTML example text",
+                false,
+                2000
+              )
+            }
+          >
+            AlertInfo
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              alertServiceConfirm(
+                "top-end",
+                "Confirm",
+                "HTML example text",
+                false,
+                2000
+              )
+            }
+          >
+            AlertConfirm
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              alertServiceError(
+                "top-end",
+                "Error",
+                "HTML example text",
+                false,
+                2000
+              )
+            }
+          >
+            AlertError
+          </button>
         </Form>
       )}
     </Formik>
@@ -88,4 +125,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
