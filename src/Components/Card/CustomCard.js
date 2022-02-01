@@ -3,6 +3,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import parse from 'html-react-parser'
 
 const CustomCard = ({
   image = '/images/placeholder/150x150.png',
@@ -18,8 +19,8 @@ const CustomCard = ({
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          <div dangerouslySetInnerHTML={{ __html: description }}></div>
+        <Typography component="span" variant="body2" color="text.secondary">
+          <div>{parse(description)}</div>
         </Typography>
       </CardContent>
     </Card>
