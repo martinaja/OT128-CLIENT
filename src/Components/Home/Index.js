@@ -1,6 +1,6 @@
 import { Typography } from '@mui/material'
 import React from 'react'
-import { ListNews } from './ListNews'
+import { ListNews } from './HomePage'
 
 function Index() {
   const content = (
