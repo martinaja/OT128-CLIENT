@@ -14,6 +14,10 @@ import ProjectsForm from './Components/Projects/ProjectsForm'
 import LoginForm from './Components/Auth/LoginForm'
 import NewsDetail from './Components/News/Detail/NewsDetail'
 import About from './Components/About/About'
+import Activities from './Components/Activities/ActivitiesDetails';
+import NewsList from './Components/News/NewsList';
+import Index from './Components/Home/Index';
+
 
 function App() {
   return (
@@ -21,7 +25,7 @@ function App() {
       <header className="App-header">
         <BrowserRouter>
           <Switch>
-            {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+            <Route path="/" exact component={Index} />
             <Route path="/create-activity" component={ActivitiesForm} />
             <Route path="/create-category" component={CategoriesForm} />
             <Route exact path="/backoffice/news" component={NewsForm} />
@@ -37,6 +41,8 @@ function App() {
             <Route path="/school-campaign" component={SchoolCampaign} />
             <Route path="/toys-campaign" component={ToysCampaign} />
             <Route path="/set-user" component={LoginForm} />
+             <Route path="/activities" component={Activities} />
+          <Route path="/news" component={NewsList} />
           </Switch>
         </BrowserRouter>
       </header>
