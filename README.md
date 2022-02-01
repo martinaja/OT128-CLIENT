@@ -76,7 +76,6 @@ https://mui.com/api/circular-progress/#:~:text=a%20custom%20theme.-,Demos,Progre
 
 ### Alerts
 
-
 To be able to view alerts in a standardized way.
 An alert service was created.
 Using the library: sweetAlert https://www.npmjs.com/package/sweetalert2-react.
@@ -112,6 +111,16 @@ Type of Alerts:
    Modo de usarla importar la funcion
 
 import { alertServiceError, alertServiceInfoTimer, alertServiceSimple } from '../Alert/AlertService'
+
+
+use the function with the described parameters
+
+<button onClick={() => alertServiceInfoTimer('top-end', 'success', "<strong>HTML <u>example</u></strong> <b>bold text</b>", false, 2000)}>alertServiceTimer</button>
+
+In the project directory, you can run:
+
+### `yarn start`
+
 
 use the function with the described parameters
 
