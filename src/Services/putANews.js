@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 async function putANews(id, body) {
   const baseUrl = process.env.REACT_APP_API_NEWS_PUT;
