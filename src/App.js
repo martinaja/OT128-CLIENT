@@ -12,6 +12,8 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign'
 import MembersForm from './Components/Members/MembersForm'
 import ProjectsForm from './Components/Projects/ProjectsForm'
 import LoginForm from './Components/Auth/LoginForm'
+import OrganizationForm from './Components/Organization/OrganizationForm'
+import Header from './Components/Header/Header'
 import NewsDetail from './Components/News/Detail/NewsDetail'
 import About from './Components/About/About'
 import Activities from './Components/Activities/ActivitiesDetails';
@@ -24,7 +26,9 @@ function App() {
     <div className="App">
       <header className="App-header">
         <BrowserRouter>
+           <Header />
           <Switch>
+   
             <Route path="/" exact component={Index} />
             <Route path="/create-activity" component={ActivitiesForm} />
             <Route path="/create-category" component={CategoriesForm} />
@@ -43,6 +47,7 @@ function App() {
             <Route path="/set-user" component={LoginForm} />
              <Route path="/activities" component={Activities} />
           <Route path="/news" component={NewsList} />
+              <Route path="/backoffice/organization/edit" component={OrganizationForm} />
           </Switch>
         </BrowserRouter>
       </header>
