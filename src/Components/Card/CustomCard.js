@@ -12,9 +12,14 @@ const CustomCard = ({
 }) => {
   return (
     <Card
-      sx={{ maxWidth: 250, background: 'rgba(255,255,255,0.6)', boxShadow: 3 }}
+      sx={{
+        maxWidth: 350,
+        minWidth: 350,
+        background: 'rgba(255,255,255,0.6)',
+        boxShadow: 3,
+      }}
     >
-      <CardMedia component="img" height="140" image={image} alt="card image" />
+      <CardMedia component="img" height="200" image={image} alt="card image" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}
