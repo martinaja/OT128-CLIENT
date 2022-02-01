@@ -1,3 +1,5 @@
+
+
 .App {
   text-align: center;
 }
@@ -23,8 +25,9 @@
   background-color: #35858b;
 }
 
+
 .App-link {
-  color: rgb(112, 76, 182);
+  color: rgb(34, 185, 29);
 }
 
 @keyframes App-logo-float {
@@ -38,3 +41,4 @@
     transform: translateY(0px);
   }
 }
+
