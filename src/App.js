@@ -13,6 +13,9 @@ import MembersForm from './Components/Members/MembersForm'
 import ProjectsForm from './Components/Projects/ProjectsForm'
 import LoginForm from './Components/Auth/LoginForm'
 import NewsDetail from './Components/News/Detail/NewsDetail'
+import About from './Components/About/About'
+
+
 
 function App() {
   return (
@@ -26,6 +29,7 @@ function App() {
             <Route exact path="/backoffice/news" component={NewsForm} />
             <Route path="/backoffice/news/:newsId" component={NewsForm} />
             <Route path="/novedades/:newsId" component={NewsDetail} />
+            <Route path="/nosotros" component={About} />
             <Route path="/backoffice/create-slide" component={SlidesForm} />
             <Route path="/create-testimonials" component={TestimonialForm} />
             <Route path="/create-user" component={UserForm} />
