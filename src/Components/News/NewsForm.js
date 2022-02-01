@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import '../../Components/FormStyles.css';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import React, { useEffect, useState } from "react";
+import "../../Components/FormStyles.css";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import {
   useHistory,
   useParams,
-} from 'react-router-dom/cjs/react-router-dom.min';
-import { ErrorMessage, Formik } from 'formik';
-import * as Yup from 'yup';
+} from "react-router-dom/cjs/react-router-dom.min";
+import { ErrorMessage, Formik } from "formik";
+import * as Yup from "yup";
 import {
   Container,
   MenuItem,
@@ -15,12 +15,12 @@ import {
   Box,
   Button,
   Input,
-} from '@mui/material';
-import { toBase64 } from '../../utils/toBase64';
-import getCategories from '../../Services/getCategories';
-import getANews from '../../Services/getANews';
-import putANews from '../../Services/putANews';
-import postANews from '../../Services/postANews';
+} from "@mui/material";
+import { toBase64 } from "../../utils/toBase64";
+import getCategories from "../../Services/getCategories";
+import getANews from "../../Services/getANews";
+import putANews from "../../Services/putANews";
+import postANews from "../../Services/postANews";
 
 const NewsForm = () => {
   const { newsId } = useParams();
@@ -40,7 +40,7 @@ const NewsForm = () => {
         setLoader(true);
         const fetch = await getCategories();
         const data = fetch?.data;
-        console.log('CATEGORIES', data);
+        console.log("CATEGORIES", data);
         setCategories(data);
       } catch (e) {
         console.error(e);
@@ -58,14 +58,14 @@ const NewsForm = () => {
         setLoader(true);
         const fetch = await getANews(newsId);
         const data = fetch?.data;
-        console.log('DATA FROM NEWS BY ID', data);
+        console.log("DATA FROM NEWS BY ID", data);
         if (data) {
           setNew(data);
           setIsEdit(true);
         }
       } catch (e) {
         console.error(e);
-        history.push('/backoffice/news');
+        history.push("/backoffice/news");
         setIsEdit(false);
       } finally {
         setLoader(false);
@@ -84,7 +84,7 @@ const NewsForm = () => {
   }, [imgUploaded]);
 
   const sendNews = async (data) => {
-    console.log('DATA DE FORMIK ANTES DE MANDAR', data);
+    console.log("DATA DE FORMIK ANTES DE MANDAR", data);
     // let newsToSend = data;
     //  If  user has uploaded a new image, parse it to send
     // if (imgUploaded) {
@@ -101,21 +101,21 @@ const NewsForm = () => {
       image: parseImg,
     };
 
-    console.log('DATA LISTA PARA ENVIAR', newsToSend);
+    console.log("DATA LISTA PARA ENVIAR", newsToSend);
     if (isEditable) {
       // Putting a news
       (async () => {
         try {
           setLoader(true);
           const request = await putANews(newsId, newsToSend);
-          console.log('REQUEST PUT NEWS', request);
+          console.log("REQUEST PUT NEWS", request);
         } catch (e) {
-          console.error('REQUEST PUT ERROR', e);
+          console.error("REQUEST PUT ERROR", e);
         } finally {
           // Check the changes
           const fetch = await getANews(newsId);
           const data = fetch?.data;
-          console.log('DATA FROM NEWS BY ID', data);
+          console.log("DATA FROM NEWS BY ID", data);
           setNew(data);
           setLoader(false);
         }
@@ -126,10 +126,10 @@ const NewsForm = () => {
         try {
           setLoader(true);
           const request = await postANews(newsToSend);
-          console.log('REQUEST POST NEWS', request);
+          console.log("REQUEST POST NEWS", request);
           // ---> It should redirect to the link of the new news
         } catch (e) {
-          console.error('POST ERROR', e);
+          console.error("POST ERROR", e);
         } finally {
           setLoader(false);
         }
@@ -141,24 +141,24 @@ const NewsForm = () => {
     name: Yup.string()
       .min(
         4,
-        'Se necesita un título que contenga un mínimo de cuatro caracteres'
+        "Se necesita un título que contenga un mínimo de cuatro caracteres"
       )
-      .required('La noticia debe tener un título'),
-    content: Yup.string().required('No podés enviar una noticia sin cuerpo'),
-    image: Yup.string().required('Imagen requerida'),
-    category_id: Yup.string().required('Categoría requerida'),
+      .required("La noticia debe tener un título"),
+    content: Yup.string().required("No podés enviar una noticia sin cuerpo"),
+    image: Yup.string().required("Imagen requerida"),
+    category_id: Yup.string().required("Categoría requerida"),
   });
 
   return loader ? (
-    'Cargando'
+    "Cargando"
   ) : (
     <Formik
       enableReinitialize
       initialValues={{
-        name: news.name || '',
-        content: news.content || '',
-        category_id: '',
-        image: '',
+        name: news.name || "",
+        content: news.content || "",
+        category_id: "",
+        image: "",
       }}
       validationSchema={schemaValidate}
       onSubmit={(val) => {
@@ -179,18 +179,18 @@ const NewsForm = () => {
           <Box sx={{ boxShadow: 5, p: 5 }}>
             {previewImgUploaded || news.image ? (
               <img
-                style={{ maxWidth: '100%' }}
+                style={{ maxWidth: "100%" }}
                 src={previewImgUploaded || news.image}
-                alt=''
+                alt=""
               />
             ) : null}
             <form onSubmit={handleSubmit}>
               <TextField
-                margin='normal'
+                margin="normal"
                 fullWidth
-                id='name'
-                name='name'
-                label='Título'
+                id="name"
+                name="name"
+                label="Título"
                 value={values.name}
                 onChange={handleChange}
                 error={touched.name && Boolean(errors.name)}
@@ -198,12 +198,12 @@ const NewsForm = () => {
                 onBlur={handleBlur}
               />
               <TextField
-                margin='normal'
+                margin="normal"
                 fullWidth
-                id='category_id'
-                name='category_id'
+                id="category_id"
+                name="category_id"
                 select
-                label='Categoría'
+                label="Categoría"
                 value={values.category_id}
                 onChange={handleChange}
                 helperText={touched.category_id && errors.category_id}
@@ -216,36 +216,36 @@ const NewsForm = () => {
                 ))}
               </TextField>
               <CKEditor
-                name='content'
+                name="content"
                 editor={ClassicEditor}
                 data={values.content}
                 onChange={(e, editor) => {
                   const data = editor.getData();
-                  setFieldValue('content', data);
+                  setFieldValue("content", data);
                 }}
               />
-              <ErrorMessage component='small' name='content' />
-              <label htmlFor='image'>
+              <ErrorMessage component="small" name="content" />
+              <label htmlFor="image">
                 <Input
-                  name='image'
-                  accept='image/*'
-                  id='image'
+                  name="image"
+                  accept="image/*"
+                  id="image"
                   multiple
-                  type='file'
+                  type="file"
                   onChange={(e) => {
                     const file = e.currentTarget.files[0];
-                    setFieldValue('image', file);
+                    setFieldValue("image", file);
                     setImgUploaded(file);
                   }}
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                 />
-                <Button fullWidth variant='outlined' component='span'>
-                  {!previewImgUploaded ? 'Subir imagen' : 'Subir otra imagen'}
+                <Button fullWidth variant="outlined" component="span">
+                  {!previewImgUploaded ? "Subir imagen" : "Subir otra imagen"}
                 </Button>
-                <ErrorMessage component='small' name='image' />
+                <ErrorMessage component="small" name="image" />
               </label>
-              <Button type='submit' variant='contained' fullWidth>
-                {isEditable ? 'Editar noticia' : 'Crear noticia'}
+              <Button type="submit" variant="contained" fullWidth>
+                {isEditable ? "Editar noticia" : "Crear noticia"}
               </Button>
             </form>
           </Box>
