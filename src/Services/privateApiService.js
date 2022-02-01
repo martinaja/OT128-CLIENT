@@ -1,15 +1,42 @@
-import axios from 'axios';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
-const config = {
-    headers: {
-        Group: 01                //Aqui va el ID del equipo!!
-    }
+const { token } = JSON.parse(localStorage.getItem('onLoggedUser')) || ''
+
+const apiService = axios.create({
+  baseURL: process.env.REACT_APP_BASE_URL,
+})
+
+if (token !== '') apiService.defaults.headers.common['authorization'] = token
+
+export const GetHandle = (apiEndpoint, id) => {
+  const [response, setResponse] = useState()
+
+  const axiosUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
+
+  useEffect(() => {
+    apiService
+      .get(axiosUrl)
+      .then((res) => setResponse(res.data))
+      .catch((err) => setResponse({ error: err }))
+  }, [])
+
+  if (!response) return null
+
+  return response
 }
 
-const Get = () => {
-    axios.get('https://jsonplaceholder.typicode.com/users', config)
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
-}
+export const PostHandle = (apiEndpoint, bodyData) => {
+  const [response, setResponse] = useState()
 
-export default Get
+  useEffect(() => {
+    apiService
+      .post(apiEndpoint, bodyData)
+      .then((res) => setResponse(res.data))
+      .catch((err) => setResponse({ error: err }))
+  }, [])
+
+  if (!response) return null
+
+  return response
+}
