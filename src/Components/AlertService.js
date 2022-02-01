@@ -50,3 +50,4 @@ export function alertServiceError(title, text) {
     errorButtonColor: "#072227",
   });
 }
+

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './App.css'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ActivitiesForm from './Components/Activities/ActivitiesForm'
@@ -12,27 +12,31 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign'
 import MembersForm from './Components/Members/MembersForm'
 import ProjectsForm from './Components/Projects/ProjectsForm'
 import LoginForm from './Components/Auth/LoginForm'
-import Activities from './Components/Activities/ActivitiesDetails'
+import OrganizationForm from './Components/Organization/OrganizationForm'
+import Header from './Components/Header/Header'
+import NewsDetail from './Components/News/Detail/NewsDetail'
+import About from './Components/About/Abogit statusut'
 import NewsList from './Components/News/NewsList'
 import Index from './Components/Home/Index'
-import Footer from './Components/Footer/Footer'
-
-
+import About from './Components/About/About'
 
 function App() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-const [value, setValue] = useState(0);
   return (
     <div className="App">
       <header className="App-header">
         <BrowserRouter>
+          <Header />
           <Switch>
-            {<Route path="/" exact component={Index} />}
+            <Route path="/" exact component={Index} />
             <Route path="/create-activity" component={ActivitiesForm} />
             <Route path="/create-category" component={CategoriesForm} />
             <Route exact path="/backoffice/news" component={NewsForm} />
+            <Route path="/novedades/:newsId" component={NewsDetail} />
             <Route path="/backoffice/news/:newsId" component={NewsForm} />
-            <Route path="/backoffice/create-slide" component={SlidesForm} />
+            <Route path="/backoffice/members/edit" component={MembersForm} />
+            <Route path="/nosotros" component={About} />
+            <Route exact path="/backoffice/slides" component={SlidesForm} />
+            <Route path="/backoffice/slides/:slideId" component={SlidesForm} />
             <Route path="/create-testimonials" component={TestimonialForm} />
             <Route path="/create-user" component={UserForm} />
             <Route path="/create-member" component={MembersForm} />
@@ -40,10 +44,12 @@ const [value, setValue] = useState(0);
             <Route path="/school-campaign" component={SchoolCampaign} />
             <Route path="/toys-campaign" component={ToysCampaign} />
             <Route path="/set-user" component={LoginForm} />
-            <Route path="/activities" component={Activities} />
             <Route path="/news" component={NewsList} />
+            <Route
+              path="/backoffice/organization/edit"
+              component={OrganizationForm}
+            />
           </Switch>
-          <Footer  value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>
         </BrowserRouter>
       </header>
     </div>
