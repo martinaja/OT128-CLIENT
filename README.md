@@ -175,3 +175,41 @@ In the project directory, you can run:
 
 ### `yarn start`
 
+
+### `SkeletonArticle`
+
+1.Display a placeholder preview of your content before the data gets loaded.
+
+2.Example : 
+
+```
+
+import { SkeletonArticle } from './Components/Skeleton/SkeletonArticle'
+
+
+const [loading, setLoading] = useState(true);
+
+const [data, setData] = useState(undefined);
+
+
+  useEffect(() => {
+
+    
+      getSlides().then( response => setData(response.data) );
+      
+      if(data){
+        setLoading(false)
+      }
+      
+  }, [data]);
+  
+
+  return (
+
+      {
+
+        (loading) ?  <SkeletonArticle /> : <div>{data[0].name}</div>
+
+      }
+		
+```
