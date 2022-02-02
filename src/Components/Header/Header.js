@@ -21,12 +21,12 @@ const Header = () => {
     },
   })
 
-  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
+  // const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
+  // const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
   const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, boxShadow: 0 }}>
       <AppBar
         position="static"
         style={{
