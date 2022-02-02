@@ -60,6 +60,7 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### CircularProgress API
+
 API documentation for the React CircularProgress component. Learn about the available props and the CSS API.
 https://mui.com/api/circular-progress/#props
 https://mui.com/api/circular-progress/#css
@@ -112,7 +113,6 @@ Type of Alerts:
 
 import { alertServiceError, alertServiceInfoTimer, alertServiceSimple } from '../Alert/AlertService'
 
-
 use the function with the described parameters
 
 <button onClick={() => alertServiceInfoTimer('top-end', 'success', "<strong>HTML <u>example</u></strong> <b>bold text</b>", false, 2000)}>alertServiceTimer</button>
@@ -121,7 +121,6 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-
 use the function with the described parameters
 
 <button onClick={() => alertServiceInfoTimer('top-end', 'success', "<strong>HTML <u>example</u></strong> <b>bold text</b>", false, 2000)}>alertServiceTimer</button>
@@ -129,7 +128,6 @@ use the function with the described parameters
 In the project directory, you can run:
 
 ### `yarn start`
-
 
 To be able to view alerts in a standardized way.
 An alert service was created.
@@ -175,3 +173,64 @@ In the project directory, you can run:
 
 ### `yarn start`
 
+### `Linear Progress Feedback`
+
+1. Assuming you have a component which makes an API call, and you handle your own 'isLoading' state, all you have to do is put the component where you want it to be displayed when it's loading and pass this 'true' or 'false ' of your state.
+
+Here is an example:
+
+import { LinearProgressFeedback } from './Components/LinearProgress'
+
+const [isLoading, setIsLoading] = useState(false)
+
+getFromApi = () => {
+setIsLoading(true)
+const response = await axios.get(api)
+if (response) {
+setIsLoading(false)
+}
+{...}
+}
+
+return (
+<LinearProgressFeedback isActive={isLoading} />
+)
+
+
+### `SkeletonArticle`
+
+1.Display a placeholder preview of your content before the data gets loaded.
+
+2.Example : 
+
+```
+
+import { SkeletonArticle } from './Components/Skeleton/SkeletonArticle'
+
+
+const [loading, setLoading] = useState(true);
+
+const [data, setData] = useState(undefined);
+
+
+  useEffect(() => {
+
+    
+      getSlides().then( response => setData(response.data) );
+      
+      if(data){
+        setLoading(false)
+      }
+      
+  }, [data]);
+  
+
+  return (
+
+      {
+
+        (loading) ?  <SkeletonArticle /> : <div>{data[0].name}</div>
+
+      }
+		
+```

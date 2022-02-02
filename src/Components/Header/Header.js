@@ -44,7 +44,7 @@ const Header = () => {
                 p: 1,
               }}
               alt="Logo ong."
-              src="/images/oso.png"
+              src="/images/Logo Somos Mas.png"
             />
           )}
 

@@ -17,6 +17,7 @@ const CustomCard = ({
         minWidth: 350,
         background: 'rgba(255,255,255,0.6)',
         boxShadow: 3,
+        m: 1,
       }}
     >
       <CardMedia component="img" height="200" image={image} alt="card image" />
@@ -24,8 +25,8 @@ const CustomCard = ({
         <Typography gutterBottom variant="h5" component="div">
           {name}
         </Typography>
-        <Typography component="span" variant="body2" color="text.secondary">
-          <div>{parse(description)}</div>
+        <Typography component={'span'} variant={'body2'} color="text.secondary">
+          {parse(description)}
         </Typography>
       </CardContent>
     </Card>
