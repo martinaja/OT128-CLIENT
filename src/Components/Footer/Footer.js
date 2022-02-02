@@ -1,271 +1,82 @@
-/*import React from 'react'
-import { Link } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
-import { Grid } from '@material-ui/core'
-import Hidden from '@material-ui/core/Hidden'
-import Facebook from '@mui/icons-material/Facebook'
-import Twitter from '@mui/icons-material/Twitter'
-import Instagram from '@mui/icons-material/Instagram'
+import React from 'react'
+import {
+  useMediaQuery,
+  createTheme,
+  AppBar,
+  Box,
+  Toolbar,
+} from '@material-ui/core'
+import { Button, Container } from '@mui/material'
+import { FooterSuscribe } from './../Footer'
 
-
-
-
-
-
-
-const useStyles = makeStyles((theme) => ({
-  footer: {
-    backgroundColor: theme.palette.common.blue,
-    width: '100%',
-    zIndex: 1302,
-    position: 'relative',
-  },
-  adornment: {
-    width: '25em',
-    verticalAlign: 'bottom',
-    [theme.breakpoints.down('md')]: {
-      width: '21em',
+const Footer = () => {
+  // Breakpoints
+  const theme = createTheme({
+    breakpoints: {
+      values: {
+        mobile: 0,
+        tablet: 640,
+        laptop: 1024,
+        desktop: 1200,
+      },
     },
-    [theme.breakpoints.down('xs')]: {
-      width: '15em',
-    },
-  },
-  mainContainer: {
-    position: 'absolute',
-  },
-  link: {
-    color: 'white',
-    fontFamily: 'Arial',
-    fontSize: '0.75rem',
-    fontWeight: 'bold',
-    textDecoration: 'none', //For removing the underline from the links in the footer.
-  },
-  gridItem: {
-    margin: '3em',
-  },
-  icon: {
-    height: '4em',
-    weight: '4em',
-    [theme.breakpoints.down('xs')]: {
-      height: '2.5em',
-      width: '2.5em',
-    },
-  },
-  socialContianer: {
-    position: 'absolute',
-    marginTop: '-6em',
-    right: '1.5em',
-    [theme.breakpoints.down('xs')]: {
-      right: '0.6em',
-    },
-  },
-}))
+  })
 
-export default function Footer(props) {
-  const classes = useStyles()
-  const { value, setValue, selectedIndex, setSelectedIndex } = props //The Footer components is getting props from App component in moudle App.js
-  //mdDown is for media with screen size medium and smaller. Breakpoint for smaller screens to hide the links in the footer.
+  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
+  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
+  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
+
+  // if you want to add more social medias, add it to here and /data/socialMedia.js.
+  // and import the Material Icon, then add the code.
+
   return (
-    <footer className={classes.footer}>
-      <Hidden mdDown>
-        <Grid container justify="center" className={classes.mainContainer}>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                component={Link}
-                to="/"
-                className={classes.link}
-                onClick={() => setValue(0)}
-              >
-                Home
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                component={Link}
-                to="/services"
-                className={classes.link}
-                onClick={() => {
-                  setValue(1)
-                  setSelectedIndex(0)
-                }}
-              >
-                Services
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/customsoftware"
-                className={classes.link}
-                onClick={() => {
-                  setValue(1)
-                  setSelectedIndex(1)
-                }}
-              >
-                Custom Software Development
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/mobileapps"
-                className={classes.link}
-                onClick={() => {
-                  setValue(1)
-                  setSelectedIndex(2)
-                }}
-              >
-                Mobile App Development
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/websites"
-                className={classes.link}
-                onClick={() => {
-                  setValue(1)
-                  setSelectedIndex(3)
-                }}
-              >
-                Website Development
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                component={Link}
-                to="/revolution"
-                className={classes.link}
-                onClick={() => setValue(2)}
-              >
-                The Revolution
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/revolution"
-                className={classes.link}
-                onClick={() => setValue(2)}
-              >
-                Vision
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/revolution"
-                className={classes.link}
-                onClick={() => setValue(2)}
-              >
-                Technology
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/revolution"
-                className={classes.link}
-                onClick={() => setValue(2)}
-              >
-                Process
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                component={Link}
-                to="/about"
-                className={classes.link}
-                onClick={() => setValue(3)}
-              >
-                About Us
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/about"
-                className={classes.link}
-                onClick={() => setValue(3)}
-              >
-                History
-              </Grid>
-              <Grid
-                item
-                component={Link}
-                to="/about"
-                className={classes.link}
-                onClick={() => setValue(3)}
-              >
-                Team
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid item className={classes.gridItem}>
-            <Grid container direction="column" spacing={2}>
-              <Grid
-                item
-                component={Link}
-                to="/contact"
-                className={classes.link}
-                onClick={() => setValue(4)}
-              >
-                Contact Us
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Hidden>
-      <img
-        alt={"Black decorative slash"}
-        src="/images/Logo Somos Mas.png"
-        className={classes.adornment}
-      />
-
-      <Grid
-        container
-        justify="flex-end"
-        spacing={2}
-        className={classes.socialContianer}
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="sticky"
+        style={{
+          background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
+          marginBottom: '0rem',
+        }}
       >
-        <Grid
-          item
-          component={'a'}
-          href="https://facebook.com"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <img
-            alt="facebook logo"
-            src={Facebook}
-            className={classes.icon}
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-        </Grid>
-        <Grid item component={'a'} href="https://twitter.com">
-          <img
-            alt="twitter logo"
-            src={Twitter}
-            className={classes.icon}
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-        </Grid>
-        <Grid item component={'a'} href="https://www.instagram.com">
-          <img
-            alt="instagram logo"
-            src={Instagram}
-            className={classes.icon}
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-        </Grid>
-      </Grid>
-    </footer>
+        <Toolbar>
+          {isMatchTablet && (
+            <Box marginLeft="10rem">
+              <Container>
+                <Button color="warning">Noticias</Button>
+                <Button color="warning">Actividades</Button>
+                <Button color="warning">Novedades</Button>
+              </Container>
+            </Box>
+          )}
+          {isMatchLaptop && (
+            <Box
+              component="img"
+              sx={{
+                width: 128,
+                height: 72,
+                m: 8,
+                p: 0,
+               position: 'static',
+              }}
+              alt="Logo ong."
+              src="/images/Logo Somos Mas.png"
+            />
+          )}
+          {isMatchTablet && (
+            <Box marginRight="10rem">
+              <Container color="warning">
+                <Button color="warning">Testimonios</Button>
+                <Button color="warning">Nosotros</Button>
+                <Button color="warning">contacto</Button>
+              </Container>
+            </Box>
+          )}
+          <FooterSuscribe/>
+          <Box />
+         
+        </Toolbar>
+      </AppBar>
+    </Box>
   )
-}*/
+}
+export default Footer

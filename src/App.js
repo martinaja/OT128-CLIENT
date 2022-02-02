@@ -21,6 +21,9 @@ import Index from './Components/Home/Index'
 import { Container } from '@material-ui/core'
 import { ThemeProvider } from '@mui/material/styles'
 import { createTheme, CssBaseline } from '@mui/material'
+import Footer from './Components/Footer/Footer'
+
+
 
 const theme = createTheme({
   palette: {
@@ -64,9 +67,10 @@ function App() {
             />
           </Container>
         </Switch>
+        <Footer/>
       </BrowserRouter>
-    
-    </ThemeProvider>
+
+       </ThemeProvider>
   )
 }
 

@@ -1,16 +1,14 @@
-import Title from "../../TitlesAndNews/Title";
-import ActivitiesList from "./ActivitiesList";
-
+import ActivitiesList from './ActivitiesList'
 
 const Detail = () => {
-	const titleFromAPI = "Desde la API Activities";
+  // const titleFromAPI = "Desde la API Activities";
 
-	return (
-		<div>
-			<Title title={titleFromAPI}></Title>
-			<ActivitiesList />
-				</div>
-	);
-};
+  return (
+    <div>
+      {/* <Title title={titleFromAPI}></Title> */}
+      <ActivitiesList />
+    </div>
+  )
+}
 
-export default Detail;
+export default Detail
