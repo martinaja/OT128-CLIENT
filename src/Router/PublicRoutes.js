@@ -8,11 +8,13 @@ import UserForm from '../Components/Users/UsersForm'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import LoginForm from '../Components/Auth/LoginForm'
+import ContactHome from '../Components/Contact/ContactHome'
 
 export const PublicRoutes = () => {
   return (
     <>
       <Route path="/" exact component={Index} />
+      <Route path="/contacto" component={ContactHome} />
       <Route path="/novedades/:newsId" component={NewsDetail} />
       <Route path="/nosotros" component={About} />
       <Route path="/create-user" component={UserForm} />
