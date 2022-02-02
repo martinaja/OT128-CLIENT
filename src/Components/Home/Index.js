@@ -3,18 +3,10 @@ import React from 'react'
 import { ListNews } from './ListNews'
 
 function Index() {
-  const content = (
-    <>
-      <Typography>
-        <h1>Bienvenidos a Somos más</h1>
-      </Typography>
-      <Typography>Aqui ira el slider</Typography>
-    </>
-  )
-
   return (
     <div className="home-container">
-      {content}
+      <Typography>Bienvenidos a Somos más</Typography>
+      <Typography>Aqui ira el slider</Typography>
       <ListNews />
     </div>
   )
