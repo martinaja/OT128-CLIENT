@@ -17,8 +17,7 @@ import Header from './Components/Header/Header'
 import NewsDetail from './Components/News/Detail/NewsDetail'
 import About from './Components/About/Abogit statusut'
 import NewsList from './Components/News/NewsList'
-import Index from './Components/Home/Index'
-import About from './Components/About/About'
+import Index from './Components/Home/Index';
 
 function App() {
   return (
