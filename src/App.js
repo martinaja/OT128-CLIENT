@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ActivitiesForm from './Components/Activities/ActivitiesForm'
 import CategoriesForm from './Components/Categories/CategoriesForm'
@@ -19,14 +18,27 @@ import About from './Components/About/About'
 import Activities from './Components/Activities/ActivitiesDetails'
 import NewsList from './Components/News/NewsList'
 import Index from './Components/Home/Index'
+import { Container } from '@material-ui/core'
+import { ThemeProvider } from '@mui/material/styles'
+import { createTheme, CssBaseline } from '@mui/material'
+
+const theme = createTheme({
+  palette: {
+    background: {
+      default: '#35858B',
+      m: 0,
+    },
+  },
+})
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <BrowserRouter>
-          <Header />
-          <Switch>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Header />
+ <BrowserRouter>
+        <Switch>
+          <Container>
             <Route path="/" exact component={Index} />
             <Route path="/create-activity" component={ActivitiesForm} />
             <Route path="/create-category" component={CategoriesForm} />
@@ -50,10 +62,11 @@ function App() {
               path="/backoffice/organization/edit"
               component={OrganizationForm}
             />
-          </Switch>
-        </BrowserRouter>
-      </header>
-    </div>
+          </Container>
+        </Switch>
+      </BrowserRouter>
+    
+    </ThemeProvider>
   )
 }
 

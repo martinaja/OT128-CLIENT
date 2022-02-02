@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material'
 import React from 'react'
-import { ListNews } from './HomePage'
+import NewsList from '../News/NewsList'
+
 
 function Index() {
   const content = (
@@ -15,7 +16,7 @@ function Index() {
   return (
     <div className="home-container">
       {content}
-      <ListNews />
+     <NewsList/>
     </div>
   )
 }

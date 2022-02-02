@@ -12,7 +12,7 @@ export const ListNews = () => {
       <Typography>
     Aquí irá la lista de novedades
       </Typography>
-     
+    
     </div>
   )
 }
