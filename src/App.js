@@ -19,6 +19,7 @@ import About from './Components/About/About'
 import Activities from './Components/Activities/ActivitiesDetails'
 import NewsList from './Components/News/NewsList'
 import Index from './Components/Home/Index'
+import ContactHome from './Components/Contact/ContactHome'
 
 function App() {
   return (
@@ -29,7 +30,16 @@ function App() {
           <Switch>
             <Route path="/" exact component={Index} />
             <Route path="/create-activity" component={ActivitiesForm} />
-            <Route path="/create-category" component={CategoriesForm} />
+            <Route
+              exact
+              path="/backoffice/create-category/:id"
+              component={CategoriesForm}
+            />
+            <Route
+              path="/backoffice/create-category"
+              component={CategoriesForm}
+            />
+            <Route path="/contacto" component={ContactHome} />
             <Route exact path="/backoffice/news" component={NewsForm} />
             <Route path="/novedades/:newsId" component={NewsDetail} />
             <Route path="/backoffice/news/:newsId" component={NewsForm} />
