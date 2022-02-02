@@ -12,16 +12,22 @@ import ToysCampaign from './Campaigns/Toys/ToysCampaign'
 import MembersForm from './Components/Members/MembersForm'
 import ProjectsForm from './Components/Projects/ProjectsForm'
 import LoginForm from './Components/Auth/LoginForm'
+import OrganizationForm from './Components/Organization/OrganizationForm'
+import Header from './Components/Header/Header'
 import NewsDetail from './Components/News/Detail/NewsDetail'
 import About from './Components/About/About'
+import Activities from './Components/Activities/ActivitiesDetails'
+import NewsList from './Components/News/NewsList'
+import Index from './Components/Home/Index'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <BrowserRouter>
+          <Header />
           <Switch>
-            {/* <Route path="/" exact component={} />           Esta ruta debe ser para el Home */}
+            <Route path="/" exact component={Index} />
             <Route path="/create-activity" component={ActivitiesForm} />
             <Route path="/create-category" component={CategoriesForm} />
             <Route exact path="/backoffice/news" component={NewsForm} />
@@ -38,6 +44,12 @@ function App() {
             <Route path="/school-campaign" component={SchoolCampaign} />
             <Route path="/toys-campaign" component={ToysCampaign} />
             <Route path="/set-user" component={LoginForm} />
+            <Route path="/activities" component={Activities} />
+            <Route path="/news" component={NewsList} />
+            <Route
+              path="/backoffice/organization/edit"
+              component={OrganizationForm}
+            />
           </Switch>
         </BrowserRouter>
       </header>
