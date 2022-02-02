@@ -35,7 +35,7 @@ const Footer = () => {
         position="sticky"
         style={{
           background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
-          marginBottom: '0rem',
+          marginBottom: '0px !important',
         }}
       >
         <Toolbar>
@@ -58,7 +58,7 @@ const Footer = () => {
                 p: 0,
                position: 'static',
               }}
-              alt="Logo ong."
+              alt="Logo Somos Mas ong."
               src="/images/Logo Somos Mas.png"
             />
           )}
@@ -71,9 +71,9 @@ const Footer = () => {
               </Container>
             </Box>
           )}
-          <FooterSuscribe/>
+
           <Box />
-         
+          <FooterSuscribe/>
         </Toolbar>
       </AppBar>
     </Box>
