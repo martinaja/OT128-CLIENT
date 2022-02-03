@@ -5,7 +5,7 @@ import {
   AppBar,
   Box,
   Toolbar,
-  Typography,
+  
 } from '@material-ui/core'
 
 const Header = () => {
