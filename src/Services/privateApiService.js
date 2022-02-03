@@ -42,9 +42,25 @@ export const PostHandle = (apiEndpoint, bodyData) => {
 }
 
 // use the setState function where you gonna save your data
-export const deleteHandle = (apiEndpoint, id, setState) => {
+export const deleteHandler = (apiEndpoint, id, setState) => {
   apiService
     .delete(`${apiEndpoint}/${id}`)
+    .then((res) =>
+      setState({
+        data: res.data,
+      }),
+    )
+    .catch((err) =>
+      setState({
+        error: err.message,
+      }),
+    )
+}
+
+// use the setState function where you gonna save your data
+export const putHandler = (apiEndpoint, id, bodyData, setState) => {
+  apiService
+    .put(`${apiEndpoint}/${id}`, bodyData)
     .then((res) =>
       setState({
         data: res.data,
