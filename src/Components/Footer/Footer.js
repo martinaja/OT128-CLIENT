@@ -56,7 +56,7 @@ const Footer = () => {
                 height: 72,
                 m: 8,
                 p: 0,
-               position: 'static',
+               position: 'fixed',
               }}
               alt="Logo Somos Mas ong."
               src="/images/Logo Somos Mas.png"
