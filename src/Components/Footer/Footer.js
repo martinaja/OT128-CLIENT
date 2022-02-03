@@ -5,9 +5,15 @@ import {
   AppBar,
   Box,
   Toolbar,
+<<<<<<< HEAD
   Button,
 } from '@material-ui/core'
 import { FooterSuscribe } from './../FooterSuscribe'
+=======
+} from '@material-ui/core'
+import { Button, Container } from '@mui/material'
+import { FooterSuscribe } from './../Footer'
+>>>>>>> 6213f0a81d13fdf613faae17603e1b70a4b82f08
 
 const Footer = () => {
   // Breakpoints
@@ -22,6 +28,7 @@ const Footer = () => {
     },
   })
 
+<<<<<<< HEAD
   // const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
   // const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
   const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
@@ -57,6 +64,60 @@ const Footer = () => {
             <Button color="inherit">Contacto</Button>
           </Box>
           <FooterSuscribe />
+=======
+  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
+  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
+  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
+
+  // if you want to add more social medias, add it to here and /data/socialMedia.js.
+  // and import the Material Icon, then add the code.
+
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="sticky"
+        style={{
+          background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
+          marginBottom: '0px !important',
+        }}
+      >
+        <Toolbar>
+          {isMatchTablet && (
+            <Box marginLeft="10rem">
+              <Container>
+                <Button color="warning">Noticias</Button>
+                <Button color="warning">Actividades</Button>
+                <Button color="warning">Novedades</Button>
+              </Container>
+            </Box>
+          )}
+          {isMatchLaptop && (
+            <Box
+              component="img"
+              sx={{
+                width: 128,
+                height: 72,
+                m: 8,
+                p: 0,
+               position: 'static',
+              }}
+              alt="Logo Somos Mas ong."
+              src="/images/Logo Somos Mas.png"
+            />
+          )}
+          {isMatchTablet && (
+            <Box marginRight="10rem">
+              <Container color="warning">
+                <Button color="warning">Testimonios</Button>
+                <Button color="warning">Nosotros</Button>
+                <Button color="warning">contacto</Button>
+              </Container>
+            </Box>
+          )}
+
+          <Box />
+          <FooterSuscribe/>
+>>>>>>> 6213f0a81d13fdf613faae17603e1b70a4b82f08
         </Toolbar>
       </AppBar>
     </Box>

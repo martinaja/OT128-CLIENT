@@ -1,10 +1,17 @@
+<<<<<<< HEAD:src/Components/FooterSuscribe.js
 import { InputLabel } from '@material-ui/core'
+=======
+>>>>>>> 6213f0a81d13fdf613faae17603e1b70a4b82f08:src/Components/Footer.js
 import {
   Button,
   Container,
   FormControl,
   FormLabel,
   Input,
+<<<<<<< HEAD:src/Components/FooterSuscribe.js
+=======
+  TableFooter,
+>>>>>>> 6213f0a81d13fdf613faae17603e1b70a4b82f08:src/Components/Footer.js
   Typography,
 } from '@mui/material'
 import { useState } from 'react'
@@ -34,6 +41,7 @@ const SubscribeForm = () => {
   }
 
   return (
+<<<<<<< HEAD:src/Components/FooterSuscribe.js
     <CardFooter>
       <Container>
         <Typography>Informate</Typography>
@@ -54,5 +62,35 @@ const SubscribeForm = () => {
         </FormControl>
       </Container>
     </CardFooter>
+=======
+    <TableFooter>
+      <Container >
+        <div className="subscribe__container">
+          <Typography>Informate</Typography>
+          <FormControl onSubmit={handleSubmit}>
+            <FormLabel>
+              <Typography>e-mail</Typography>
+              <Input
+                color="warning"
+                type="email"
+                name="subscribeEmail"
+                value={inputEmail}
+                onChange={(e) => setInputEmail(e.target.value)}
+              />
+            </FormLabel>
+            <small>{inputError}</small>
+            <Button
+              type="submit"
+              value="Subscribe"
+              width="12px"
+              color="warning"
+            >
+              Suscribe
+            </Button>
+          </FormControl>
+        </div>
+      </Container>
+    </TableFooter>
+>>>>>>> 6213f0a81d13fdf613faae17603e1b70a4b82f08:src/Components/Footer.js
   )
 }
