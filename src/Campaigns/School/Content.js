@@ -21,8 +21,8 @@ const Content = () => {
 
   const renderer = ({ days, hours, minutes, seconds }) => (
     <span>
-      Falta {days} días, {zeroPad(hours) + 3} horas, {zeroPad(minutes)} minutos,{' '}
-      {zeroPad(seconds)} segundos.
+      Falta {days} días, {parseInt(zeroPad(hours)) + 3} horas,{' '}
+      {zeroPad(minutes)} minutos, {zeroPad(seconds)} segundos.
     </span>
   )
 
@@ -53,7 +53,7 @@ const Content = () => {
           {/* Hide on mobile */}
           <section id="countdown">
             <Countdown
-              date={'2022-02-05T00:00:00.000000Z'}
+              date={'2022-02-04T00:00:00.000000Z'}
               renderer={renderer}
             />
           </section>
