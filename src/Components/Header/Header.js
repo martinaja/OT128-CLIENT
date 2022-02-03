@@ -5,7 +5,6 @@ import {
   AppBar,
   Box,
   Toolbar,
-  
 } from '@material-ui/core'
 
 const Header = () => {

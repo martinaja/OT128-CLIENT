@@ -5,11 +5,10 @@ import {
   FormControl,
   FormLabel,
   Input,
-  InputAdornment,
-  TableFooter,
   Typography,
 } from '@mui/material'
 import { useState } from 'react'
+import { CardFooter } from 'reactstrap'
 
 export const FooterSuscribe = () => {
   const isUserSubscribe = localStorage.getItem('isUserSubscribe')
@@ -35,33 +34,25 @@ const SubscribeForm = () => {
   }
 
   return (
-    <TableFooter>
-      <Container >
-       
-          <Typography>Informate</Typography>
-          <FormControl onSubmit={handleSubmit}>
-            <FormLabel >
-              <Typography >e-mail</Typography>
-              <Input
-    
-                type="email"
-                name="subscribeEmail"
-                value={inputEmail}
-                onChange={(e) => setInputEmail(e.target.value)}
-              />
-            </FormLabel>
-            <small>{inputError}</small>
-            <Button
-              type="submit"
-              value="Subscribe"
-              width="12px"
-              color='inherit'
-            >
-              Suscribe
-            </Button>
-          </FormControl>
-     
+    <CardFooter>
+      <Container>
+        <Typography>Informate</Typography>
+        <FormControl onSubmit={handleSubmit}>
+          <FormLabel>
+            <Typography>e-mail</Typography>
+            <Input
+              type="email"
+              name="subscribeEmail"
+              value={inputEmail}
+              onChange={(e) => setInputEmail(e.target.value)}
+            />
+          </FormLabel>
+          <small>{inputError}</small>
+          <Button type="submit" value="Subscribe" width="12px" color="inherit">
+            Suscribe
+          </Button>
+        </FormControl>
       </Container>
-    </TableFooter>
+    </CardFooter>
   )
 }

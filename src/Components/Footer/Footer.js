@@ -5,10 +5,9 @@ import {
   AppBar,
   Box,
   Toolbar,
+  Button,
 } from '@material-ui/core'
-import { Button, Container } from '@mui/material'
-import { FooterSuscribe } from '../FooterSuscribe'
-
+import { FooterSuscribe } from './../FooterSuscribe'
 
 const Footer = () => {
   // Breakpoints
@@ -23,64 +22,41 @@ const Footer = () => {
     },
   })
 
-  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
+  // const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
+  // const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
   const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
 
-  // if you want to add more social medias, add it to here and /data/socialMedia.js.
-  // and import the Material Icon, then add the code.
-
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, boxShadow: 0 }}>
       <AppBar
-      
-        position="relative"
+        position="static"
         style={{
           background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
-          marginBottom: '0rem',
-          marginTop: '10rem'
         }}
       >
-        <Toolbar >
-          {isMatchTablet && (
-            <Box marginLeft="10rem" sx={{ flexGrow: 1 }}>
-              <Container>
-              <Button color="inherit">Notocias</Button>
-                <Button color="inherit">Actividades</Button>
-                <Button color="inherit">Novedades</Button>
-              </Container>
-            </Box>
-          )}
-          {isMatchLaptop && (
-            <Box
-              component="img"
-              sx={{
-                
-                width: 120,
-                height: 62,
-                m: 8,
-                p: 0,
-               position: 'static',
-              }}
-              alt="Logo Somos Mas ong."
-              src="/images/Logo Somos Mas.png"
-            />
-          )}
-          {isMatchTablet && (
-            <Box marginRight="8rem" >
-              <Container color="warning">
-                <Button color="inherit">Testimonios</Button>
-                <Button color="inherit">Nosotros</Button>
-                <Button color="inherit">Contacto</Button>
-              </Container>
-            </Box>
-          )}
-
-          <Box />
-          <Box sx={{ flexGrow: 1 }}>
-          <FooterSuscribe />
+        <Box
+          component="img"
+          sx={{
+            width: 128,
+            height: 73,
+            ml: '3rem',
+            p: 1,
+          }}
+          alt="Logo ong."
+          src="/images/Logo Somos Mas.png"
+        />
+        <Box marginLeft="10rem" sx={{ flexGrow: 1 }}>
+          <Button color="inherit">Notocias</Button>
+          <Button color="inherit">Actividades</Button>
+          <Button color="inherit">Novedades</Button>
+        </Box>
+        <Toolbar>
+          <Box marginLeft="10rem" sx={{ flexGrow: 1 }}>
+            <Button color="inherit">Testimonios</Button>
+            <Button color="inherit">Nosotros</Button>
+            <Button color="inherit">Contacto</Button>
           </Box>
-        
+          <FooterSuscribe />
         </Toolbar>
       </AppBar>
     </Box>
