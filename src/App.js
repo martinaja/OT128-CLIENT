@@ -1,14 +1,29 @@
 import React from 'react'
-import './App.css'
 import Header from './Components/Header/Header'
+import { ThemeProvider } from '@mui/material/styles'
+import { createTheme, CssBaseline, Container } from '@mui/material'
+import Footer from './Components/Footer/Footer'
 import { Routes } from './Router/Routes'
+
+const theme = createTheme({
+  palette: {
+    background: {
+      default: '#35858B',
+      m: 0,
+    },
+  },
+})
 
 function App() {
   return (
-    <div className="App">
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Header />
-      <Routes />
-    </div>
+      <Container>
+        <Routes />
+      </Container>
+      <Footer />
+    </ThemeProvider>
   )
 }
 export default App
