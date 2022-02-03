@@ -18,3 +18,4 @@ export const GetPublicHandle = (apiEndpoint, id) => {
 
     return  response 
 }
+
