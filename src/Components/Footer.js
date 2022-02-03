@@ -1,6 +1,15 @@
+import {
+  Button,
+  Container,
+  FormControl,
+  FormLabel,
+  Input,
+  TableFooter,
+  Typography,
+} from '@mui/material'
 import { useState } from 'react'
 
-export const Footer = () => {
+export const FooterSuscribe = () => {
   const isUserSubscribe = localStorage.getItem('isUserSubscribe')
 
   return <footer>{!isUserSubscribe && <SubscribeForm />}</footer>
@@ -24,22 +33,33 @@ const SubscribeForm = () => {
   }
 
   return (
-    <footer>
-      <div className="subscribe__container">
-        <form onSubmit={handleSubmit}>
-          <label>
-            e-mail
-            <input
-              type="email"
-              name="subscribeEmail"
-              value={inputEmail}
-              onChange={(e) => setInputEmail(e.target.value)}
-            />
-          </label>
-          <small>{inputError}</small>
-          <input type="submit" value="Subscribe" />
-        </form>
-      </div>
-    </footer>
+    <TableFooter>
+      <Container >
+        <div className="subscribe__container">
+          <Typography>Informate</Typography>
+          <FormControl onSubmit={handleSubmit}>
+            <FormLabel>
+              <Typography>e-mail</Typography>
+              <Input
+                color="warning"
+                type="email"
+                name="subscribeEmail"
+                value={inputEmail}
+                onChange={(e) => setInputEmail(e.target.value)}
+              />
+            </FormLabel>
+            <small>{inputError}</small>
+            <Button
+              type="submit"
+              value="Subscribe"
+              width="12px"
+              color="warning"
+            >
+              Suscribe
+            </Button>
+          </FormControl>
+        </div>
+      </Container>
+    </TableFooter>
   )
 }

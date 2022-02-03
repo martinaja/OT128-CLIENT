@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@material-ui/core'
 
-const Header = () => {
+const FooterToys = () => {
   // Breakpoints
   const theme = createTheme({
     breakpoints: {
@@ -40,11 +40,12 @@ const Header = () => {
               sx={{
                 width: 108,
                 height: 53,
-                m: 0,
+                m: 2,
+                
                 p: 1,
               }}
               alt="Logo ong."
-              src="/images/Logo Somos Mas.png"
+              src="/images/oso.png"
             />
           )}
 
@@ -79,4 +80,4 @@ const Header = () => {
     </Box>
   )
 }
-export default Header
+export default FooterToys
