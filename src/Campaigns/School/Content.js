@@ -21,10 +21,12 @@ const Content = () => {
 
   const renderer = ({ days, hours, minutes, seconds }) => (
     <span>
-      Falta {days} días, {parseInt(zeroPad(hours)) + 3} horas,{' '}
-      {zeroPad(minutes)} minutos, {zeroPad(seconds)} segundos.
+      Faltan {days} días, {hours} horas, {minutes} minutos, {seconds} segundos.
     </span>
   )
+
+  const date = new Date('2022-03-02T00:00:00.000000Z') /*Date from API*/
+  const dateToUTM = date.toUTCString()
 
   return (
     <Container
@@ -52,10 +54,7 @@ const Content = () => {
         <Box>
           {/* Hide on mobile */}
           <section id="countdown">
-            <Countdown
-              date={'2022-02-04T00:00:00.000000Z'}
-              renderer={renderer}
-            />
+            <Countdown date={dateToUTM + '-0300'} renderer={renderer} />
           </section>
         </Box>
       )}
