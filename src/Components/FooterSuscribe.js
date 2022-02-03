@@ -1,9 +1,11 @@
+import { InputLabel } from '@material-ui/core'
 import {
   Button,
   Container,
   FormControl,
   FormLabel,
   Input,
+  InputAdornment,
   TableFooter,
   Typography,
 } from '@mui/material'
@@ -35,13 +37,13 @@ const SubscribeForm = () => {
   return (
     <TableFooter>
       <Container >
-        <div className="subscribe__container">
+       
           <Typography>Informate</Typography>
           <FormControl onSubmit={handleSubmit}>
-            <FormLabel>
-              <Typography>e-mail</Typography>
+            <FormLabel >
+              <Typography >e-mail</Typography>
               <Input
-                color="warning"
+    
                 type="email"
                 name="subscribeEmail"
                 value={inputEmail}
@@ -53,12 +55,12 @@ const SubscribeForm = () => {
               type="submit"
               value="Subscribe"
               width="12px"
-              color="warning"
+              color='inherit'
             >
               Suscribe
             </Button>
           </FormControl>
-        </div>
+     
       </Container>
     </TableFooter>
   )

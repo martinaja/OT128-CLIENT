@@ -7,7 +7,8 @@ import {
   Toolbar,
 } from '@material-ui/core'
 import { Button, Container } from '@mui/material'
-import { FooterSuscribe } from './../Footer'
+import { FooterSuscribe } from '../FooterSuscribe'
+
 
 const Footer = () => {
   // Breakpoints
@@ -32,19 +33,21 @@ const Footer = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
-        position="sticky"
+      
+        position="relative"
         style={{
           background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
-          marginBottom: '0px !important',
+          marginBottom: '0rem',
+          marginTop: '10rem'
         }}
       >
-        <Toolbar>
+        <Toolbar >
           {isMatchTablet && (
-            <Box marginLeft="10rem">
+            <Box marginLeft="10rem" sx={{ flexGrow: 1 }}>
               <Container>
-                <Button color="warning">Noticias</Button>
-                <Button color="warning">Actividades</Button>
-                <Button color="warning">Novedades</Button>
+              <Button color="inherit">Notocias</Button>
+                <Button color="inherit">Actividades</Button>
+                <Button color="inherit">Novedades</Button>
               </Container>
             </Box>
           )}
@@ -52,8 +55,9 @@ const Footer = () => {
             <Box
               component="img"
               sx={{
-                width: 128,
-                height: 72,
+                
+                width: 120,
+                height: 62,
                 m: 8,
                 p: 0,
                position: 'static',
@@ -63,17 +67,20 @@ const Footer = () => {
             />
           )}
           {isMatchTablet && (
-            <Box marginRight="10rem">
+            <Box marginRight="8rem" >
               <Container color="warning">
-                <Button color="warning">Testimonios</Button>
-                <Button color="warning">Nosotros</Button>
-                <Button color="warning">contacto</Button>
+                <Button color="inherit">Testimonios</Button>
+                <Button color="inherit">Nosotros</Button>
+                <Button color="inherit">Contacto</Button>
               </Container>
             </Box>
           )}
 
           <Box />
-          <FooterSuscribe/>
+          <Box sx={{ flexGrow: 1 }}>
+          <FooterSuscribe />
+          </Box>
+        
         </Toolbar>
       </AppBar>
     </Box>
