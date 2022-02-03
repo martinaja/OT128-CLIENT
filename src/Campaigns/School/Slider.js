@@ -1,39 +1,39 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Carousel from 'react-material-ui-carousel'
 import ItemSlider from '../ItemSlider'
 
 const Slider = () => {
-  // Breakpoints
-  // const theme = createTheme({
-  //   breakpoints: {
-  //     values: {
-  //       mobile: 0,
-  //       tablet: 640,
-  //       laptop: 1024,
-  //       desktop: 1200,
-  //     },
-  //   },
-  // })
-
-  // const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  // const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
-  // const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
-
   const items = [
     {
-      name: 'Random Name #1',
-      description: 'Probably the most random thing you have ever seen!',
+      name: 'Imagen Campaña #1',
+      text: 'Texto al pie de la imagen ejemplo #1 campaña escolar',
+      image:
+        'https://drive.google.com/uc?export=view&id=1qEqvRfz1jifFZlAySvPcto7ajvpcMwlC',
     },
     {
-      name: 'Random Name #2',
-      description: 'Hello World!',
+      name: 'Imagen Campaña #2',
+      text: 'Texto al pie de la imagen ejemplo #2 campaña escolar',
+      image:
+        'https://drive.google.com/uc?export=view&id=1N5x1Fw7IVcbHtw7AJF0-weg-HhXTekoF',
+    },
+    {
+      name: 'Imagen Campaña #3',
+      text: 'Texto al pie de la imagen ejemplo #3 campaña escolar',
+      image:
+        'https://drive.google.com/uc?export=view&id=1EfWmYnA2R49ZW8anbMT9Hg2J02pVT5D9',
     },
   ]
 
   return (
-    <Box sx={{ m: 'auto', p: 'auto', maxWidth: '100%' }}>
-      <Carousel>
+    <Box sx={{ my: 2 }}>
+      <Carousel
+        interval="5000"
+        animation="slide"
+        duration="750"
+        swipe={false}
+        indicators={false}
+      >
         {items.map((item, i) => (
           <ItemSlider key={i} item={item} />
         ))}
