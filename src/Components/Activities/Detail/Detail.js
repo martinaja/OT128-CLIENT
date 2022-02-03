@@ -39,7 +39,7 @@ export const Detail = (props) => {
           </Typography>
         </>
       ) : (
-        <h1>Prueba</h1>
+        <SkeletonArticle />
       )}
     </>
   )
