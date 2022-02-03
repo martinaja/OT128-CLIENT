@@ -11,7 +11,7 @@ const NewsList = () => {
 
     return (
         <div>
-            <h1>Listado de Novedades</h1>
+            <h2>Listado de Novedades</h2>
             <ul className="list-container">
                 {newsMock.length > 0 ? 
                     newsMock.map((element) => {
