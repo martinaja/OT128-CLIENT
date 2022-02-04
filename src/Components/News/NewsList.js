@@ -25,13 +25,13 @@ const NewsList = () => {
 
         <h1>Novedades</h1>
         
-        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid container="true" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}  direction={{ xs: "column", md: "row"}}>
                 {data?.length > 0 ? 
                     data?.map((element) => {
                         return(
-                            <Grid item xs={2} sm={4} md={4} key={element.id}>,
+                            <Grid item="true" xs={2} sm={4} md={4} key={element.id}>
                        
-                            <CustomCard image={String(element.image)} name={String(element.name)} description={String(element.description)}/>,
+                            <CustomCard image={element.image} name={element.name} description={element.content}/>
                    
                             </Grid>
                         )
@@ -41,9 +41,6 @@ const NewsList = () => {
                 }
         </Grid>
 
-
-    
-        {/* <CustomCard name={"name"} description={"description"} /> */}
 
 
         </>
