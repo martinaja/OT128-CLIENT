@@ -6,7 +6,6 @@ import { createTheme, CssBaseline, Container } from '@mui/material'
 import { Routes } from './Router/Routes'
 import { getPublicHandle } from './Services/BaseHTTP/publicApiService'
 
-
 const theme = createTheme({
   palette: {
     background: {
@@ -17,8 +16,6 @@ const theme = createTheme({
 })
 
 function App() {
-
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -26,7 +23,6 @@ function App() {
       <Container>
         <Routes />
       </Container>
-      <Footer />
     </ThemeProvider>
   )
 }
