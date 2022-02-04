@@ -1,32 +1,52 @@
 import React from 'react';
-import '../CardListStyles.css';
+import { useState, useEffect } from 'react';
+import { GetPublicHandle } from '../../Services/publicApiService';
+import { Stack as Grid } from '@mui/material';
+import CustomCard from './../Card/CustomCard';
 
-const NewsList = () => {
-    const newsMock = [
-        {id: 2, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 1, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 3, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 4, name: 'Titulo de prueba', description: 'Descripcion de prueba'}
-    ];
+
+const NewsList = () => {    
+    const [data, setData] = useState('')
+
+    const url = process.env.REACT_APP_API_NEWS_GET
+
+    const resp = GetPublicHandle(url)
+  
+    useEffect(() => {
+      if (resp) {
+        const { data } = resp
+        setData(data)
+      }
+    }, [resp])
+
 
     return (
-        <div>
-            <h2>Listado de Novedades</h2>
-            <ul className="list-container">
-                {newsMock.length > 0 ? 
-                    newsMock.map((element) => {
+        <>
+
+        <h1>Novedades</h1>
+        
+        <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                {data?.length > 0 ? 
+                    data?.map((element) => {
                         return(
-                            <li className="card-info" key={element.id}>
-                                <h3>{element.name}</h3>
-                                <p>{element.description}</p>
-                            </li>
+                            <Grid item xs={2} sm={4} md={4} key={element.id}>,
+                       
+                            <CustomCard image={String(element.image)} name={String(element.name)} description={String(element.description)}/>,
+                   
+                            </Grid>
                         )
-                    })
+                    }) 
                 :
                     <p>No hay novedades</p>
                 }
-            </ul>
-        </div>
+        </Grid>
+
+
+    
+        {/* <CustomCard name={"name"} description={"description"} /> */}
+
+
+        </>
     );
 }
  
