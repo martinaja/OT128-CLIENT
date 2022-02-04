@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { React, useState } from 'react'
 import parse from 'html-react-parser'
-import { getAllActivity } from '../../Services/ActivityService';
+import getActivities from './../../Services/getActivities';
 
 
 
@@ -10,7 +10,7 @@ const ActivitiesContent = () => {
   const [infoActivities] = useState([])
 const [data, setData] = useState()
   useEffect(() => {
-      getAllActivity().then((res) => setData(res.data.data))
+      getActivities().then((res) => setData(res.data.data))
       }, [])
 console.log(data)
   const activitiesArray = infoActivities.map(

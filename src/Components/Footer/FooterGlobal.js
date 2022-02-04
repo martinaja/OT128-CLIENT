@@ -6,7 +6,6 @@ import { Box } from '@mui/material'
 import classNames from 'classnames'
 import React, { Component } from 'react'
 
-
 class Footer extends Component {
   render() {
     const { classes } = this.props
@@ -51,11 +50,11 @@ class Footer extends Component {
                   alt="Logo ong."
                   src="/images/Logo Somos Mas.png"
                 />
-                 <Box
+                <Box
                   component="img"
                   sx={{
-                    width: 182,
-                    height: 123,
+                    maxWidth: 182,
+                    maxHeight: 123,
                     m: 'auto',
                     p: 1,
                   }}
@@ -73,7 +72,7 @@ class Footer extends Component {
               <Grid className={classes.flexContainer} item xs={3}></Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={4} style={{  marginLeft: '8' }}>
+          <Grid item xs={12} sm={4} style={{ marginLeft: '8' }}>
             <ul style={{ listStyle: 'none', margin: 0 }}>
               <li>
                 <Button>Noticias</Button>
@@ -95,9 +94,15 @@ class Footer extends Component {
               </li>
             </ul>
           </Grid>
-         
         </Grid>
-        
+        <Grid>
+        <Typography>
+  www.somosmas.com
+</Typography>
+<Typography>
+  Acceda a la campaña
+</Typography>
+        </Grid>
         <Grid className={classes.subFooter} item xs={12}>
           <Typography
             className={classes.white}
@@ -107,6 +112,7 @@ class Footer extends Component {
             {currentYear} O.N.G Somos Más
           </Typography>
         </Grid>
+        
       </div>
     )
   }

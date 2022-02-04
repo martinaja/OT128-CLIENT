@@ -1,9 +1,10 @@
 import React from 'react'
-import { getHandler } from '../../../Services/BaseHTTP/publicApiService'
+import { getPublicHandler } from '../../../Services/BaseHTTP/publicApiService'
 import { Title } from '../../Title'
 import { Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { SkeletonArticle } from './../../Skeleton/SkeletonArticle'
+import { getHandler } from './../../../Services/BaseHTTP/privateApiService';
 
 export const Detail = (props) => {
   const [data, setData] = useState('')
