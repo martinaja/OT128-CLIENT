@@ -1,50 +1,51 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { GetPublicHandle } from '../../Services/publicApiService';
-import { Stack as Grid } from '@mui/material';
-import CustomCard from './../Card/CustomCard';
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { GetPublicHandle } from '../../Services/publicApiService'
+import { Stack as Grid } from '@mui/material'
+import CustomCard from './../Card/CustomCard'
 
+const NewsList = () => {
+  const [data, setData] = useState('')
 
-const NewsList = () => {    
-    const [data, setData] = useState('')
+  const url = process.env.REACT_APP_API_NEWS_GET
 
-    const url = process.env.REACT_APP_API_NEWS_GET
+  const resp = GetPublicHandle(url)
 
-    const resp = GetPublicHandle(url)
-  
-    useEffect(() => {
-      if (resp) {
-        const { data } = resp
-        setData(data)
-      }
-    }, [resp])
+  useEffect(() => {
+    if (resp) {
+      const { data } = resp
+      setData(data)
+    }
+  }, [resp])
 
+  return (
+    <>
+      <h1>Novedades</h1>
 
-    return (
-        <>
-
-        <h1>Novedades</h1>
-        
-        <Grid container="true" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}  direction={{ xs: "column", md: "row"}}>
-                {data?.length > 0 ? 
-                    data?.map((element) => {
-                        return(
-                            <Grid item="true" xs={2} sm={4} md={4} key={element.id}>
-                       
-                            <CustomCard image={element.image} name={element.name} description={element.content}/>
-                   
-                            </Grid>
-                        )
-                    }) 
-                :
-                    <p>No hay novedades</p>
-                }
-        </Grid>
-
-
-
-        </>
-    );
+      <Grid
+        container="true"
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+        direction={{ xs: 'column', md: 'row' }}
+      >
+        {data?.length > 0 ? (
+          data?.map((element) => {
+            return (
+              <Grid item="true" xs={2} sm={4} md={4} key={element.id}>
+                <CustomCard
+                  image={element.image}
+                  name={element.name}
+                  description={element.content}
+                />
+              </Grid>
+            )
+          })
+        ) : (
+          <p>No hay novedades</p>
+        )}
+      </Grid>
+    </>
+  )
 }
- 
-export default NewsList;
+
+export default NewsList
