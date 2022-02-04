@@ -1,39 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { Paper, useMediaQuery, createTheme, Typography } from '@mui/material'
+import { Paper, Typography } from '@mui/material'
+import { useBreakPoints } from '../utils/hooks/useBreakPoints'
 
 const ItemSlider = ({ item }) => {
   const { image, text } = item
-
   const [height, setHeight] = useState('95vh')
 
-  //Breakpoints
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        mobile: 0,
-        tablet: 640,
-        laptop: 1024,
-        desktop: 1200,
-      },
-    },
-  })
-
-  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
-  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
+  const isMatchSmartTv = useBreakPoints('(min-width: 1536px)')
+  const isMatchDesktop = useBreakPoints('(min-width: 1200px)')
+  const isMatchTablet = useBreakPoints('(min-width: 600px)')
 
   // Inside this useEffect the size of the image is set
   useEffect(() => {
-    if (isMatchDesktop) {
+    if (isMatchSmartTv) {
       setHeight('90vh')
-    } else if (isMatchLaptop) {
+    } else if (isMatchDesktop) {
       setHeight('65vh')
     } else if (isMatchTablet) {
       setHeight('55vh')
     } else {
       setHeight('40vh')
     }
-  }, [isMatchTablet, isMatchLaptop, isMatchDesktop])
+  }, [isMatchTablet, isMatchDesktop, isMatchSmartTv])
 
   return (
     <Paper>
@@ -48,7 +36,7 @@ const ItemSlider = ({ item }) => {
           display: 'flex',
         }}
       />
-      {isMatchLaptop && (
+      {isMatchDesktop && (
         <Typography sx={{ py: 2, textAlign: 'center' }}>{text}</Typography>
       )}
     </Paper>
