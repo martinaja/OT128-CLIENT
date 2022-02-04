@@ -1,15 +1,16 @@
-import { Typography } from '@mui/material'
 import React from 'react'
-import { ListNews } from './ListNews'
+import NewsList from '../News/NewsList'
 
 function Index() {
   return (
-    <div className="home-container">
-      <Typography>Bienvenidos a Somos más</Typography>
-      <Typography>Aqui ira el slider</Typography>
-      <ListNews />
+    <div>
+      <h1>Bienvenidos</h1>
+      <h2>@Somosmás</h2>
+      <NewsList/>
+      <h2>Testimonios</h2>
+      <h4>Aquí iran las cards de testimonial.js</h4>
     </div>
   )
 }
 
-export default Index
+export default Index;
