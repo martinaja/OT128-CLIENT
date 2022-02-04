@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-const token = JSON.parse(localStorage.getItem('onLoggedUser'))
+const token = localStorage.getItem('token')
 
 const apiService = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
 })
 
-if (token !== '')
-  apiService.defaults.headers.common['Authorization'] = `Bearer ${token}` //token
+if (token) {
+  apiService.defaults.headers.common['Authorization'] = `Bearer ${token}`
+}
 
 export const getHandler = (apiEndpoint, id) => {
   const apiServiceUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
@@ -45,8 +46,4 @@ export const patchHandler = (apiEndpoint, id, bodyData) => {
   return apiService
     .post(apiServiceUrl, bodyData)
     .catch((err) => console.log(err))
-}
-
-export const getCategories = (id) => {
-  return getHandler('http://ongapi.alkemy.org/api/categories', id)
 }
