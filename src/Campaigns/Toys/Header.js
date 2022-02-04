@@ -7,23 +7,41 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core'
+import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
 
 const Header = () => {
-  // Breakpoints
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        mobile: 0,
-        tablet: 640,
-        laptop: 1024,
-        desktop: 1200,
-      },
-    },
-  })
+  // const [
+  //   isMatchTablet,
+  //   isMatchLaptop,
+  //   isMatchDesktop,
+  //   useUpTablet,
+  //   useUpLaptop,
+  //   useUpDesktop,
+  // ] = useBreakPoints()
+  const isMatchDesktop = useBreakPoints('(min-width: 1200px)')
+  const isMatchLaptop = useBreakPoints('(min-width: 1024px)')
+  const isMatchTablet = useBreakPoints('(min-width: 640px)')
+  // console.log('probando hook', desktop)
 
-  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
-  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
+  // console.log(isMatchTablet)
+  // useUpTablet()
+  // useUpLaptop()
+  // useUpDesktop()
+  // Breakpoints
+  // const theme = createTheme({
+  //   breakpoints: {
+  //     values: {
+  //       mobile: 0,
+  //       tablet: 640,
+  //       laptop: 1024,
+  //       desktop: 1200,
+  //     },
+  //   },
+  // })
+
+  // const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
+  // const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
+  // const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
 
   return (
     <Box sx={{ flexGrow: 1 }}>
