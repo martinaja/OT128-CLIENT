@@ -1,42 +1,49 @@
-import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const { token } = JSON.parse(localStorage.getItem('onLoggedUser')) || ''
+const token = localStorage.getItem('token')
 
 const apiService = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
 })
 
-if (token !== '') apiService.defaults.headers.common['authorization'] = token
-
-export const GetHandle = (apiEndpoint, id) => {
-  const [response, setResponse] = useState()
-
-  const axiosUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
-
-  useEffect(() => {
-    apiService
-      .get(axiosUrl)
-      .then((res) => setResponse(res.data))
-      .catch((err) => setResponse({ error: err }))
-  }, [])
-
-  if (!response) return null
-
-  return response
+if (token) {
+  apiService.defaults.headers.common['Authorization'] = `Bearer ${token}`
 }
 
-export const PostHandle = (apiEndpoint, bodyData) => {
-  const [response, setResponse] = useState()
+export const getHandler = (apiEndpoint, id) => {
+  const apiServiceUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
 
-  useEffect(() => {
-    apiService
-      .post(apiEndpoint, bodyData)
-      .then((res) => setResponse(res.data))
-      .catch((err) => setResponse({ error: err }))
-  }, [])
+  return apiService.get(apiServiceUrl).catch((err) => console.log(err))
+}
 
-  if (!response) return null
+export const postHandler = (apiEndpoint, bodyData) => {
+  return apiService.post(apiEndpoint, bodyData).catch((err) => console.log(err))
+}
 
-  return response
+// Id obligatory
+export const deleteHandler = (apiEndpoint, id) => {
+  if (!id) return 'error-no-id'
+  const apiServiceUrl = `${apiEndpoint}/${id}`
+
+  return apiService.post(apiServiceUrl).catch((err) => console.log(err))
+}
+
+// Id obligatory
+export const putHandler = (apiEndpoint, id, bodyData) => {
+  if (!id) return 'error-no-id'
+  const apiServiceUrl = `${apiEndpoint}/${id}`
+
+  return apiService
+    .post(apiServiceUrl, bodyData)
+    .catch((err) => console.log(err))
+}
+
+// Id obligatory
+export const patchHandler = (apiEndpoint, id, bodyData) => {
+  if (!id) return 'error-no-id'
+  const apiServiceUrl = `${apiEndpoint}/${id}`
+
+  return apiService
+    .post(apiServiceUrl, bodyData)
+    .catch((err) => console.log(err))
 }
