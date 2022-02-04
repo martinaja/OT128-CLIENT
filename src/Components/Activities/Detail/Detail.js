@@ -4,7 +4,7 @@ import { Title } from '../../Title'
 import { Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { SkeletonArticle } from './../../Skeleton/SkeletonArticle'
-import { getHandler } from './../../../Services/BaseHTTP/privateApiService';
+
 
 export const Detail = (props) => {
   const [data, setData] = useState('')
@@ -17,7 +17,7 @@ export const Detail = (props) => {
 
   const { id } = params
 
-  const resp = getHandler(url, id)
+  const resp = getPublicHandler(url, id)
 
   useEffect(() => {
     if (resp) {
