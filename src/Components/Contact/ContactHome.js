@@ -33,9 +33,9 @@ const ContactHome = () => {
         textAlign: 'center',
       }}
     >
-      <Title>Contacto</Title>
+      <Title image="/images/campaign-recent-02.jpg">Contacto</Title>
       <ContactDetails data={data} />
-      <Button sx={{ mt: 2 }} variant="outlined" onClick={handleClick}>
+      <Button variant="contained" sx={{ my: 2 }} onClick={handleClick}>
         Envianos un mensaje!
       </Button>
       <Box sx={{ display: show ? 'block' : 'none' }}>
