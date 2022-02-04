@@ -20,13 +20,13 @@ const CustomCard = ({
         m: 1,
       }}
     >
-      <CardMedia component="img" height="200" image={image} alt="card image" />
+      <CardMedia component="img" height="200" image={String(image)} alt="card image" />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {String(name)}
         </Typography>
         <Typography component={'span'} variant={'body2'} color="text.secondary">
-          {parse(description)}
+          {parse(String(description))}
         </Typography>
       </CardContent>
     </Card>
