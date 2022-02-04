@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useState } from 'react'
-import { CardFooter } from 'reactstrap'
+
 
 export const FooterSuscribe = () => {
   const isUserSubscribe = localStorage.getItem('isUserSubscribe')

@@ -1,21 +1,18 @@
 import { useEffect } from 'react'
 import { React, useState } from 'react'
-import axios from 'axios'
 import parse from 'html-react-parser'
+import { getAllActivity } from '../../Services/ActivityService';
 
 
 
 
 const ActivitiesContent = () => {
-  const [infoActivities, setInfoActivities] = useState([])
-
+  const [infoActivities] = useState([])
+const [data, setData] = useState()
   useEffect(() => {
-    axios
-      .get('http://ongapi.alkemy.org/api/activities')
-      .then((res) => setInfoActivities(res.data.data))
-      .catch((err) => console.log(err))
-  }, [])
-
+      getAllActivity().then((res) => setData(res.data.data))
+      }, [])
+console.log(data)
   const activitiesArray = infoActivities.map(
     (singleActivity) => singleActivity.description,
   )
