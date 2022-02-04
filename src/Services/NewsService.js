@@ -1,45 +1,27 @@
-import {
-  putRequest,
-  deleteRequest,
-  postRequest,
-  getRequest,
-} from "./privateApiService";
+import { getHandler } from './publicApiService'
+import { postHandler, putHandler, deleteHandler } from './privateApiService'
 
-import {Get} from "./publicApiService"
+const newsGetUrl = process.env.REACT_APP_API_NEWS_GET
+const newsPostUrl = process.env.REACT_APP_API_NEWS_POST
+const newsPutUrl = process.env.REACT_APP_API_NEWS_PUT
+const newsDeleteUrl = process.env.REACT_APP_API_NEWS_DELETE
 
-const baseUrl = "http://ongapi.alkemy.org/api/news";
+export const getNews = async (id) => {
+  const response = await getHandler(newsGetUrl, id)
+  return response ? response.data : false
+}
 
-const getNews = () => {
-  const response = Get(`${baseUrl}`);
-  return response;
-};
+export const createNew = async (body) => {
+  const response = await postHandler(newsPostUrl, body)
+  return response ? response.data : false
+}
 
-const createNews = (news) => {
-  const response = postRequest(`${baseUrl}`, news);
-  return response;
-};
+export const updateNew = async (id, body) => {
+  const response = await putHandler(newsPutUrl, id, body)
+  return response ? response.data : false
+}
 
-const getNewsById = (id) => {
-  const response = getRequest(`${baseUrl}/${id}`);
-  return response;
-};
-
-const updateNews = (id, news) => {
-  const response = putRequest(`${baseUrl}`, id, news);
-  return response;
-};
-
-const deleteNews = (id) => {
-  const response = deleteRequest(`${baseUrl}`, id);
-  return response;
-};
-
-const NewsService = {
-  delete: deleteNews,
-  getDetail: getNewsById,
-  getAll: getNews,
-  create: createNews,
-  update: updateNews,
-};
-
-export default NewsService;
+export const deleteNew = async (id) => {
+  const response = await deleteHandler(newsDeleteUrl, id)
+  return response ? response.data : false
+}
