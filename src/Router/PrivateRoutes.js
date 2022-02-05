@@ -13,10 +13,13 @@ export const PrivateRoutes = () => {
     <>
       <Route
         exact
-        path="backoffice/create-activity"
+        path="/backoffice/create-activity"
         component={ActivitiesForm}
       />
-      <Route path="backoffice/create-activity/:id" component={ActivitiesForm} />
+      <Route
+        path="/backoffice/create-activity/:id"
+        component={ActivitiesForm}
+      />
       <Route
         exact
         path="/backoffice/create-category"

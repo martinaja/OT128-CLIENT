@@ -59,7 +59,7 @@ const ActivitiesForm = () => {
   useEffect(() => {
     setTimeout(() => {
       setResponseServer(undefined)
-    }, 3500)
+    }, 3100)
     console.log(responseServer)
   }, [responseServer])
 
