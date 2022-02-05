@@ -14,7 +14,7 @@ class Footer extends Component {
       <div className={classes.root}>
         <Grid
           container
-          spacing={0}
+          spacing={3}
           className={classNames(classes.footerText, classes.footerSections)}
         >
           <Grid item xs={12} sm={4}>
@@ -96,21 +96,21 @@ class Footer extends Component {
           </Grid>
         </Grid>
         <Grid>
-        <Typography>
+        <h3>
   www.somosmas.com
-</Typography>
-<Typography>
+</h3>
+<h3>
   Acceda a la campaña
-</Typography>
+</h3>
         </Grid>
         <Grid className={classes.subFooter} item xs={12}>
-          <Typography
+          <h3
             className={classes.white}
             variant="subheading"
             component={'span'}
           >
             {currentYear} O.N.G Somos Más
-          </Typography>
+          </h3>
         </Grid>
         
       </div>
@@ -121,8 +121,8 @@ class Footer extends Component {
 const styles = (theme) => ({
   root: {
     marginTop: 30,
-    backgroundColor: `${theme.palette.primary[500]}`,
-    borderTop: 'solid 3px #998643',
+    backgroundColor: `${theme.palette.secondary[500]}`,
+    borderTop: 'solid 3px #AEFEFF',
     paddingTop: '16px',
     overflowX: 'hidden',
   },
@@ -130,24 +130,18 @@ const styles = (theme) => ({
     margin: '0 16px',
   },
   subFooter: {
-    backgroundColor: 'rgba(0, 0, 0, 0.15)',
+    backgroundColor: 'rgba(174, 254, 255, 0.15)',
     padding: '8px 16px 8px 16px',
     marginTop: '8px',
   },
   footerText: {
-    color: '#fff',
+    color: '#AEFEFF',
     fontSize: '18px',
     lineHeight: 1.5,
   },
-  invertedBtnDark: {
-    color: '#fff',
-    backgroundColor: 'transparent',
-    border: '2px #fff solid',
-    boxShadow: 'none',
-    margin: '8px',
-  },
+  
   white: {
-    color: '#ffffff',
+    color: '#AEFEFF',
   },
   flexContainer: {
     display: 'flex',
