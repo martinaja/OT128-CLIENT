@@ -1,33 +1,61 @@
-import React from 'react';
-import '../CardListStyles.css';
+import React from 'react'
+import { useState, useEffect } from 'react'
+// import { GetPublicHandle } from '../../Services/publicApiService'
+import { Stack as Grid } from '@mui/material'
+import CustomCard from './../Card/CustomCard'
+import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
 
 const NewsList = () => {
-    const newsMock = [
-        {id: 2, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 1, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 3, name: 'Titulo de prueba', description: 'Descripcion de prueba'},
-        {id: 4, name: 'Titulo de prueba', description: 'Descripcion de prueba'}
-    ];
+//   const [data, setData] = useState('')
 
-    return (
-        <div>
-            <h2>Listado de Novedades</h2>
-            <ul className="list-container">
-                {newsMock.length > 0 ? 
-                    newsMock.map((element) => {
-                        return(
-                            <li className="card-info" key={element.id}>
-                                <h3>{element.name}</h3>
-                                <p>{element.description}</p>
-                            </li>
-                        )
-                    })
-                :
-                    <p>No hay novedades</p>
-                }
-            </ul>
-        </div>
-    );
+//   const url = process.env.REACT_APP_API_NEWS_GET
+
+//   const resp = GetPublicHandle(url)
+
+//   useEffect(() => {
+//     if (resp) {
+//       const { data } = resp
+//       setData(data)
+//     }
+//   }, [resp])
+
+  return ( <h1>Prueba</h1>
+    // <>
+    //   {!data ? (
+    //     <SkeletonArticle />
+    //   ) : (
+    //     <>
+    //       {' '}
+    //       <h1>Novedades</h1>
+    //       <Grid
+    //         container="true"
+    //         spacing={{ xs: 2, md: 3 }}
+    //         columns={{ xs: 4, sm: 8, md: 12 }}
+    //         direction={{ xs: 'column', md: 'row' }}
+    //       >
+    //         {data?.length > 0 ? (
+    //           data?.map((element) => {
+    //             return (
+    //               <Grid item="true" xs={2} sm={4} md={4} key={element.id}>
+    //                 <CustomCard
+    //                   image={element.image}
+    //                   name={element.name}
+    //                   description={element.content}
+    //                 />
+    //               </Grid>
+    //             )
+    //           })
+    //         ) : (
+    //           <p>No hay novedades</p>
+    //         )}
+    //       </Grid>
+    //     </>
+    //   )}
+    // </>
+  )
 }
- 
-export default NewsList;
+
+export default NewsList
+
+
+// TODO: REFACTOR
