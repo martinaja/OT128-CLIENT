@@ -3,22 +3,22 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import convertBase64, { SUPPORTED_FORMATS } from '../../utils/toBase64'
+import { toBase64 } from '../../utils/toBase64'
+import { SUPPORTED_FORMATS } from '../../utils/supportedFormatsImg'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { LinearProgressFeedback } from '../LinearProgress'
+import {
+  postActivity,
+  putActivity,
+} from '../../Services/apiServices/activitiesApiService'
+import { alertServiceInfoTimer } from '../AlertService'
 
 const ActivitiesForm = () => {
-  const { id } = useParams()
+  let id = useParams().id
+  const [responseServer, setResponseServer] = useState(undefined)
+  const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(() => {
-    console.log(id)
-  })
-
-  const [state, setState] = useState({
-    responseServer: '',
-    id: undefined,
-    isLoading: false,
-  })
   const formikInitialValues = {
     name: '',
     description: '',
@@ -35,11 +35,33 @@ const ActivitiesForm = () => {
   })
 
   const handleSubmit = async (formData) => {
-    setState({ ...state, isLoading: true })
-    let responseServer = undefined
-    const imageBase64 = await convertBase64(formData.image)
-    setState({ ...state, isLoading: false })
+    setIsLoading(true)
+    const imageBase64 = await toBase64(formData.image)
+    console.log(id)
+    if (id) {
+      setResponseServer(
+        await putActivity(id, {
+          ...formData,
+          image: imageBase64,
+        }),
+      )
+    } else {
+      setResponseServer(
+        await postActivity({
+          ...formData,
+          image: imageBase64,
+        }),
+      )
+    }
+    setIsLoading(false)
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setResponseServer(undefined)
+    }, 3500)
+    console.log(responseServer)
+  }, [responseServer])
 
   const formik = useFormik({
     initialValues: formikInitialValues,
@@ -81,6 +103,16 @@ const ActivitiesForm = () => {
       <button className="submit-btn" type="submit">
         Send
       </button>
+      {responseServer !== undefined
+        ? alertServiceInfoTimer(
+            'start',
+            'info',
+            responseServer.data.message,
+            false,
+            3000,
+          )
+        : null}
+      <LinearProgressFeedback isActive={isLoading} />
     </form>
   )
 }
