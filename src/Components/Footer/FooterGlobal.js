@@ -1,16 +1,15 @@
 import { Button } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
-import { Box } from '@mui/material'
+import { Box, ButtonGroup } from '@mui/material'
 import classNames from 'classnames'
 import React, { Component } from 'react'
-
 import { Facebook, Twitter, Instagram, LinkedIn } from '@material-ui/icons'
 
 class Footer extends Component {
   render() {
     const { classes } = this.props
-    const currentYear = new Date().getFullYear()
+
     return (
       <div className={classes.root}>
         <Grid
@@ -18,7 +17,7 @@ class Footer extends Component {
           spacing={2}
           className={classNames(classes.footerText, classes.footerSections)}
         >
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} style={{ marginTop: '1rem' }}>
             <div vocab="http://schema.org/" typeof="Organization">
               <span property="name">O.N.G. Somos Más</span>
               <div property="address" typeof="PostalAddress">
@@ -28,7 +27,7 @@ class Footer extends Component {
                 </span>
                 <span property="postalCode">CP 1414</span>
               </div>
-              <span property="telephone">(011) 4723-4329</span>
+              <span property="telephone">(011) 4854-6368</span>
             </div>
           </Grid>
 
@@ -36,78 +35,74 @@ class Footer extends Component {
             <Grid container>
               <Grid
                 className={classes.flexContainer}
-                style={{ marginTop: '7rem' }}
+                style={{ marginTop: '3.5rem', marginBottom: '3.5rem'}}
                 item
                 xs={12}
               >
                 <Box
+                
                   component="img"
                   sx={{
                     width: 200,
                     height: 113,
                     m: '0',
-                    p: 1,
+                    p: 0,
                   }}
                   alt="Logo ong."
-                  src="/images/Logo Somos Mas.png"
+                  src="/images/logo-bco.png"
                 />
+
                 <Box
+                  style={{ marginLeft: '3.5rem' }}
                   component="img"
+                 
                   sx={{
                     maxWidth: 182,
                     maxHeight: 123,
-                    m: 'auto',
-                    p: 1,
+                    m: '0',
+                    p: 0,
                   }}
                   alt="Logo ong."
-                  src="/images/oso.png"
+                  src="/images/oso-bco.png"
                 />
               </Grid>
               <Grid className={classes.flexContainer} item xs={3}></Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <ul style={{ listStyle: 'none' }}>
-              <li>
-                <Button>Noticias</Button>
-              </li>
-              <li>
-                <Button>Actividades</Button>
-              </li>
-              <li>
-                <Button>Novedades</Button>
-              </li>
-              <li>
-                <Button>Testimonios</Button>
-              </li>
-              <li>
-                <Button>Nosotros</Button>
-              </li>
-              <li>
-                <Button>Contacto</Button>
-              </li>
-            </ul>
+
+          <Grid></Grid>
+
+          <Grid
+            style={{
+              marginTop: '3.5rem',
+              marginBottom: '3.5rem',
+              marginLeft: '8rem',
+            }}
+          >
+            <h3>www.somosmas.com</h3>
+            <Box>
+              <Instagram />
+
+              <Facebook />
+
+              <Twitter />
+
+              <LinkedIn />
+            </Box>
           </Grid>
         </Grid>
 
-        <Box>
-          <Instagram />
-
-          <Facebook />
-
-          <Twitter />
-
-          <LinkedIn />
-        </Box>
-
-        <Grid>
-          <h3>www.somosmas.com</h3>
-          <h3>Acceda a la campaña</h3>
-        </Grid>
         <Grid className={classes.subFooter} item xs={12}>
-          <h3 className={classes.white} variant="subheading" component={'span'}>
-            {currentYear} O.N.G Somos Más
-          </h3>
+          <Grid item xs={12} sm={4}>
+            <ButtonGroup  style={{ marginLeft: '8rem' }} variant="text" color="primary" size="large">
+              <Button>Noticias</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Actividades</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Novedades</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Testimonios</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Nosotros</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Contacto</Button>
+            </ButtonGroup>
+          </Grid>
         </Grid>
       </div>
     )
