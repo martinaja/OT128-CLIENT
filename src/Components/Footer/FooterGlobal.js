@@ -45,7 +45,7 @@ class Footer extends Component {
                   sx={{
                     width: 200,
                     height: 113,
-                    m: '0',
+                    m: 0,
                     p: 0,
                   }}
                   alt="Logo ong."
@@ -77,24 +77,25 @@ class Footer extends Component {
               marginTop: '3.5rem',
               marginBottom: '3.5rem',
               marginLeft: '8rem',
-              color: '#072227'
+              color: '#072227',
+             
             }}
           >
             <h3>www.somosmas.com</h3>
-            <Box>
-              <Instagram />
+            <Box style={{marginLeft: '2rem'}}>
+              <Instagram  style={{marginLeft: '0.7rem'}}/>
 
-              <Facebook />
+              <Facebook style={{marginLeft: '0.7rem'}} />
 
-              <Twitter />
+              <Twitter style={{marginLeft: '0.7rem'}} />
 
-              <LinkedIn />
+              <LinkedIn style={{marginLeft: '0.7rem'}}/>
             </Box>
           </Grid>
         </Grid>
 
         <Grid className={classes.subFooter} item xs={12}  >
-          <Grid item xs={18} sm={4} >
+          <Grid item xs={12} sm={4} >
             <ButtonGroup  style={{ widht: '1080px' }} variant="text" color="inherit" size="large">
               <Button   style={{ marginLeft: '6.5rem' }}>Noticias</Button>
               <Button  style={{ marginLeft: '4.5rem' }}>Actividades</Button>
