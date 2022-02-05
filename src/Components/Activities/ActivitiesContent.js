@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import { React, useState } from 'react'
 import parse from 'html-react-parser'
-import { getActivity } from './../../Services/apiServices/activitiesApiService';
+import { getActivity } from '../../Services/apiServices/activitiesApiService'
+
 
 
 
