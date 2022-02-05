@@ -45,7 +45,7 @@ class Footer extends Component {
                   sx={{
                     width: 200,
                     height: 113,
-                    m: 0,
+                    m: '0',
                     p: 0,
                   }}
                   alt="Logo ong."
@@ -77,19 +77,17 @@ class Footer extends Component {
               marginTop: '3.5rem',
               marginBottom: '3.5rem',
               marginLeft: '8rem',
-              color: '#072227',
-             
             }}
           >
             <h3>www.somosmas.com</h3>
-            <Box style={{marginLeft: '2rem'}}>
-              <Instagram  style={{marginLeft: '0.7rem'}}/>
+            <Box>
+              <Instagram />
 
-              <Facebook style={{marginLeft: '0.7rem'}} />
+              <Facebook />
 
-              <Twitter style={{marginLeft: '0.7rem'}} />
+              <Twitter />
 
-              <LinkedIn style={{marginLeft: '0.7rem'}}/>
+              <LinkedIn />
             </Box>
           </Grid>
         </Grid>
