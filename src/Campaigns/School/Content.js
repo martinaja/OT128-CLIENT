@@ -4,7 +4,7 @@ import Timer from '../../Components/Countdown/Timer'
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
 import PlaceIcon from '@mui/icons-material/Place'
-import './Content.css'
+import '../Content.css'
 
 const Content = () => {
   const theme = createTheme({
