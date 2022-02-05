@@ -3,30 +3,22 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import {
-  compareActivitieExist,
-  putActivitie,
-  postActivitie,
-} from '../../Services/activitiesServices'
+import convertBase64, { SUPPORTED_FORMATS } from '../../utils/toBase64'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const ActivitiesForm = () => {
-  const ALLOWED_IMAGE_FORMATS = ['image/jpeg', 'image/png', 'image/jpg']
+  const { id } = useParams()
 
-  const convertBase64 = async (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader()
-      fileReader.readAsDataURL(file)
+  useEffect(() => {
+    console.log(id)
+  })
 
-      fileReader.onload = () => {
-        resolve(fileReader.result)
-      }
-
-      fileReader.onerror = (error) => {
-        reject(error)
-      }
-    })
-  }
-
+  const [state, setState] = useState({
+    responseServer: '',
+    id: undefined,
+    isLoading: false,
+  })
   const formikInitialValues = {
     name: '',
     description: '',
@@ -37,31 +29,22 @@ const ActivitiesForm = () => {
     description: Yup.string(),
     image: Yup.mixed()
       .test('fileType', 'File must be an image jpg or png', (value) => {
-        if (value) return ALLOWED_IMAGE_FORMATS.includes(value && value.type)
+        if (value) return SUPPORTED_FORMATS.includes(value && value.type)
       })
       .required('Required'),
   })
 
+  const handleSubmit = async (formData) => {
+    setState({ ...state, isLoading: true })
+    let responseServer = undefined
+    const imageBase64 = await convertBase64(formData.image)
+    setState({ ...state, isLoading: false })
+  }
+
   const formik = useFormik({
     initialValues: formikInitialValues,
     validationSchema: formikValidationSchema,
-    onSubmit: async (formData) => {
-      let responseServer = undefined
-      const imageBase64 = await convertBase64(formData.image)
-      const id = await compareActivitieExist(formData.name)
-      if (id) {
-        responseServer = await putActivitie(id, {
-          ...formData,
-          image: imageBase64,
-        })
-      } else {
-        responseServer = await postActivitie({
-          ...formData,
-          image: imageBase64,
-        })
-      }
-      console.log(responseServer)
-    },
+    onSubmit: handleSubmit,
   })
 
   return (

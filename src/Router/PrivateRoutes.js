@@ -11,7 +11,12 @@ import OrganizationForm from '../Components/Organization/OrganizationForm'
 export const PrivateRoutes = () => {
   return (
     <>
-      <Route path="/create-activity" component={ActivitiesForm} />
+      <Route
+        exact
+        path="backoffice/create-activity"
+        component={ActivitiesForm}
+      />
+      <Route path="backoffice/create-activity/:id" component={ActivitiesForm} />
       <Route
         exact
         path="/backoffice/create-category"
