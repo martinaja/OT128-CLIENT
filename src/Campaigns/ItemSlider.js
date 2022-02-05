@@ -4,24 +4,30 @@ import { useBreakPoints } from '../utils/hooks/useBreakPoints'
 
 const ItemSlider = ({ item }) => {
   const { image, text } = item
-  const [height, setHeight] = useState('95vh')
 
   const isMatchSmartTv = useBreakPoints('(min-width: 1536px)')
   const isMatchDesktop = useBreakPoints('(min-width: 1200px)')
   const isMatchTablet = useBreakPoints('(min-width: 600px)')
 
+  const startHeight = () => {
+    const WindowWidth = window.innerWidth
+    if (WindowWidth >= 1536) {
+      return '110vh'
+    } else if (WindowWidth < 1536 && WindowWidth >= 1200) {
+      return '80vh'
+    } else if (WindowWidth < 1200 && WindowWidth >= 600) {
+      return '65vh'
+    } else if (WindowWidth < 600) {
+      return '40vh'
+    }
+  }
+
+  const [height, setHeight] = useState(startHeight())
+
   // Inside this useEffect the size of the image is set
   useEffect(() => {
-    if (isMatchSmartTv) {
-      setHeight('90vh')
-    } else if (isMatchDesktop) {
-      setHeight('65vh')
-    } else if (isMatchTablet) {
-      setHeight('55vh')
-    } else {
-      setHeight('40vh')
-    }
-  }, [isMatchTablet, isMatchDesktop, isMatchSmartTv])
+    setHeight(startHeight())
+  }, [isMatchSmartTv, isMatchDesktop, isMatchTablet])
 
   return (
     <Paper>
@@ -31,14 +37,22 @@ const ItemSlider = ({ item }) => {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: height,
+          height: height,
           width: '100%',
           display: 'flex',
         }}
       />
-      {isMatchDesktop && (
-        <Typography sx={{ py: 2, textAlign: 'center' }}>{text}</Typography>
-      )}
+      {/* {ShowFotterImg && ( */}
+      <Typography
+        sx={{
+          py: 2,
+          textAlign: 'center',
+          display: { xs: 'none', lg: 'block' },
+        }}
+      >
+        {text}
+      </Typography>
+      {/* )} */}
     </Paper>
   )
 }
