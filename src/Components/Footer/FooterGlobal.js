@@ -49,7 +49,7 @@ class Footer extends Component {
                     p: 0,
                   }}
                   alt="Logo ong."
-                  src="/images/logo-bco.png"
+                  src="/images/logo-verde.png"
                 />
 
                 <Box
@@ -63,7 +63,7 @@ class Footer extends Component {
                     p: 0,
                   }}
                   alt="Logo ong."
-                  src="/images/oso-bco.png"
+                  src="/images/oso-verde.png"
                 />
               </Grid>
               <Grid className={classes.flexContainer} item xs={3}></Grid>
@@ -77,6 +77,7 @@ class Footer extends Component {
               marginTop: '3.5rem',
               marginBottom: '3.5rem',
               marginLeft: '8rem',
+              color: '#072227'
             }}
           >
             <h3>www.somosmas.com</h3>
@@ -92,15 +93,15 @@ class Footer extends Component {
           </Grid>
         </Grid>
 
-        <Grid className={classes.subFooter} item xs={12}>
-          <Grid item xs={12} sm={4}>
-            <ButtonGroup  style={{ marginLeft: '8rem' }} variant="text" color="primary" size="large">
-              <Button>Noticias</Button>
-              <Button  style={{ marginLeft: '3.5rem' }}>Actividades</Button>
-              <Button  style={{ marginLeft: '3.5rem' }}>Novedades</Button>
-              <Button  style={{ marginLeft: '3.5rem' }}>Testimonios</Button>
-              <Button  style={{ marginLeft: '3.5rem' }}>Nosotros</Button>
-              <Button  style={{ marginLeft: '3.5rem' }}>Contacto</Button>
+        <Grid className={classes.subFooter} item xs={12}  >
+          <Grid item xs={18} sm={4} >
+            <ButtonGroup  style={{ widht: '1080px' }} variant="text" color="inherit" size="large">
+              <Button   style={{ marginLeft: '6.5rem' }}>Noticias</Button>
+              <Button  style={{ marginLeft: '4.5rem' }}>Actividades</Button>
+              <Button  style={{ marginLeft: '4.5rem' }}>Novedades</Button>
+              <Button  style={{ marginLeft: '4.5rem' }}>Testimonios</Button>
+              <Button  style={{ marginLeft: '4.5rem' }}>Nosotros</Button>
+              <Button  style={{ marginLeft: '4.5rem' }}>Contacto</Button>
             </ButtonGroup>
           </Grid>
         </Grid>
@@ -113,26 +114,27 @@ const styles = (theme) => ({
   root: {
     marginTop: 30,
     backgroundColor: `${theme.palette.secondary[500]}`,
-    borderTop: 'solid 3px #AEFEFF',
+    borderTop: 'solid 3px #35858B ',
     paddingTop: '16px',
     overflowX: 'hidden',
+  
   },
   footerSections: {
     margin: '0 16px',
   },
   subFooter: {
-    backgroundColor: 'rgba(174, 254, 255, 0.15)',
+    backgroundColor: '#35858B',
     padding: '8px 16px 8px 16px',
     marginTop: '8px',
   },
   footerText: {
-    color: '#AEFEFF',
+    color: '#35858B',
     fontSize: '18px',
     lineHeight: 1.5,
   },
 
   white: {
-    color: '#AEFEFF',
+    color: '#35858B',
   },
   flexContainer: {
     display: 'flex',

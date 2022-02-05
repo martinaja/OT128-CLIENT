@@ -73,7 +73,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 body{
     font-size: 14px;
-    color: #555555;
+    color: #110f0f;
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
 }
@@ -84,7 +84,7 @@ h4,
 h5,
 h6 {
     clear: both;
-    color: #222222;
+    color: #1b1a1a;
     font-family: 'Rubik', sans-serif;
     font-weight: 500;
 }
@@ -174,7 +174,7 @@ textarea:focus {
     padding-top: 120px;
 }
 .btn-primary{
-    background-color: #00a6eb;
+    background-color: #0f1213;
     padding: 0 20px;
     border-radius: 2px 2px 2px 2px;
     -moz-border-radius: 2px 2px 2px 2px;

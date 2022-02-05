@@ -43,7 +43,7 @@ const Header = () => {
               p: 1,
             }}
             alt="Logo ong."
-            src="/images/Logo Somos Mas.png"
+            src="/images/lobo-color.png"
           />
         </Toolbar>
       </AppBar>
