@@ -1,5 +1,7 @@
 import React from 'react'
+import FooterGlobal from '../Footer/FooterGlobal';
 import NewsList from '../News/NewsList'
+
 
 function Index() {
   return (
@@ -9,7 +11,9 @@ function Index() {
       <NewsList/>
       <h2>Testimonios</h2>
       <h4>Aquí iran las cards de testimonial.js</h4>
+    <FooterGlobal/>
     </div>
+    
   )
 }
 

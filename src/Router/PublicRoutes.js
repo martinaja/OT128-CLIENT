@@ -15,9 +15,9 @@ import { Detail } from '../Components/Activities/Detail/Detail'
 export const PublicRoutes = () => {
   return (
     <>
-      <Route path="/" exact component={Index} />
-      <Route path="/contacto" component={ContactHome} />
-      <Route path="/novedades/:newsId" component={NewsDetail} />
+     <Route path="/" exact component={Index} /> 
+        <Route path="/contacto" component={ContactHome}/>
+     <Route path="/novedades/:newsId" component={NewsDetail} />
       <Route path="/nosotros" component={About} />
       <Route path="/create-user" component={UserForm} />
       <Route path="/school-campaign" component={SchoolCampaign} />

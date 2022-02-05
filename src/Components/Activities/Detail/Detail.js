@@ -1,5 +1,5 @@
 import React from 'react'
-import { GetPublicHandle } from '../../../Services/publicApiService'
+import { getHandler } from '../../../Services/BaseHTTP/publicApiService'
 import { Title } from '../../Title'
 import { Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
@@ -16,7 +16,7 @@ export const Detail = (props) => {
 
   const { id } = params
 
-  const resp = GetPublicHandle(url, id)
+  const resp = getHandler(url, id)
 
   useEffect(() => {
     if (resp) {
