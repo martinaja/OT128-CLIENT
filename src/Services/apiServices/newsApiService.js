@@ -1,9 +1,6 @@
+import { deletePrivateHandler, postPrivateHandler, putPrivateHandler } from '../BaseHTTP/privateApiService'
 import { getPublicHandler } from '../BaseHTTP/publicApiService'
-import {
-  postPrivateHandler,
-  putPrivateHandler,
-  deletePrivateHandler,
-} from './privateApiService'
+
 
 const newsGetUrl = process.env.REACT_APP_API_NEWS_GET
 const newsPostUrl = process.env.REACT_APP_API_NEWS_POST
