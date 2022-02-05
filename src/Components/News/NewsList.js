@@ -1,16 +1,17 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { GetPublicHandle } from '../../Services/publicApiService'
+
 import { Stack as Grid } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
+import { getPublicHandler } from '../../Services/BaseHTTP/publicApiService'
 
 const NewsList = () => {
   const [data, setData] = useState('')
 
   const url = process.env.REACT_APP_API_NEWS_GET
 
-  const resp = GetPublicHandle(url)
+  const resp = getPublicHandler(url)
 
   useEffect(() => {
     if (resp) {

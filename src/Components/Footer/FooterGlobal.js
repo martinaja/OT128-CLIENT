@@ -1,24 +1,23 @@
 import { Button } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
-import { Box } from '@mui/material'
+import { Box, ButtonGroup } from '@mui/material'
 import classNames from 'classnames'
 import React, { Component } from 'react'
-
+import { Facebook, Twitter, Instagram, LinkedIn } from '@material-ui/icons'
 
 class Footer extends Component {
   render() {
     const { classes } = this.props
-    const currentYear = new Date().getFullYear()
+
     return (
       <div className={classes.root}>
         <Grid
           container
-          spacing={0}
+          spacing={2}
           className={classNames(classes.footerText, classes.footerSections)}
         >
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={4} style={{ marginTop: '1rem' }}>
             <div vocab="http://schema.org/" typeof="Organization">
               <span property="name">O.N.G. Somos Más</span>
               <div property="address" typeof="PostalAddress">
@@ -28,7 +27,7 @@ class Footer extends Component {
                 </span>
                 <span property="postalCode">CP 1414</span>
               </div>
-              <span property="telephone">(011) 4723-4329</span>
+              <span property="telephone">(011) 4854-6368</span>
             </div>
           </Grid>
 
@@ -36,76 +35,74 @@ class Footer extends Component {
             <Grid container>
               <Grid
                 className={classes.flexContainer}
-                style={{ justifyContent: 'center' }}
+                style={{ marginTop: '3.5rem', marginBottom: '3.5rem'}}
                 item
                 xs={12}
               >
                 <Box
+                
                   component="img"
                   sx={{
                     width: 200,
                     height: 113,
                     m: '0',
-                    p: 1,
+                    p: 0,
                   }}
                   alt="Logo ong."
-                  src="/images/Logo Somos Mas.png"
+                  src="/images/logo-bco.png"
                 />
-                 <Box
+
+                <Box
+                  style={{ marginLeft: '3.5rem' }}
                   component="img"
+                 
                   sx={{
-                    width: 182,
-                    height: 123,
-                    m: 'auto',
-                    p: 1,
+                    maxWidth: 182,
+                    maxHeight: 123,
+                    m: '0',
+                    p: 0,
                   }}
                   alt="Logo ong."
-                  src="/images/oso.png"
+                  src="/images/oso-bco.png"
                 />
               </Grid>
-
-              <Grid
-                className={classes.flexContainer}
-                style={{ justifyContent: 'flex-end' }}
-                item
-                xs={6}
-              ></Grid>
               <Grid className={classes.flexContainer} item xs={3}></Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={4} style={{  marginLeft: '8' }}>
-            <ul style={{ listStyle: 'none', margin: 0 }}>
-              <li>
-                <Button>Noticias</Button>
-              </li>
-              <li>
-                <Button>Actividades</Button>
-              </li>
-              <li>
-                <Button>Novedades</Button>
-              </li>
-              <li>
-                <Button>Testimonios</Button>
-              </li>
-              <li>
-                <Button>Nosotros</Button>
-              </li>
-              <li>
-                <Button>Contacto</Button>
-              </li>
-            </ul>
-          </Grid>
-         
-        </Grid>
-        
-        <Grid className={classes.subFooter} item xs={12}>
-          <Typography
-            className={classes.white}
-            variant="subheading"
-            component={'span'}
+
+          <Grid></Grid>
+
+          <Grid
+            style={{
+              marginTop: '3.5rem',
+              marginBottom: '3.5rem',
+              marginLeft: '8rem',
+            }}
           >
-            {currentYear} O.N.G Somos Más
-          </Typography>
+            <h3>www.somosmas.com</h3>
+            <Box>
+              <Instagram />
+
+              <Facebook />
+
+              <Twitter />
+
+              <LinkedIn />
+            </Box>
+          </Grid>
+        </Grid>
+
+        <Grid className={classes.subFooter} item xs={12}>
+          <Grid item xs={12} sm={4}>
+            <ButtonGroup  style={{ marginLeft: '8rem' }} variant="text" color="primary" size="large">
+              <Button>Noticias</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Actividades</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Novedades</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Testimonios</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Nosotros</Button>
+              <Button  style={{ marginLeft: '3.5rem' }}>Contacto</Button>
+            </ButtonGroup>
+          </Grid>
         </Grid>
       </div>
     )
@@ -115,8 +112,8 @@ class Footer extends Component {
 const styles = (theme) => ({
   root: {
     marginTop: 30,
-    backgroundColor: `${theme.palette.primary[500]}`,
-    borderTop: 'solid 3px #998643',
+    backgroundColor: `${theme.palette.secondary[500]}`,
+    borderTop: 'solid 3px #AEFEFF',
     paddingTop: '16px',
     overflowX: 'hidden',
   },
@@ -124,24 +121,18 @@ const styles = (theme) => ({
     margin: '0 16px',
   },
   subFooter: {
-    backgroundColor: 'rgba(0, 0, 0, 0.15)',
+    backgroundColor: 'rgba(174, 254, 255, 0.15)',
     padding: '8px 16px 8px 16px',
     marginTop: '8px',
   },
   footerText: {
-    color: '#fff',
+    color: '#AEFEFF',
     fontSize: '18px',
     lineHeight: 1.5,
   },
-  invertedBtnDark: {
-    color: '#fff',
-    backgroundColor: 'transparent',
-    border: '2px #fff solid',
-    boxShadow: 'none',
-    margin: '8px',
-  },
+
   white: {
-    color: '#ffffff',
+    color: '#AEFEFF',
   },
   flexContainer: {
     display: 'flex',

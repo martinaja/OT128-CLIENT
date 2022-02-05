@@ -1,5 +1,6 @@
+import { postPrivateHandler, putPrivateHandler } from '../BaseHTTP/privateApiService'
 import { getPublicHandler } from '../BaseHTTP/publicApiService'
-import { postPrivateHandler, putPrivateHandler } from './privateApiService'
+
 
 const organizationGetUrl = process.env.REACT_APP_API_ORGANIZATION_GET
 const organizationPostUrl = process.env.REACT_APP_API_ORGANIZATION_POST
