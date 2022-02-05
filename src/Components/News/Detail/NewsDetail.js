@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Container } from '@mui/material'
 import parse from 'html-react-parser'
 import { useParams } from 'react-router-dom'
-import getANews from '../../../Services/getANews'
 import styles from './NewsDetails.module.css'
+import { getNews } from './../../../Services/apiServices/newsApiService';
 
 export default function NewsDetail({ title }) {
   const { newsId } = useParams()
@@ -15,7 +15,7 @@ export default function NewsDetail({ title }) {
       (async () => {
         try {
           setLoader(true)
-          const request = await getANews(newsId)
+          const request = await getNews(newsId)
           const newsData = request?.data
           if (newsData) setNews(newsData)
         } catch (e) {

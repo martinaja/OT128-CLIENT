@@ -3,11 +3,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import {
-  compareActivitieExist,
-  putActivitie,
-  postActivitie,
-} from '../../Services/activitiesServices'
+
+import { postActivity, putActivity } from '../../Services/apiServices/activitiesApiService'
 
 const ActivitiesForm = () => {
   const ALLOWED_IMAGE_FORMATS = ['image/jpeg', 'image/png', 'image/jpg']
@@ -48,14 +45,15 @@ const ActivitiesForm = () => {
     onSubmit: async (formData) => {
       let responseServer = undefined
       const imageBase64 = await convertBase64(formData.image)
+      // eslint-disable-next-line no-undef
       const id = await compareActivitieExist(formData.name)
       if (id) {
-        responseServer = await putActivitie(id, {
+        responseServer = await putActivity(id, {
           ...formData,
           image: imageBase64,
         })
       } else {
-        responseServer = await postActivitie({
+        responseServer = await postActivity({
           ...formData,
           image: imageBase64,
         })

@@ -17,10 +17,9 @@ import {
   Input,
 } from "@mui/material";
 import { toBase64 } from "../../utils/toBase64";
-import getCategories from "../../Services/getCategories";
-import getANews from "../../Services/getANews";
-import putANews from "../../Services/putANews";
-import postANews from "../../Services/postANews";
+
+import { getNews, postNews, putNews } from "../../Services/apiServices/newsApiService";
+import { getCategories } from "../../Services/apiServices/categoriesApiService";
 
 const NewsForm = () => {
   const { newsId } = useParams();
@@ -56,7 +55,7 @@ const NewsForm = () => {
     (async () => {
       try {
         setLoader(true);
-        const fetch = await getANews(newsId);
+        const fetch = await getNews(newsId);
         const data = fetch?.data;
         console.log("DATA FROM NEWS BY ID", data);
         if (data) {
@@ -107,13 +106,13 @@ const NewsForm = () => {
       (async () => {
         try {
           setLoader(true);
-          const request = await putANews(newsId, newsToSend);
+          const request = await putNews(newsId, newsToSend);
           console.log("REQUEST PUT NEWS", request);
         } catch (e) {
           console.error("REQUEST PUT ERROR", e);
         } finally {
           // Check the changes
-          const fetch = await getANews(newsId);
+          const fetch = await getNews(newsId);
           const data = fetch?.data;
           console.log("DATA FROM NEWS BY ID", data);
           setNew(data);
@@ -125,7 +124,7 @@ const NewsForm = () => {
       (async () => {
         try {
           setLoader(true);
-          const request = await postANews(newsToSend);
+          const request = await postNews(newsToSend);
           console.log("REQUEST POST NEWS", request);
           // ---> It should redirect to the link of the new news
         } catch (e) {

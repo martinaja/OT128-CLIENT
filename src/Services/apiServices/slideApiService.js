@@ -1,9 +1,7 @@
+import { deletePrivateHandler, postPrivateHandler, putPrivateHandler } from '../BaseHTTP/privateApiService'
 import { getPublicHandler } from '../BaseHTTP/publicApiService'
-import {
-  postPrivateHandler,
-  putPrivateHandler,
-  deletePrivateHandler,
-} from './privateApiService'
+
+
 
 const slideGetUrl = process.env.REACT_APP_API_SLIDE_GET
 const slidePostUrl = process.env.REACT_APP_API_SLIDE_POST

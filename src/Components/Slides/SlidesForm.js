@@ -7,11 +7,8 @@ import { Container, TextField, Box, Button, Input } from '@mui/material'
 import { toBase64 } from '../../utils/toBase64'
 import '../FormStyles.css'
 import { useParams, useHistory } from 'react-router-dom'
-import postSlide from '../../Services/postSlide'
-import getSlide from '../../Services/getSlide'
-import getSlides from '../../Services/getSlides'
-import putSlide from '../../Services/putSlide'
 import { SUPPORTED_FORMATS } from '../../utils/supportedFormatsImg'
+import { getSlide, postSlide, putSlide } from '../../Services/apiServices/slideApiService'
 
 const SlidesForm = () => {
   const { slideId } = useParams()
@@ -32,7 +29,7 @@ const SlidesForm = () => {
   async function gettingSlides() {
     try {
       setLoader(true)
-      const fetchSlides = await getSlides()
+      const fetchSlides = await getSlide()
       console.log('SLIDES', fetchSlides?.data)
       return fetchSlides?.data
     } catch (e) {

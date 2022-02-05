@@ -3,11 +3,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import {
-	compareTestimonialExist,
-	putTestimony,
-	postTestimony
-} from '../../Services/testimonialsFormServices';
+import { postaTestimony, putTestimony } from './../../Services/apiServices/testimonyApiService';
+
 
 const TestimonialForm = () => {
 	const ALLOWED_IMAGE_FORMATS = [
@@ -53,6 +50,7 @@ const TestimonialForm = () => {
 		onSubmit: async formData => {
 			let responseServer = undefined;
 			const imageBase64 = await convertBase64(formData.image);
+			// eslint-disable-next-line no-undef
 			const id = await compareTestimonialExist(formData.name);
 			if (id) {
 				responseServer = await putTestimony(id, {
@@ -60,7 +58,7 @@ const TestimonialForm = () => {
 					image: imageBase64
 				});
 			} else {
-				responseServer = await postTestimony({
+				responseServer = await postaTestimony({
 					...formData,
 					image: imageBase64
 				});
