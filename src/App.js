@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './Components/Header/Header'
 import { ThemeProvider } from '@mui/material/styles'
 import { createTheme, CssBaseline, Container } from '@mui/material'
-import Footer from './Components/Footer/Footer'
+// import Footer from './Components/Footer/Footer'
 import { Routes } from './Router/Routes'
 
 const theme = createTheme({
@@ -22,7 +22,7 @@ function App() {
       <Container>
         <Routes />
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </ThemeProvider>
   )
 }
