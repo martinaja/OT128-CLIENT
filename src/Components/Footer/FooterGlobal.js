@@ -1,10 +1,11 @@
 import { Button } from '@material-ui/core'
 import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import { Box } from '@mui/material'
 import classNames from 'classnames'
 import React, { Component } from 'react'
+
+import { Facebook, Twitter, Instagram, LinkedIn } from '@material-ui/icons'
 
 class Footer extends Component {
   render() {
@@ -14,7 +15,7 @@ class Footer extends Component {
       <div className={classes.root}>
         <Grid
           container
-          spacing={3}
+          spacing={2}
           className={classNames(classes.footerText, classes.footerSections)}
         >
           <Grid item xs={12} sm={4}>
@@ -35,7 +36,7 @@ class Footer extends Component {
             <Grid container>
               <Grid
                 className={classes.flexContainer}
-                style={{ justifyContent: 'center' }}
+                style={{ marginTop: '7rem' }}
                 item
                 xs={12}
               >
@@ -62,18 +63,11 @@ class Footer extends Component {
                   src="/images/oso.png"
                 />
               </Grid>
-
-              <Grid
-                className={classes.flexContainer}
-                style={{ justifyContent: 'flex-end' }}
-                item
-                xs={6}
-              ></Grid>
               <Grid className={classes.flexContainer} item xs={3}></Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} sm={4} style={{ marginLeft: '8' }}>
-            <ul style={{ listStyle: 'none', margin: 0 }}>
+          <Grid item xs={12} sm={4}>
+            <ul style={{ listStyle: 'none' }}>
               <li>
                 <Button>Noticias</Button>
               </li>
@@ -95,24 +89,26 @@ class Footer extends Component {
             </ul>
           </Grid>
         </Grid>
+
+        <Box>
+          <Instagram />
+
+          <Facebook />
+
+          <Twitter />
+
+          <LinkedIn />
+        </Box>
+
         <Grid>
-        <h3>
-  www.somosmas.com
-</h3>
-<h3>
-  Acceda a la campaña
-</h3>
+          <h3>www.somosmas.com</h3>
+          <h3>Acceda a la campaña</h3>
         </Grid>
         <Grid className={classes.subFooter} item xs={12}>
-          <h3
-            className={classes.white}
-            variant="subheading"
-            component={'span'}
-          >
+          <h3 className={classes.white} variant="subheading" component={'span'}>
             {currentYear} O.N.G Somos Más
           </h3>
         </Grid>
-        
       </div>
     )
   }
@@ -139,7 +135,7 @@ const styles = (theme) => ({
     fontSize: '18px',
     lineHeight: 1.5,
   },
-  
+
   white: {
     color: '#AEFEFF',
   },
