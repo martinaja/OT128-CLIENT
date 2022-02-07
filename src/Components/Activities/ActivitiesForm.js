@@ -33,7 +33,7 @@ const ActivitiesForm = () => {
     image: undefined,
   }
   const formikValidationSchema = Yup.object({
-    name: Yup.string().required('El campo nombre es obligatorio.'),
+    name: Yup.string().required('El  nombre es requerido.'),
     description: Yup.string(),
     image: Yup.mixed()
       .required('ingrese una imagen')
