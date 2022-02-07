@@ -35,7 +35,15 @@ export const PrivateRoutes = () => {
       <Route path="/create-member" component={MembersForm} />
       <Route exact path="/backoffice/slides" component={SlidesForm} />
       <Route path="/backoffice/slides/:slideId" component={SlidesForm} />
-      <Route path="/create-testimonials" component={TestimonialForm} />
+      <Route
+        exact
+        path="/backoffice/create-testimonials"
+        component={TestimonialForm}
+      />
+      <Route
+        path="/backoffice/create-testimonials/:id"
+        component={TestimonialForm}
+      />
       <Route path="/create-project" component={ProjectsForm} />
       <Route
         path="/backoffice/organization/edit"
