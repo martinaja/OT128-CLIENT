@@ -5,7 +5,7 @@ import { Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { SkeletonArticle } from './../../Skeleton/SkeletonArticle'
 
-export const Detail = (props) => {
+export const Detail = (props) => { 
   const [data, setData] = useState(undefined)
 
   const url = process.env.REACT_APP_API_ACTIVITY_GET

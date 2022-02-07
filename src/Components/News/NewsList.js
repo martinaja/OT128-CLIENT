@@ -11,14 +11,10 @@ const NewsList = () => {
 
   const url = process.env.REACT_APP_API_NEWS_GET
 
-  const resp = getPublicHandler(url)
-
   useEffect(() => {
-    if (resp) {
-      const { data } = resp
-      setData(data)
-    }
-  }, [resp])
+    getPublicHandler(url).then(({ data }) => setData(data.data)) 
+  }, [])
+
 
   return (
     <>
@@ -28,16 +24,11 @@ const NewsList = () => {
         <>
           {' '}
           <h1>Novedades</h1>
-          <Grid
-            container="true"
-            spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 4, sm: 8, md: 12 }}
-            direction={{ xs: 'column', md: 'row' }}
-          >
+          <Grid container='true' columns={{ xs: 4, sm: 8, md: 6 }} spacing={{ xs: 2, md: 3 }}>
             {data?.length > 0 ? (
               data?.map((element) => {
                 return (
-                  <Grid item="true" xs={2} sm={4} md={4} key={element.id}>
+                  <Grid item='true' xs={4} sm={4} md={6} key={element.id}>
                     <CustomCard
                       image={element.image}
                       name={element.name}
