@@ -22,14 +22,14 @@ export const postPrivateHandler = (apiEndpoint, bodyData) => {
 export const deletePrivateHandler = (apiEndpoint, id) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
-  return apiService.post(apiServiceUrl).catch((err) => console.log(err))
+  return apiService.delete(apiServiceUrl).catch((err) => console.log(err))
 }
 // Id obligatory
 export const putPrivateHandler = (apiEndpoint, id, bodyData) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
   return apiService
-    .post(apiServiceUrl, bodyData)
+    .put(apiServiceUrl, bodyData)
     .catch((err) => console.log(err))
 }
 // Id obligatory
@@ -37,6 +37,6 @@ export const patchPrivateHandler = (apiEndpoint, id, bodyData) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
   return apiService
-    .post(apiServiceUrl, bodyData)
+    .patch(apiServiceUrl, bodyData)
     .catch((err) => console.log(err))
 }
