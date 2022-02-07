@@ -7,12 +7,8 @@ import { ErrorMessage, Formik } from "formik";
 import * as Yup from "yup";
 import { Container, TextField, Box, Button, Input } from "@mui/material";
 import { toBase64 } from "../../utils/toBase64";
-import {
-  getCategory,
-  postCategory,
-  putCategory,
-} from "../../Services/CategoryApiService";
 import Spinner from "../Spinner";
+import { getCategories, postCategories, putCategories } from "../../Services/apiServices/categoriesApiService";
 
 const CategoriesForm = (props) => {
   const idCategory = props.match.params.id;
@@ -29,7 +25,7 @@ const CategoriesForm = (props) => {
     (async () => {
       try {
         setLoader(true);
-        const fetch = await getCategory(idCategory);
+        const fetch = await getCategories(idCategory);
         const data = fetch?.data;
         if (data) {
           setCategory(data);
@@ -88,9 +84,9 @@ const CategoriesForm = (props) => {
 
     //depending of the state of isEditing call post or put
     if (!isEditing) {
-      postCategory(newToSend);
+      postCategories(newToSend);
     } else {
-      putCategory(idCategory, newToSend);
+      putCategories(idCategory, newToSend);
     }
   };
 
