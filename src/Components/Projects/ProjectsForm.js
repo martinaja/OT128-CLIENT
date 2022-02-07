@@ -2,24 +2,27 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 import "../FormStyles.css";
+import { postPrivateHandler, putPrivateHandler } from "../../Services/BaseHTTP/privateApiService";
 
 const ProjectForm = (proyect) => {
+
+  const url = process.env.REACT_APP_API_PROJECTS_GET;
+
+
   return (
     <>
       <Formik
-        initialValues={{
-          title: proyect.title || "",
-          description: proyect.description || "",
-          image: proyect.image || "",
-          due_date: proyect.due_date || "",
+        initialValues= {{
+          title: proyect?.title || "",
+          description: proyect?.description || "",
+          image: proyect?.image || "",
+          due_date: proyect?.due_date || "",
         }}
         onSubmit={(values) => {
           if (proyect.id) {
-            console.log("usuario existe");
-            // TODO: hacer peticion put a /projects/{id}
+            putPrivateHandler(url, proyect.id, values);
           } else {
-            console.log("usuario no existe");
-            // TODO: hacer peticion post a /projects
+            postPrivateHandler(url, values);
           }
           console.log(values);
         }}
