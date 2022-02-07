@@ -5,9 +5,8 @@ import { Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { SkeletonArticle } from './../../Skeleton/SkeletonArticle'
 
-
 export const Detail = (props) => {
-  const [data, setData] = useState('')
+  const [data, setData] = useState(undefined)
 
   const url = process.env.REACT_APP_API_ACTIVITY_GET
 
@@ -17,18 +16,19 @@ export const Detail = (props) => {
 
   const { id } = params
 
-  const resp = getPublicHandler(url, id)
-
   useEffect(() => {
-    if (resp) {
-      const { data } = resp
-      setData(data)
+    getPublicHandler(url, id).then(({ data }) => setData(data.data))
+
+    if (!data) {
+      setTimeout(() => {
+        setData('Error')
+      }, 5000)
     }
-  }, [resp])
+  }, [])
 
   return (
     <>
-      {resp ? (
+      {data ? (
         <>
           <Title children={data?.name} image={data?.image} />
           <Typography
