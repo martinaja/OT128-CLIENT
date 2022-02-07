@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from '@mui/material'
-import getOrganization from '../../Services/getOrganizationData'
+import { getOrganization } from './../../Services/apiServices/organizationApiService';
+
 
 export default function About({ title }) {
   const [organization, setOrganization] = useState(null)

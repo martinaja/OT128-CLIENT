@@ -1,9 +1,12 @@
-import { Box, Container, createTheme, useMediaQuery } from '@material-ui/core'
+import { Box, createTheme, Grid, Paper, useMediaQuery } from '@material-ui/core'
 import React from 'react'
-import Countdown, { zeroPad } from 'react-countdown'
+import Timer from '../../Components/Countdown/Timer'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import AccessTimeIcon from '@mui/icons-material/AccessTime'
+import PlaceIcon from '@mui/icons-material/Place'
+import '../Content.css'
 
 const Content = () => {
-  // Breakpoints
   const theme = createTheme({
     breakpoints: {
       values: {
@@ -11,55 +14,102 @@ const Content = () => {
         tablet: 640,
         laptop: 1024,
         desktop: 1200,
+        smartTv: 1500,
       },
     },
   })
 
   const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
   const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
-  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
-
-  const renderer = ({ days, hours, minutes, seconds }) => (
-    <span>
-      Falta {days} días, {parseInt(zeroPad(hours)) + 3} horas,{' '}
-      {zeroPad(minutes)} minutos, {zeroPad(seconds)} segundos.
-    </span>
-  )
+  // const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
+  const isTV = useMediaQuery(theme.breakpoints.up('smartTv'))
 
   return (
-    <Container
-      style={{
-        background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
-      }}
+    <Grid
+      container
+      spacing={1}
+      style={{ background: isTV && 'rgba(7, 34, 39, .1)' }}
     >
-      <Box>
+      <Grid item xs={12}>
+        <Paper elevation={5} className="date-container">
+          <div>
+            <CalendarTodayIcon /> <span>Fecha</span>
+          </div>
+          <div>
+            <AccessTimeIcon /> <span>Hora</span>
+          </div>
+          <div>
+            <PlaceIcon /> <span>Lugar</span>
+          </div>
+        </Paper>
+      </Grid>
+      <Grid style={{ padding: '20px' }} item xs={12} lg={5}>
         <main>
-          <p>Descripción</p>
-          <p>Fecha</p>
-          <p>Hora</p>
-          <p>Lugar</p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+            tincidunt posuere vehicula. Curabitur nec auctor tortor. Donec nec
+            suscipit enim, et congue felis. Integer non commodo metus. Donec
+            finibus, eros nec volutpat tincidunt, nibh sem bibendum libero, in
+            ultricies sem risus non nibh. Proin dictum, arcu dapibus tincidunt
+            viverra, nibh nunc pharetra nibh, a mattis tellus elit eu purus.
+            Vivamus eget sollicitudin ipsum. Suspendisse eget sem pellentesque,
+            gravida nisi vel, gravida neque. Interdum et malesuada fames ac ante
+            ipsum primis in faucibus. Quisque semper tellus dolor, tincidunt
+            gravida augue volutpat non. Vestibulum dapibus non massa vitae
+            mollis. Integer et nisl quis diam commodo elementum. Cras in mauris
+            purus. Pellentesque iaculis est in justo suscipit, eu dignissim
+            mauris ultrices. Fusce molestie ornare orci.
+          </p>
+          <p>
+            Pellentesque habitant morbi tristique senectus et netus et malesuada
+            fames ac turpis egestas. Nunc rhoncus ligula id nibh aliquam, ac
+            rutrum tortor pellentesque. Donec quis mi tempus, tempus nulla quis,
+            scelerisque erat. Pellentesque eu gravida risus. Vestibulum sed
+            pellentesque nisl. Donec ut nisl quis mauris iaculis molestie.
+            Vivamus at turpis sodales, commodo risus eu, venenatis libero. Nulla
+            eget dapibus mauris, a porta lacus. Vestibulum a tincidunt nulla.
+            Duis a rutrum elit. Fusce metus eros, porta sit amet viverra a,
+            aliquet sit amet ipsum.
+          </p>
         </main>
-      </Box>
+      </Grid>
       {isMatchLaptop && (
-        <Box>
+        <Grid item xs={12} lg={7}>
           {/* Hide on mobile & tablet */}
-          <section id="gallery">
-            <p>Imágenes</p>
-          </section>
-        </Box>
-      )}
-      {isMatchTablet && (
-        <Box>
-          {/* Hide on mobile */}
-          <section id="countdown">
-            <Countdown
-              date={'2022-02-04T00:00:00.000000Z'}
-              renderer={renderer}
+          <section id="gallery-campaign">
+            <Box
+              boxShadow={5}
+              style={{
+                height: '50vh',
+                width: '100%',
+                padding: '20px',
+                backgroundImage: 'url("/images/blog-img-02.jpg")',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+              }}
+            />
+            <Box
+              boxShadow={5}
+              style={{
+                height: '50vh',
+                width: '100%',
+                padding: '20px',
+                backgroundImage: 'url("/images/blog-img-02.jpg")',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+              }}
             />
           </section>
-        </Box>
+        </Grid>
       )}
-    </Container>
+      {isMatchTablet && (
+        <Grid item xs={12} style={{ padding: '50px 0' }}>
+          <Timer date="2022-03-02T00:00:00.000000Z" />
+        </Grid>
+      )}
+    </Grid>
   )
 }
 
