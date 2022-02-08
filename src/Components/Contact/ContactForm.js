@@ -1,33 +1,45 @@
-import React from "react";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React from 'react'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import { postContact } from '../../Services/apiServices/contactApiService'
+import * as Yup from 'yup'
 
-import "../FormStyles.css";
+import '../FormStyles.css'
+import { alertServiceError } from '../AlertService'
 
 export const ContactForm = () => {
+  const sendContact = (data) =>
+    (async () => {
+      const request = await postContact(data)
+      if (request.error) {
+        alertServiceError(
+          request.message,
+          'se produjo un error al intentar enviar su formulario de contacto. Por favor, intente nuevamente mas tarde.',
+        )
+      }
+    })()
+
   return (
     <>
       <Formik
         initialValues={{
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
+          name: '',
+          email: '',
+          phone: '',
+          message: '',
         }}
         onSubmit={(values) => {
-          // TODO: Realizar función de envio de email
-          console.log(values);
+          sendContact(values)
         }}
         validationSchema={Yup.object({
-          name: Yup.string().required("Campo obligatorio"),
+          name: Yup.string().required('Campo obligatorio'),
           email: Yup.string()
-            .email("Debe ingresar un email valido")
-            .required("Campo obligatorio"),
+            .email('Debe ingresar un email valido')
+            .required('Campo obligatorio'),
           phone: Yup.number()
-            .typeError("Solo puede ingresar números")
-            .min(8, "El número debe tener al menos 8 dígitos")
-            .required("Campo obligatorio"),
-          message: Yup.string().required("Campo obligatorio"),
+            .typeError('Solo puede ingresar números')
+            .min(8, 'El número debe tener al menos 8 dígitos')
+            .required('Campo obligatorio'),
+          message: Yup.string().required('Campo obligatorio'),
         })}
       >
         {(formik) => (
@@ -67,5 +79,5 @@ export const ContactForm = () => {
         )}
       </Formik>
     </>
-  );
-};
+  )
+}

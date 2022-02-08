@@ -3,13 +3,16 @@ import Header from './Header'
 import Slider from './Slider'
 import Content from './Content'
 import Footer from './FooterToys'
+import { Container } from '@mui/material'
 
 const ToysCampaign = () => {
   return (
     <>
       <Header />
-      <Slider />
-      <Content />
+      <Container>
+        <Slider />
+        <Content />
+      </Container>
       <Footer />
     </>
   )
