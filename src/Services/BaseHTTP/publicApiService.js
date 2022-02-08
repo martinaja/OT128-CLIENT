@@ -6,31 +6,62 @@ const apiService = axios.create({
 
 export const getPublicHandler = (apiEndpoint, id) => {
   const apiServiceUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
-  return apiService.get(apiServiceUrl).catch((err) => console.log(err))
+  return apiService.get(apiServiceUrl).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 export const postHandler = (apiEndpoint, bodyData) => {
-  return apiService.post(apiEndpoint, bodyData).catch((err) => console.log(err))
+  return apiService.post(apiEndpoint, bodyData).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 
 // Id obligatory
 export const deletePublicHandler = (apiEndpoint, id) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
-  return apiService.post(apiServiceUrl).catch((err) => console.log(err))
+  return apiService.post(apiServiceUrl).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 // Id obligatory
 export const putPublicHandler = (apiEndpoint, id, bodyData) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
-  return apiService
-    .post(apiServiceUrl, bodyData)
-    .catch((err) => console.log(err))
+  return apiService.post(apiServiceUrl, bodyData).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 // Id obligatory
 export const patchPublicHandler = (apiEndpoint, id, bodyData) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
-  return apiService
-    .post(apiServiceUrl, bodyData)
-    .catch((err) => console.log(err))
+  return apiService.post(apiServiceUrl, bodyData).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }

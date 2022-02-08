@@ -53,8 +53,8 @@ const SubscribeForm = () => {
             <Button
               type="submit"
               value="Subscribe"
-              width="12px"
-              color="warning"
+              width="18px"
+              color="inherit"
             >
               Suscribe
             </Button>
