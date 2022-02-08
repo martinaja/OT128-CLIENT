@@ -2,7 +2,6 @@ import Header from './Components/Header/Header'
 import { ThemeProvider } from '@mui/material/styles'
 import { createTheme, CssBaseline, Container } from '@mui/material'
 import { Routes } from './Router/Routes'
-import { MembersList } from './Components/Members/MembersList';
 
 const theme = createTheme({
   palette: {
@@ -15,10 +14,6 @@ const theme = createTheme({
 
 function App() {
   return (
-    <>
-      <MembersList />
-
-
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header />
@@ -26,9 +21,6 @@ function App() {
         <Routes />
       </Container>
     </ThemeProvider>
-
-
-    </>
   )
 }
 export default App
