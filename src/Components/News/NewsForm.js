@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../../Components/FormStyles.css'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import {
-  useHistory,
-  useParams,
-} from 'react-router-dom/cjs/react-router-dom.min'
+import { useHistory, useParams } from 'react-router-dom'
 import { ErrorMessage, Formik } from 'formik'
 import * as Yup from 'yup'
 import {
@@ -23,7 +20,6 @@ import {
   postNews,
   putNews,
 } from '../../Services/apiServices/newsApiService'
-
 import { alertServiceError } from '../AlertService'
 import ButtonLoader from '../ButtonLoader/ButtonLoader'
 
@@ -31,31 +27,41 @@ const NewsForm = () => {
   const { newsId } = useParams()
   const history = useHistory()
 
-  const [btnLoader, setBtnLoader] = useState(false)
-
   const [news, setNew] = useState([])
   const [categories, setCategories] = useState([])
   const [isEditable, setIsEdit] = useState(false)
   const [imgUploaded, setImgUploaded] = useState(null)
   const [previewImgUploaded, setPreviewImgUploaded] = useState(null)
+
   const [loader, setLoader] = useState(false)
+  const [btnLoader, setBtnLoader] = useState(false)
 
   // Fetch categories
-  useEffect(() => {
-    ;(async () => {
-      try {
-        setLoader(true)
-        const fetch = await getCategories()
-        const data = fetch?.data?.data
-        console.log('CATEGORIES', data)
-        setCategories(data)
-      } catch (e) {
-        console.error(e)
-      } finally {
-        setLoader(false)
-      }
-    })()
-  }, [])
+  useEffect(
+    () =>
+      (async () => {
+        try {
+          setLoader(true)
+          const fetch = await getCategories()
+          const data = fetch?.data?.data
+          console.log('CATEGORIES', data)
+          data
+            ? setCategories(data)
+            : alertServiceError(
+                'No se pudo cargar la noticia',
+                'Verificá que la URL sea correcta',
+              )
+        } catch (e) {
+          alertServiceError(
+            'No se pudo obtener la información solicitada',
+            e.message,
+          )
+        } finally {
+          setLoader(false)
+        }
+      })(),
+    [],
+  )
 
   // Checking that exist an id from a news. In case true, upload a news data
   useEffect(() => {
@@ -70,11 +76,17 @@ const NewsForm = () => {
           setNew(data)
           setIsEdit(true)
         } else {
-          alertServiceError('titu', 'txt')
+          alertServiceError(
+            'No se pudo cargar la noticia',
+            'Verificá que la URL sea correcta',
+          )
           history.push('/backoffice/news')
         }
       } catch (e) {
-        console.error(e)
+        alertServiceError(
+          'No se pudo obtener la información solicitada',
+          e.message,
+        )
 
         setIsEdit(false)
         history.push('/backoffice/news')
