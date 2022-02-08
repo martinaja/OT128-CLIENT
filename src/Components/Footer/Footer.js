@@ -1,64 +1,31 @@
-import { Grid, IconButton, Box } from '@material-ui/core'
+import { Grid, IconButton } from '@material-ui/core'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import './Footer.css'
-import { useBreakPoints } from './../../utils/hooks/useBreakPoints';
-
-
 
 function Footer() {
-  const isMatchSmartTv = useBreakPoints('(min-width: 1536px)')
-  const isMatchDesktop = useBreakPoints('(min-width: 1200px)')
-  const isMatchTablet = useBreakPoints('(min-width: 600px)')
-
-  const startHeight = () => {
-    const WindowWidth = window.innerWidth
-    if (WindowWidth >= 1536) {
-      return '70vh'
-    } else if (WindowWidth < 1536 && WindowWidth >= 1200) {
-      return '65vh'
-    } else if (WindowWidth < 1200 && WindowWidth >= 600) {
-      return '73vh'
-    } else if (WindowWidth < 600) {
-      return '114vh'
-    }
-  }
-
-  const [height, setHeight] = useState(startHeight())
-
-  // Inside this useEffect the size of the image is set
-  useEffect(() => {
-    setHeight(startHeight())
-  }, [isMatchSmartTv, isMatchDesktop, isMatchTablet])
-
   return (
     <>
       <div className="container">
-        <div style={{ minHeight: height}}>
+        <div style={{ minHeight: '100vh' }}></div>
         <Grid container className="footer__container">
           <Grid
             item
             container
             md={4}
             sm={12}
-            m= {0}
             alignItems="center"
             className="center"
           >
-            <Box
-                className='logo'
-                component="img"
-                sx={{
-                
-                  m: '0',
-                  p: 0,
-                }}
-                alt="logo ong."
-                src="/images/logo-bco.png"
-              />
+            <img
+              alt="Logo ong."
+              src="/images/logo-bco.png"
+              className="logo"
+            />
+            <img alt="Logo ong." src="/images/oso-bco.png" className="logo" />
           </Grid>
 
           <Grid item container md sm={12}>
@@ -104,8 +71,6 @@ function Footer() {
             </div>
           </Grid>
         </Grid>
-        </div>
-        
       </div>
     </>
   )

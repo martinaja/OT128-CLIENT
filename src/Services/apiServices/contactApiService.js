@@ -1,9 +1,8 @@
-import { getPublicHandler } from '../BaseHTTP/publicApiService'
+import { getPublicHandler, postHandler } from '../BaseHTTP/publicApiService'
 import {
-  postPrivateHandler,
   putPrivateHandler,
   deletePrivateHandler,
-} from './privateApiService'
+} from '../BaseHTTP/privateApiService'
 
 const contactGetUrl = process.env.REACT_APP_API_CONTACT_GET
 const contactPostUrl = process.env.REACT_APP_API_CONTACT_POST
@@ -14,8 +13,8 @@ export const getContact = (id) => {
   return getPublicHandler(contactGetUrl, id)
 }
 
-export const postContact = (id, bodydata) => {
-  return postPrivateHandler(contactPostUrl, id, bodydata)
+export const postContact = (bodydata) => {
+  return postHandler(contactPostUrl, bodydata)
 }
 
 export const putContact = (id, bodydata) => {
