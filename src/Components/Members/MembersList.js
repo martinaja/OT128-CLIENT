@@ -2,8 +2,10 @@ import { CardActions, Grid, Typography, Button, Card, CardMedia, CardContent } f
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { getPublicHandler } from './../../Services/BaseHTTP/publicApiService';
+import { Facebook } from '@material-ui/icons';
+import { LinkedIn } from '@material-ui/icons';
 
-import CustomCard from './../Card/CustomCard';
+
 
 export const MembersList = () => {
 
@@ -18,9 +20,6 @@ export const MembersList = () => {
     console.log(data);
 
   return <>
-
-
-
 
   
 
@@ -47,8 +46,12 @@ export const MembersList = () => {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" href={element.facebookUrl}>Facebook</Button>
-                <Button size="small" href={element.linkedinUrl}>LinkedIn</Button>
+                <Button size="small" href={element.facebookUrl}>
+                    <Facebook color="primary"/> Facebook
+                </Button>
+                <Button size="small" href={element.linkedinUrl}>
+                    <LinkedIn color="primary"/> LinkedIn
+                </Button>
             </CardActions>
             </Card>
 
