@@ -3,7 +3,8 @@ import { Container } from '@mui/material'
 import parse from 'html-react-parser'
 import { useParams } from 'react-router-dom'
 import styles from './NewsDetails.module.css'
-import { getNews } from './../../../Services/apiServices/newsApiService';
+import { getNews } from '../../../Services/apiServices/newsApiService'
+import { alertServiceError } from '../../AlertService'
 
 export default function NewsDetail({ title }) {
   const { newsId } = useParams()
@@ -16,11 +17,19 @@ export default function NewsDetail({ title }) {
         try {
           setLoader(true)
           const request = await getNews(newsId)
-          const newsData = request?.data
-          if (newsData) setNews(newsData)
+          const newsData = request?.data?.data
+          newsData
+            ? setNews(newsData)
+            : alertServiceError(
+                'No se pudo cargar la noticia',
+                'Verificá que la URL sea correcta',
+              )
         } catch (e) {
-          console.erorr(e)
-          // Insert alert
+          console.erro(e)
+          alertServiceError(
+            'No se pudo obtener la información solicitada',
+            e.message,
+          )
         } finally {
           setLoader(false)
         }
