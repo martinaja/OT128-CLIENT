@@ -7,10 +7,12 @@ import SlidesForm from '../Components/Slides/SlidesForm'
 import TestimonialForm from '../Components/Testimonials/TestimonialsForm'
 import ProjectsForm from '../Components/Projects/ProjectsForm'
 import OrganizationForm from '../Components/Organization/OrganizationForm'
+import BackOfficeHome from '../Components/Backoffice/BackOfficeHome'
 
 export const PrivateRoutes = () => {
   return (
     <>
+      <Route excat path="/backoffice" component={BackOfficeHome} />
       <Route
         exact
         path="/backoffice/create-activity"
