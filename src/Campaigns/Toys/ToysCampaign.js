@@ -5,7 +5,7 @@ import Content from './Content'
 import Footer from './Footer'
 
 import { Container } from '@mui/material'
-import FooterToys from './FooterToys'
+// import FooterToys from './FooterToys'
 
 const ToysCampaign = () => {
   return (
@@ -15,7 +15,7 @@ const ToysCampaign = () => {
         <Slider />
         <Content />
       </Container>
-      <FooterToys />
+      <Footer />
     </>
   )
 }
