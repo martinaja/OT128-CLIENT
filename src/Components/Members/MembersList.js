@@ -1,4 +1,4 @@
-import { CardActions, Grid, Typography, Button, Card, CardMedia, CardContent } from '@mui/material';
+import { CardActions, Grid, Typography, Button, Card, CardMedia, CardContent, Box } from '@mui/material';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { getPublicHandler } from './../../Services/BaseHTTP/publicApiService';
@@ -17,21 +17,17 @@ export const MembersList = () => {
         getPublicHandler(url).then(({ data }) => setData(data.data)) 
       }, [])
 
-    console.log(data);
-
   return <>
 
-  
+      <Box sx={{ m: 2 }}>
 
-        <h1>MemberLIst</h1>
-        <Grid container rows={{ xs: 1, sm: 8, md: 6 }} spacing={{ xs: 2, md: 3 }}>
+        <h1>MemberList</h1>
+        <Grid container rows={{ xs: 1, sm: 8, md: 6 }} spacing={{ xs: 3, md: 3 }}>
             {data?.length > 0 ? (
               data?.map((element) => {
                 return (
                   <Grid item key={element.id}>
-
-
-                  <Card sx={{ maxWidth: 300}}>
+                  <Card sx={{ maxWidth: 300 }}>
             <CardMedia
                 component="img"
                 image={element.image}
@@ -54,18 +50,6 @@ export const MembersList = () => {
                 </Button>
             </CardActions>
             </Card>
-
-
-
-
-
-
-
-
-
-
-
-
                   </Grid>
                 )
               })
@@ -73,6 +57,6 @@ export const MembersList = () => {
               <h1>No se encontraron resultados</h1>
             )}
           </Grid>
-
+</Box>
   </>;
 };
