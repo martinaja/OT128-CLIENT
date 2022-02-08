@@ -1,21 +1,21 @@
 
 *{
-  margin: 0;
-  padding: 0;
+  
+
   box-sizing: border-box;
   font-family: 'Roboto';
 }
 
 .container{
-  min-height: 100vh;
+ bottom: 0% !important;
   position: relative;
   background-color: #eee;
+ 
 }
 
 .footer__container{
-  position: absolute;
-  bottom: 0;
-  margin-bottom: -20rem;
+ 
+  bottom: 0 !important;
   padding: 2rem;
   background-color: #35858B;
 }
@@ -137,6 +137,13 @@
     bottom: 0;
     margin-bottom: -40rem;
     padding: 2rem;
+    
+  }
+  
+}
+@media screen and (max-width: 1536px){
+  .footer__container{
     background-color: #272C34;
   }
+ 
 }
