@@ -9,7 +9,7 @@ import {
 import { useEffect } from 'react'
 import { getOrganization } from '../../Services/apiServices/organizationApiService'
 
-export const OrganizationScreen = () => {
+const OrganizationScreen = () => {
   useEffect(() => {
     ;(async () => {
       console.log(await getOrganization())
@@ -42,3 +42,5 @@ export const OrganizationScreen = () => {
     </>
   )
 }
+
+export default OrganizationScreen
