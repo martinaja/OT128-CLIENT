@@ -7,6 +7,7 @@ import SlidesForm from '../Components/Slides/SlidesForm'
 import TestimonialForm from '../Components/Testimonials/TestimonialsForm'
 import ProjectsForm from '../Components/Projects/ProjectsForm'
 import OrganizationForm from '../Components/Organization/OrganizationForm'
+import UsersHome from '../Components/Users/UsersHome'
 
 export const PrivateRoutes = () => {
   return (
@@ -49,6 +50,7 @@ export const PrivateRoutes = () => {
         path="/backoffice/organization/edit"
         component={OrganizationForm}
       />
+      <Route path="/backoffice/users" component={UsersHome} />
     </>
   )
 }
