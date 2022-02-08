@@ -3,7 +3,7 @@ import {
   postPrivateHandler,
   putPrivateHandler,
   deletePrivateHandler,
-} from '../../Services/BaseHTTP/privateApiService'
+} from '../BaseHTTP/privateApiService'
 
 const activityGetUrl = process.env.REACT_APP_API_ACTIVITY_GET
 const activityPostUrl = process.env.REACT_APP_API_ACTIVITY_POST

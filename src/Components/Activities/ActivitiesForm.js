@@ -3,26 +3,21 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-
-import { postActivity, putActivity } from '../../Services/apiServices/activitiesApiService'
+import { toBase64 } from '../../utils/toBase64'
+import { SUPPORTED_FORMATS } from '../../utils/supportedFormatsImg'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { LinearProgressFeedback } from '../LinearProgress'
+import {
+  postActivity,
+  putActivity,
+} from '../../Services/apiServices/activitiesApiService'
+import { alertServiceInfoTimer } from '../AlertService'
 
 const ActivitiesForm = () => {
-  const ALLOWED_IMAGE_FORMATS = ['image/jpeg', 'image/png', 'image/jpg']
-
-  const convertBase64 = async (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader()
-      fileReader.readAsDataURL(file)
-
-      fileReader.onload = () => {
-        resolve(fileReader.result)
-      }
-
-      fileReader.onerror = (error) => {
-        reject(error)
-      }
-    })
-  }
+  let id = useParams().id
+  const [responseServer, setResponseServer] = useState(undefined)
+  const [isLoading, setIsLoading] = useState(false)
 
   const formikInitialValues = {
     name: '',
@@ -34,32 +29,44 @@ const ActivitiesForm = () => {
     description: Yup.string(),
     image: Yup.mixed()
       .test('fileType', 'File must be an image jpg or png', (value) => {
-        if (value) return ALLOWED_IMAGE_FORMATS.includes(value && value.type)
+        if (value) return SUPPORTED_FORMATS.includes(value && value.type)
       })
       .required('Required'),
   })
 
+  const handleSubmit = async (formData) => {
+    setIsLoading(true)
+    const imageBase64 = await toBase64(formData.image)
+    console.log(id)
+    if (id) {
+      setResponseServer(
+        await putActivity(id, {
+          ...formData,
+          image: imageBase64,
+        }),
+      )
+    } else {
+      setResponseServer(
+        await postActivity({
+          ...formData,
+          image: imageBase64,
+        }),
+      )
+    }
+    setIsLoading(false)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setResponseServer(undefined)
+    }, 3100)
+    console.log(responseServer)
+  }, [responseServer])
+
   const formik = useFormik({
     initialValues: formikInitialValues,
     validationSchema: formikValidationSchema,
-    onSubmit: async (formData) => {
-      let responseServer = undefined
-      const imageBase64 = await convertBase64(formData.image)
-      // eslint-disable-next-line no-undef
-      const id = await compareActivitieExist(formData.name)
-      if (id) {
-        responseServer = await putActivity(id, {
-          ...formData,
-          image: imageBase64,
-        })
-      } else {
-        responseServer = await postActivity({
-          ...formData,
-          image: imageBase64,
-        })
-      }
-      console.log(responseServer)
-    },
+    onSubmit: handleSubmit,
   })
 
   return (
@@ -96,6 +103,16 @@ const ActivitiesForm = () => {
       <button className="submit-btn" type="submit">
         Send
       </button>
+      {responseServer !== undefined
+        ? alertServiceInfoTimer(
+            'start',
+            'info',
+            responseServer.data.message,
+            false,
+            3000,
+          )
+        : null}
+      <LinearProgressFeedback isActive={isLoading} />
     </form>
   )
 }

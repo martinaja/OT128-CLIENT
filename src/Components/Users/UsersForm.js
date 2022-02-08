@@ -1,9 +1,14 @@
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { postPrivateHandler, putPrivateHandler } from "../../Services/BaseHTTP/privateApiService";
 
 import "../FormStyles.css";
 
 const UserForm = (usuario) => {
+
+  const url = process.env.REACT_APP_API_USERS_GET;
+
+console.log(url)
   return (
     <>
       <Formik
@@ -16,11 +21,10 @@ const UserForm = (usuario) => {
         }}
         onSubmit={(values) => {
           if (usuario.id) {
-            console.log("usuario existe");
-            // TODO: hacer peticion put a /users/{id}
+            putPrivateHandler(url, usuario.id, values);
           } else {
             console.log("usuario no existe");
-            // TODO: hacer peticion post a /users
+            postPrivateHandler(url, values);
           }
           console.log(values);
         }}
