@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { Container } from '@mui/material';
+import HomeForm from '../BackOffice/HomeForm';
 
 
 function Index() {
@@ -14,7 +15,7 @@ function Index() {
 
       <h2>Testimonios</h2>
       <h4>Aquí iran las cards de testimonial.js</h4>
-  
+ 
     </Container>
    
     </div>
