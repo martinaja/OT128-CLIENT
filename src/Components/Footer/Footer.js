@@ -17,13 +17,13 @@ function Footer() {
   const startHeight = () => {
     const WindowWidth = window.innerWidth
     if (WindowWidth >= 1536) {
-      return '100vh'
+      return '70vh'
     } else if (WindowWidth < 1536 && WindowWidth >= 1200) {
-      return '40vh'
+      return '65vh'
     } else if (WindowWidth < 1200 && WindowWidth >= 600) {
-      return '0vh'
+      return '73vh'
     } else if (WindowWidth < 600) {
-      return '45vh'
+      return '114vh'
     }
   }
 
@@ -37,13 +37,14 @@ function Footer() {
   return (
     <>
       <div className="container">
-        <div style={{ minHeight: height }}>
+        <div style={{ minHeight: height}}>
         <Grid container className="footer__container">
           <Grid
             item
             container
             md={4}
             sm={12}
+            m= {0}
             alignItems="center"
             className="center"
           >
