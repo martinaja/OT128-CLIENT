@@ -21,6 +21,10 @@
   max-width: 100%;
 }
 
+.entry__img img {
+  max-width: 100%;
+}
+
 .entry__content {
   padding-top: 25px;
   line-height: 1.5;
