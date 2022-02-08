@@ -1,8 +1,5 @@
 import React from 'react'
-import FooterGlobal from '../Footer/FooterGlobal';
-
-
-
+import Footer from '../Footer/Footer'
 
 
 function Index() {
@@ -10,14 +7,13 @@ function Index() {
     <div>
       <h1>Bienvenidos</h1>
       <h2>@Somosmás</h2>
-   
+
       <h2>Testimonios</h2>
       <h4>Aquí iran las cards de testimonial.js</h4>
-    <FooterGlobal/>
-    
+     <Footer/>
     </div>
-    
+ 
   )
 }
 
-export default Index;
+export default Index
