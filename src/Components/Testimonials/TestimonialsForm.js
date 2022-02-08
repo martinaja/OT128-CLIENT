@@ -13,7 +13,14 @@ import {
   putTestimony,
 } from '../../Services/apiServices/testimonyApiService'
 import { alertServiceInfoTimer } from '../AlertService'
-import { Box, Button, Container, Input, TextField } from '@mui/material'
+import {
+  Box,
+  Button,
+  Container,
+  Input,
+  TextField,
+  Typography,
+} from '@mui/material'
 
 const TestimonialForm = () => {
   let id = useParams().id
@@ -82,7 +89,10 @@ const TestimonialForm = () => {
       }) => (
         <Container>
           <Box sx={{ boxShadow: 5, p: 5, mt: 2 }}>
-            <form className="form-container" onSubmit={handleSubmit}>
+            <Typography variant="h4">
+              {!id ? 'Crear Testimonio' : 'Editar Testimonio'}
+            </Typography>
+            <form onSubmit={handleSubmit}>
               <TextField
                 fullWidth
                 type="text"
