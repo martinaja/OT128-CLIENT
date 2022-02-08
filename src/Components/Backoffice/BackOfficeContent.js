@@ -1,10 +1,16 @@
+import { Typography } from '@mui/material'
 import React from 'react'
 
 const BackOfficeContent = () => {
   return (
-    <div>
-      <h1>Mensaje de bienvenida</h1>
-    </div>
+    <Typography
+      sx={{ textAlign: 'center', mt: '4rem' }}
+      variant="h3"
+      component="div"
+      gutterBottom
+    >
+      Bienvenido al backoffice de somos más
+    </Typography>
   )
 }
 

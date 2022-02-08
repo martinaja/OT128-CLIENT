@@ -7,7 +7,7 @@ import BackOfficeContent from './BackOfficeContent'
 const BackOfficeHome = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Container>
         <BackOfficeContent />
       </Container>

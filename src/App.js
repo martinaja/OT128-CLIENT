@@ -32,9 +32,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header />
-      {/* <Container> */}
       <Routes />
-      {/* </Container> */}
     </ThemeProvider>
   )
 }
