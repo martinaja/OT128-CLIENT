@@ -1,4 +1,4 @@
-import { Grid, IconButton, Box } from '@material-ui/core'
+import { Grid, IconButton } from '@material-ui/core'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import TwitterIcon from '@material-ui/icons/Twitter'
@@ -6,7 +6,6 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import React, {useState, useEffect} from 'react'
 import './Footer.css'
 import { useBreakPoints } from './../../utils/hooks/useBreakPoints';
-
 
 
 function Footer() {
@@ -47,17 +46,12 @@ function Footer() {
             alignItems="center"
             className="center"
           >
-            <Box
-                className='logo'
-                component="img"
-                sx={{
-                
-                  m: '0',
-                  p: 0,
-                }}
-                alt="logo ong."
-                src="/images/logo-bco.png"
-              />
+            <img
+              alt="Logo ong."
+              src="/images/logo-bco.png"
+              className="logo"
+            />
+            <img alt="Logo ong." src="/images/oso-bco.png" className="logo" />
           </Grid>
 
           <Grid item container md sm={12}>
