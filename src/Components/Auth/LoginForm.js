@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
-
+import '../FormStyles.css'
 
 const LoginForm = () => {
   const validateFields = (values) => {
