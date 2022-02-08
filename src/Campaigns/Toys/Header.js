@@ -1,36 +1,18 @@
 import React from 'react'
-import {
-  useMediaQuery,
-  createTheme,
-  AppBar,
-  Box,
-  Toolbar,
-  Typography,
-} from '@material-ui/core'
+import { AppBar, Box, Toolbar, Typography } from '@material-ui/core'
+import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
 
 const Header = () => {
-  // Breakpoints
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        mobile: 0,
-        tablet: 640,
-        laptop: 1024,
-        desktop: 1200,
-      },
-    },
-  })
-
-  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
-  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
+  const isMatchSmartTv = useBreakPoints('(min-width: 1536px)')
+  const isMatchDesktop = useBreakPoints('(min-width: 1200px)')
+  const isMatchTablet = useBreakPoints('(min-width: 600px)')
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
         style={{
-          background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
+          background: isMatchSmartTv ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
         }}
       >
         <Toolbar>
@@ -52,14 +34,15 @@ const Header = () => {
             component="img"
             sx={{
               height: 60,
-              m: isMatchLaptop ? 0 : 'auto',
+              ml: isMatchDesktop ? 0 : 'auto',
+              mr: isMatchDesktop && 0,
               p: 1,
             }}
             alt="Logo campaña."
             src="/images/oso.png"
           />
 
-          {isMatchLaptop && (
+          {isMatchDesktop && (
             <Typography
               variant="h6"
               noWrap

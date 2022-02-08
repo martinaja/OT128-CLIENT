@@ -5,7 +5,7 @@ export const LinearProgressFeedback = ({ isActive = false }) => {
   return (
     <>
       {isActive && (
-        <Box sx={{ width: '80%' }}>
+        <Box sx={{ width: '100%' }}>
           <LinearProgress />
         </Box>
       )}

@@ -1,6 +1,9 @@
-import { deletePrivateHandler, postPrivateHandler, putPrivateHandler } from '../BaseHTTP/privateApiService'
+import {
+  deletePrivateHandler,
+  postPrivateHandler,
+  putPrivateHandler,
+} from '../BaseHTTP/privateApiService'
 import { getPublicHandler } from '../BaseHTTP/publicApiService'
-
 
 const testimonyGetUrl = process.env.REACT_APP_API_TESTIMONY_GET
 const testimonyPostUrl = process.env.REACT_APP_API_TESTIMONY_POST
@@ -11,7 +14,7 @@ export const getTestimony = (id) => {
   return getPublicHandler(testimonyGetUrl, id)
 }
 
-export const postaTestimony = (id, bodydata) => {
+export const postTestimony = (id, bodydata) => {
   return postPrivateHandler(testimonyPostUrl, id, bodydata)
 }
 

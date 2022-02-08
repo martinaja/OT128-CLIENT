@@ -6,9 +6,12 @@ import {
   Box,
   Toolbar,
   
+  
 } from '@material-ui/core'
+import ButtonMenuBackOffice from './ButtonMenuBackOffice'
 
-const Header = () => {
+
+const HeaderBackoffice = () => {
   // Breakpoints
   const theme = createTheme({
     breakpoints: {
@@ -30,7 +33,7 @@ const Header = () => {
       <AppBar
         position="static"
         style={{
-          background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
+          background: isMatchDesktop ? 'rgba(53,133,139,0.7)' : 'rgb(7,34,39)',
         }}
       >
         <Toolbar>
@@ -43,11 +46,12 @@ const Header = () => {
               p: 1,
             }}
             alt="Logo ong."
-            src="/images/logo-bco.png"
+            src="/images/logo-letras-blancas.png"
           />
+          <ButtonMenuBackOffice>Menu</ButtonMenuBackOffice>
         </Toolbar>
-      </AppBar>
+         </AppBar>
     </Box>
   )
 }
-export default Header
+export default HeaderBackoffice

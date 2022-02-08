@@ -12,31 +12,62 @@ if (token) {
 
 export const getPrivateHandler = (apiEndpoint, id) => {
   const apiServiceUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
-  return apiService.get(apiServiceUrl).catch((err) => console.log(err))
+  return apiService.get(apiServiceUrl).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 export const postPrivateHandler = (apiEndpoint, bodyData) => {
-  return apiService.post(apiEndpoint, bodyData).catch((err) => console.log(err))
+  return apiService.post(apiEndpoint, bodyData).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 
 // Id obligatory
 export const deletePrivateHandler = (apiEndpoint, id) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
-  return apiService.post(apiServiceUrl).catch((err) => console.log(err))
+  return apiService.delete(apiServiceUrl).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 // Id obligatory
 export const putPrivateHandler = (apiEndpoint, id, bodyData) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
-  return apiService
-    .post(apiServiceUrl, bodyData)
-    .catch((err) => console.log(err))
+  return apiService.put(apiServiceUrl, bodyData).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }
 // Id obligatory
 export const patchPrivateHandler = (apiEndpoint, id, bodyData) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
-  return apiService
-    .post(apiServiceUrl, bodyData)
-    .catch((err) => console.log(err))
+  return apiService.patch(apiServiceUrl, bodyData).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
 }

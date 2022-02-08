@@ -1,40 +1,33 @@
 import React, { useEffect, useState } from 'react'
-import { Paper, useMediaQuery, createTheme, Typography } from '@mui/material'
+import { Paper, Typography } from '@mui/material'
+import { useBreakPoints } from '../utils/hooks/useBreakPoints'
 
 const ItemSlider = ({ item }) => {
   const { image, text } = item
 
-  const [height, setHeight] = useState('95vh')
+  const isMatchSmartTv = useBreakPoints('(min-width: 1536px)')
+  const isMatchDesktop = useBreakPoints('(min-width: 1200px)')
+  const isMatchTablet = useBreakPoints('(min-width: 600px)')
 
-  //Breakpoints
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        mobile: 0,
-        tablet: 640,
-        laptop: 1024,
-        desktop: 1200,
-      },
-    },
-  })
+  const startHeight = () => {
+    const WindowWidth = window.innerWidth
+    if (WindowWidth >= 1536) {
+      return '110vh'
+    } else if (WindowWidth < 1536 && WindowWidth >= 1200) {
+      return '80vh'
+    } else if (WindowWidth < 1200 && WindowWidth >= 600) {
+      return '65vh'
+    } else if (WindowWidth < 600) {
+      return '40vh'
+    }
+  }
 
-  const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
-  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
-  console.log(isMatchLaptop)
+  const [height, setHeight] = useState(startHeight())
 
   // Inside this useEffect the size of the image is set
   useEffect(() => {
-    if (isMatchDesktop) {
-      setHeight('90vh')
-    } else if (isMatchLaptop) {
-      setHeight('65vh')
-    } else if (isMatchTablet) {
-      setHeight('55vh')
-    } else {
-      setHeight('40vh')
-    }
-  }, [isMatchTablet, isMatchLaptop, isMatchDesktop])
+    setHeight(startHeight())
+  }, [isMatchSmartTv, isMatchDesktop, isMatchTablet])
 
   return (
     <Paper>
@@ -44,14 +37,22 @@ const ItemSlider = ({ item }) => {
           backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
-          minHeight: height,
+          height: height,
           width: '100%',
           display: 'flex',
         }}
       />
-      {isMatchLaptop && (
-        <Typography sx={{ py: 2, textAlign: 'center' }}>{text}</Typography>
-      )}
+      {/* {ShowFotterImg && ( */}
+      <Typography
+        sx={{
+          py: 2,
+          textAlign: 'center',
+          display: { xs: 'none', lg: 'block' },
+        }}
+      >
+        {text}
+      </Typography>
+      {/* )} */}
     </Paper>
   )
 }
