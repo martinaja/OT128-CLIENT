@@ -1,6 +1,7 @@
 .strong{
     color: black;
     font-weight: bold;
+   
 }
 
 .form-container{
@@ -9,6 +10,8 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
   
 }
 
