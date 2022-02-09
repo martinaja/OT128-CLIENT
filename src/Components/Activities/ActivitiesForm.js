@@ -96,7 +96,7 @@ const ActivitiesForm = () => {
             <Typography variant="h4">
               {!id ? 'Crear Actividad' : 'Editar Actividad'}
             </Typography>
-            <form className="form-container" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 fullWidth
@@ -135,7 +135,7 @@ const ActivitiesForm = () => {
                 </Button>
                 <ErrorMessage component="small" name="image" />
               </label>
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" fullWidth>
                 {id ? 'Editar actividad' : 'Crear actividad'}
               </Button>
               {responseServer !== undefined
