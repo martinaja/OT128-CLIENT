@@ -49,7 +49,6 @@ const ActivitiesForm = () => {
   const handleSubmit = async (formData) => {
     setIsLoading(true)
     const imageBase64 = await toBase64(formData.image)
-    console.log(id)
     if (id) {
       setResponseServer(
         await putActivity(id, {
@@ -69,10 +68,18 @@ const ActivitiesForm = () => {
   }
 
   useEffect(() => {
+    if (responseServer !== undefined)
+      alertServiceInfoTimer(
+        'start',
+        'info',
+        responseServer.data.message,
+        false,
+        3000,
+      )
+
     setTimeout(() => {
       setResponseServer(undefined)
-    }, 3100)
-    console.log(responseServer)
+    }, 3000)
   }, [responseServer])
 
   return (
@@ -128,7 +135,6 @@ const ActivitiesForm = () => {
                   onChange={(e) => {
                     setFieldValue('image', e.target.files[0])
                   }}
-                  error={errors.image}
                 />
                 <Button fullWidth variant="outlined" component="span">
                   subir imagen
@@ -138,15 +144,6 @@ const ActivitiesForm = () => {
               <Button type="submit" variant="contained" fullWidth>
                 {id ? 'Editar actividad' : 'Crear actividad'}
               </Button>
-              {responseServer !== undefined
-                ? alertServiceInfoTimer(
-                    'start',
-                    'info',
-                    responseServer.data.message,
-                    false,
-                    3000,
-                  )
-                : null}
               <LinearProgressFeedback isActive={isLoading} />
             </form>
           </Box>
