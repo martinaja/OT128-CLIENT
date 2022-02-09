@@ -9,8 +9,7 @@ const BackOfficeHome = () => {
       {BackofficeHeader}
       <Container>
         <BackOfficeContent />
-       </Container>
-     
+      </Container>
     </>
   )
 }
