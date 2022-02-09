@@ -2,20 +2,23 @@
 *{
   margin: 0;
   padding: 0;
+ 
   box-sizing: border-box;
   font-family: 'Roboto';
 }
 
 .container{
-  min-height: 100vh;
+  display: contents;
+ margin-top: 0%;
   position: relative;
   background-color: #eee;
+  margin-bottom: 0%;
 }
 
 .footer__container{
   position: absolute;
-  bottom: 0;
-  margin-bottom: -20rem;
+  bottom: 0rem!important;
+  margin-bottom: 0rem;
   padding: 2rem;
   background-color: #35858B;
 }

@@ -1,9 +1,8 @@
 import { ThemeProvider } from '@mui/material/styles'
-import { createTheme, CssBaseline} from '@mui/material'
+import { createTheme, CssBaseline } from '@mui/material'
 import { Routes } from './Router/Routes'
 import Footer from './Components/Footer/Footer'
 import Header from './Components/Header/Header'
-
 
 const theme = createTheme({
   palette: {
@@ -33,9 +32,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-<Header/>
+      <Header />
       <Routes />
-      <Footer/>
+      <Footer />
     </ThemeProvider>
   )
 }
