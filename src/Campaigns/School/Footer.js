@@ -22,12 +22,12 @@ function Footer() {
           >
             <img
               alt="Logo ong."
-              src="/images/logo-bco.png"
+              src="/images/salvavidas-color.png"
               className="logo"
             />
             <img
 alt="Logo ong."
-src="/images/logo-bco.png"
+src="/images/school-bco.png"
 className="logo"
 />
             
