@@ -8,7 +8,6 @@ import { alertServiceError } from '../../AlertService'
 import { Title } from '../../Title'
 import Spinner from '../../Spinner'
 
-
 export default function NewsDetail() {
   const { newsId } = useParams()
   const history = useHistory()
