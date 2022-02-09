@@ -9,6 +9,7 @@ import ProjectsForm from '../Components/Projects/ProjectsForm'
 import OrganizationForm from '../Components/Organization/OrganizationForm'
 import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
 import OrganizationScreen from '../Components/Organization/OrganizationScreen'
+import MembersScreen from '../Components/Members/MembersScreen'
 
 export const PrivateRoutes = () => {
   return (
@@ -34,6 +35,7 @@ export const PrivateRoutes = () => {
       />
       <Route exact path="/backoffice/news" component={NewsForm} />
       <Route path="/backoffice/news/:newsId" component={NewsForm} />
+      <Route exact path="/backoffice/members" component={MembersScreen} />
       <Route path="/backoffice/members/edit" component={MembersForm} />
       <Route path="/create-member" component={MembersForm} />
       <Route exact path="/backoffice/slides" component={SlidesForm} />
