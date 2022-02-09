@@ -1,19 +1,22 @@
 * {
-  margin:0
-  ;padding:0;
+
+  padding:0;
   box-sizing:border-box;}
 
 .container{
-  padding-top: 0px;
-  padding-bottom: 0px;
-  font: 14px "champagne&limousines", sans-serif;
+  padding-top: 50px;
+  padding-bottom: 0px!important;
+  font: 14px "Roboto";
   text-align: justify;
 }
 
 .footer__container{
-
-  position: relative;
-padding: 2rem;
+  margin-bottom: 0px!important;
+  position:fixed;
+               
+  left: 0px;
+  bottom: 0px;
+  width: 100%;
    background-color: #272C34;
 }
 
@@ -21,7 +24,8 @@ padding: 2rem;
   top: 0%!important;
   width: 5rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+ 
+  margin-left: 2rem;
 }
 
 .logo__name{
@@ -101,6 +105,7 @@ padding: 2rem;
   width: 100%;
   text-align: center;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 0.7rem;
 }
 
@@ -143,7 +148,7 @@ padding: 2rem;
   .footer__container{
   
     bottom: 0;
-    margin-bottom: 0rem;
+    margin-bottom: 0rem!important;
     padding: 2rem;
     background-color: #272C34;
   }
@@ -255,9 +260,8 @@ padding: 2rem;
   }
 
   .footer__container{
-   
-    bottom: 0;
-    margin-bottom: 0rem;
+ 
+    margin-bottom: 0rem!important;
     padding: 2rem;
     background-color: #272C34;
   }
