@@ -4,7 +4,7 @@
   box-sizing:border-box;}
 
 .container{
-  padding-top: 50px;
+  padding-top: 0px;
   padding-bottom: 0px;
   font: 14px "champagne&limousines", sans-serif;
   text-align: justify;
@@ -13,11 +13,8 @@
 .footer__container{
 
   position: relative;
-
-
-  padding: 2rem;
-  
-  background-color: #272C34;
+padding: 2rem;
+   background-color: #272C34;
 }
 
 .logo{
@@ -144,9 +141,9 @@
   }
 
   .footer__container{
-    position: absolute;
+  
     bottom: 0;
-    margin-bottom: -40rem;
+    margin-bottom: 0rem;
     padding: 2rem;
     background-color: #272C34;
   }
@@ -258,9 +255,9 @@
   }
 
   .footer__container{
-    position: absolute;
+   
     bottom: 0;
-    margin-bottom: -40rem;
+    margin-bottom: 0rem;
     padding: 2rem;
     background-color: #272C34;
   }
