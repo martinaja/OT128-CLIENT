@@ -1,41 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from '@mui/material'
 import parse from 'html-react-parser'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import styles from './NewsDetails.module.css'
 import { getNews } from '../../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../../AlertService'
 import { Title } from '../../Title'
 
-export default function NewsDetail({ title }) {
+export default function NewsDetail() {
   const { newsId } = useParams()
+  const history = useHistory()
   const [loader, setLoader] = useState(false)
   const [news, setNews] = useState(null)
 
   useEffect(
     () =>
       (async () => {
-        try {
-          setLoader(true)
-          const requestNews = await getNews(newsId)
-          const newsData = requestNews.data?.data
-          newsData
-            ? setNews(newsData)
-            : alertServiceError(
-                'No se pudo cargar la noticia',
-                'Verificá que la URL sea correcta',
-              )
-        } catch (e) {
-          console.erro(e)
+        setLoader(true)
+
+        const requestNews = await getNews(newsId)
+        if (requestNews.error) {
           alertServiceError(
+            requestNews.message,
             'No se pudo obtener la información solicitada',
-            e.message,
           )
-        } finally {
-          setLoader(false)
+          history.push('/')
         }
+
+        const newsData = requestNews.data?.data
+        newsData
+          ? setNews(newsData)
+          : alertServiceError(
+              'No se pudo cargar la noticia',
+              'Verificá que la URL sea correcta',
+            ) && history.push('/')
+
+        setLoader(false)
       })(),
-    [newsId],
+    [newsId, history],
   )
 
   return loader ? (
