@@ -1,21 +1,37 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 
-import { Grid } from '@mui/material';
+import { Grid } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
-import { getPublicHandler } from '../../Services/BaseHTTP/publicApiService'
+import { getNews } from '../../Services/apiServices/newsApiService'
+import { alertServiceError } from '../AlertService'
 
 const NewsList = () => {
-  const [data, setData] = useState('')
+  const [data, setData] = useState(null)
 
-  const url = process.env.REACT_APP_API_NEWS_GET
+  useEffect(
+    () =>
+      (async () => {
+        const requestNews = await getNews()
+        if (requestNews.error) {
+          alertServiceError(
+            requestNews.message,
+            'No se pudo obtener la información solicitada',
+          )
+        }
 
-  useEffect(() => {
-    getPublicHandler(url).then(({ data }) => setData(data.data)) 
-  }, [])
+        const newsData = requestNews.data?.data
+        newsData
+          ? setData(newsData)
+          : alertServiceError(
+              'No se pudo cargar la noticia',
+              'Verificá que la URL sea correcta',
+            )
+      })(),
+    [],
+  )
 
- 
   return (
     <>
       {!data ? (
@@ -24,7 +40,11 @@ const NewsList = () => {
         <>
           {' '}
           <h1>Novedades</h1>
-          <Grid container rows={{ xs: 1, sm: 8, md: 6 }} spacing={{ xs: 2, md: 3 }}>
+          <Grid
+            container
+            rows={{ xs: 1, sm: 8, md: 6 }}
+            spacing={{ xs: 2, md: 3 }}
+          >
             {data?.length > 0 ? (
               data?.map((element) => {
                 return (
