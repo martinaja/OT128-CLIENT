@@ -13,7 +13,7 @@ import OrganizationScreen from '../Components/Organization/OrganizationScreen'
 export const PrivateRoutes = () => {
   return (
     <>
-      <Route excat path="/backoffice" component={BackOfficeHome} />
+      <Route exact path="/backoffice" component={BackOfficeHome} />
       <Route
         exact
         path="/backoffice/create-activity"
