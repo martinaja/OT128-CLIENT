@@ -45,7 +45,6 @@ const TestimonialForm = () => {
   const handleSubmit = async (formData) => {
     setIsLoading(true)
     const imageBase64 = await toBase64(formData.image)
-    console.log(id)
     if (id) {
       setResponseServer(
         await putTestimony(id, {
@@ -65,10 +64,18 @@ const TestimonialForm = () => {
   }
 
   useEffect(() => {
+    if (responseServer !== undefined)
+      alertServiceInfoTimer(
+        'start',
+        'info',
+        responseServer.data.message,
+        false,
+        3000,
+      )
+
     setTimeout(() => {
       setResponseServer(undefined)
     }, 3000)
-    console.log(responseServer)
   }, [responseServer])
 
   return (
@@ -123,7 +130,6 @@ const TestimonialForm = () => {
                   onChange={(e) => {
                     setFieldValue('image', e.target.files[0])
                   }}
-                  error={errors.image}
                 />
                 <Button fullWidth variant="outlined" component="span">
                   subir imagen
@@ -133,15 +139,6 @@ const TestimonialForm = () => {
               <Button fullWidth type="submit" variant="contained">
                 {id ? 'Editar testimonio' : 'Crear testimonio'}
               </Button>
-              {responseServer !== undefined
-                ? alertServiceInfoTimer(
-                    'start',
-                    'info',
-                    responseServer.data.message,
-                    false,
-                    3000,
-                  )
-                : null}
               <LinearProgressFeedback isActive={isLoading} />
             </form>
           </Box>
