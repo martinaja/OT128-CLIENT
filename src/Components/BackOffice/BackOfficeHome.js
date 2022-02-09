@@ -2,6 +2,7 @@ import { Container } from '@mui/material'
 import React from 'react'
 import BackOfficeContent from './BackOfficeContent'
 import BackofficeHeader from './HeaderBackoffice'
+import SlidesList from './SlidesList';
 
 const BackOfficeHome = () => {
   return (
@@ -9,6 +10,7 @@ const BackOfficeHome = () => {
       {BackofficeHeader}
       <Container>
         <BackOfficeContent />
+        <SlidesList/>
       </Container>
      
     </>
