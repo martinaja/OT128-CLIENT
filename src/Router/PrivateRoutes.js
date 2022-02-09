@@ -7,10 +7,13 @@ import SlidesForm from '../Components/Slides/SlidesForm'
 import TestimonialForm from '../Components/Testimonials/TestimonialsForm'
 import ProjectsForm from '../Components/Projects/ProjectsForm'
 import OrganizationForm from '../Components/Organization/OrganizationForm'
+import UsersHome from '../Components/Users/UsersHome'
 import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
 import OrganizationScreen from '../Components/Organization/OrganizationScreen'
 import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
+import UserForm from '../Components/Users/UsersForm'
+
 
 export const PrivateRoutes = () => {
   return (
@@ -61,6 +64,8 @@ export const PrivateRoutes = () => {
         path="/backoffice/organization/edit"
         component={OrganizationForm}
       />
+      <Route exact path="/backoffice/users" component={UsersHome} />
+      <Route exact path="/backoffice/users/create" component={UserForm} />
     </>
   )
 }
