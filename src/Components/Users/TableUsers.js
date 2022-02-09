@@ -1,40 +1,73 @@
 import React from 'react'
 import { DataGrid } from '@mui/x-data-grid'
-import { Button } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
+import { Box, Button } from '@mui/material'
+import { alertServiceConfirm } from '../AlertService'
+import { Link } from 'react-router-dom'
+import AddIcon from '@mui/icons-material/Add'
 
 const TableUsers = () => {
+  // function call to delete user
+  const deleteUser = (params) => {
+    console.log('action->', params.field, 'id->', params.id)
+  }
+
+  // set table
   const columns = [
-    { field: 'name', name: 'Full Name', width: 140 },
-    { field: 'email', name: 'Email de contacto', width: 150 },
     {
-      field: 'action',
+      field: 'edit',
       headerName: 'Editar',
       sortable: false,
+
       renderCell: (params) => {
         const onClick = (e) => {
-          e.stopPropagation() // don't select this row after clicking
-          console.log(params)
+          e.stopPropagation()
+          console.log('action->', params.field, 'id->', params.id)
         }
 
-        return <Button onClick={onClick}>Click</Button>
+        return (
+          <Button>
+            <EditIcon color="primary" onClick={onClick} />
+          </Button>
+        )
       },
     },
     {
       field: 'delete',
       headerName: 'Borrar',
       sortable: false,
+
       renderCell: (params) => {
         const onClick = (e) => {
-          e.stopPropagation() // don't select this row after clicking
-          console.log(params)
+          e.stopPropagation()
+          alertServiceConfirm(
+            'Desea eliminar este usuario?',
+            'eliminar',
+            () => {
+              deleteUser(params)
+            },
+          )
         }
 
-        return <Button onClick={onClick}>Borrar</Button>
+        return (
+          <Button>
+            <DeleteIcon sx={{ color: 'rgb(255, 0, 0)' }} onClick={onClick} />
+          </Button>
+        )
       },
+    },
+    { field: 'name', headerName: 'Nombre', name: 'Full Name', width: 170 },
+    {
+      field: 'email',
+      headerName: 'Correo Electrónico',
+      name: 'Email de contacto',
+      width: 180,
     },
   ]
 
-  const rows = [
+  // mock of users
+  const mock = [
     { id: 1, name: 'Snow Jon', email: 'Jon@gmail.com' },
     { id: 2, name: 'Lannister Cersei', email: 'Cersei@gmail.com' },
     { id: 3, name: 'Lannister Jaime', email: 'Jaime@gmail.com' },
@@ -44,17 +77,27 @@ const TableUsers = () => {
     { id: 7, name: 'Clifford Ferrara', email: 'Ferrara@gmail.com' },
     { id: 8, name: 'Frances Rossini', email: 'Rossini@gmail.com' },
     { id: 9, name: 'Roxie Harvey', email: 'Harvey@gmail.com' },
+    { id: 10, name: 'Lautaro Zapata', email: 'Lautarogzapata@gmail.com' },
   ]
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <Box
+      width={{ sx: '100%', md: '600px' }}
+      style={{ height: 600, backgroundColor: 'white', margin: 'auto' }}
+    >
+      <Link to="/backoffice/users/create" style={{ textDecoration: 'none' }}>
+        <Button variant="outlined" sx={{ m: 2 }}>
+          {' '}
+          Crear nuevo usuario
+        </Button>
+      </Link>
       <DataGrid
-        rows={rows}
+        rows={mock}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={10}
+        rowsPerPageOptions={[10]}
       />
-    </div>
+    </Box>
   )
 }
 
