@@ -1,17 +1,15 @@
 import { Container } from '@mui/material'
 import React from 'react'
-// import Footer from '../Footer/Footer'
-// import Header from '../Header/Header'
 import BackOfficeContent from './BackOfficeContent'
+import BackofficeHeader from './HeaderBackoffice'
 
 const BackOfficeHome = () => {
   return (
     <>
-      {/* <Header /> */}
+      {BackofficeHeader}
       <Container>
         <BackOfficeContent />
       </Container>
-      {/* <Footer /> */}
     </>
   )
 }
