@@ -6,6 +6,8 @@ import styles from './NewsDetails.module.css'
 import { getNews } from '../../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../../AlertService'
 import { Title } from '../../Title'
+import Spinner from '../../Spinner'
+
 
 export default function NewsDetail() {
   const { newsId } = useParams()
@@ -41,7 +43,7 @@ export default function NewsDetail() {
   )
 
   return loader ? (
-    'Cargando...'
+    <Spinner />
   ) : (
     <Container className={[styles.entry]}>
       <div className={[styles['entry_header']]}>

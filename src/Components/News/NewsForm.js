@@ -22,6 +22,7 @@ import {
 } from '../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../AlertService'
 import ButtonLoader from '../ButtonLoader/ButtonLoader'
+import Spinner from '../Spinner'
 
 const NewsForm = () => {
   const { newsId } = useParams()
@@ -187,7 +188,7 @@ const NewsForm = () => {
   })
 
   return loader ? (
-    'Cargando...'
+    <Spinner />
   ) : (
     <Formik
       enableReinitialize
