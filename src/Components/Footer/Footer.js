@@ -10,7 +10,7 @@ function Footer() {
   return (
     <>
       <div className="container">
-        <div style={{ minHeight: '100vh' }}></div>
+        <div style={{ minHeight: '65vh' }}></div>
         <Grid container className="footer__container">
           <Grid
             item
