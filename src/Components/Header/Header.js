@@ -5,7 +5,6 @@ import {
   AppBar,
   Box,
   Toolbar,
-  
 } from '@material-ui/core'
 
 const Header = () => {
@@ -26,7 +25,7 @@ const Header = () => {
   const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
 
   return (
-    <Box sx={{ flexGrow: 1, boxShadow: 0 }}>
+    <Box id="main-header" sx={{ flexGrow: 1, boxShadow: 0 }}>
       <AppBar
         position="static"
         style={{

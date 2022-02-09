@@ -29,7 +29,7 @@ const NewsForm = () => {
 
   const [news, setNew] = useState([])
   const [categories, setCategories] = useState([])
-  const [isEditable, setIsEdit] = useState(false)
+  const [isEditable, setIsEditable] = useState(false)
   const [imgUploaded, setImgUploaded] = useState(null)
   const [previewImgUploaded, setPreviewImgUploaded] = useState(null)
 
@@ -40,25 +40,26 @@ const NewsForm = () => {
   useEffect(
     () =>
       (async () => {
-        try {
-          setLoader(true)
-          const fetch = await getCategories()
-          const data = fetch?.data?.data
-          console.log('CATEGORIES', data)
-          data
-            ? setCategories(data)
-            : alertServiceError(
-                'No se pudo cargar la noticia',
-                'Verificá que la URL sea correcta',
-              )
-        } catch (e) {
+        setLoader(true)
+
+        const fetchCategories = await getCategories()
+        if (fetchCategories.error)
           alertServiceError(
+            fetchCategories.message,
             'No se pudo obtener la información solicitada',
-            e.message,
           )
-        } finally {
-          setLoader(false)
-        }
+
+        const dataCategories = fetchCategories?.data?.data
+        console.log('CATEGORIES', dataCategories)
+
+        dataCategories
+          ? setCategories(dataCategories)
+          : alertServiceError(
+              'No se pudo cargar la noticia',
+              'Verificá que la URL sea correcta',
+            )
+
+        setLoader(false)
       })(),
     [],
   )
@@ -67,32 +68,30 @@ const NewsForm = () => {
   useEffect(() => {
     if (!newsId) return
     ;(async () => {
-      try {
-        setLoader(true)
-        const fetch = await getNews(newsId)
-        const data = fetch?.data?.data
-        console.log('DATA FROM NEWS BY ID', data)
-        if (data) {
-          setNew(data)
-          setIsEdit(true)
-        } else {
-          alertServiceError(
-            'No se pudo cargar la noticia',
-            'Verificá que la URL sea correcta',
-          )
-          history.push('/backoffice/news')
-        }
-      } catch (e) {
-        alertServiceError(
-          'No se pudo obtener la información solicitada',
-          e.message,
-        )
+      setLoader(true)
 
-        setIsEdit(false)
+      const fetchNews = await getNews(newsId)
+      if (fetchNews.error) {
+        alertServiceError(
+          fetchNews.message,
+          'No se pudo obtener la información solicitada',
+        )
+        setIsEditable(false)
         history.push('/backoffice/news')
-      } finally {
-        setLoader(false)
       }
+
+      const dataNews = fetchNews.data?.data
+      console.log('DATA DE LA NOTICIA', dataNews)
+
+      if (dataNews) {
+        setNew(dataNews)
+        setIsEditable(true)
+      } else {
+        alertServiceError('No se pudo cargar la noticia', 'ID inválido')
+        history.push('/backoffice/news')
+      }
+
+      setLoader(false)
     })()
   }, [newsId, history])
 
@@ -126,37 +125,53 @@ const NewsForm = () => {
     }
 
     console.log('DATA LISTA PARA ENVIAR', newsToSend)
-    if (isEditable) {
+    if (isEditable)
       // Putting a news
-      ;(async () => {
-        try {
-          const request = await putNews(newsId, newsToSend)
-          console.log('REQUEST PUT NEWS', request)
-        } catch (e) {
-          console.error('REQUEST PUT ERROR', e)
-        } finally {
-          // Check the changes
-          const fetch = await getNews(newsId)
-          const data = fetch?.data
-          console.log('DATA FROM NEWS BY ID', data)
-          setNew(data)
-          setBtnLoader(false)
+      (async () => {
+        const putRequest = await putNews(newsId, newsToSend)
+        console.log('REQUEST PUT NEWS', putRequest)
+        if (putRequest.error) {
+          alertServiceError(
+            putRequest.message,
+            'No se pudo editar la información',
+          )
+        } else {
+          history.push(`/novedades/${newsId}`)
+        }
+
+        // Redirect to the news
+        const fetch = await getNews(newsId)
+        const data = fetch.data?.data
+        console.log('DATA FROM NEWS BY ID', data)
+        data
+          ? setNew(data)
+          : alertServiceError(
+              'No se pudo cargar la noticia',
+              'Verificá que la URL sea correcta',
+            )
+
+        setBtnLoader(false)
+      })()
+    // Posting a news
+    else
+      (async () => {
+        const postRequest = await postNews(newsToSend)
+        console.log('REQUEST POST NEWS', postRequest)
+        if (postRequest.error)
+          alertServiceError(
+            postRequest.message,
+            'No se pudo enviar la información',
+          )
+
+        setBtnLoader(false)
+
+        // ---> Redirect to the new news
+        if (postRequest.statusText === 'OK') {
+          const postRequestData = postRequest.data?.data
+          const newNewsID = postRequestData?.id
+          history.push(`/novedades/${newNewsID}`)
         }
       })()
-    } else {
-      // Posting a news
-      ;(async () => {
-        try {
-          const request = await postNews(newsToSend)
-          console.log('REQUEST POST NEWS', request)
-          // ---> It should redirect to the link of the new news
-        } catch (e) {
-          console.error('POST ERROR', e)
-        } finally {
-          setBtnLoader(false)
-        }
-      })()
-    }
   }
 
   const schemaValidate = Yup.object().shape({
@@ -184,7 +199,6 @@ const NewsForm = () => {
       }}
       validationSchema={schemaValidate}
       onSubmit={(val) => {
-        console.log(val)
         sendNews(val)
       }}
     >
