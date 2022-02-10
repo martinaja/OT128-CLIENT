@@ -6,7 +6,7 @@ import Footer from './Footer'
 import { Container } from '@mui/material'
 import { useEffect } from 'react'
 import handleDisplayByID from '../../utils/handleDisplayByID'
-// import FooterToys from './FooterToys'
+import { Container } from '@mui/material'
 
 const ToysCampaign = () => {
   useEffect(() => {
@@ -21,7 +21,7 @@ const ToysCampaign = () => {
         <Slider />
         <Content />
       </Container>
-      <Footer />
+      {/* {<Footer /> } */}
     </>
   )
 }
