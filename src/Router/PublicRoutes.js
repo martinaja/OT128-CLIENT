@@ -11,6 +11,8 @@ import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import NotFound from '../Components/NotFound/NotFound'
+import { Donations } from './../Components/Donations/Donations';
+import { Thankyou } from './../Components/Donations/Thankyou';
 
 export const PublicRoutes = () => {
   return (
@@ -24,8 +26,10 @@ export const PublicRoutes = () => {
       <Route exact path="/toys-campaign" component={ToysCampaign} />
       <Route exact path="/set-user" component={LoginForm} />
       <Route exact path="/activities" component={Activities} />
-      <Route exact path="/activities/:id" component={Detail} />
-      <Route exact path="/news" component={NewsList} />
+      <Route path="/activities/:id" component={Detail} />
+      <Route path="/news" component={NewsList} />
+      <Route path="/donations" component={Donations} />
+      <Route path="/thankyou" component={Thankyou} />
     </>
   )
 }
