@@ -1,6 +1,5 @@
-import { Box, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import React from 'react'
-import Footer from '../Footer/Footer'
 import TableUsers from './TableUsers'
 
 const UsersHome = () => {
