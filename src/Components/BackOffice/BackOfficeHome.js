@@ -4,7 +4,6 @@ import BackOfficeContent from './BackOfficeContent'
 import Sidebar from './BackOfficeSidebar'
 import BackofficeHeader from './HeaderBackoffice'
 
-
 const BackOfficeHome = () => {
   return (
     <>
