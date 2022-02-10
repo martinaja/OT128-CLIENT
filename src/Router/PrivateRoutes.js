@@ -13,6 +13,7 @@ import OrganizationScreen from '../Components/Organization/OrganizationScreen'
 import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
+import CategoriesHome from '../Components/Categories/CategoriesHome'
 import SlidesScreen from './../Components/Slides/SlidesList';
 
 
@@ -32,11 +33,11 @@ export const PrivateRoutes = () => {
       />
       <Route
         exact
-        path="/backoffice/create-category"
+        path="/backoffice/categories/create"
         component={CategoriesForm}
       />
       <Route
-        path="/backoffice/create-category/:id"
+        path="/backoffice/categories/create/:id"
         component={CategoriesForm}
       />
       <Route exact path="/backoffice/news" component={NewsForm} />
@@ -68,6 +69,7 @@ export const PrivateRoutes = () => {
       />
       <Route exact path="/backoffice/users" component={UsersHome} />
       <Route exact path="/backoffice/users/create" component={UserForm} />
+      <Route exact path="/backoffice/categories" component={CategoriesHome} />
     </>
   )
 }
