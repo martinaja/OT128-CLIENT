@@ -15,7 +15,7 @@ import OrganizationScreen from '../Components/Organization/OrganizationScreen'
 import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
-import SlidesScreen from './../Components/Slides/SlidesList'
+import SlidesScreen from '../Components/Slides/SlidesList'
 
 export const PrivateRoute = ({ children, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => state.auth)

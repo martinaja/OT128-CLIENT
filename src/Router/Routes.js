@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
-import { privateRoutes } from './privateRoutes'
-import { publicRoutes } from './publicRoutes'
+import { privateRoutes } from './PrivateRoutes'
+import { publicRoutes } from './PublicRoutes'
 
 export const Routes = () => {
   return (
