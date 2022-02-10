@@ -64,6 +64,14 @@ const ActivitiesForm = () => {
         }),
       )
     }
+
+    // alert in case of fail to update or create a new activity
+    if (responseServer.error) {
+      alertServiceError(
+        responseServer.message,
+        'Se produjo un error al crear o editar una actividad.',
+      )
+    }
     setIsLoading(false)
   }
 
