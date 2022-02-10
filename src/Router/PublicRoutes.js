@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 import Index from '../Components/Home/Index'
 import NewsDetail from '../Components/News/Detail/NewsDetail'
 import About from '../Components/About/About'
@@ -10,21 +10,26 @@ import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
+import NotFound from '../Components/NotFound/NotFound'
+import { Donations } from './../Components/Donations/Donations';
+import { Thankyou } from './../Components/Donations/Thankyou';
 
 export const PublicRoutes = () => {
   return (
     <>
-      <Route path="/" exact component={Index} />
-      <Route path="/contacto" component={ContactHome} />
-      <Route path="/novedades/:newsId" component={NewsDetail} />
-      <Route path="/nosotros" component={About} />
-      <Route path="/create-user" component={UserForm} />
-      <Route path="/school-campaign" component={SchoolCampaign} />
-      <Route path="/toys-campaign" component={ToysCampaign} />
-      <Route path="/set-user" component={LoginForm} />
+      <Route exact path="/" component={Index} />
+      <Route exact path="/contacto" component={ContactHome} />
+      <Route exact path="/novedades/:newsId" component={NewsDetail} />
+      <Route exact path="/nosotros" component={About} />
+      <Route exact path="/create-user" component={UserForm} />
+      <Route exact path="/school-campaign" component={SchoolCampaign} />
+      <Route exact path="/toys-campaign" component={ToysCampaign} />
+      <Route exact path="/set-user" component={LoginForm} />
       <Route exact path="/activities" component={Activities} />
       <Route path="/activities/:id" component={Detail} />
       <Route path="/news" component={NewsList} />
+      <Route path="/donations" component={Donations} />
+      <Route path="/thankyou" component={Thankyou} />
     </>
   )
 }

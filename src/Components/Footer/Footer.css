@@ -1,30 +1,26 @@
 * {
-  margin:0
-  ;padding:0;
+margin: initial;
+  padding:0;
   box-sizing:border-box;}
 
 .container{
   padding-top: 50px;
-  padding-bottom: 0px;
-  font: 14px "champagne&limousines", sans-serif;
-  text-align: justify;
+  margin: 0;
+  font: 14px "Roboto";
+  text-align: center;
 }
 
 .footer__container{
-
-  position: relative;
-
-
-  padding: 2rem;
-  
-  background-color: #272C34;
+ 
+ background-color: #272C34;
 }
 
 .logo{
   top: 0%!important;
   width: 5rem;
   margin-right: 1rem;
-  margin-bottom: 1rem;
+ 
+  margin-left: 2rem;
 }
 
 .logo__name{
@@ -76,12 +72,14 @@
 .social{
   width: 100%;
   color: #eee;
+  
 }
 
 .social__hr{
   margin-top: 1rem;
   margin-bottom: 1rem;
   background-color: #eee;
+  
 }
 
 .social__tags{
@@ -89,6 +87,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  
 }
 
 .social__tags__color{
@@ -104,22 +103,15 @@
   width: 100%;
   text-align: center;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   font-size: 0.7rem;
 }
 
 @media screen and (max-width: 960px){
-  .hr{
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 50%;
-    background-color: #eee;
-    width: 768px;
-  }
-
+  
   .center{
     justify-content: center;
-    align-items: center;
+    align-items: inherits;
     text-align: center;
   }
 
@@ -133,6 +125,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 2rem;
   }
 }
 
@@ -144,10 +137,10 @@
   }
 
   .footer__container{
-    position: absolute;
+  position: relative;
     bottom: 0;
-    margin-bottom: -40rem;
-    padding: 2rem;
+ 
+    
     background-color: #272C34;
   }
 }
@@ -258,9 +251,8 @@
   }
 
   .footer__container{
-    position: absolute;
-    bottom: 0;
-    margin-bottom: -40rem;
+ 
+    margin-bottom: 0rem!important;
     padding: 2rem;
     background-color: #272C34;
   }

@@ -13,6 +13,8 @@ import OrganizationScreen from '../Components/Organization/OrganizationScreen'
 import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
+import CategoriesHome from '../Components/Categories/CategoriesHome'
+import SlidesScreen from './../Components/Slides/SlidesList';
 
 export const PrivateRoutes = () => {
   return (
@@ -30,11 +32,11 @@ export const PrivateRoutes = () => {
       />
       <Route
         exact
-        path="/backoffice/create-category"
+        path="/backoffice/categories/create"
         component={CategoriesForm}
       />
       <Route
-        path="/backoffice/create-category/:id"
+        path="/backoffice/categories/create/:id"
         component={CategoriesForm}
       />
       <Route exact path="/backoffice/news" component={NewsForm} />
@@ -42,8 +44,9 @@ export const PrivateRoutes = () => {
       <Route exact path="/backoffice/members" component={MembersScreen} />
       <Route path="/backoffice/members/edit" component={MembersForm} />
       <Route path="/create-member" component={MembersForm} />
-      <Route exact path="/backoffice/slides" component={SlidesForm} />
-      <Route path="/backoffice/slides/:slideId" component={SlidesForm} />
+      <Route exact path="/backoffice/slides" component={SlidesScreen} />
+      <Route exact path="/backoffice/slides/create" component={SlidesForm} />
+      <Route path="/backoffice/slides/create/:slideId" component={SlidesForm} />
       <Route
         exact
         path="/backoffice/create-testimonials"
@@ -65,6 +68,7 @@ export const PrivateRoutes = () => {
       />
       <Route exact path="/backoffice/users" component={UsersHome} />
       <Route exact path="/backoffice/users/create" component={UserForm} />
+      <Route exact path="/backoffice/categories" component={CategoriesHome} />
     </>
   )
 }

@@ -34,7 +34,10 @@ const ActivitiesContent = () => {
     (singleActivity) => singleActivity.description,
   )
 
-  console.log(activitiesArray)
+  // useEffect(() => {
+  //   if (infoActivities?.error)
+  //     alertServiceError('Error', infoActivities.message)
+  // }, [infoActivities])
 
   return activitiesArray.map((singleRender) => {
     if (!singleRender) {
