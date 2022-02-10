@@ -14,7 +14,6 @@ import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
 
-
 export const PrivateRoutes = () => {
   return (
     <>
@@ -66,6 +65,7 @@ export const PrivateRoutes = () => {
       />
       <Route exact path="/backoffice/users" component={UsersHome} />
       <Route exact path="/backoffice/users/create" component={UserForm} />
+      <Route exact path="/backoffice/categories" component={CategoriesHome} />
     </>
   )
 }

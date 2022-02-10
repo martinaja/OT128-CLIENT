@@ -5,7 +5,6 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Box, Button } from '@mui/material'
 import { alertServiceConfirm } from '../AlertService'
 import { Link } from 'react-router-dom'
-import AddIcon from '@mui/icons-material/Add'
 
 const TableUsers = () => {
   // function call to delete user
