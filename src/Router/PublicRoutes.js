@@ -28,3 +28,4 @@ export const publicRoutes = [
   <Route path="/activities/:id" component={Detail} key="Detail" />,
   <Route path="/news" component={NewsList} key="NewsList" />,
 ]
+
