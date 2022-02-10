@@ -19,7 +19,7 @@ import SlidesScreen from './../Components/Slides/SlidesList';
 export const PrivateRoutes = () => {
   return (
     <>
-      <Route excat path="/backoffice" component={BackOfficeHome} />
+      <Route exact path="/backoffice" component={BackOfficeHome} />
       <Route exact path="/backoffice/activities" component={ActivitiesScreen} />
       <Route
         exact
