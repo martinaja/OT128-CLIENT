@@ -3,13 +3,14 @@ import { getPublicHandler } from '../BaseHTTP/publicApiService'
 
 
 
-const slideGetUrl = process.env.REACT_APP_API_SLIDE_GET
-const slidePostUrl = process.env.REACT_APP_API_SLIDE_POST
-const slidePutUrl = process.env.REACT_APP_API_SLIDE_PUT
-const slideDeleteUrl = process.env.REACT_APP_API_SLIDE_DELETE
+const slideGetUrl = process.env.REACT_APP_API_SLIDES_GET
+const slidePostUrl = process.env.REACT_APP_API_SLIDES_POST
+const slidePutUrl = process.env.REACT_APP_API_SLIDES_PUT
+const slideDeleteUrl = process.env.REACT_APP_API_SLIDES_DELETE
 
 export const getSlide = (id) => {
-  return getPublicHandler(slideGetUrl, id)
+  
+  return id ? getPublicHandler (slideGetUrl, id) : getPublicHandler (slideGetUrl)
 }
 
 export const postSlide = (id, bodydata) => {

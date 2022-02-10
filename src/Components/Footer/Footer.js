@@ -10,7 +10,7 @@ function Footer() {
   return (
     <>
       <div className="container">
-        <div style={{ minHeight: '100vh' }}></div>
+      
         <Grid container className="footer__container">
           <Grid
             item
@@ -25,7 +25,7 @@ function Footer() {
               src="/images/logo-bco.png"
               className="logo"
             />
-            <img alt="Logo ong." src="/images/oso-bco.png" className="logo" />
+            
           </Grid>
 
           <Grid item container md sm={12}>
