@@ -5,7 +5,7 @@ import { DonationsMp } from './DonationsMp';
 export const Donations = () => {
   return (
    <>
-      <DonationsMp text={"hola"} />
+      <DonationsMp />
 
    </>
   )
