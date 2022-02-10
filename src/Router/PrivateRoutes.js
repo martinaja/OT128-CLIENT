@@ -44,12 +44,6 @@ export const privateRoutes = [
     <ActivitiesForm />
   </PrivateRoute>,
   <PrivateRoute
-    path="/backoffice/create-activity/:id"
-    key="backoffice/create-activity/:id"
-  >
-    <ActivitiesForm />
-  </PrivateRoute>,
-  <PrivateRoute
     path="/backoffice/create-category"
     key="backoffice/create-category"
   >
@@ -60,6 +54,12 @@ export const privateRoutes = [
     key="backoffice/create-category/:id"
   >
     <CategoriesForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-activity/:id"
+    key="backoffice/create-activity/:id"
+  >
+    <ActivitiesForm />
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/news" key="backoffice/news">
     <NewsForm />

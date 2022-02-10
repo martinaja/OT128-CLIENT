@@ -25,6 +25,6 @@ export const publicRoutes = [
   <Route path="/toys-campaign" component={ToysCampaign} key="ToysCampaign" />,
   <Route path="/login" component={LoginForm} key="LoginForm" />,
   <Route path="/activities" component={Activities} key="Activities" />,
-  <Route path="/activities/:id" component={Detail} key="Detail" />,
   <Route path="/news" component={NewsList} key="NewsList" />,
+  <Route path="/activities/:id" component={Detail} key="Detail" />,
 ]
