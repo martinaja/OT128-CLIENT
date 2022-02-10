@@ -1,14 +1,14 @@
 import { Container } from '@mui/material'
 import React from 'react'
-import TableUsers from './TableUsers'
+import CategoriesList from './CategoriesList'
 
-const UsersHome = () => {
+const CategoriesHome = () => {
   return (
     <Container sx={{ alignItems: 'center', textAlign: 'center' }}>
-      <h2>Tabla de Usuarios</h2>
-      <TableUsers />
+      <h2>Lista de Categorías</h2>
+      <CategoriesList />
     </Container>
   )
 }
 
-export default UsersHome
+export default CategoriesHome

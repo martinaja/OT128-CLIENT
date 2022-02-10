@@ -10,6 +10,7 @@ const BackOfficeHome = () => {
       <Container>
         <BackOfficeContent />
       </Container>
+      {/* <Footer /> */}
     </>
   )
 }
