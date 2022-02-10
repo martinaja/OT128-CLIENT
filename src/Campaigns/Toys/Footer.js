@@ -25,6 +25,11 @@ function Footer() {
               src="/images/logo-bco.png"
               className="logo"
             />
+            <img
+alt="Logo ong."
+src="/images/logo-bco.png"
+className="logo"
+/>
             
           </Grid>
 
@@ -77,3 +82,5 @@ function Footer() {
 }
 
 export default Footer
+
+

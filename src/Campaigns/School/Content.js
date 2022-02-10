@@ -43,7 +43,7 @@ const Content = () => {
           </div>
         </Paper>
       </Grid>
-      <Grid style={{ padding: '20px' }} item xs={12} lg={5}>
+      <Grid style={{ padding: '20px' }} item xs={12} md={5}>
         <main>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
@@ -74,7 +74,7 @@ const Content = () => {
         </main>
       </Grid>
       {isMatchLaptop && (
-        <Grid item xs={12} lg={7}>
+        <Grid item xs={12} md={7}>
           {/* Hide on mobile & tablet */}
           <section id="gallery-campaign">
             <Box

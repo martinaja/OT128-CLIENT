@@ -1,11 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
-import Spinner from "../Spinner";
-import {
-  alertServiceConfirm,
-  alertServiceInfoTimer,
-  alertServiceError,
-} from "../AlertService";
 
 const LoginForm = () => {
   const validateFields = (values) => {
@@ -79,50 +73,8 @@ const LoginForm = () => {
           >
             Registrarse
           </button>
-          <button onClick={() => setLoading(true)}>Spinner</button>
-          {loading && <Spinner />}
-          <button
-            type="button"
-            onClick={() =>
-              alertServiceInfoTimer(
-                "top-end",
-                "Sucess",
-                "HTML example text",
-                false,
-                2000
-              )
-            }
-          >
-            AlertInfo
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              alertServiceConfirm(
-                "top-end",
-                "Confirm",
-                "HTML example text",
-                false,
-                2000
-              )
-            }
-          >
-            AlertConfirm
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              alertServiceError(
-                "top-end",
-                "Error",
-                "HTML example text",
-                false,
-                2000
-              )
-            }
-          >
-            AlertError
-          </button>
+         
+         
         </Form>
       )}
     </Formik>
