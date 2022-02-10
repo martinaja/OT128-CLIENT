@@ -18,6 +18,7 @@ const TableUsers = () => {
       field: 'edit',
       headerName: 'Editar',
       sortable: false,
+      width: 70,
 
       renderCell: (params) => {
         const onClick = (e) => {
@@ -36,6 +37,7 @@ const TableUsers = () => {
       field: 'delete',
       headerName: 'Borrar',
       sortable: false,
+      width: 70,
 
       renderCell: (params) => {
         const onClick = (e) => {
@@ -61,7 +63,7 @@ const TableUsers = () => {
       field: 'email',
       headerName: 'Correo Electrónico',
       name: 'Email de contacto',
-      width: 180,
+      width: 270,
     },
   ]
 
