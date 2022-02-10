@@ -12,7 +12,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
 import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { AppBar, Button } from '@mui/material'
+import { AppBar } from '@mui/material'
 
 const drawerWidth = 220
 
@@ -34,8 +34,8 @@ const links = [
     path: '/backoffice/users',
   },
   {
-    name: 'Dashboard4',
-    path: '/backoffice',
+    name: 'Catetegorías',
+    path: '/backoffice/categories',
   },
 ]
 
@@ -63,6 +63,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     setOpen(false)
+    console.log(history.location.pathname)
   }, [history.location.pathname])
 
   return (
