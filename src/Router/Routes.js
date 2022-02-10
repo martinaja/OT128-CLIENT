@@ -13,4 +13,5 @@ export const Routes = () => {
     </>
   )
 }
+
 const Error404 = () => <h1>ERROR ERRROR</h1>

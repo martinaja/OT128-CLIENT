@@ -17,6 +17,7 @@ import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
 
+
 export const PrivateRoute = ({ children, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => state.auth)
 
