@@ -9,8 +9,8 @@ import { useHistory } from 'react-router-dom'
 
 export const Detail = (props) => {
   const [data, setData] = useState(undefined)
+  const [loader, setLoader] = useState(false)
   const history = useHistory()
-  const url = process.env.REACT_APP_API_ACTIVITY_GET
 
   const {
     match: { params },
@@ -19,6 +19,7 @@ export const Detail = (props) => {
   const { id } = params
 
   useEffect(() => {
+    setLoader(true)
     ;(async () => {
       const response = await getActivity(id)
       if (response.error) {
@@ -36,12 +37,13 @@ export const Detail = (props) => {
             'No se pudo cargar la actividad',
             'Verificá que la URL sea correcta',
           ) && history.push('/activities')
+      setLoader(false)
     })()
   }, [])
 
   return (
     <>
-      {data ? (
+      {!loader ? (
         <>
           <Title children={data?.name} image={data?.image} />
           <Typography
