@@ -4,7 +4,7 @@ import TableUsers from './TableUsers'
 
 const UsersHome = () => {
   return (
-    <Container sx={{ alignItems: 'center', textAlign: 'center' }}>
+    <Container sx={{ alignItems: 'center', textAlign: 'center'}}>
       <h2>Tabla de Usuarios</h2>
       <TableUsers />
     </Container>

@@ -11,6 +11,14 @@ function Index() {
         <h2>@Somosmás</h2>
         <h2>Testimonios</h2>
         <h4>Aquí iran las cards de testimonial.js</h4>
+        <h1>Bienvenidos</h1>
+        <h2>@Somosmás</h2>
+        <h2>Testimonios</h2>
+        <h4>Aquí iran las cards de testimonial.js</h4>
+        <h1>Bienvenidos</h1>
+        <h2>@Somosmás</h2>
+        <h2>Testimonios</h2>
+        <h4>Aquí iran las cards de testimonial.js</h4>
       </Container>
     </div>
   )

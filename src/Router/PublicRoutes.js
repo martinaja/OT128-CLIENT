@@ -11,6 +11,7 @@ import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 
+
 export const publicRoutes = [
   <Route exact path="/" component={Index} key="Index" />,
   <Route path="/contacto" component={ContactHome} key="ContactHome" />,
