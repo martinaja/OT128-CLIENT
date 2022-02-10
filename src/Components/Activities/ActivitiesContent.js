@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { React, useState } from 'react'
 import parse from 'html-react-parser'
 import { getActivity } from '../../Services/apiServices/activitiesApiService'
+import { alertServiceError } from '../AlertService'
 
 const ActivitiesContent = () => {
   const [infoActivities, setInfoActivities] = useState([])
@@ -14,7 +15,10 @@ const ActivitiesContent = () => {
     (singleActivity) => singleActivity.description,
   )
 
-  console.log(activitiesArray)
+  useEffect(() => {
+    if (infoActivities?.error)
+      alertServiceError('Error', infoActivities.message)
+  }, [infoActivities])
 
   return activitiesArray.map((singleRender) => {
     if (!singleRender) {
