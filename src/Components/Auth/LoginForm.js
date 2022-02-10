@@ -71,7 +71,7 @@ const LoginForm = () => {
             className="submit-btn"
             disabled={isSubmitting}
           >
-            Registrarse
+            Ingresar
           </button>
          
          
