@@ -1,15 +1,15 @@
 import React from 'react'
-import { getPublicHandler } from '../../../Services/BaseHTTP/publicApiService'
 import { Title } from '../../Title'
 import { Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { SkeletonArticle } from './../../Skeleton/SkeletonArticle'
 import { getActivity } from '../../../Services/apiServices/activitiesApiService'
 import { alertServiceError } from '../../AlertService'
+import { useHistory } from 'react-router-dom'
 
 export const Detail = (props) => {
   const [data, setData] = useState(undefined)
-
+  const history = useHistory()
   const url = process.env.REACT_APP_API_ACTIVITY_GET
 
   const {
@@ -20,23 +20,23 @@ export const Detail = (props) => {
 
   useEffect(() => {
     ;(async () => {
-      const data = await getActivity(id)
-      console.log(data)
-      if (data.error) {
+      const response = await getActivity(id)
+      if (response.error) {
         alertServiceError(
-          data.message,
-          'Hubo un problema para recibir los datos, profavor intente denuevo mas tarde',
+          response.message,
+          'No se encontró la actividad solicitada, porfavor intente nuevamente',
         )
+        history.push('/activities')
       }
+
+      const activityData = response.data?.data
+      activityData
+        ? setData(activityData)
+        : alertServiceError(
+            'No se pudo cargar la actividad',
+            'Verificá que la URL sea correcta',
+          ) && history.push('/activities')
     })()
-
-    // getPublicHandler(url, id).then(({ data }) => setData(data.data))
-
-    // if (!data) {
-    //   setTimeout(() => {
-    //     setData('Error')
-    //   }, 5000)
-    // }
   }, [])
 
   return (
