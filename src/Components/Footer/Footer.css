@@ -1,23 +1,18 @@
 * {
-
+margin: initial;
   padding:0;
   box-sizing:border-box;}
 
 .container{
   padding-top: 50px;
-  padding-bottom: 0px!important;
+  margin: 0;
   font: 14px "Roboto";
-  text-align: justify;
+  text-align: center;
 }
 
 .footer__container{
-  margin-bottom: 0px!important;
-  position:fixed;
-               
-  left: 0px;
-  bottom: 0px;
-  width: 100%;
-   background-color: #272C34;
+ 
+ background-color: #272C34;
 }
 
 .logo{
@@ -77,12 +72,14 @@
 .social{
   width: 100%;
   color: #eee;
+  
 }
 
 .social__hr{
   margin-top: 1rem;
   margin-bottom: 1rem;
   background-color: #eee;
+  
 }
 
 .social__tags{
@@ -90,6 +87,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  
 }
 
 .social__tags__color{
@@ -110,18 +108,10 @@
 }
 
 @media screen and (max-width: 960px){
-  .hr{
-    display: block;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 50%;
-    background-color: #eee;
-    width: 768px;
-  }
-
+  
   .center{
     justify-content: center;
-    align-items: center;
+    align-items: inherits;
     text-align: center;
   }
 
@@ -135,6 +125,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 2rem;
   }
 }
 
@@ -146,10 +137,10 @@
   }
 
   .footer__container{
-  
+  position: relative;
     bottom: 0;
-    margin-bottom: 0rem!important;
-    padding: 2rem;
+ 
+    
     background-color: #272C34;
   }
 }
