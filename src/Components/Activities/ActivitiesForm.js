@@ -12,7 +12,7 @@ import {
   postActivity,
   putActivity,
 } from '../../Services/apiServices/activitiesApiService'
-import { alertServiceInfoTimer } from '../AlertService'
+import { alertServiceError, alertServiceInfoTimer } from '../AlertService'
 import {
   Box,
   Button,
@@ -68,14 +68,17 @@ const ActivitiesForm = () => {
   }
 
   useEffect(() => {
-    if (responseServer !== undefined)
+    if (responseServer?.error) {
+      alertServiceError('Error', responseServer.message)
+    } else if (responseServer?.data) {
       alertServiceInfoTimer(
-        'start',
+        'top',
         'info',
         responseServer.data.message,
         false,
         3000,
       )
+    }
 
     setTimeout(() => {
       setResponseServer(undefined)
