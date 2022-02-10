@@ -19,8 +19,8 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
     height: 200,
     [theme.breakpoints.down('sm')]: {
-      width: '100% !important', // Overrides inline-style
-      height: 100,
+      width: '60% !important', // Overrides inline-style
+      height: 200,
     },
     '&:hover, &.Mui-focusVisible': {
       zIndex: 1,
@@ -29,9 +29,6 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
       },
       '& .MuiImageMarked-root': {
         opacity: 0,
-      },
-      '& .MuiTypography-root': {
-        border: '4px solid currentColor',
       },
     },
   }));
@@ -83,49 +80,44 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
 
   return (
     <>
-      <Box sx={{ width: '100%', maxWidth: 500, m:5 }}>
+      <Box sx={{ width: '100%', maxWidth: 500, m: 2 }}>
         <Typography variant="h4" component="div" gutterBottom>
           Donar
         </Typography>
         <Typography variant="body1" gutterBottom>
           {text}
         </Typography>
-
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
-   
-        <ImageButton
-          focusRipple
-          key={image.title}
-          style={{
-            width: image.width,
-          }}
-        >
-          <ImageSrc style={{ backgroundImage: `url(${mp})` }} />
-          <ImageBackdrop className="MuiImageBackdrop-root" />
-          <Image>
-            <Typography
-              component="span"
-              variant="subtitle1"
-              color="inherit"
-              sx={{
-                position: 'relative',
-                p: 12,
-                pt: 2,
-                pb: (theme) => `calc(${theme.spacing(17)} + 6px)`,
-              }}
-            >
-              {image.title}
-              <ImageMarked className="MuiImageMarked-root" />
-            </Typography>
-          </Image>
-        </ImageButton>
-     
-
-    </Box>
-              
-
-
       </Box>
+
+
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', maxWidth: 500, width: '100%', m: 2}}>
+   <ImageButton
+     focusRipple
+     key={image.title}
+     style={{
+       width: image.width,
+     }}
+   >
+     <ImageSrc style={{ backgroundImage: `url(${mp})` }} />
+     <ImageBackdrop className="MuiImageBackdrop-root" />
+     <Image>
+       <Typography
+         component="span"
+         variant="subtitle1"
+         color="inherit"
+         sx={{
+           position: 'relative',
+           p: 10,
+           pt: 0,
+           pb: (theme) => `calc(${theme.spacing(17)})`,
+         }}
+       >
+         <h2>{image.title}</h2>
+         <ImageMarked className="MuiImageMarked-root" />
+       </Typography>
+     </Image>
+   </ImageButton>
+</Box>
     </>
   )
 }
