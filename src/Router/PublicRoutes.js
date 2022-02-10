@@ -11,18 +11,20 @@ import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 
-export const PublicRoutes = (
-  <Route>
-    <Route exact path="/" component={Index} />,
-    <Route path="/contacto" component={ContactHome} />,
-    <Route path="/novedades/:newsId" component={NewsDetail} />,
-    <Route path="/nosotros" component={About} />,
-    <Route path="/create-user" component={UserForm} />,
-    <Route path="/school-campaign" component={SchoolCampaign} />,
-    <Route path="/toys-campaign" component={ToysCampaign} />,
-    <Route path="/set-user" component={LoginForm} />,
-    <Route path="/activities" component={Activities} />,
-    <Route path="/activities/:id" component={Detail} />,
-    <Route path="/news" component={NewsList} />,
-  </Route>
-)
+export const PublicRoutes = () => {
+  return (
+    <>
+      <Route path="/" exact component={Index} />
+      <Route path="/contacto" component={ContactHome} />
+      <Route path="/novedades/:newsId" component={NewsDetail} />
+      <Route path="/nosotros" component={About} />
+      <Route path="/create-user" component={UserForm} />
+      <Route path="/school-campaign" component={SchoolCampaign} />
+      <Route path="/toys-campaign" component={ToysCampaign} />
+      <Route path="/login" component={LoginForm} />
+      <Route exact path="/activities" component={Activities} />
+      <Route path="/activities/:id" component={Detail} />
+      <Route path="/news" component={NewsList} />
+    </>
+  )
+}
