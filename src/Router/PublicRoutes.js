@@ -10,11 +10,13 @@ import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
+import NotFound from '../Components/NotFound/NotFound'
 
 export const PublicRoutes = () => {
   return (
     <>
       <Route path="/" exact component={Index} />
+      <Route path="/404" exact component={NotFound} />
       <Route path="/contacto" component={ContactHome} />
       <Route path="/novedades/:newsId" component={NewsDetail} />
       <Route path="/nosotros" component={About} />
