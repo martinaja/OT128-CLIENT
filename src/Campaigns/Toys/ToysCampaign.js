@@ -6,7 +6,6 @@ import Footer from './Footer'
 import { Container } from '@mui/material'
 import { useEffect } from 'react'
 import handleDisplayByID from '../../utils/handleDisplayByID'
-import { Container } from '@mui/material'
 
 const ToysCampaign = () => {
   useEffect(() => {
