@@ -2,7 +2,6 @@ import { styled, useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
-import MuiAppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
@@ -13,9 +12,9 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
 import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { Button } from '@mui/material'
+import { AppBar, Button } from '@mui/material'
 
-const drawerWidth = 240
+const drawerWidth = 220
 
 const links = [
   {
@@ -39,23 +38,6 @@ const links = [
     path: '/backoffice',
   },
 ]
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}))
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -86,7 +68,11 @@ export default function Sidebar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar
+        sx={{ backgroundColor: 'inherit', boxShadow: 'none' }}
+        position="absolute"
+        open={open}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -125,8 +111,15 @@ export default function Sidebar() {
         <List>
           {links.map((link) => (
             <ListItem button key={link.name}>
-              <Link to={link.path} style={{ textDecoration: 'none' }}>
-                <Button>{link.name}</Button>
+              <Link
+                to={link.path}
+                style={{
+                  textDecoration: 'none',
+                  width: '100%',
+                  color: 'inherit',
+                }}
+              >
+                {link.name}
               </Link>
             </ListItem>
           ))}
