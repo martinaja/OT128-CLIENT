@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 import { Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -12,6 +13,11 @@ import { Redirect, Route } from 'react-router-dom'
 import { Route, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 >>>>>>> 1720bcf05e0de4b881c7287208c72c0eec9c1f5a
+=======
+import { Route, Redirect } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+
+>>>>>>> 14ea1e6c53648a11eec126755df730b13ee7e53e
 import ActivitiesForm from '../Components/Activities/ActivitiesForm'
 import CategoriesForm from '../Components/Categories/CategoriesForm'
 import NewsForm from '../Components/News/NewsForm'
@@ -27,9 +33,14 @@ import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
+<<<<<<< HEAD
 import { useSelector } from 'react-redux'
 >>>>>>> 9b966e7a2a8f27e0c7f141ba823d8dec0311fb3d
 
+=======
+
+
+>>>>>>> 14ea1e6c53648a11eec126755df730b13ee7e53e
 export const PrivateRoute = ({ children, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => state.auth)
 
@@ -42,3 +53,96 @@ export const PrivateRoute = ({ children, ...rest }) => {
     />
   )
 }
+<<<<<<< HEAD
+=======
+
+export const privateRoutes = [
+  <PrivateRoute exact path="/backoffice" key="backoffice">
+    <BackOfficeHome />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/activities" key="backoffice/activities">
+    <ActivitiesScreen />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-activity"
+    key="backoffice/create-activity"
+  >
+    <ActivitiesForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-category"
+    key="backoffice/create-category"
+  >
+    <CategoriesForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-category/:id"
+    key="backoffice/create-category/:id"
+  >
+    <CategoriesForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-activity/:id"
+    key="backoffice/create-activity/:id"
+  >
+    <ActivitiesForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/news" key="backoffice/news">
+    <NewsForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/news/:newsId" key="backoffice/news/:newsId">
+    <NewsForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/members" key="backoffice/members">
+    <MembersScreen />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/members/edit" key="backoffice/members/edit">
+    <MembersForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/create-member" key="create-member">
+    <MembersForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/slides" key="backoffice/slides">
+    <SlidesScreen />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/slides/create" key="backoffice/slides/create">
+    <SlidesForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/slides/create/:slideId"
+    key="backoffice/slides/create/:slideId"
+  >
+    <SlidesForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-testimonials"
+    key="backoffice/create-testimonials"
+  >
+    <TestimonialForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-testimonials/:id"
+    key="backoffice/create-testimonials/:id"
+  >
+    <TestimonialForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/create-project" key="create-project">
+    <ProjectsForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/organization" key="backoffice/organization">
+    <OrganizationScreen />
+  </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/organization/edit"
+    key="backoffice/organization/edit"
+  >
+    <OrganizationForm />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/users" key="backoffice/users">
+    <UsersHome />
+  </PrivateRoute>,
+  <PrivateRoute path="/backoffice/users/create" key="backoffice/users/create">
+    <UserForm />
+  </PrivateRoute>,
+]
+>>>>>>> 14ea1e6c53648a11eec126755df730b13ee7e53e
