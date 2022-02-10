@@ -4,8 +4,10 @@ import { Title } from '../../Title'
 import { Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { SkeletonArticle } from './../../Skeleton/SkeletonArticle'
+import { getActivity } from '../../../Services/apiServices/activitiesApiService'
+import { alertServiceError } from '../../AlertService'
 
-export const Detail = (props) => { 
+export const Detail = (props) => {
   const [data, setData] = useState(undefined)
 
   const url = process.env.REACT_APP_API_ACTIVITY_GET
@@ -17,13 +19,24 @@ export const Detail = (props) => {
   const { id } = params
 
   useEffect(() => {
-    getPublicHandler(url, id).then(({ data }) => setData(data.data))
+    ;(async () => {
+      const data = await getActivity(id)
+      console.log(data)
+      if (data.error) {
+        alertServiceError(
+          data.message,
+          'Hubo un problema para recibir los datos, profavor intente denuevo mas tarde',
+        )
+      }
+    })()
 
-    if (!data) {
-      setTimeout(() => {
-        setData('Error')
-      }, 5000)
-    }
+    // getPublicHandler(url, id).then(({ data }) => setData(data.data))
+
+    // if (!data) {
+    //   setTimeout(() => {
+    //     setData('Error')
+    //   }, 5000)
+    // }
   }, [])
 
   return (

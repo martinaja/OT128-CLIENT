@@ -14,11 +14,10 @@ import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
 
-
 export const PrivateRoutes = () => {
   return (
     <>
-      <Route excat path="/backoffice" component={BackOfficeHome} />
+      <Route exact path="/backoffice" component={BackOfficeHome} />
       <Route exact path="/backoffice/activities" component={ActivitiesScreen} />
       <Route
         exact
