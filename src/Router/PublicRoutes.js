@@ -21,7 +21,7 @@ export const PublicRoutes = () => {
       <Route path="/create-user" component={UserForm} />
       <Route path="/school-campaign" component={SchoolCampaign} />
       <Route path="/toys-campaign" component={ToysCampaign} />
-      <Route path="/set-user" component={LoginForm} />
+      <Route path="/login" component={LoginForm} />
       <Route exact path="/activities" component={Activities} />
       <Route path="/activities/:id" component={Detail} />
       <Route path="/news" component={NewsList} />
