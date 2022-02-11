@@ -11,28 +11,11 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-const mock = [
-  {
-    id: 1,
-    name: 'Actividad 1',
-    image: 'https://picsum.photos/200/200',
-    createdAt: '2020-01-01',
-  },
-  {
-    id: 2,
-    name: 'Actividad 2',
-    image: 'https://picsum.photos/200/200',
-    createdAt: '2020-01-01',
-  },
-  {
-    id: 3,
-    name: 'Actividad 3',
-    image: 'https://picsum.photos/200/200',
-    createdAt: '2020-01-01',
-  },
-]
+import { fetchActivities } from '../../features/activitiesReducer'
+import Sidebar from '../BackOffice/BackOfficeSidebar'
 
 const ActivitieRow = ({ activitie }) => {
   return (
@@ -69,8 +52,16 @@ const ActivitieRow = ({ activitie }) => {
 }
 
 const ActivitiesScreen = () => {
+  const dispatch = useDispatch()
+  const response = useSelector((state) => state.activities)
+
+  useEffect(() => {
+    dispatch(fetchActivities())
+  }, [dispatch])
+
   return (
     <Container>
+      <Sidebar />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}
@@ -95,7 +86,7 @@ const ActivitiesScreen = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mock.map((activitie) => (
+            {response.activities.map((activitie) => (
               <ActivitieRow key={activitie.id} activitie={activitie} />
             ))}
           </TableBody>

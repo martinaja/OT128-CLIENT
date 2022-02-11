@@ -20,40 +20,8 @@ function Footer() {
             alignItems="center"
             className="center"
           >
-            <img
-              alt="Logo ong."
-              src="/images/logo-bco.png"
-              className="logo"
-            />
-            <img
-alt="Logo ong."
-src="/images/logo-bco.png"
-className="logo"
-/>
-            
+            <img alt="Logo ong." src="/images/oso-bco.png" className="logo" />
           </Grid>
-
-          <Grid item container md sm={12}>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Noticias</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Actividades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Novedades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Testimonios </div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Nosotros</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Contacto</div>
-            </Grid>
-          </Grid>
-         
 
           <Grid item md={12} sm={12} className="social">
             <hr className="social__hr" />
@@ -82,5 +50,3 @@ className="logo"
 }
 
 export default Footer
-
-
