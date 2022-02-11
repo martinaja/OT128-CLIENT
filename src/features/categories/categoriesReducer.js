@@ -43,35 +43,3 @@ export const categoriesSlice = createSlice({
 })
 
 export default categoriesSlice.reducer
-
-// export const searchCategories = createAsyncThunk(async (data, { dispatch }) => {
-//   try {
-//     const response = await getCategories(data.id)
-//     console.log(response)
-//   } catch {
-//     throw new Error()
-//   }
-//   //   dispatch(setLoader())
-//   //   const response = await getCategories(data.id)
-//   //   console.log('asdasda ----> ', response)
-//   //   dispatch(setCategory(response))
-//   //   dispatch(setLoader())
-// })
-
-// export const searchWord = (word) => (dispatch) => {
-//   dispatch(setLoader());
-//   dispatch(setWord(word));
-//   axios
-//     .get(`https://api.dictionaryapi.dev/api/v2/entries/es/${word}"`)
-//     .then((response) => {
-//       dispatch(
-//         setResult(response.data[0].meanings[0].definitions[0].definition)
-//       );
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     })
-//     .finally(() => {
-//       dispatch(setLoader());
-//     });
-// };

@@ -45,6 +45,7 @@ export const privateRoutes = [
     <ActivitiesForm />
   </PrivateRoute>,
   <PrivateRoute
+    exact
     path="/backoffice/categories/create"
     key="backoffice/categories/create"
   >
