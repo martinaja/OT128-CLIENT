@@ -15,6 +15,7 @@ import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
+import NewsTable from '../Components/News/Table/NewsTable'
 import CategoriesHome from '../Components/Categories/CategoriesHome'
 
 export const PrivateRoute = ({ children, ...rest }) => {
@@ -68,10 +69,20 @@ export const privateRoutes = [
   >
     <ActivitiesForm />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/news" key="backoffice/news">
+  <PrivateRoute exact path="/backoffice/news" key="backoffice/news">
+    <NewsTable />
+  </PrivateRoute>,
+  <PrivateRoute
+    exact
+    path="/backoffice/news/create"
+    key="/backoffice/news/create"
+  >
     <NewsForm />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/news/:newsId" key="backoffice/news/:newsId">
+  <PrivateRoute
+    path="/backoffice/news/create/:newsId"
+    key="/backoffice/news/create/:newsId"
+  >
     <NewsForm />
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/members" key="backoffice/members">
