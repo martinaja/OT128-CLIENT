@@ -17,6 +17,7 @@ import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
 import NewsTable from '../Components/News/Table/NewsTable'
+import CategoriesHome from '../Components/Categories/CategoriesHome'
 
 export const PrivateRoute = ({ children, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => state.auth)
@@ -44,18 +45,25 @@ export const privateRoutes = [
   >
     <ActivitiesForm />
   </PrivateRoute>,
+  <PrivateRoute exact path="/backoffice/categories" key="backoffice/categories">
+    <CategoriesHome />
+  </PrivateRoute>,
   <PrivateRoute
-    path="/backoffice/create-category"
-    key="backoffice/create-category"
+    path="/backoffice/categories/create"
+    key="backoffice/categories/create"
   >
     <CategoriesForm />
   </PrivateRoute>,
   <PrivateRoute
-    path="/backoffice/create-category/:id"
-    key="backoffice/create-category/:id"
+    path="/backoffice/categories/create/:id"
+    key="backoffice/categories/create/:id"
   >
     <CategoriesForm />
   </PrivateRoute>,
+  <PrivateRoute path="/backoffice/categories" key="backoffice/categories">
+    <CategoriesHome />
+  </PrivateRoute>,
+
   <PrivateRoute
     path="/backoffice/create-activity/:id"
     key="backoffice/create-activity/:id"
