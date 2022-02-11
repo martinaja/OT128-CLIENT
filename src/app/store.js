@@ -8,5 +8,5 @@ import membersReducer from '../features/members/membersReducer'
 const store = configureStore({
   reducer: { auth: authReducer, members: membersReducer, users: usersReducer, categories: categoriesReducer,activities: activitiesReducer }, //add reducers
 
-
+})
 export default store
