@@ -18,6 +18,7 @@ import SlidesScreen from './../Components/Slides/SlidesList'
 import NewsTable from '../Components/News/Table/NewsTable'
 import CategoriesHome from '../Components/Categories/CategoriesHome'
 
+
 export const PrivateRoute = ({ children, ...rest }) => {
   const { isAuthenticated } = useSelector((state) => state.auth)
 
