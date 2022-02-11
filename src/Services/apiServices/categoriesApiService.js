@@ -1,6 +1,9 @@
-import { deletePrivateHandler, postPrivateHandler, putPrivateHandler } from '../BaseHTTP/privateApiService'
-import { getPublicHandler } from '../BaseHTTP/publicApiService'
-
+import {
+  getPrivateHandler,
+  deletePrivateHandler,
+  postPrivateHandler,
+  putPrivateHandler,
+} from '../BaseHTTP/privateApiService'
 
 const categoriesGetUrl = process.env.REACT_APP_API_CATEGORIES_GET
 const categoriesPostUrl = process.env.REACT_APP_API_CATEGORIES_POST
@@ -8,7 +11,7 @@ const categoriesPutUrl = process.env.REACT_APP_API_CATEGORIES_PUT
 const categoriesDeleteUrl = process.env.REACT_APP_API_CATEGORIES_DELETE
 
 export const getCategories = (id) => {
-  return getPublicHandler(categoriesGetUrl, id)
+  return getPrivateHandler(categoriesGetUrl, id)
 }
 
 export const postCategories = (id, bodydata) => {
