@@ -42,7 +42,6 @@ const ItemSlider = ({ item }) => {
           display: 'flex',
         }}
       />
-      {/* {ShowFotterImg && ( */}
       <Typography
         sx={{
           py: 2,
@@ -52,7 +51,6 @@ const ItemSlider = ({ item }) => {
       >
         {text}
       </Typography>
-      {/* )} */}
     </Paper>
   )
 }

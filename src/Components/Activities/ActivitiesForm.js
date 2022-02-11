@@ -12,7 +12,7 @@ import {
   postActivity,
   putActivity,
 } from '../../Services/apiServices/activitiesApiService'
-import { alertServiceInfoTimer } from '../AlertService'
+import { alertServiceError, alertServiceInfoTimer } from '../AlertService'
 import {
   Box,
   Button,
@@ -49,7 +49,6 @@ const ActivitiesForm = () => {
   const handleSubmit = async (formData) => {
     setIsLoading(true)
     const imageBase64 = await toBase64(formData.image)
-    console.log(id)
     if (id) {
       setResponseServer(
         await putActivity(id, {
@@ -65,14 +64,33 @@ const ActivitiesForm = () => {
         }),
       )
     }
+
+    // alert in case of fail to update or create a new activity
+    if (responseServer.error) {
+      alertServiceError(
+        responseServer.message,
+        'Se produjo un error al crear o editar una actividad.',
+      )
+    }
     setIsLoading(false)
   }
 
   useEffect(() => {
+    if (responseServer?.error) {
+      alertServiceError('Error', responseServer.message)
+    } else if (responseServer?.data) {
+      alertServiceInfoTimer(
+        'top',
+        'info',
+        responseServer.data.message,
+        false,
+        3000,
+      )
+    }
+
     setTimeout(() => {
       setResponseServer(undefined)
-    }, 3100)
-    console.log(responseServer)
+    }, 3000)
   }, [responseServer])
 
   return (
@@ -96,7 +114,7 @@ const ActivitiesForm = () => {
             <Typography variant="h4">
               {!id ? 'Crear Actividad' : 'Editar Actividad'}
             </Typography>
-            <form className="form-container" onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <TextField
                 margin="normal"
                 fullWidth
@@ -128,25 +146,15 @@ const ActivitiesForm = () => {
                   onChange={(e) => {
                     setFieldValue('image', e.target.files[0])
                   }}
-                  error={errors.image}
                 />
                 <Button fullWidth variant="outlined" component="span">
                   subir imagen
                 </Button>
                 <ErrorMessage component="small" name="image" />
               </label>
-              <Button type="submit" variant="contained">
+              <Button type="submit" variant="contained" fullWidth>
                 {id ? 'Editar actividad' : 'Crear actividad'}
               </Button>
-              {responseServer !== undefined
-                ? alertServiceInfoTimer(
-                    'start',
-                    'info',
-                    responseServer.data.message,
-                    false,
-                    3000,
-                  )
-                : null}
               <LinearProgressFeedback isActive={isLoading} />
             </form>
           </Box>

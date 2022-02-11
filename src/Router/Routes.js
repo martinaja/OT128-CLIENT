@@ -1,16 +1,17 @@
-import { BrowserRouter, Switch } from 'react-router-dom'
-import { PrivateRoutes } from './PrivateRoutes'
-import { PublicRoutes } from './PublicRoutes'
+import { Switch, Route } from 'react-router-dom'
+import { privateRoutes } from './PrivateRoutes'
+import { publicRoutes } from './PublicRoutes'
 
 export const Routes = () => {
   return (
-    <BrowserRouter>
+    <>
       <Switch>
-        <PublicRoutes />
+        {publicRoutes}
+        {privateRoutes}
+        <Route path="*" component={Error404} />
       </Switch>
-      <Switch>
-        <PrivateRoutes />
-      </Switch>
-    </BrowserRouter>
+    </>
   )
 }
+
+const Error404 = () => <h1>ERROR ERRROR</h1>

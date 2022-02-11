@@ -1,7 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import React, { useState } from "react";
 
-
 const LoginForm = () => {
   const validateFields = (values) => {
     // Checks user input is valid
@@ -72,7 +71,7 @@ const LoginForm = () => {
             className="submit-btn"
             disabled={isSubmitting}
           >
-            Registrarse
+            Ingresar
           </button>
          
          
