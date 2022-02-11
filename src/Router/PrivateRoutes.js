@@ -62,10 +62,14 @@ export const privateRoutes = [
   >
     <ActivitiesForm />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/news" key="backoffice/news">
+  <PrivateRoute exact path="/backoffice/news" key="backoffice/news">
     <NewsTable />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/news/create" key="/backoffice/news/create">
+  <PrivateRoute
+    exact
+    path="/backoffice/news/create"
+    key="/backoffice/news/create"
+  >
     <NewsForm />
   </PrivateRoute>,
   <PrivateRoute
