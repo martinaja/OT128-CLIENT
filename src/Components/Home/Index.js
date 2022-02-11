@@ -4,8 +4,8 @@ import { Container } from '@mui/material'
 import { getOrganization } from './../../Services/apiServices/organizationApiService'
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
-
 import NewsSearch from '../News/NewsSearch'
+
 
 function Index() {
   const [loader, setLoader] = useState(false)
