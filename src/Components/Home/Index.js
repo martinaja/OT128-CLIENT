@@ -5,6 +5,8 @@ import { getOrganization } from './../../Services/apiServices/organizationApiSer
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
 
+import NewsForm from './../News/NewsForm';
+
 
 
 function Index() {
@@ -41,7 +43,7 @@ function Index() {
   ) : (
     <div>
       <Container>
-     
+     <NewsForm/>
         {data ? <h1>{data.welcome_text}</h1> : null}
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>

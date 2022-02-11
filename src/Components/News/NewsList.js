@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-
 import { Grid } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
