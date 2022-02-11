@@ -11,6 +11,7 @@ import {
   TableRow,
 } from '@mui/material'
 import { Link } from 'react-router-dom'
+import Sidebar from '../BackOffice/BackOfficeSidebar'
 
 const mock = [
   {
@@ -64,6 +65,7 @@ const MemberRow = ({ member }) => {
 const MembersScreen = () => {
   return (
     <Container>
+      <Sidebar />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}

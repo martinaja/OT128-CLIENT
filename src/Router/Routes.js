@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { privateRoutes } from './PrivateRoutes'
 import { publicRoutes } from './PublicRoutes'
 
@@ -8,10 +8,13 @@ export const Routes = () => {
       <Switch>
         {publicRoutes}
         {privateRoutes}
-        <Route path="*" component={Error404} />
+
+        <Route path="*">
+          <Redirect to="/404" />
+        </Route>
       </Switch>
     </>
   )
 }
 
-const Error404 = () => <h1>ERROR ERRROR</h1>
+
