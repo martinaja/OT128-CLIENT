@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { getCategories } from '../../Services/apiServices/categoriesApiService'
 
 const initialState = {
-  category: {},
   allCategories: [],
   status: 'idle',
   loader: false,
@@ -11,9 +10,9 @@ const initialState = {
 
 export const getCategory = createAsyncThunk(
   'category/getCategory',
-  async (categoryId) => {
+  async () => {
     try {
-      const response = await getCategories(categoryId)
+      const response = await getCategories()
       return response.data
     } catch (error) {
       throw new Error(error)
@@ -32,7 +31,7 @@ export const categoriesSlice = createSlice({
       })
       .addCase(getCategory.fulfilled, (state, action) => {
         state.status = action.payload.message
-        state.category = action.payload.data
+        state.allCategories = action.payload.data
         state.loader = false
       })
       .addCase(getCategory.rejected, (state, action) => {

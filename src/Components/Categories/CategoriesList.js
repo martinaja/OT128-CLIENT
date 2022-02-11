@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DataGrid } from '@mui/x-data-grid'
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import { Box, Button } from '@mui/material'
-import { alertServiceConfirm } from '../AlertService'
+import { alertServiceConfirm, alertServiceError } from '../AlertService'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -13,8 +13,22 @@ const CategoriesList = () => {
     console.log('action->', params.field, 'id->', params.id)
   }
 
+  // Retrieve data from api
   const dispatch = useDispatch()
   const state = useSelector((state) => state.categories)
+
+  useEffect(() => {
+    if (state.status === 'idle') {
+      dispatch(getCategory())
+    }
+
+    if (state.status === 'error') {
+      alertServiceError(
+        state.errorMsg,
+        'Se produjo un error al intentar obtener datos de categorías',
+      )
+    }
+  }, [state.status, dispatch])
 
   // set table
   const columns = [
@@ -138,7 +152,7 @@ const CategoriesList = () => {
         </Button>
       </Link>
       <DataGrid
-        rows={mock}
+        rows={state.allCategories}
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
