@@ -1,36 +1,47 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from '@mui/material'
-import { getOrganization } from './../../Services/apiServices/organizationApiService';
-
+import { getOrganization } from './../../Services/apiServices/organizationApiService'
+import { alertServiceError } from '../AlertService'
+import Spinner from '../Spinner'
 
 export default function About({ title }) {
-  const [organization, setOrganization] = useState(null)
   const [loader, setLoader] = useState(false)
+  const [data, setData] = useState()
 
   useEffect(
     () =>
       (async () => {
-        try {
-          setLoader(true)
-          const request = await getOrganization()
-          if (request.success) setOrganization(request.data)
-        } catch (e) {
-          console.error(e)
-          // Insert alert
-        } finally {
-          setLoader(false)
+        setLoader(true)
+        const response = await getOrganization()
+        console.log(response)
+        if (response.error) {
+          alertServiceError(
+            response.message,
+            'No se pudo obtener la información solicitada',
+          )
         }
+
+        const organizationData = response.data?.data
+        console.log(organizationData)
+        organizationData
+          ? setData(organizationData)
+          : alertServiceError(
+              'No se pudo cargar la pagina',
+              'Verificá que la URL sea correcta',
+            )
+        setLoader(false)
       })(),
     [],
   )
+
   return loader ? (
-    'cargando...'
+    <Spinner />
   ) : (
     <Container>
-      {/* <Title>{title}</Title> When Title component exists */}
+      {data ? data.name : null}
       <div>
         <h2>Sobre nosotros</h2>
-        <p>{organization?.long_description}</p>
+        {/* <p>{organization?.long_description}</p> */}
       </div>
     </Container>
   )
