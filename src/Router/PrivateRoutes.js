@@ -49,6 +49,7 @@ export const privateRoutes = [
     <CategoriesHome />
   </PrivateRoute>,
   <PrivateRoute
+    exact
     path="/backoffice/categories/create"
     key="backoffice/categories/create"
   >
