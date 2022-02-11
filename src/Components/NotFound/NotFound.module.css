@@ -1,0 +1,10 @@
+.container {
+  background: url('../../../public/images/404.png') no-repeat center;
+  height: 75vh;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.container a {
+  margin: 25px;
+}
