@@ -48,17 +48,21 @@ export const privateRoutes = [
     <CategoriesHome />
   </PrivateRoute>,
   <PrivateRoute
-    path="/backoffice/create-category"
-    key="backoffice/create-category"
+    path="/backoffice/categories/create"
+    key="backoffice/categories/create"
   >
     <CategoriesForm />
   </PrivateRoute>,
   <PrivateRoute
-    path="/backoffice/create-category/:id"
-    key="backoffice/create-category/:id"
+    path="/backoffice/categories/create/:id"
+    key="backoffice/categories/create/:id"
   >
     <CategoriesForm />
   </PrivateRoute>,
+  <PrivateRoute path="/backoffice/categories" key="backoffice/categories">
+    <CategoriesHome />
+  </PrivateRoute>,
+
   <PrivateRoute
     path="/backoffice/create-activity/:id"
     key="backoffice/create-activity/:id"
