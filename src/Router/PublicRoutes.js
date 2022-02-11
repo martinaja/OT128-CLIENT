@@ -12,6 +12,7 @@ import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import NotFound from '../Components/NotFound/NotFound'
 
+
 export const publicRoutes = [
   <Route exact path="/" component={Index} key="Index" />,
   <Route path="/contacto" component={ContactHome} key="ContactHome" />,

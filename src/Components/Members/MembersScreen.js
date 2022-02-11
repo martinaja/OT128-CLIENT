@@ -10,26 +10,32 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchMember } from '../../features/members/membersReducer'
+import { alertServiceError } from '../AlertService'
+import Spinner from '../Spinner'
 import Sidebar from '../BackOffice/BackOfficeSidebar'
 
-const mock = [
-  {
-    id: 1,
-    name: 'John Doe',
-    image: 'https://picsum.photos/200/200',
-  },
-  {
-    id: 2,
-    name: 'Freddy Mercury',
-    image: 'https://picsum.photos/200/200',
-  },
-  {
-    id: 3,
-    name: 'Frank Sinatra',
-    image: 'https://picsum.photos/200/200',
-  },
-]
+// const mock = [
+//   {
+//     id: 1,
+//     name: 'John Doe',
+//     image: 'https://picsum.photos/200/200',
+//   },
+//   {
+//     id: 2,
+//     name: 'Freddy Mercury',
+//     image: 'https://picsum.photos/200/200',
+//   },
+//   {
+//     id: 3,
+//     name: 'Frank Sinatra',
+//     image: 'https://picsum.photos/200/200',
+//   },
+// ]
 
 const MemberRow = ({ member }) => {
   return (
@@ -63,7 +69,25 @@ const MemberRow = ({ member }) => {
 }
 
 const MembersScreen = () => {
-  return (
+  const dispatch = useDispatch()
+
+  const { status, members, loader, errMsg } = useSelector(
+    (state) => state.members,
+  )
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchMember())
+    }
+
+    if (status === 'error') {
+      alertServiceError(errMsg, 'No se pudo editar la información')
+    }
+  }, [dispatch, status, errMsg])
+
+  return loader ? (
+    <Spinner />
+  ) : (
     <Container>
       <Sidebar />
       <TableContainer
@@ -89,7 +113,7 @@ const MembersScreen = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mock.map((member) => (
+            {members.map((member) => (
               <MemberRow key={member.id} member={member} />
             ))}
           </TableBody>
