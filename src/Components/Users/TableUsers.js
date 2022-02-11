@@ -84,7 +84,7 @@ const TableUsers = () => {
   return (
     <Box
       width={{ sx: '100%', md: '600px' }}
-      style={{ height: 600, backgroundColor: 'white', margin: 'auto' }}
+      style={{ margin: 'auto', backgroundColor: 'white' }}
     >
       <Link to="/backoffice/users/create" style={{ textDecoration: 'none' }}>
         <Button variant="outlined" sx={{ m: 2 }}>
@@ -97,6 +97,7 @@ const TableUsers = () => {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
+        style={{ height: 600 }}
       />
     </Box>
   )

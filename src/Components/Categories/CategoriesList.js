@@ -43,7 +43,7 @@ const CategoriesList = () => {
         const onClick = (e) => {
           e.stopPropagation()
           alertServiceConfirm(
-            'Desea eliminar este usuario?',
+            'Desea eliminar esta categoría?',
             'eliminar',
             () => {
               deleteCategory(params)
@@ -122,7 +122,7 @@ const CategoriesList = () => {
   return (
     <Box
       width={{ sx: '100%', md: '600px' }}
-      style={{ height: 600, backgroundColor: 'white', margin: 'auto' }}
+      style={{ backgroundColor: 'white', margin: 'auto' }}
     >
       <Link
         to="/backoffice/categories/create"
@@ -138,6 +138,7 @@ const CategoriesList = () => {
         columns={columns}
         pageSize={10}
         rowsPerPageOptions={[10]}
+        style={{ height: 600 }}
       />
     </Box>
   )

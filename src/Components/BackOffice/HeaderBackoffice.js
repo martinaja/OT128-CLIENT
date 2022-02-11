@@ -5,11 +5,7 @@ import {
   AppBar,
   Box,
   Toolbar,
-  
-  
 } from '@material-ui/core'
-import ButtonMenuBackOffice from './ButtonMenuBackOffice'
-
 
 const HeaderBackoffice = () => {
   // Breakpoints
@@ -48,9 +44,8 @@ const HeaderBackoffice = () => {
             alt="Logo ong."
             src="/images/logo-letras-blancas.png"
           />
-          <ButtonMenuBackOffice>Menu</ButtonMenuBackOffice>
         </Toolbar>
-         </AppBar>
+      </AppBar>
     </Box>
   )
 }
