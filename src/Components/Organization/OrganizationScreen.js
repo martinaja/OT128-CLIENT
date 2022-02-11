@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getOrganization } from '../../Services/apiServices/organizationApiService'
+import Sidebar from '../BackOffice/BackOfficeSidebar'
 import Spinner from '../Spinner'
 
 const OrganizationScreen = () => {
@@ -35,6 +36,7 @@ const OrganizationScreen = () => {
             justifyContent: 'center',
           }}
         >
+          <Sidebar />
           <Box sx={{ m: 2 }}>
             <Card
               sx={{
