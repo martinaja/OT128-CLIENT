@@ -10,7 +10,7 @@ import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
-
+import NotFound from '../Components/NotFound/NotFound'
 
 export const publicRoutes = [
   <Route exact path="/" component={Index} key="Index" />,
@@ -28,4 +28,5 @@ export const publicRoutes = [
   <Route path="/activities" component={Activities} key="Activities" />,
   <Route path="/news" component={NewsList} key="NewsList" />,
   <Route path="/activities/:id" component={Detail} key="Detail" />,
+  <Route exact path="/404" component={NotFound} />,
 ]
