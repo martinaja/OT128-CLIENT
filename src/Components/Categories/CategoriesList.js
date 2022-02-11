@@ -5,12 +5,16 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Box, Button } from '@mui/material'
 import { alertServiceConfirm } from '../AlertService'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 const CategoriesList = () => {
   // function call to delete category
   const deleteCategory = (params) => {
     console.log('action->', params.field, 'id->', params.id)
   }
+
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state.categories)
 
   // set table
   const columns = [
