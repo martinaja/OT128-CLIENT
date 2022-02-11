@@ -4,7 +4,7 @@ import { Container } from '@mui/material'
 import { getOrganization } from './../../Services/apiServices/organizationApiService'
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
-
+import NewsSearch from '../News/NewsSearch'
 
 
 function Index() {
@@ -41,7 +41,7 @@ function Index() {
   ) : (
     <div>
       <Container>
-     
+      <NewsSearch/>
         {data ? <h1>{data.welcome_text}</h1> : null}
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>
