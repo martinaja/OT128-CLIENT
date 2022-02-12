@@ -17,6 +17,7 @@ import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
 import NewsTable from '../Components/News/Table/NewsTable'
 import CategoriesHome from '../Components/Categories/CategoriesHome'
+import UsersHome from './../Components/Users/UsersHome';
 
 
 export const PrivateRoute = ({ children, ...rest }) => {
@@ -133,7 +134,7 @@ export const privateRoutes = [
     <OrganizationForm />
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/users" key="backoffice/users">
-    <UsersHome />
+    <UsersHome/>
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/users/create" key="backoffice/users/create">
     <UserForm />

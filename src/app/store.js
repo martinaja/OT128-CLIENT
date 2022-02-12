@@ -4,9 +4,18 @@ import activitiesReducer from '../features/activitiesReducer'
 import categoriesReducer from '../features/categories/categoriesReducer'
 import usersReducer from '../features/backofficeUsers/usersReducer'
 import membersReducer from '../features/members/membersReducer'
+import newsReducer from '../features/news/newsReducer'
+import slidesReducer from '../features/auth/slides/slidesReducer'
 
 const store = configureStore({
-  reducer: { auth: authReducer, members: membersReducer, users: usersReducer, categories: categoriesReducer,activities: activitiesReducer }, //add reducers
-
+  reducer: {
+    auth: authReducer,
+    members: membersReducer,
+    users: usersReducer,
+    categories: categoriesReducer,
+    activities: activitiesReducer,
+    mews: newsReducer,
+    slides: slidesReducer,
+  }, //add reducers
 })
 export default store
