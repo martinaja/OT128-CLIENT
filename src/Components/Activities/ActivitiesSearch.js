@@ -29,32 +29,26 @@ export const ActivitiesSearch = () => {
     }
   }, 500)
 
-  useEffect(() => {
-    console.log(isLoading)
-  }, [isLoading])
-
   return (
-    <>
-      <Box display="flex" justifyContent="center">
-        <TextField
-          error={error}
-          helperText={error ? 'Ingrese al menos 3 caracteres' : ''}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                {isLoading && <Spinner />}
-              </InputAdornment>
-            ),
-          }}
-          sx={{
-            m: 2,
-            width: '50%',
-          }}
-          label="Busca Actividad"
-          name="title"
-          onChange={(e) => handleChange(e.target.value)}
-        />
-      </Box>
-    </>
+    <Box display="flex" justifyContent="center">
+      <TextField
+        error={error}
+        helperText={error ? 'Ingrese al menos 3 caracteres' : ''}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              {isLoading && <Spinner />}
+            </InputAdornment>
+          ),
+        }}
+        sx={{
+          m: 2,
+          width: '50%',
+        }}
+        label="Busca Actividad"
+        name="title"
+        onChange={(e) => handleChange(e.target.value)}
+      />
+    </Box>
   )
 }
