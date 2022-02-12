@@ -133,7 +133,7 @@ export const privateRoutes = [
     <OrganizationForm />
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/users" key="backoffice/users">
-    <UsersHome />
+    <UsersHome/>
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/users/create" key="backoffice/users/create">
     <UserForm />
