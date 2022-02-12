@@ -1,37 +1,45 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { debounce } from 'lodash'
-import { searchCategories } from '../../Services/apiServices/categoriesApiService'
+import { useDispatch, useSelector } from 'react-redux'
+import { alertServiceError } from '../AlertService'
+import {
+  getCategory,
+  searchCategory,
+} from '../../features/categories/categoriesReducer'
 
 const InputSearchCategories = function () {
-  const [searchedTitle, setSearchedTitle] = useState('')
-  const [message, setMessage] = useState('')
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state.categories)
 
-  const handleInput = debounce(async (val) => {
-    if (val.length >= 3) {
-      const response = await searchCategories(val)
-      console.log(response.data.data)
-    } else {
-      setMessage('Ingresa al menos 3 caracteres para la búsqueda')
+  useEffect(() => {
+    if (state.status === 'idle') {
+      dispatch(getCategory())
     }
-  }, 3000)
+
+    if (state.status === 'error') {
+      alertServiceError(
+        state.errorMsg,
+        'Se produjo un error al intentar obtener datos de categorías',
+      )
+    }
+  }, [state.status, dispatch, state.errorMsg])
+
+  const handleInput = debounce((val) => {
+    if (val.length >= 3) {
+      dispatch(searchCategory(val))
+    } else {
+      dispatch(getCategory())
+    }
+  }, 500)
 
   return (
     <div className="search">
       <input
         type="text"
-        placeholder="Buscar titulo"
+        placeholder="Buscar categoría"
         className="search-input"
         onChange={(e) => handleInput(e.target.value)}
       />
-      {searchedTitle.length > 0 ? (
-        <div>
-          {searchedTitle.map((i) => (
-            <p key={i}>{i.name}</p>
-          ))}
-        </div>
-      ) : (
-        <p>{message}</p>
-      )}
     </div>
   )
 }
