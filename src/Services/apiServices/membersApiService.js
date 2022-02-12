@@ -15,15 +15,15 @@ export const getMembers = (id) => {
   return getPrivateHandler(memberGetUrl, id)
 }
 
-export const postActivity = (id, bodydata) => {
+export const postMembers = (id, bodydata) => {
   return postPrivateHandler(memberPostUrl, id, bodydata)
 }
 
-export const putActivity = (id, bodydata) => {
+export const putMembers = (id, bodydata) => {
   return putPrivateHandler(memberPutUrl, id, bodydata)
 }
 
-export const deleteActivity = (id) => {
+export const deleteMembers = (id) => {
   return deletePrivateHandler(memberDeleteUrl, id)
 }
 

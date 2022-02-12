@@ -15,23 +15,38 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchMember } from '../../features/members/membersReducer'
-import { alertServiceError } from '../AlertService'
+import { deleteMembers } from '../../Services/apiServices/membersApiService'
+import { alertServiceConfirm, alertServiceError } from '../AlertService'
 import Sidebar from '../BackOffice/BackOfficeSidebar'
 import { MemberSearch } from './MemberSearch'
 
 const MemberRow = ({ member }) => {
+  const { id, name, image } = member
+  const removeMember = () => {
+    alertServiceConfirm(
+      '¿Está seguro de eliminar este miembro?',
+      'Aceptar',
+      () => {
+        deleteMembers(id)
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      },
+    )
+  }
+
   return (
     <TableRow
       key={member.name}
       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
       <TableCell component="th" scope="row">
-        {member.name}
+        {name}
       </TableCell>
       <TableCell>
         <Avatar
-          src={member.image}
-          alt={member.name}
+          src={image}
+          alt={name}
           variant="square"
           sx={{ width: 120, height: 120, margin: 'auto' }}
         />
@@ -42,7 +57,7 @@ const MemberRow = ({ member }) => {
         </Button>
       </TableCell>
       <TableCell align="right">
-        <Button variant="contained" color="success">
+        <Button variant="contained" color="success" onClick={removeMember}>
           Eliminar
         </Button>
       </TableCell>
