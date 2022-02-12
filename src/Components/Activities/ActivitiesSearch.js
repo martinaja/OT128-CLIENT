@@ -1,12 +1,28 @@
 import { Box, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import {
+  searchActivitie,
+  fetchActivities,
+} from '../../features/activitiesReducer'
 
 export const ActivitiesSearch = () => {
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log(search)
-  }, [search])
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+    if (e.target.value.length >= 3) {
+      setLoading(true)
+      dispatch(searchActivitie(search))
+      setLoading(false)
+    } else {
+      setLoading(true)
+      dispatch(fetchActivities())
+      setLoading(false)
+    }
+  }
 
   return (
     <Box display="flex" justifyContent="center">
@@ -18,7 +34,7 @@ export const ActivitiesSearch = () => {
         label="Busca Actividad"
         name="title"
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={handleChange}
       />
     </Box>
   )
