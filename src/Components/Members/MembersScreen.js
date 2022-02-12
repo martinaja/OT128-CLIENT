@@ -16,26 +16,8 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchMember } from '../../features/members/membersReducer'
 import { alertServiceError } from '../AlertService'
-import Spinner from '../Spinner'
 import Sidebar from '../BackOffice/BackOfficeSidebar'
-
-// const mock = [
-//   {
-//     id: 1,
-//     name: 'John Doe',
-//     image: 'https://picsum.photos/200/200',
-//   },
-//   {
-//     id: 2,
-//     name: 'Freddy Mercury',
-//     image: 'https://picsum.photos/200/200',
-//   },
-//   {
-//     id: 3,
-//     name: 'Frank Sinatra',
-//     image: 'https://picsum.photos/200/200',
-//   },
-// ]
+import { MemberSearch } from './MemberSearch'
 
 const MemberRow = ({ member }) => {
   return (
@@ -71,9 +53,7 @@ const MemberRow = ({ member }) => {
 const MembersScreen = () => {
   const dispatch = useDispatch()
 
-  const { status, members, loader, errMsg } = useSelector(
-    (state) => state.members,
-  )
+  const { status, members, errMsg } = useSelector((state) => state.members)
 
   useEffect(() => {
     if (status === 'idle') {
@@ -85,11 +65,10 @@ const MembersScreen = () => {
     }
   }, [dispatch, status, errMsg])
 
-  return loader ? (
-    <Spinner />
-  ) : (
+  return (
     <Container>
       <Sidebar />
+      <MemberSearch />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}
