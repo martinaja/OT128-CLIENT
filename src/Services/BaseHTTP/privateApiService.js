@@ -64,3 +64,17 @@ export const patchPrivateHandler = (apiEndpoint, id, bodyData) => {
     return error
   })
 }
+
+// Search for word
+export const searchPrivateHandler = (apiEndpoint, search) => {
+  const apiServiceUrl = `${apiEndpoint}${search}`
+  console.log(apiServiceUrl)
+  return apiService.get(apiServiceUrl).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
+}
