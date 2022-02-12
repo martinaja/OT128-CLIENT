@@ -13,7 +13,7 @@ import {
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { fetchMember } from '../../features/members/membersReducer'
 import { deleteMembers } from '../../Services/apiServices/membersApiService'
 import { alertServiceConfirm, alertServiceError } from '../AlertService'
@@ -22,6 +22,8 @@ import { MemberSearch } from './MemberSearch'
 
 const MemberRow = ({ member }) => {
   const { id, name, image } = member
+  const history = useHistory()
+
   const removeMember = () => {
     alertServiceConfirm(
       '¿Está seguro de eliminar este miembro?',
@@ -52,7 +54,12 @@ const MemberRow = ({ member }) => {
         />
       </TableCell>
       <TableCell align="right">
-        <Button sx={{ m: 1 }} variant="contained" color="success">
+        <Button
+          sx={{ m: 1 }}
+          variant="contained"
+          color="success"
+          onClick={() => history.push(`/backoffice/members/create/${id}`)}
+        >
           Editar
         </Button>
       </TableCell>
