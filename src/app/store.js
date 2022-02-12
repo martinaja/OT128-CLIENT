@@ -8,7 +8,14 @@ import newsReducer from '../features/news/newsReducer'
 import slidesReducer from '../features/auth/slide/slidesReducer'
 
 const store = configureStore({
-  reducer: { auth: authReducer, members: membersReducer, users: usersReducer, categories: categoriesReducer,activities: activitiesReducer }, //add reducers
-
+  reducer: {
+    auth: authReducer,
+    members: membersReducer,
+    users: usersReducer,
+    categories: categoriesReducer,
+    activities: activitiesReducer,
+    news: newsReducer,
+    slides: slidesReducer,
+  }, //add reducers
 })
 export default store
