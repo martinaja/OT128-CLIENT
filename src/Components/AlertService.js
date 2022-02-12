@@ -8,7 +8,7 @@ export function alertServiceInfoTimer(
   timer,
 ) {
   Swal.fire({
-    position: 'top',
+    position: 'center',
     icon: 'info',
     title,
     showConfirmButton,
@@ -21,6 +21,7 @@ export function alertServiceInfoTimer(
 export function alertServiceConfirm(title, confirmButtonText, action) {
   Swal.fire({
     title,
+    
     color: 'White',
     background: 'black',
     showDenyButton: true,

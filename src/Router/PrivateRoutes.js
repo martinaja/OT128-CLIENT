@@ -9,13 +9,14 @@ import SlidesForm from '../Components/Slides/SlidesForm'
 import TestimonialForm from '../Components/Testimonials/TestimonialsForm'
 import ProjectsForm from '../Components/Projects/ProjectsForm'
 import OrganizationForm from '../Components/Organization/OrganizationForm'
-import UsersHome from '../Components/Users/UsersHome'
 import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
 import OrganizationScreen from '../Components/Organization/OrganizationScreen'
 import MembersScreen from '../Components/Members/MembersScreen'
 import ActivitiesScreen from '../Components/Activities/ActivitiesScreen'
 import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
+import NewsTable from '../Components/News/Table/NewsTable'
+import CategoriesHome from '../Components/Categories/CategoriesHome'
 
 
 export const PrivateRoute = ({ children, ...rest }) => {
@@ -44,28 +45,46 @@ export const privateRoutes = [
   >
     <ActivitiesForm />
   </PrivateRoute>,
+  <PrivateRoute exact path="/backoffice/categories" key="backoffice/categories">
+    <CategoriesHome />
+  </PrivateRoute>,
   <PrivateRoute
-    path="/backoffice/create-category"
-    key="backoffice/create-category"
+    exact
+    path="/backoffice/categories/create"
+    key="backoffice/categories/create"
   >
     <CategoriesForm />
   </PrivateRoute>,
   <PrivateRoute
-    path="/backoffice/create-category/:id"
-    key="backoffice/create-category/:id"
+    path="/backoffice/categories/create/:id"
+    key="backoffice/categories/create/:id"
   >
     <CategoriesForm />
   </PrivateRoute>,
+  <PrivateRoute path="/backoffice/categories" key="backoffice/categories">
+    <CategoriesHome />
+  </PrivateRoute>,
+
   <PrivateRoute
     path="/backoffice/create-activity/:id"
     key="backoffice/create-activity/:id"
   >
     <ActivitiesForm />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/news" key="backoffice/news">
+  <PrivateRoute exact path="/backoffice/news" key="backoffice/news">
+    <NewsTable />
+  </PrivateRoute>,
+  <PrivateRoute
+    exact
+    path="/backoffice/news/create"
+    key="/backoffice/news/create"
+  >
     <NewsForm />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/news/:newsId" key="backoffice/news/:newsId">
+  <PrivateRoute
+    path="/backoffice/news/create/:newsId"
+    key="/backoffice/news/create/:newsId"
+  >
     <NewsForm />
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/members" key="backoffice/members">

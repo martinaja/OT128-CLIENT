@@ -12,14 +12,7 @@ if (token) {
 
 export const getPrivateHandler = (apiEndpoint, id) => {
   const apiServiceUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
-  return apiService.get(apiServiceUrl).catch((err) => {
-    console.log(err)
-    const error = {
-      error: true,
-      message: err.message,
-    }
-    return error
-  })
+  return apiService.get(apiServiceUrl)
 }
 export const postPrivateHandler = (apiEndpoint, bodyData) => {
   return apiService.post(apiEndpoint, bodyData).catch((err) => {
