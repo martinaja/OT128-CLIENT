@@ -1,4 +1,4 @@
-import { TextField } from '@mui/material'
+import { Box, TextField } from '@mui/material'
 import { useEffect, useState } from 'react'
 
 export const ActivitiesSearch = () => {
@@ -9,11 +9,17 @@ export const ActivitiesSearch = () => {
   }, [search])
 
   return (
-    <TextField
-      label="Busca Actividad"
-      name="title"
-      value={search}
-      onChange={(e) => setSearch(e.target.value)}
-    />
+    <Box display="flex" justifyContent="center">
+      <TextField
+        sx={{
+          m: 2,
+          width: '50%',
+        }}
+        label="Busca Actividad"
+        name="title"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </Box>
   )
 }
