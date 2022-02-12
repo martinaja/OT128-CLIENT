@@ -11,10 +11,8 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchActivities } from '../../features/activitiesReducer'
 import Sidebar from '../BackOffice/BackOfficeSidebar'
 import { ActivitiesSearch } from './ActivitiesSearch'
 
@@ -53,12 +51,7 @@ const ActivitieRow = ({ activitie }) => {
 }
 
 const ActivitiesScreen = () => {
-  const dispatch = useDispatch()
   const response = useSelector((state) => state.activities)
-
-  useEffect(() => {
-    dispatch(fetchActivities())
-  }, [dispatch])
 
   return (
     <Container>

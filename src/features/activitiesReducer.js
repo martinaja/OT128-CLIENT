@@ -6,31 +6,42 @@ import {
 
 const initialState = {
   activities: [],
+  loading: false,
 }
 
 const activitiesSlice = createSlice({
   name: 'activities',
   initialState,
   reducers: {
-    getActivities: (state, action) => {
+    isLoading: (state, action) => {
+      state.loading = action.payload
+    },
+    getActivitie: (state, action) => {
       state.activities = action.payload
+      state.loading = false
     },
     getActivitieSearched: (state, action) => {
       state.activities = action.payload
+      state.loading = false
     },
   },
 })
 
-export const { getActivities, getActivitieSearched } = activitiesSlice.actions
+export const { getActivitie, getActivitieSearched, isLoading } =
+  activitiesSlice.actions
 
 export default activitiesSlice.reducer
 
-export const fetchActivities = () => async (dispatch) => {
+export const getActivities = () => async (dispatch) => {
   const response = await getActivity()
-  dispatch(getActivities(response.data.data))
+  dispatch(getActivitie(response.data.data))
 }
 
 export const searchActivitie = (query) => async (dispatch) => {
   const response = await searchActivities(query)
   dispatch(getActivitieSearched(response.data.data))
+}
+
+export const setLoading = (loading) => (dispatch) => {
+  dispatch(isLoading(loading))
 }

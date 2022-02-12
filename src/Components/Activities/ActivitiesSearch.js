@@ -1,41 +1,60 @@
-import { Box, TextField } from '@mui/material'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { Box, InputAdornment, TextField } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   searchActivitie,
-  fetchActivities,
+  getActivities,
+  setLoading,
 } from '../../features/activitiesReducer'
+import { debounce } from 'lodash'
+import Spinner from '../Spinner'
 
 export const ActivitiesSearch = () => {
-  const [search, setSearch] = useState('')
-  const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
+  const isLoading = useSelector((state) => state.activities.loading)
+  const [error, setError] = useState(false)
 
-  const handleChange = (e) => {
-    setSearch(e.target.value)
-    if (e.target.value.length >= 3) {
-      setLoading(true)
-      dispatch(searchActivitie(search))
-      setLoading(false)
+  useEffect(() => {
+    dispatch(setLoading(true))
+    dispatch(getActivities())
+  }, [dispatch])
+
+  const handleChange = debounce((value) => {
+    dispatch(setLoading(true))
+    value.length < 3 ? setError(true) : setError(false)
+    if (value.length >= 3) {
+      dispatch(searchActivitie(value))
     } else {
-      setLoading(true)
-      dispatch(fetchActivities())
-      setLoading(false)
+      dispatch(getActivities())
     }
-  }
+  }, 500)
+
+  useEffect(() => {
+    console.log(isLoading)
+  }, [isLoading])
 
   return (
-    <Box display="flex" justifyContent="center">
-      <TextField
-        sx={{
-          m: 2,
-          width: '50%',
-        }}
-        label="Busca Actividad"
-        name="title"
-        value={search}
-        onChange={handleChange}
-      />
-    </Box>
+    <>
+      <Box display="flex" justifyContent="center">
+        <TextField
+          error={error}
+          helperText={error ? 'Ingrese al menos 3 caracteres' : ''}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                {isLoading && <Spinner />}
+              </InputAdornment>
+            ),
+          }}
+          sx={{
+            m: 2,
+            width: '50%',
+          }}
+          label="Busca Actividad"
+          name="title"
+          onChange={(e) => handleChange(e.target.value)}
+        />
+      </Box>
+    </>
   )
 }
