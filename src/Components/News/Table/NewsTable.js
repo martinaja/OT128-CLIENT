@@ -5,76 +5,8 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Box, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { alertServiceConfirm } from '../../AlertService'
-
-// mock of news
-const mock = [
-  {
-    id: 1,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 2,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 3,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 4,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 5,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 6,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 7,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 8,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 9,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 10,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-  {
-    id: 11,
-    name: 'Titulo de la noticia',
-    image: 'https://cdn-icons-png.flaticon.com/512/25/25231.png',
-    createdAt: '2022-01-01',
-  },
-]
+import { useSelector } from 'react-redux'
+import SearchNewsBackoffice from '../SearchNews/SearchNewsBackoffice'
 
 const deleteNews = (params) => {
   console.log(params.field, params.id)
@@ -137,41 +69,49 @@ const columns = [
     ),
   },
   {
-    field: 'createdAt',
+    field: 'created_at',
     headerName: 'Fecha',
-    name: 'createdAt',
+    name: 'created_at',
     width: 270,
+    renderCell: (params) => params.row.created_at.substring(0, 10),
   },
 ]
 
 export default function NewsTable() {
-  return (
-    <Box
-      width={{ sx: '100%', md: '850px' }}
-      style={{ backgroundColor: 'white', margin: 'auto' }}
-    >
-      <Button
-        component={Link}
-        to="/backoffice/news/create"
-        variant="outlined"
-        sx={{ m: 2 }}
-      >
-        Crear noticia
-      </Button>
+  const newsState = useSelector((state) => state.news)
 
-      <DataGrid
-        rows={mock}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        style={{ height: '800px' }}
-        getRowHeight={({ id, densityFactor }) => {
-          if (id % 1 === 0) {
-            return 100 * densityFactor
-          }
-          return null
-        }}
-      />
-    </Box>
+  console.log('newsState.news', newsState.news)
+
+  return (
+    <div>
+      <Box
+        width={{ sx: '100%', md: '850px' }}
+        style={{ backgroundColor: 'white', margin: 'auto' }}
+      >
+        <Button
+          component={Link}
+          to="/backoffice/news/create"
+          variant="outlined"
+          sx={{ m: 2 }}
+        >
+          Crear noticia
+        </Button>
+        <SearchNewsBackoffice />
+
+        <DataGrid
+          rows={newsState.news}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          style={{ height: '800px' }}
+          getRowHeight={({ id, densityFactor }) => {
+            if (id % 1 === 0) {
+              return 100 * densityFactor
+            }
+            return null
+          }}
+        />
+      </Box>
+    </div>
   )
 }
