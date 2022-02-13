@@ -59,7 +59,6 @@ export const categoriesSlice = createSlice({
         state.loader = true
       })
       .addCase(searchCategory.fulfilled, (state, action) => {
-        console.log('---------->', action.payload)
         state.status = action.payload.message
         state.allCategories = action.payload.data
         state.loader = false
