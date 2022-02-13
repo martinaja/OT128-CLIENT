@@ -1,34 +1,42 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
+import { getUsers } from '../../Services/apiServices/usersApiService'
 
 const initialState = {
   status: '',
-  users: {},
+  users: [],
+  loader: false,
 }
 
-export const getUsers = createAsyncThunk('users/getUsers', async (data) => {
-  try {
-    const response = await axios.get('http://ongapi.alkemy.org/api/users')
-    return response.data
-  } catch {
-    throw new Error()
-  }
-})
+export const getUsersThunk = createAsyncThunk(
+  'users/getUsersThunk',
+  async () => {
+    try {
+      const response = await getUsers()
+      return response.data
+    } catch {
+      throw new Error()
+    }
+  },
+)
 
 export const usersReducer = createSlice({
   name: 'backofficeUsers',
   initialState,
   extraReducers: (builder) => {
     builder
-      .addCase(getUsers.pending, (state) => {
+      .addCase(getUsersThunk.pending, (state) => {
         state.status = 'pending'
+        state.loader = true
       })
-      .addCase(getUsers.fulfilled, (state, action) => {
+      .addCase(getUsersThunk.fulfilled, (state, action) => {
         state.status = action.payload.message
         state.users = action.payload.data
+        state.loader = false
       })
-      .addCase(getUsers.rejected, (state) => {
+      .addCase(getUsersThunk.rejected, (state) => {
         state.status = 'error'
+        state.loader = false
       })
   },
 })
