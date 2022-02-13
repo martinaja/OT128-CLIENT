@@ -5,7 +5,7 @@ import {
 } from '../../Services/apiServices/usersApiService'
 
 const initialState = {
-  status: '',
+  status: 'idle',
   users: [],
   loader: false,
 }
@@ -58,7 +58,7 @@ export const usersReducer = createSlice({
       })
       .addCase(searchUsersThunk.fulfilled, (state, action) => {
         state.status = action.payload.message
-        state.allCategories = action.payload.data
+        state.users = action.payload.data
         state.loader = false
       })
       .addCase(searchUsersThunk.rejected, (state, action) => {
