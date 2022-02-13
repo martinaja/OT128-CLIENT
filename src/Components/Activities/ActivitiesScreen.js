@@ -15,7 +15,6 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchActivities } from '../../features/activitiesReducer'
-import Sidebar from '../BackOffice/BackOfficeSidebar'
 
 const ActivitieRow = ({ activitie }) => {
   return (
@@ -61,7 +60,6 @@ const ActivitiesScreen = () => {
 
   return (
     <Container>
-      <Sidebar />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}

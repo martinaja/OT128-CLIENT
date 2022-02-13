@@ -17,7 +17,6 @@ import { Link } from 'react-router-dom'
 import { fetchMember } from '../../features/members/membersReducer'
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
-import Sidebar from '../BackOffice/BackOfficeSidebar'
 
 // const mock = [
 //   {
@@ -89,7 +88,6 @@ const MembersScreen = () => {
     <Spinner />
   ) : (
     <Container>
-      <Sidebar />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}
