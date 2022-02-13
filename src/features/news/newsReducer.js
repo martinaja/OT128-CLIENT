@@ -20,6 +20,7 @@ export const fetchNew = createAsyncThunk('news/getNews', async () => {
   }
 })
 
+// For backoffice
 export const fetchSearchNews = createAsyncThunk(
   'news/searchNews',
   async (val) => {
@@ -58,7 +59,7 @@ export const newsSlice = createSlice({
       })
       .addCase(fetchSearchNews.fulfilled, (state, action) => {
         state.status = action.payload.message
-        state.allCategories = action.payload.data
+        state.news = action.payload.data
         state.loader = false
       })
       .addCase(fetchSearchNews.rejected, (state, action) => {
