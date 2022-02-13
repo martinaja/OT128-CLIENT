@@ -1,6 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
-import { getUsers } from '../../Services/apiServices/usersApiService'
+import {
+  getUsers,
+  searchUsers,
+} from '../../Services/apiServices/usersApiService'
 
 const initialState = {
   status: '',
@@ -20,6 +23,18 @@ export const getUsersThunk = createAsyncThunk(
   },
 )
 
+export const searchUsersThunk = createAsyncThunk(
+  'category/searchUsersThunk',
+  async (val) => {
+    try {
+      const response = await searchUsers(val)
+      return response.data
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+)
+
 export const usersReducer = createSlice({
   name: 'backofficeUsers',
   initialState,
@@ -35,6 +50,20 @@ export const usersReducer = createSlice({
         state.loader = false
       })
       .addCase(getUsersThunk.rejected, (state) => {
+        state.status = 'error'
+        state.loader = false
+      })
+      .addCase(searchUsersThunk.pending, (state) => {
+        state.status = 'pending'
+        state.loader = true
+      })
+      .addCase(searchUsersThunk.fulfilled, (state, action) => {
+        state.status = action.payload.message
+        state.allCategories = action.payload.data
+        state.loader = false
+      })
+      .addCase(searchUsersThunk.rejected, (state, action) => {
+        state.errorMsg = action.error.message
         state.status = 'error'
         state.loader = false
       })
