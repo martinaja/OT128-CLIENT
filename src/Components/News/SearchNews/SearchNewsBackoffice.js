@@ -12,7 +12,7 @@ export default function SearchNewsBackoffice() {
   const [helper, setHelper] = useState(false)
 
   useEffect(() => {
-    if (newsState.status === 'idle') {
+    if (newsState.status === 'idle' || newsState.status === 'delete') {
       dispatch(fetchNew())
     }
 

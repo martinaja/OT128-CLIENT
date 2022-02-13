@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
+  deleteNews,
   getNews,
   searchNews,
 } from './../../Services/apiServices/newsApiService'
@@ -26,6 +27,17 @@ export const fetchSearchNews = createAsyncThunk(
   async (val) => {
     try {
       const response = await searchNews(val)
+      return response.data
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+)
+export const fetchDeleteNews = createAsyncThunk(
+  'news/deleteNews',
+  async (id) => {
+    try {
+      const response = await deleteNews(id)
       return response.data
     } catch (error) {
       throw new Error(error)
@@ -63,6 +75,19 @@ export const newsSlice = createSlice({
         state.loader = false
       })
       .addCase(fetchSearchNews.rejected, (state, action) => {
+        state.errMsg = action.error.message
+        state.status = 'error'
+        state.loader = false
+      })
+      .addCase(fetchDeleteNews.pending, (state) => {
+        state.status = 'pending'
+        state.loader = true
+      })
+      .addCase(fetchDeleteNews.fulfilled, (state, action) => {
+        state.status = 'delete'
+        state.loader = false
+      })
+      .addCase(fetchDeleteNews.rejected, (state, action) => {
         state.errMsg = action.error.message
         state.status = 'error'
         state.loader = false
