@@ -36,7 +36,7 @@ const InputSearchUsers = function () {
     <div className="search">
       <input
         type="text"
-        placeholder="Buscar categoría"
+        placeholder="Buscar Usuario por nombre"
         className="search-input"
         onChange={(e) => handleInput(e.target.value)}
       />
