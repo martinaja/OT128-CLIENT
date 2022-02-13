@@ -135,7 +135,18 @@ export const privateRoutes = [
   <PrivateRoute exact path="/backoffice/users" key="backoffice/users">
     <UsersHome />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/users/create" key="backoffice/users/create">
+  <PrivateRoute
+    exact
+    path="/backoffice/users/create"
+    key="backoffice/users/create"
+  >
+    <UserForm />
+  </PrivateRoute>,
+  <PrivateRoute
+    exact
+    path="/backoffice/users/create/:id"
+    key="backoffice/users/create"
+  >
     <UserForm />
   </PrivateRoute>,
 ]
