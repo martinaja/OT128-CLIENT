@@ -6,6 +6,15 @@ import {
   getUsersThunk,
   searchUsersThunk,
 } from '../../features/backofficeUsers/usersReducer'
+import {
+  Box,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material'
 
 const InputSearchUsers = function () {
   const dispatch = useDispatch()
@@ -33,14 +42,47 @@ const InputSearchUsers = function () {
   }, 500)
 
   return (
-    <div className="search">
-      <input
-        type="text"
-        placeholder="Buscar Usuario por nombre"
-        className="search-input"
-        onChange={(e) => handleInput(e.target.value)}
-      />
-    </div>
+    <Box width={{ sx: '100%', md: '600px' }} style={{ margin: 'auto' }}>
+      <Grid container>
+        <Grid item xs={8}>
+          <TextField
+            id="outlined-basic"
+            label="Nombre usuario"
+            variant="outlined"
+            onChange={(e) => handleInput(e.target.value)}
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <FormControl fullWidth>
+            <InputLabel id="select">Tipo</InputLabel>
+            <Select
+              defaultValue={'Todos'}
+              labelId="select"
+              id="select"
+              // value={age}
+              label="Age"
+              // onChange={handleChange}
+            >
+              <MenuItem value={'Todos'}>Todos los usuarios</MenuItem>
+              <MenuItem value={'Administrador'}>
+                Usuarios Administrador
+              </MenuItem>
+              <MenuItem value={'Usuario'}>Uruarios Comunes</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+      </Grid>
+    </Box>
+
+    // <div className="search">
+    //   <input
+    //     type="text"
+    //     placeholder="Buscar Usuario por nombre"
+    //     className="search-input"
+    //     onChange={(e) => handleInput(e.target.value)}
+    //   />
+    // </div>
   )
 }
 
