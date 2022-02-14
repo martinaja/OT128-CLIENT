@@ -6,6 +6,7 @@ import { Box, Button } from '@mui/material'
 import { alertServiceConfirm } from '../AlertService'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Spinner from '../Spinner'
 
 const CategoriesList = () => {
   // function call to delete category
@@ -93,13 +94,17 @@ const CategoriesList = () => {
           Crear nueva Categoía
         </Button>
       </Link>
-      <DataGrid
-        rows={state.allCategories}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        style={{ height: 600 }}
-      />
+      {state.loader ? (
+        <Spinner />
+      ) : (
+        <DataGrid
+          rows={state.allCategories}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          style={{ height: 600 }}
+        />
+      )}
     </Box>
   )
 }

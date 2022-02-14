@@ -25,3 +25,7 @@ export const putActivity = (id, bodydata) => {
 export const deleteActivity = (id) => {
   return deletePrivateHandler(activityDeleteUrl, id)
 }
+
+export const searchActivities = (query) => {
+  return getPublicHandler(`${activityGetUrl}?search=${query}`)
+}

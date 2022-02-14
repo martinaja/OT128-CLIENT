@@ -17,6 +17,7 @@ import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
 import NewsTable from '../Components/News/Table/NewsTable'
 import CategoriesHome from '../Components/Categories/CategoriesHome'
+
 import UsersHome from '../Components/Users/UsersHome'
 
 export const PrivateRoute = ({ children, ...rest }) => {
@@ -45,6 +46,13 @@ export const privateRoutes = [
   >
     <ActivitiesForm />
   </PrivateRoute>,
+  <PrivateRoute
+    path="/backoffice/create-activity/:id"
+    key="backoffice/create-activity/:id"
+  >
+    <ActivitiesForm />
+  </PrivateRoute>,
+
   <PrivateRoute exact path="/backoffice/categories" key="backoffice/categories">
     <CategoriesHome />
   </PrivateRoute>,
@@ -65,12 +73,6 @@ export const privateRoutes = [
     <CategoriesHome />
   </PrivateRoute>,
 
-  <PrivateRoute
-    path="/backoffice/create-activity/:id"
-    key="backoffice/create-activity/:id"
-  >
-    <ActivitiesForm />
-  </PrivateRoute>,
   <PrivateRoute exact path="/backoffice/news" key="backoffice/news">
     <NewsTable />
   </PrivateRoute>,
@@ -87,15 +89,19 @@ export const privateRoutes = [
   >
     <NewsForm />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/members" key="backoffice/members">
+  <PrivateRoute exact path="/backoffice/members" key="backoffice/members">
     <MembersScreen />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/members/edit" key="backoffice/members/edit">
+  <PrivateRoute path="/backoffice/members/create" key="create-member">
     <MembersForm />
   </PrivateRoute>,
-  <PrivateRoute path="/create-member" key="create-member">
+  <PrivateRoute
+    path="/backoffice/members/create/:id"
+    key="backoffice/members/edit"
+  >
     <MembersForm />
   </PrivateRoute>,
+
   <PrivateRoute path="/backoffice/slides" key="backoffice/slides">
     <SlidesScreen />
   </PrivateRoute>,
@@ -132,8 +138,8 @@ export const privateRoutes = [
   >
     <OrganizationForm />
   </PrivateRoute>,
-  <PrivateRoute path="/backoffice/users" key="backoffice/users">
-    <UsersHome/>
+  <PrivateRoute exact path="/backoffice/users" key="backoffice/users">
+    <UsersHome />
   </PrivateRoute>,
   <PrivateRoute path="/backoffice/users/create" key="backoffice/users/create">
     <UserForm />

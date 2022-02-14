@@ -5,8 +5,13 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Box, Button } from '@mui/material'
 import { alertServiceConfirm } from '../AlertService'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import Spinner from '../Spinner'
 
 const TableUsers = () => {
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state.users)
+
   // function call to delete user
   const deleteUser = (params) => {
     console.log('action->', params.field, 'id->', params.id)
@@ -21,15 +26,12 @@ const TableUsers = () => {
       width: 70,
 
       renderCell: (params) => {
-        const onClick = (e) => {
-          e.stopPropagation()
-          console.log('action->', params.field, 'id->', params.id)
-        }
-
         return (
-          <Button>
-            <EditIcon color="primary" onClick={onClick} />
-          </Button>
+          <Button
+            component={Link}
+            to={`/backoffice/users/create/${params.id}`}
+            endIcon={<EditIcon />}
+          />
         )
       },
     },
@@ -92,13 +94,17 @@ const TableUsers = () => {
           Crear nuevo usuario
         </Button>
       </Link>
-      <DataGrid
-        rows={mock}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        style={{ height: 600 }}
-      />
+      {state.loader ? (
+        <Spinner />
+      ) : (
+        <DataGrid
+          rows={state.users}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          style={{ height: 600 }}
+        />
+      )}
     </Box>
   )
 }
