@@ -17,7 +17,6 @@ import { ActivitiesSearch } from './ActivitiesSearch'
 
 const ActivitieRow = ({ activitie }) => {
   const createdAt = activitie['created_at'].slice(0, 10)
-  console.log(activitie)
   return (
     <TableRow
       key={activitie.name}
