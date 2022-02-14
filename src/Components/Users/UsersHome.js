@@ -9,7 +9,6 @@ const UsersHome = () => {
     <Container sx={{ alignItems: 'center', textAlign: 'center' }}>
       <Sidebar />
       <h2>Tabla de Usuarios</h2>
-      <InputSearchUsers />
       <TableUsers />
     </Container>
   )

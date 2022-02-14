@@ -7,6 +7,7 @@ import { alertServiceConfirm } from '../AlertService'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../Spinner'
+import InputSearchUsers from './InputSearchUser'
 
 const TableUsers = () => {
   const dispatch = useDispatch()
@@ -74,6 +75,7 @@ const TableUsers = () => {
       width={{ sx: '100%', md: '600px' }}
       style={{ margin: 'auto', backgroundColor: 'white' }}
     >
+      <InputSearchUsers />
       <Link to="/backoffice/users/create" style={{ textDecoration: 'none' }}>
         <Button variant="outlined" sx={{ m: 2 }}>
           {' '}
