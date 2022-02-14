@@ -24,9 +24,9 @@ export const fetchNew = createAsyncThunk('news/getNews', async () => {
 // For backoffice
 export const fetchSearchNews = createAsyncThunk(
   'news/searchNews',
-  async (val) => {
+  async (search) => {
     try {
-      const response = await searchNews(val)
+      const response = await searchNews(search.name, search.category)
       return response.data
     } catch (error) {
       throw new Error(error)
