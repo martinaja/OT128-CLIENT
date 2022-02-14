@@ -2,17 +2,37 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { alertServiceError } from '../../AlertService'
 import { debounce } from 'lodash'
-import { Box, TextField } from '@mui/material'
+import { Box, MenuItem, TextField } from '@mui/material'
 import { fetchNew, fetchSearchNews } from '../../../features/news/newsReducer'
 import SearchIcon from '@mui/icons-material/Search'
+import { getCategory } from '../../../features/categories/categoriesReducer'
 
 export default function SearchNewsBackoffice() {
   const dispatch = useDispatch()
   const newsState = useSelector((state) => state.news)
-  const [helper, setHelper] = useState(false)
+  const { allCategories, status: categoriesStatus } = useSelector(
+    (state) => state.categories,
+  )
+  const [querySearch, setQuerySearch] = useState({
+    name: '',
+    category: '',
+  })
 
+  // Get categories
   useEffect(() => {
-    if (newsState.status === 'idle' || newsState.status === 'delete') {
+    if (categoriesStatus === 'idle' || categoriesStatus === 'delete')
+      dispatch(getCategory())
+
+    if (categoriesStatus === 'error')
+      alertServiceError(
+        categoriesStatus.errorMsg,
+        'Se produjo un error al intentar obtener las categorías',
+      )
+  }, [dispatch, categoriesStatus])
+
+  // Get news in case delete them or error
+  useEffect(() => {
+    if (newsState.status === 'delete') {
       dispatch(fetchNew())
     }
 
@@ -24,28 +44,62 @@ export default function SearchNewsBackoffice() {
     }
   }, [newsState.status, dispatch, newsState.errorMsg])
 
-  const handleInput = debounce((val) => {
-    if (val.length >= 3) {
-      dispatch(fetchSearchNews(val))
-      setHelper(false)
-    } else {
+  // Filter news
+  useEffect(() => {
+    if (querySearch.name?.length === 0) {
       dispatch(fetchNew())
-      setHelper(true)
     }
-  }, 500)
+
+    if (querySearch.name?.length < 3 && querySearch.category !== '') return
+
+    debounce(() => {
+      if (querySearch.name?.length >= 3) {
+        dispatch(fetchSearchNews(querySearch))
+      } else if (querySearch.name?.length > 0 && querySearch.name?.length < 3) {
+        dispatch(fetchNew())
+      }
+    }, 450)()
+  }, [querySearch, dispatch])
+
+  const handleInput = (e) => {
+    setQuerySearch({
+      ...querySearch,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  console.log('render')
 
   return (
     <Box>
-      <TextField
-        label="Buscar"
-        fullWidth
-        onChange={(e) => handleInput(e.target.value)}
-        defaultValue="Ingresá un título"
-        helperText={helper && 'Ingresá al menos tres caracteres'}
-        InputProps={{
-          startAdornment: <SearchIcon />,
-        }}
-      />
+      <form>
+        <TextField
+          label="Buscar"
+          fullWidth
+          name="name"
+          placeholder="Ingresá un título"
+          InputProps={{
+            startAdornment: <SearchIcon />,
+          }}
+          onChange={handleInput}
+        />
+        <TextField
+          margin="normal"
+          fullWidth
+          name="category"
+          select
+          label="Seleccior categoría (opcional)"
+          onChange={handleInput}
+          defaultValue=""
+        >
+          <MenuItem value="">Todas</MenuItem>
+          {allCategories.map((cat, i) => (
+            <MenuItem key={i} value={cat.id}>
+              {cat.name}-{cat.id}
+            </MenuItem>
+          ))}
+        </TextField>
+      </form>
     </Box>
   )
 }

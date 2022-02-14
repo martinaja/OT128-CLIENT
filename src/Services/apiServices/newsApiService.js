@@ -10,7 +10,6 @@ const newsGetUrl = process.env.REACT_APP_API_NEWS_GET
 const newsPostUrl = process.env.REACT_APP_API_NEWS_POST
 const newsPutUrl = process.env.REACT_APP_API_NEWS_PUT
 const newsDeleteUrl = process.env.REACT_APP_API_NEWS_DELETE
-const newsSearchUrl = '/news?search='
 
 export const getNews = (id) => {
   return getPublicHandler(newsGetUrl, id)
@@ -28,6 +27,9 @@ export const deleteNews = (id) => {
   return deletePrivateHandler(newsDeleteUrl, id)
 }
 
-export const searchNews = (name) => {
-  return searchPrivateHandler(newsSearchUrl, name)
+export const searchNews = (name, category) => {
+  return searchPrivateHandler(
+    newsGetUrl,
+    `?search=${name}&category=${category}`,
+  )
 }
