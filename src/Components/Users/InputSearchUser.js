@@ -41,10 +41,18 @@ const InputSearchUsers = function () {
 
   useEffect(() => {
     debounce(() => {
-      if (querySearch.name?.length >= 3) {
+      if (querySearch.name.length >= 3) {
         dispatch(searchUsersThunk(querySearch))
-      } else if (querySearch.name?.length > 0 && querySearch.name?.length < 3) {
-        dispatch(getUsersThunk())
+      } else {
+        if (querySearch.type === '') {
+          dispatch(getUsersThunk())
+        } else if (querySearch.type === 1 || querySearch.type === 2) {
+          const searchOnlyByFilter = {
+            name: '',
+            type: querySearch.type,
+          }
+          dispatch(searchUsersThunk(searchOnlyByFilter))
+        }
       }
     }, 450)()
   }, [querySearch, dispatch])
@@ -67,6 +75,9 @@ const InputSearchUsers = function () {
             variant="outlined"
             onChange={handleInput}
             fullWidth
+            InputProps={{
+              startAdornment: <SearchIcon />,
+            }}
           />
         </Grid>
         <Grid item xs={4}>
@@ -81,9 +92,9 @@ const InputSearchUsers = function () {
               label="select"
               onChange={handleInput}
             >
-              <MenuItem value={''}>Todos los usuarios</MenuItem>
-              <MenuItem value={1}>Usuarios Administrador</MenuItem>
-              <MenuItem value={2}>Uruarios Comunes</MenuItem>
+              <MenuItem value={''}>Todos</MenuItem>
+              <MenuItem value={1}>Usuario Administrador</MenuItem>
+              <MenuItem value={2}>Usuario Regular</MenuItem>
             </Select>
           </FormControl>
         </Grid>

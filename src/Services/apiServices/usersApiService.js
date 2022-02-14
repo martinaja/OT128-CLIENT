@@ -28,6 +28,8 @@ export const deleteUsers = (id) => {
   return deletePrivateHandler(usersDeleteUrl, id)
 }
 
-export const searchUsers = (value) => {
-  return searchPrivateHandler(userSearchUrl, value)
+export const searchUsers = ({ name, type }) => {
+  let searchParams
+  searchParams = `?search=${name}&role=${type}`
+  return searchPrivateHandler(userSearchUrl, searchParams)
 }
