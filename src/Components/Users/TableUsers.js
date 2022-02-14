@@ -83,7 +83,9 @@ const TableUsers = () => {
         </Button>
       </Link>
       {state.loader ? (
-        <Spinner />
+        <Box sx={{ py: 4 }}>
+          <Spinner />
+        </Box>
       ) : (
         <DataGrid
           rows={state.users}

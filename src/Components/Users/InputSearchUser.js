@@ -40,8 +40,9 @@ const InputSearchUsers = function () {
   }, [state.status, dispatch, state.errorMsg])
 
   useEffect(() => {
-    debounce(() => {
+    ;(() => {
       if (querySearch.name.length >= 3) {
+        console.log(querySearch)
         dispatch(searchUsersThunk(querySearch))
       } else {
         if (querySearch.type === '') {
@@ -54,15 +55,15 @@ const InputSearchUsers = function () {
           dispatch(searchUsersThunk(searchOnlyByFilter))
         }
       }
-    }, 450)()
+    })()
   }, [querySearch, dispatch])
 
-  const handleInput = (e) => {
+  const handleInput = debounce((e) => {
     setQuerySearch({
       ...querySearch,
       [e.target.name]: e.target.value,
     })
-  }
+  }, 450)
 
   return (
     <Box>
