@@ -3,15 +3,14 @@ import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import { PrivateRoute, privateRoutes } from '../../Router/PrivateRoutes'
 import BackOfficeContent from './BackOfficeContent'
-import Sidebar from './BackOfficeSidebar'
+import HeaderBackoffice from './HeaderBackoffice'
 
 const BackOfficeHome = () => {
   return (
     <>
-      {/* {BackofficeHeader} */}
+      <HeaderBackoffice />
       <Container>
         <BackOfficeContent />
-        <Sidebar />
         <Switch>
           {privateRoutes.map(({ path, exact, component: Component }) => {
             return (
@@ -25,7 +24,6 @@ const BackOfficeHome = () => {
           </Route>
         </Switch>
       </Container>
-      {/* <Footer /> */}
     </>
   )
 }
