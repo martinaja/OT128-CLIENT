@@ -1,52 +1,101 @@
-import React from 'react'
-import {
-  useMediaQuery,
-  createTheme,
-  AppBar,
-  Box,
-  Toolbar,
-} from '@material-ui/core'
+import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { FaBars, FaTimes } from 'react-icons/fa'
+import styles from './Header.module.css'
+import logo from './logo-bco.png'
+import { arrayData } from './data'
+
+import { useSelector } from 'react-redux'
 
 const Header = () => {
-  // Breakpoints
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        mobile: 0,
-        tablet: 640,
-        laptop: 1024,
-        desktop: 1200,
-      },
-    },
-  })
+  const [isOpen, setIsOpen] = useState(false)
 
-  // const isMatchTablet = useMediaQuery(theme.breakpoints.up('tablet'))
-  // const isMatchLaptop = useMediaQuery(theme.breakpoints.up('laptop'))
-  const isMatchDesktop = useMediaQuery(theme.breakpoints.up('desktop'))
+  const toggle = () => setIsOpen(!isOpen)
+
+  let { pathname = '' } = useLocation()
+
+  const userAuth = useSelector((state) => state.auth.isAuthenticated)
 
   return (
-    <Box id="main-header" sx={{ flexGrow: 1, boxShadow: 0 }}>
-      <AppBar
-        position="static"
-        style={{
-          background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
-        }}
-      >
-        <Toolbar>
-          <Box
-            component="img"
-            sx={{
-              width: 108,
-              height: 53,
-              m: 'auto',
-              p: 1,
-            }}
-            alt="Logo ong."
-            src="/images/logo-bco.png"
-          />
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <>
+      <NavBar toggle={toggle} pathname={pathname} userAuth={userAuth} />
+      <SideBar toggle={toggle} isOpen={isOpen} userAuth={userAuth} />
+    </>
   )
 }
+
 export default Header
+
+const NavBar = ({ toggle, pathname, userAuth }) => (
+  <nav className={styles.navbar}>
+    <div className={styles.navbarContainer}>
+      <Link className={styles.navLogoLink} to="/">
+        <img src={logo} className={styles.navLogo} alt="logo" />
+      </Link>
+      <div className={styles.mobileIcon}>
+        <FaBars onClick={toggle} />
+      </div>
+      <ul className={styles.navMenu}>
+        {arrayData.map((link, key) => (
+          <li
+            className={` ${styles.navItem}  ${
+              pathname === link.path ? styles.navLinksActive : ''
+            }`}
+            key={key}
+          >
+            <Link className={styles.navLinks} to={link.path}>
+              {link.pathName}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className={styles.navBtn}>
+        {userAuth ? (
+          <Link className={styles.navBtnLink} to="/backoffice">
+            BackOffice
+          </Link>
+        ) : (
+          <Link className={styles.navBtnLink} to="/login">
+            Iniciar sesión
+          </Link>
+        )}
+      </div>
+    </div>
+  </nav>
+)
+
+const SideBar = ({ toggle, isOpen, userAuth }) => (
+  <aside
+    className={styles.sidebarContainer}
+    style={
+      isOpen ? { opacity: '100%', top: '0' } : { opacity: '0', top: '-100%' }
+    }
+    onClick={toggle}
+  >
+    <div className={styles.icon}>
+      <FaTimes className={styles.closeIcon} />
+    </div>
+    <div className={styles.sidebarWrapper}>
+      <ul className={styles.sidebarMenu}>
+        {arrayData.map((link, key) => (
+          <li className={styles.sidebarLink} key={key}>
+            <Link className={styles.sidebarLink} to={link.path}>
+              {link.pathName}
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <div className={styles.sidebarBtnWrap}>
+        {userAuth ? (
+          <Link className={styles.sidebarRoute} to="/backoffice">
+            BackOffice
+          </Link>
+        ) : (
+          <Link to={'/signin'} className={styles.sidebarRoute}>
+            Iniciar sesión
+          </Link>
+        )}
+      </div>
+    </div>
+  </aside>
+)
