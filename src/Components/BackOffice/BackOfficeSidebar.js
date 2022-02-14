@@ -63,7 +63,6 @@ export default function Sidebar() {
 
   useEffect(() => {
     setOpen(false)
-    console.log(history.location.pathname)
   }, [history.location.pathname])
 
   return (
