@@ -22,14 +22,9 @@ export default function NewsTable() {
       width: 70,
 
       renderCell: (params) => {
-        const onClick = (e) => {
-          e.stopPropagation()
-          console.log('action->', params.field, 'id->', params.id)
-        }
-
         return (
           <Button component={Link} to={`/backoffice/news/create/${params.id}`}>
-            <EditIcon color="primary" onClick={onClick} />
+            <EditIcon color="primary" />
           </Button>
         )
       },

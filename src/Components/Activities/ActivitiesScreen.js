@@ -13,7 +13,6 @@ import {
 } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import Sidebar from '../BackOffice/BackOfficeSidebar'
 import { ActivitiesSearch } from './ActivitiesSearch'
 
 const ActivitieRow = ({ activitie }) => {
@@ -55,7 +54,6 @@ const ActivitiesScreen = () => {
 
   return (
     <Container>
-      <Sidebar />
       <ActivitiesSearch />
       <TableContainer
         component={Paper}

@@ -17,7 +17,6 @@ import { Link, useHistory } from 'react-router-dom'
 import { fetchMember } from '../../features/members/membersReducer'
 import { deleteMembers } from '../../Services/apiServices/membersApiService'
 import { alertServiceConfirm, alertServiceError } from '../AlertService'
-import Sidebar from '../BackOffice/BackOfficeSidebar'
 import { MemberSearch } from './MemberSearch'
 
 const MemberRow = ({ member }) => {
@@ -89,7 +88,6 @@ const MembersScreen = () => {
 
   return (
     <Container>
-      <Sidebar />
       <MemberSearch />
       <TableContainer
         component={Paper}
