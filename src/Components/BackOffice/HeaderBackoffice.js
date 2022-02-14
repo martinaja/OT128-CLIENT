@@ -1,11 +1,7 @@
 import React from 'react'
-import {
-  useMediaQuery,
-  createTheme,
-  AppBar,
-  Box,
-  Toolbar,
-} from '@material-ui/core'
+import { useMediaQuery, createTheme, AppBar, Box } from '@material-ui/core'
+import Sidebar from './BackOfficeSidebar'
+import { Link } from 'react-router-dom'
 
 const HeaderBackoffice = () => {
   // Breakpoints
@@ -27,24 +23,31 @@ const HeaderBackoffice = () => {
   return (
     <Box sx={{ flexGrow: 1, boxShadow: 0 }}>
       <AppBar
-        position="static"
+        position="relative"
         style={{
-          background: isMatchDesktop ? 'rgba(53,133,139,0.7)' : 'rgb(7,34,39)',
+          background: isMatchDesktop ? 'rgba(7,34,39,0.7)' : 'rgb(7,34,39)',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '.5rem',
         }}
       >
-        <Toolbar>
+        <Link to="/">
           <Box
             component="img"
             sx={{
-              width: 108,
-              height: 53,
-              m: 'auto',
+              height: 60,
+              ml: isMatchDesktop ? 0 : 'auto',
+              mr: isMatchDesktop && 0,
               p: 1,
+              paddingLeft: '18px',
             }}
             alt="Logo ong."
-            src="/images/logo-letras-blancas.png"
+            src="/images/logo-bco.png"
           />
-        </Toolbar>
+        </Link>
+        <Sidebar />
       </AppBar>
     </Box>
   )
