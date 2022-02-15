@@ -5,8 +5,7 @@ import { getOrganization } from './../../Services/apiServices/organizationApiSer
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
 import SlidesSearch from '../Slides/SlidesSearch'
-
-
+import ContactMap from '../Contact/ContactMap'
 
 function Index() {
   const [loader, setLoader] = useState(false)
