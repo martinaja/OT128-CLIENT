@@ -9,6 +9,9 @@ import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
 import RegisterForm from '../Components/Auth/RegisterForm';
+import { Donations } from '../Components/Donations/Donations'
+import { Thankyou } from './../Components/Donations/Thankyou';
+
 
 export const publicRoutes = [
   {
@@ -65,5 +68,15 @@ export const publicRoutes = [
     path: '/home/news',
     exact: true,
     component: NewsList,
+  },
+  {
+    path: '/donations',
+    exact: true,
+    component: {Donations},
+  },
+  {
+    path: '/gracias',
+    exact: true,
+    component: {Thankyou},
   },
 ]
