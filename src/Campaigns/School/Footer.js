@@ -4,8 +4,7 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import React from 'react'
-import '../../Components/Footer/Footer.css'
-;
+import '../../Components/PublicWeb/Footer/Footer.css'
 
 function Footer() {
   return (
@@ -22,15 +21,11 @@ function Footer() {
             className="center"
           >
             <img
-alt="Logo ong."
-src="/images/school-bco.png"
-className="logo"
-/>
-            
+              alt="Logo ong."
+              src="/images/school-bco.png"
+              className="logo"
+            />
           </Grid>
-
-       
-         
 
           <Grid item md={12} sm={12} className="social">
             <hr className="social__hr" />
