@@ -15,8 +15,8 @@ const PublicContent = () => {
             </Route>
           )
         })}
-        <Route path="*">
-          <Redirect to="/404" />
+        <Route path="/home/*">
+          <Redirect push to="/404" />
         </Route>
       </Switch>
       <Footer />

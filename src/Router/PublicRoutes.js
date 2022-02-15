@@ -5,7 +5,6 @@ import NewsList from '../Components/News/NewsList'
 import UserForm from '../Components/Users/UsersForm'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
-import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
@@ -19,7 +18,7 @@ export const publicRoutes = [
   },
   {
     path: '/home/contacto',
-    exact: false,
+    exact: true,
     component: ContactHome,
   },
   {
@@ -34,32 +33,27 @@ export const publicRoutes = [
   },
   {
     path: '/home/nosotros',
-    exact: false,
+    exact: true,
     component: About,
   },
   {
     path: '/home/create-user',
-    exact: false,
+    exact: true,
     component: UserForm,
   },
   {
     path: '/home/school-campaign',
-    exact: false,
+    exact: true,
     component: SchoolCampaign,
   },
   {
     path: '/home/toys-campaign',
-    exact: false,
+    exact: true,
     component: ToysCampaign,
   },
   {
-    path: '/home/login',
-    exact: false,
-    component: LoginForm,
-  },
-  {
     path: '/home/activities/',
-    exact: false,
+    exact: true,
     component: Activities,
   },
   {
@@ -69,7 +63,7 @@ export const publicRoutes = [
   },
   {
     path: '/home/news',
-    exact: false,
+    exact: true,
     component: NewsList,
   },
 ]
