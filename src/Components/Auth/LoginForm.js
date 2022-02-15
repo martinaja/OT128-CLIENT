@@ -117,7 +117,7 @@ const dispatch = useDispatch();
             </Button>
               <Grid container>
                 <Grid item>
-                  <Link component={RouterLink} to='/register'>
+                  <Link component={RouterLink} to='/home/register'>
                     {'No tiene una cuenta? Registrese'}
                   </Link>
                 </Grid>
