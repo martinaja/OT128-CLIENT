@@ -5,16 +5,18 @@ import {
   Redirect,
 } from 'react-router-dom'
 import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
-import { publicRoutes } from './PublicRoutes'
+import PublicContent from '../Components/PublicWeb/PublicContent'
+import NotFound from '../Components/NotFound/NotFound'
 
 export const Routes = () => {
   return (
     <Router>
       <Switch>
-        {publicRoutes}
+        <Redirect exact from="/" to="/home" />
+        <Route path="/home" component={PublicContent} />
         <Route path="/backoffice" component={BackOfficeHome} />
-        <Route path="*">
-          <Redirect to="/404" />
+        <Route path="/404">
+          <NotFound />
         </Route>
       </Switch>
     </Router>

@@ -29,7 +29,7 @@ export default Header
 const NavBar = ({ toggle, pathname, userAuth }) => (
   <nav className={styles.navbar}>
     <div className={styles.navbarContainer}>
-      <Link className={styles.navLogoLink} to="/">
+      <Link className={styles.navLogoLink} to="/home">
         <img src={logo} className={styles.navLogo} alt="logo" />
       </Link>
       <div className={styles.mobileIcon}>
