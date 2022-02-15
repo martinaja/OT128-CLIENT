@@ -16,6 +16,7 @@ import { Link } from 'react-router-dom'
 import { ActivitiesSearch } from './ActivitiesSearch'
 
 const ActivitieRow = ({ activitie }) => {
+  const createdAt = activitie['created_at'].slice(0, 10)
   return (
     <TableRow
       key={activitie.name}
@@ -33,7 +34,7 @@ const ActivitieRow = ({ activitie }) => {
         />
       </TableCell>
       <TableCell align="right">
-        <Typography variant="body">{activitie.createdAt}</Typography>
+        <Typography variant="body">{createdAt}</Typography>
       </TableCell>
       <TableCell align="right">
         <Button sx={{ m: 1 }} variant="contained" color="success">
