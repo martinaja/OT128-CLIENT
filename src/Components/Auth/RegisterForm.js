@@ -90,7 +90,6 @@ const FormLogic = () => {
           })}
           onSubmit={(values) => {
             const { name, email, password } = values
-
             dispatch(userRegister({ name, email, password }))
           }}
         >

@@ -6,6 +6,7 @@ import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
 
 import SearchNewsBackoffice from './../News/SearchNews/SearchNewsBackoffice';
+import { DonationsMp } from './../Donations/DonationsMp';
 
 
 
@@ -43,6 +44,7 @@ function Index() {
   ) : (
     <div>
       <Container>
+      <DonationsMp/>
       <SearchNewsBackoffice/>
         {data ? <h1>{data.welcome_text}</h1> : null}
         {/* <SlidesList/> */}
