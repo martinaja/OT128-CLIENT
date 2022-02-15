@@ -44,7 +44,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/activities/create/:id',
-    exact: true,
+    exact: false,
     component: ActivitiesForm,
   },
   {
@@ -59,7 +59,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/categories/create/:id',
-    exact: true,
+    exact: false,
     component: CategoriesForm,
   },
   {
@@ -74,7 +74,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/news/create/:newsId',
-    exact: true,
+    exact: false,
     component: NewsForm,
   },
   {
