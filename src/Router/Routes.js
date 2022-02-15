@@ -1,16 +1,22 @@
-import { BrowserRouter, Switch } from 'react-router-dom'
-import { PrivateRoutes } from './PrivateRoutes'
-import { PublicRoutes } from './PublicRoutes'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
+import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
+import { publicRoutes } from './PublicRoutes'
 
 export const Routes = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Switch>
-        <PublicRoutes />
+        {publicRoutes}
+        <Route path="/backoffice" component={BackOfficeHome} />
+        <Route path="*">
+          <Redirect to="/404" />
+        </Route>
       </Switch>
-      <Switch>
-        <PrivateRoutes />
-      </Switch>
-    </BrowserRouter>
+    </Router>
   )
 }

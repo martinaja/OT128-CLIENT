@@ -10,50 +10,60 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material'
-import { Link } from 'react-router-dom'
-
-const mock = [
-  {
-    id: 1,
-    name: 'John Doe',
-    image: 'https://picsum.photos/200/200',
-  },
-  {
-    id: 2,
-    name: 'Freddy Mercury',
-    image: 'https://picsum.photos/200/200',
-  },
-  {
-    id: 3,
-    name: 'Frank Sinatra',
-    image: 'https://picsum.photos/200/200',
-  },
-]
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
+import { fetchMember } from '../../features/members/membersReducer'
+import { deleteMembers } from '../../Services/apiServices/membersApiService'
+import { alertServiceConfirm, alertServiceError } from '../AlertService'
+import { MemberSearch } from './MemberSearch'
 
 const MemberRow = ({ member }) => {
+  const { id, name, image } = member
+  const history = useHistory()
+
+  const removeMember = () => {
+    alertServiceConfirm(
+      '¿Está seguro de eliminar este miembro?',
+      'Aceptar',
+      () => {
+        deleteMembers(id)
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      },
+    )
+  }
+
   return (
     <TableRow
       key={member.name}
       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
       <TableCell component="th" scope="row">
-        {member.name}
+        {name}
       </TableCell>
       <TableCell>
         <Avatar
-          src={member.image}
-          alt={member.name}
+          src={image}
+          alt={name}
           variant="square"
           sx={{ width: 120, height: 120, margin: 'auto' }}
         />
       </TableCell>
       <TableCell align="right">
-        <Button sx={{ m: 1 }} variant="contained" color="success">
+        <Button
+          sx={{ m: 1 }}
+          variant="contained"
+          color="success"
+          onClick={() => history.push(`/backoffice/members/create/${id}`)}
+        >
           Editar
         </Button>
       </TableCell>
       <TableCell align="right">
-        <Button variant="contained" color="success">
+        <Button variant="contained" color="success" onClick={removeMember}>
           Eliminar
         </Button>
       </TableCell>
@@ -62,8 +72,23 @@ const MemberRow = ({ member }) => {
 }
 
 const MembersScreen = () => {
+  const dispatch = useDispatch()
+
+  const { status, members, errMsg } = useSelector((state) => state.members)
+
+  useEffect(() => {
+    if (status === 'idle') {
+      dispatch(fetchMember())
+    }
+
+    if (status === 'error') {
+      alertServiceError(errMsg, 'No se pudo editar la información')
+    }
+  }, [dispatch, status, errMsg])
+
   return (
     <Container>
+      <MemberSearch />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}
@@ -87,7 +112,7 @@ const MembersScreen = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mock.map((member) => (
+            {members.map((member) => (
               <MemberRow key={member.id} member={member} />
             ))}
           </TableBody>

@@ -5,9 +5,13 @@ import EditIcon from '@mui/icons-material/Edit'
 import { Box, Button } from '@mui/material'
 import { alertServiceConfirm } from '../AlertService'
 import { Link } from 'react-router-dom'
-import AddIcon from '@mui/icons-material/Add'
+import { useDispatch, useSelector } from 'react-redux'
+import Spinner from '../Spinner'
 
 const TableUsers = () => {
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state.users)
+
   // function call to delete user
   const deleteUser = (params) => {
     console.log('action->', params.field, 'id->', params.id)
@@ -19,17 +23,15 @@ const TableUsers = () => {
       field: 'edit',
       headerName: 'Editar',
       sortable: false,
+      width: 70,
 
       renderCell: (params) => {
-        const onClick = (e) => {
-          e.stopPropagation()
-          console.log('action->', params.field, 'id->', params.id)
-        }
-
         return (
-          <Button>
-            <EditIcon color="primary" onClick={onClick} />
-          </Button>
+          <Button
+            component={Link}
+            to={`/backoffice/users/create/${params.id}`}
+            endIcon={<EditIcon />}
+          />
         )
       },
     },
@@ -37,6 +39,7 @@ const TableUsers = () => {
       field: 'delete',
       headerName: 'Borrar',
       sortable: false,
+      width: 70,
 
       renderCell: (params) => {
         const onClick = (e) => {
@@ -62,7 +65,7 @@ const TableUsers = () => {
       field: 'email',
       headerName: 'Correo Electrónico',
       name: 'Email de contacto',
-      width: 180,
+      width: 270,
     },
   ]
 
@@ -83,7 +86,7 @@ const TableUsers = () => {
   return (
     <Box
       width={{ sx: '100%', md: '600px' }}
-      style={{ height: 600, backgroundColor: 'white', margin: 'auto' }}
+      style={{ margin: 'auto', backgroundColor: 'white' }}
     >
       <Link to="/backoffice/users/create" style={{ textDecoration: 'none' }}>
         <Button variant="outlined" sx={{ m: 2 }}>
@@ -91,12 +94,17 @@ const TableUsers = () => {
           Crear nuevo usuario
         </Button>
       </Link>
-      <DataGrid
-        rows={mock}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-      />
+      {state.loader ? (
+        <Spinner />
+      ) : (
+        <DataGrid
+          rows={state.users}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          style={{ height: 600 }}
+        />
+      )}
     </Box>
   )
 }

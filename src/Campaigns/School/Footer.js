@@ -4,7 +4,8 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import React from 'react'
-import './Footer.css'
+import '../../Components/Footer/Footer.css'
+;
 
 function Footer() {
   return (
@@ -21,11 +22,6 @@ function Footer() {
             className="center"
           >
             <img
-              alt="Logo ong."
-              src="/images/salvavidas-color.png"
-              className="logo"
-            />
-            <img
 alt="Logo ong."
 src="/images/school-bco.png"
 className="logo"
@@ -33,26 +29,7 @@ className="logo"
             
           </Grid>
 
-          <Grid item container md sm={12}>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Noticias</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Actividades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Novedades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Testimonios </div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Nosotros</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Contacto</div>
-            </Grid>
-          </Grid>
+       
          
 
           <Grid item md={12} sm={12} className="social">

@@ -1,12 +1,13 @@
-import { Box, Container } from '@mui/material'
+import { Container } from '@mui/material'
 import React from 'react'
-import Footer from '../Footer/Footer'
+import InputSearchUsers from './InputSearchUser'
 import TableUsers from './TableUsers'
 
 const UsersHome = () => {
   return (
     <Container sx={{ alignItems: 'center', textAlign: 'center' }}>
       <h2>Tabla de Usuarios</h2>
+      <InputSearchUsers />
       <TableUsers />
     </Container>
   )

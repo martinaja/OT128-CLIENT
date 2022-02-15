@@ -11,28 +11,9 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
-const mock = [
-  {
-    id: 1,
-    name: 'Actividad 1',
-    image: 'https://picsum.photos/200/200',
-    createdAt: '2020-01-01',
-  },
-  {
-    id: 2,
-    name: 'Actividad 2',
-    image: 'https://picsum.photos/200/200',
-    createdAt: '2020-01-01',
-  },
-  {
-    id: 3,
-    name: 'Actividad 3',
-    image: 'https://picsum.photos/200/200',
-    createdAt: '2020-01-01',
-  },
-]
+import { ActivitiesSearch } from './ActivitiesSearch'
 
 const ActivitieRow = ({ activitie }) => {
   return (
@@ -69,8 +50,11 @@ const ActivitieRow = ({ activitie }) => {
 }
 
 const ActivitiesScreen = () => {
+  const response = useSelector((state) => state.activities)
+
   return (
     <Container>
+      <ActivitiesSearch />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}
@@ -95,7 +79,7 @@ const ActivitiesScreen = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {mock.map((activitie) => (
+            {response.activities.map((activitie) => (
               <ActivitieRow key={activitie.id} activitie={activitie} />
             ))}
           </TableBody>

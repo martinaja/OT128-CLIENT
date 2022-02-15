@@ -12,7 +12,7 @@ import {
   postActivity,
   putActivity,
 } from '../../Services/apiServices/activitiesApiService'
-import { alertServiceInfoTimer } from '../AlertService'
+import { alertServiceError, alertServiceInfoTimer } from '../AlertService'
 import {
   Box,
   Button,
@@ -64,18 +64,29 @@ const ActivitiesForm = () => {
         }),
       )
     }
+
+    // alert in case of fail to update or create a new activity
+    if (responseServer.error) {
+      alertServiceError(
+        responseServer.message,
+        'Se produjo un error al crear o editar una actividad.',
+      )
+    }
     setIsLoading(false)
   }
 
   useEffect(() => {
-    if (responseServer !== undefined)
+    if (responseServer?.error) {
+      alertServiceError('Error', responseServer.message)
+    } else if (responseServer?.data) {
       alertServiceInfoTimer(
-        'start',
+        'top',
         'info',
         responseServer.data.message,
         false,
         3000,
       )
+    }
 
     setTimeout(() => {
       setResponseServer(undefined)
