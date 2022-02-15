@@ -33,10 +33,6 @@ export const PrivateRoute = ({ children, ...rest }) => {
 
 export const privateRoutes = [
   {
-    path: '/backoffice',
-    exact: true,
-  },
-  {
     path: '/backoffice/activities',
     exact: true,
     component: ActivitiesScreen,
@@ -123,7 +119,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/create-project',
-    exact: false,
+    exact: true,
     component: ProjectsForm,
   },
   {
@@ -133,7 +129,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/organization/edit',
-    exact: false,
+    exact: true,
     component: OrganizationForm,
   },
   {
