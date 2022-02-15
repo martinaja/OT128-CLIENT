@@ -1,8 +1,6 @@
 import { styled, useTheme } from '@mui/material/styles'
-import Box from '@mui/material/Box'
 import Drawer from '@mui/material/Drawer'
 import CssBaseline from '@mui/material/CssBaseline'
-import Toolbar from '@mui/material/Toolbar'
 import List from '@mui/material/List'
 import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
@@ -12,7 +10,6 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
 import { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { AppBar } from '@mui/material'
 
 const drawerWidth = 220
 
@@ -36,6 +33,10 @@ const links = [
   {
     name: 'Catetegorías',
     path: '/backoffice/categories',
+  },
+  {
+    name: 'Novedades',
+    path: '/backoffice/news',
   },
 ]
 
@@ -63,29 +64,21 @@ export default function Sidebar() {
 
   useEffect(() => {
     setOpen(false)
-    console.log(history.location.pathname)
   }, [history.location.pathname])
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <>
       <CssBaseline />
-      <AppBar
-        sx={{ backgroundColor: 'inherit', boxShadow: 'none' }}
-        position="absolute"
-        open={open}
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={handleDrawerOpen}
+        edge="start"
+        sx={{ mr: 2, ...open }}
       >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: 'none' }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+        <MenuIcon />
+      </IconButton>
+
       <Drawer
         sx={{
           width: drawerWidth,
@@ -95,13 +88,13 @@ export default function Sidebar() {
             boxSizing: 'border-box',
           },
         }}
-        variant="persistent"
-        anchor="left"
+        variant="temporary"
+        anchor="right"
         open={open}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
+            {theme.direction === 'rtl' ? (
               <ChevronLeftIcon />
             ) : (
               <ChevronRightIcon />
@@ -126,6 +119,6 @@ export default function Sidebar() {
           ))}
         </List>
       </Drawer>
-    </Box>
+    </>
   )
 }

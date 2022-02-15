@@ -11,13 +11,12 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { fetchActivities } from '../../features/activitiesReducer'
-import Sidebar from '../BackOffice/BackOfficeSidebar'
+import { ActivitiesSearch } from './ActivitiesSearch'
 
 const ActivitieRow = ({ activitie }) => {
+  const createdAt = activitie['created_at'].slice(0, 10)
   return (
     <TableRow
       key={activitie.name}
@@ -35,7 +34,7 @@ const ActivitieRow = ({ activitie }) => {
         />
       </TableCell>
       <TableCell align="right">
-        <Typography variant="body">{activitie.createdAt}</Typography>
+        <Typography variant="body">{createdAt}</Typography>
       </TableCell>
       <TableCell align="right">
         <Button sx={{ m: 1 }} variant="contained" color="success">
@@ -52,16 +51,11 @@ const ActivitieRow = ({ activitie }) => {
 }
 
 const ActivitiesScreen = () => {
-  const dispatch = useDispatch()
   const response = useSelector((state) => state.activities)
-
-  useEffect(() => {
-    dispatch(fetchActivities())
-  }, [dispatch])
 
   return (
     <Container>
-      <Sidebar />
+      <ActivitiesSearch />
       <TableContainer
         component={Paper}
         sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}
