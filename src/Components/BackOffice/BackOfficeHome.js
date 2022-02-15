@@ -15,12 +15,12 @@ const BackOfficeHome = () => {
           {privateRoutes.map(({ path, exact, component: Component }) => {
             return (
               <PrivateRoute key={path} path={path} exact={exact}>
-                {Component ? <Component /> : null}
+                <Component />
               </PrivateRoute>
             )
           })}
-          <Route path="*">
-            <Redirect to="/404" />
+          <Route path="/backoffice/*">
+            <Redirect push to="/404" />
           </Route>
         </Switch>
       </Container>
