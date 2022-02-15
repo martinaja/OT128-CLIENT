@@ -4,15 +4,14 @@ import { useHistory, useParams } from 'react-router-dom'
 import { getNews } from '../../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../../AlertService'
 import Spinner from '../../Spinner'
-import { Controller, Scene } from "react-scrollmagic";
-import { Tween, Timeline } from "react-gsap";
+import { Controller, Scene } from 'react-scrollmagic'
+import { Tween, Timeline } from 'react-gsap'
 
 export default function NewsDetail() {
   const { newsId } = useParams()
   const history = useHistory()
   const [loader, setLoader] = useState(false)
   const [news, setNews] = useState(null)
-
 
   useEffect(
     () =>
@@ -41,59 +40,58 @@ export default function NewsDetail() {
     [newsId, history],
   )
 
-
-  return <> loader ? (
-    <Spinner />
-  ) : 
-  
-  <Controller>
-        <Box>
-          <Scene
-            duration={800}
-            pin={{ pushFollowers: true }}
-            triggerHook={0.5}
-            offset={250}
-          >
-    <Container>
-
-      <h1>{news?.name}</h1>
-      <Box
-        component="img"
-        sx={{ 
-          maxwidth: 'auto',
-          maxWidth: { xs: 350, md: 800 },
-        }}
-        alt={news?.name}
-        src={news?.image}
-      />
-        <Box component="span" sx={{ fontSize: 16, mt: 1, display: 'flex'}}>
-        {news && new Date(news.created_at).toLocaleDateString('es-AR')}
-        </Box>
-    </Container>
+  return (
+    <>
+      {' '}
+      loader ? (
+      <Spinner />) :
+      <Container>
+        <Controller>
+          <Scene duration={600} triggerHook={0.5} offset={225}>
+            <Box sx={{ flexDirection: 'column' }}>
+              <h1>{news?.name}</h1>
+              <Box
+                component="img"
+                sx={{
+                  maxwidth: 'auto',
+                  maxWidth: { xs: 350, md: 800 },
+                }}
+                alt={news?.name}
+                src={news?.image}
+              />
+              <Box
+                component="span"
+                sx={{ fontSize: 16, mt: 1, display: 'flex' }}
+              >
+                {news && new Date(news.created_at).toLocaleDateString('es-AR')}
+              </Box>
+            </Box>
           </Scene>
           <h2>Comentarios</h2>
           <Scene
-            duration={300}
+            duration={500}
             triggerHook={0.75}
-            pin={{ pushFollowers: false }}
+            pin={{ pushFollowers: true }}
+            offset={125}
           >
             {(progress) => (
-              <div className="mx-auto">
+              <Box>
                 <Timeline totalProgress={progress} paused>
                   <Timeline
-                    target={<p className="timeline">{news && String(news.content) && 'No hay comentarios'}</p>}
+                    target={
+                      <p>
+                        {news && String(news.content) && 'No hay comentarios'}
+                      </p>
+                    }
                   >
                     <Tween from={{ opacity: -1 }} to={{ opacity: 1 }} />
                   </Timeline>
-         
                 </Timeline>
-              </div>
+              </Box>
             )}
           </Scene>
-        </Box>
-      </Controller>
-
-
-
-  </>
+        </Controller>
+      </Container>
+    </>
+  )
 }
