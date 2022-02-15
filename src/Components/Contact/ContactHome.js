@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Title } from '../Title.js'
 import ContactDetails from './ContactDetails.js'
 import { ContactForm } from './ContactForm.js'
+import ContactMap from './ContactMap.js'
 
 const ContactHome = () => {
   const data = {
@@ -41,6 +42,7 @@ const ContactHome = () => {
       <Box sx={{ display: show ? 'block' : 'none' }}>
         <ContactForm />
       </Box>
+      <ContactMap />
     </Box>
   )
 }
