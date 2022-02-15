@@ -16,7 +16,6 @@ import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
 import NewsTable from '../Components/News/Table/NewsTable'
 import CategoriesHome from '../Components/Categories/CategoriesHome'
-
 import UsersHome from '../Components/Users/UsersHome'
 
 export const PrivateRoute = ({ children, ...rest }) => {
@@ -44,7 +43,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/activities/create',
-    exact: false,
+    exact: true,
     component: ActivitiesForm,
   },
   {
@@ -59,7 +58,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/categories/create',
-    exact: false,
+    exact: true,
     component: CategoriesForm,
   },
   {
@@ -74,7 +73,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/news/create',
-    exact: false,
+    exact: true,
     component: NewsForm,
   },
   {
@@ -89,7 +88,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/members/create',
-    exact: false,
+    exact: true,
     component: MembersForm,
   },
   {
@@ -104,7 +103,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/slides/create',
-    exact: false,
+    exact: true,
     component: SlidesForm,
   },
   {
@@ -114,7 +113,7 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/create-testimonials',
-    exact: false,
+    exact: true,
     component: TestimonialForm,
   },
   {
@@ -144,6 +143,11 @@ export const privateRoutes = [
   },
   {
     path: '/backoffice/users/create',
+    exact: true,
+    component: UserForm,
+  },
+  {
+    path: '/backoffice/users/create/:id',
     exact: false,
     component: UserForm,
   },

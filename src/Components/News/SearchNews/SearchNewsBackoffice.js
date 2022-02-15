@@ -20,15 +20,14 @@ export default function SearchNewsBackoffice() {
 
   // Get categories
   useEffect(() => {
-    if (categoriesStatus === 'idle' || categoriesStatus === 'delete')
-      dispatch(getCategory())
+    if (categoriesStatus === 'idle') dispatch(getCategory())
 
     if (categoriesStatus === 'error')
       alertServiceError(
         categoriesStatus.errorMsg,
         'Se produjo un error al intentar obtener las categorías',
       )
-  }, [dispatch, categoriesStatus])
+  }, [categoriesStatus, dispatch])
 
   // Get news in case delete them or error
   useEffect(() => {
@@ -42,33 +41,36 @@ export default function SearchNewsBackoffice() {
         'Se produjo un error al intentar obtener las noticias',
       )
     }
-  }, [newsState.status, dispatch, newsState.errorMsg])
+  }, [newsState.status, newsState.errorMsg, dispatch])
 
   // Filter news
   useEffect(() => {
-    if (querySearch.name?.length === 0) {
+    console.log('querySearch', querySearch)
+
+    if (querySearch.name?.length < 3 && querySearch.category !== '') {
+      const searchOnlyByFilter = {
+        name: '',
+        category: querySearch.category,
+      }
+      dispatch(fetchSearchNews(searchOnlyByFilter))
+      return
+    }
+
+    if (querySearch.name?.length < 3) {
       dispatch(fetchNew())
     }
 
-    if (querySearch.name?.length < 3 && querySearch.category !== '') return
-
-    debounce(() => {
-      if (querySearch.name?.length >= 3) {
-        dispatch(fetchSearchNews(querySearch))
-      } else if (querySearch.name?.length > 0 && querySearch.name?.length < 3) {
-        dispatch(fetchNew())
-      }
-    }, 450)()
+    if (querySearch.name?.length >= 3) {
+      dispatch(fetchSearchNews(querySearch))
+    }
   }, [querySearch, dispatch])
 
-  const handleInput = (e) => {
+  const handleInput = debounce((e) => {
     setQuerySearch({
       ...querySearch,
       [e.target.name]: e.target.value,
     })
-  }
-
-  console.log('render')
+  }, 450)
 
   return (
     <Box>

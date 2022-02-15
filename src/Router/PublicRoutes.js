@@ -1,5 +1,3 @@
-import { Route } from 'react-router-dom'
-import Index from '../Components/Home/Index'
 import NewsDetail from '../Components/News/Detail/NewsDetail'
 import About from '../Components/About/About'
 import Activities from '../Components/Activities/ActivitiesDetails'
@@ -8,28 +6,70 @@ import UserForm from '../Components/Users/UsersForm'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import LoginForm from '../Components/Auth/LoginForm'
-import RegisterForm from '../Components/Auth/RegisterForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
-import NotFound from '../Components/NotFound/NotFound'
-
+import Index from '../Components/Home/Index'
+import RegisterForm from '../Components/Auth/RegisterForm';
 
 export const publicRoutes = [
-  <Route exact path="/" component={Index} key="Index" />,
-  <Route path="/contacto" component={ContactHome} key="ContactHome" />,
-  <Route path="/novedades/:newsId" component={NewsDetail} key="NewsDetail" />,
-  <Route path="/nosotros" component={About} key="About" />,
-  <Route path="/create-user" component={UserForm} key="UserForm" />,
-  <Route
-    path="/school-campaign"
-    component={SchoolCampaign}
-    key="SchoolCampaign"
-  />,
-  <Route path="/toys-campaign" component={ToysCampaign} key="ToysCampaign" />,
-  <Route path="/login" component={LoginForm} key="LoginForm" />,
-  <Route path="/register" component={RegisterForm} key="RegisterForm" />,
-  <Route path="/activities" component={Activities} key="Activities" />,
-  <Route path="/news" component={NewsList} key="NewsList" />,
-  <Route path="/activities/:id" component={Detail} key="Detail" />,
-  <Route exact path="/404" component={NotFound} />,
+  {
+    path: '/home',
+    exact: true,
+    component: Index,
+  },
+  {
+    path: '/home/contacto',
+    exact: false,
+    component: ContactHome,
+  },
+  {
+    path: '/home/register',
+    exact: false,
+    component: RegisterForm,
+  },
+  {
+    path: '/home/novedades/:newsId',
+    exact: false,
+    component: NewsDetail,
+  },
+  {
+    path: '/home/nosotros',
+    exact: false,
+    component: About,
+  },
+  {
+    path: '/home/create-user',
+    exact: false,
+    component: UserForm,
+  },
+  {
+    path: '/home/school-campaign',
+    exact: false,
+    component: SchoolCampaign,
+  },
+  {
+    path: '/home/toys-campaign',
+    exact: false,
+    component: ToysCampaign,
+  },
+  {
+    path: '/home/login',
+    exact: false,
+    component: LoginForm,
+  },
+  {
+    path: '/home/activities/',
+    exact: false,
+    component: Activities,
+  },
+  {
+    path: '/home/activities/:id',
+    exact: false,
+    component: Detail,
+  },
+  {
+    path: '/home/news',
+    exact: false,
+    component: NewsList,
+  },
 ]

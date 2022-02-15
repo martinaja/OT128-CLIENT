@@ -7,6 +7,7 @@ import { alertServiceConfirm } from '../AlertService'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../Spinner'
+import InputSearchUsers from './InputSearchUser'
 
 const TableUsers = () => {
   const dispatch = useDispatch()
@@ -69,25 +70,12 @@ const TableUsers = () => {
     },
   ]
 
-  // mock of users
-  const mock = [
-    { id: 1, name: 'Snow Jon', email: 'Jon@gmail.com' },
-    { id: 2, name: 'Lannister Cersei', email: 'Cersei@gmail.com' },
-    { id: 3, name: 'Lannister Jaime', email: 'Jaime@gmail.com' },
-    { id: 4, name: 'Stark Arya', email: 'Arya@gmail.com' },
-    { id: 5, name: 'Targaryen Daenerys', email: 'Daenerys@gmail.com' },
-    { id: 6, name: 'Melisandre Jorge', email: 'Jorge@gmail.com' },
-    { id: 7, name: 'Clifford Ferrara', email: 'Ferrara@gmail.com' },
-    { id: 8, name: 'Frances Rossini', email: 'Rossini@gmail.com' },
-    { id: 9, name: 'Roxie Harvey', email: 'Harvey@gmail.com' },
-    { id: 10, name: 'Lautaro Zapata', email: 'Lautarogzapata@gmail.com' },
-  ]
-
   return (
     <Box
       width={{ sx: '100%', md: '600px' }}
       style={{ margin: 'auto', backgroundColor: 'white' }}
     >
+      <InputSearchUsers />
       <Link to="/backoffice/users/create" style={{ textDecoration: 'none' }}>
         <Button variant="outlined" sx={{ m: 2 }}>
           {' '}
@@ -95,7 +83,9 @@ const TableUsers = () => {
         </Button>
       </Link>
       {state.loader ? (
-        <Spinner />
+        <Box sx={{ py: 4 }}>
+          <Spinner />
+        </Box>
       ) : (
         <DataGrid
           rows={state.users}
