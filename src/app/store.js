@@ -5,7 +5,8 @@ import categoriesReducer from '../features/categories/categoriesReducer'
 import usersReducer from '../features/backofficeUsers/usersReducer'
 import membersReducer from '../features/members/membersReducer'
 import newsReducer from '../features/news/newsReducer'
-import slidesReducer from '../features/auth/slide/slidesReducer'
+import slidesReducer from '../features/slide/slidesReducer'
+
 
 const store = configureStore({
   reducer: {

@@ -8,6 +8,7 @@ import UserForm from '../Components/Users/UsersForm'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import LoginForm from '../Components/Auth/LoginForm'
+import RegisterForm from '../Components/Auth/RegisterForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import NotFound from '../Components/NotFound/NotFound'
@@ -26,6 +27,7 @@ export const publicRoutes = [
   />,
   <Route path="/toys-campaign" component={ToysCampaign} key="ToysCampaign" />,
   <Route path="/login" component={LoginForm} key="LoginForm" />,
+  <Route path="/register" component={RegisterForm} key="RegisterForm" />,
   <Route path="/activities" component={Activities} key="Activities" />,
   <Route path="/news" component={NewsList} key="NewsList" />,
   <Route path="/activities/:id" component={Detail} key="Detail" />,
