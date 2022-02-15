@@ -34,6 +34,10 @@ const links = [
     name: 'Catetegorías',
     path: '/backoffice/categories',
   },
+  {
+    name: 'Novedades',
+    path: '/backoffice/news',
+  },
 ]
 
 const DrawerHeader = styled('div')(({ theme }) => ({
