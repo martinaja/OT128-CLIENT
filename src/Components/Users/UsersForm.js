@@ -1,52 +1,85 @@
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { postPrivateHandler, putPrivateHandler } from "../../Services/BaseHTTP/privateApiService";
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import {
+  postPrivateHandler,
+  putPrivateHandler,
+} from '../../Services/BaseHTTP/privateApiService'
 
-import "../FormStyles.css";
+import '../FormStyles.css'
+import { useParams, useHistory } from 'react-router-dom'
+import { getUsers } from '../../Services/apiServices/usersApiService'
+import { useEffect, useState } from 'react'
+import { alertServiceError } from '../AlertService'
 
-const UserForm = (usuario) => {
+const UserForm = () => {
+  const { id } = useParams()
+  const history = useHistory()
+  const url = process.env.REACT_APP_API_USERS_GET
 
-  const url = process.env.REACT_APP_API_USERS_GET;
+  const [usuario, setUsuario] = useState({})
 
-console.log(url)
+  useEffect(() => {
+    if (!id) return
+    ;(async () => {
+      const response = await getUsers(id)
+      if (response.error) {
+        alertServiceError(
+          response.message,
+          'No se pudo obtener la información solicitada',
+        )
+        history.push('/backoffice/users/create')
+      }
+
+      const dataCategory = response.data?.data
+
+      if (dataCategory) {
+        setUsuario(dataCategory)
+      } else {
+        alertServiceError('No se pudo cargar la categoría', 'ID inválido')
+        history.push('/backoffice/users/create')
+      }
+    })()
+  }, [history, id])
+
   return (
     <>
       <Formik
+        enableReinitialize
         initialValues={{
-          name: usuario.name || "",
-          email: usuario.email || "",
-          role_id: usuario.role_id || "",
-          description: "",
-          photo: "",
+          name: usuario.name || '',
+          email: usuario.email || '',
+          role_id: usuario.role_id || '',
+          description: usuario.description || '',
+          photo: '',
         }}
         onSubmit={(values) => {
           if (usuario.id) {
-            putPrivateHandler(url, usuario.id, values);
+            putPrivateHandler(url, usuario.id, values)
           } else {
-            console.log("usuario no existe");
-            postPrivateHandler(url, values);
+            console.log('usuario no existe')
+            postPrivateHandler(url, values)
           }
-          console.log(values);
+          console.log(values)
         }}
         validationSchema={Yup.object({
           name: Yup.string()
-            .min(4, "Debe tener mínimo 4 caracteres")
-            .required("Campo obligatorio"),
+            .min(4, 'Debe tener mínimo 4 caracteres')
+            .required('Campo obligatorio'),
           email: Yup.string()
-            .email("Debe ingresar un email valido")
-            .required("Campo obligatorio"),
-          role_id: Yup.string().required("Seleccione una opción"),
+            .email('Debe ingresar un email valido')
+            .required('Campo obligatorio'),
+          role_id: Yup.string().required('Seleccione una opción'),
           description: Yup.string()
-            .min(10, "Debe tener mínimo 10 caracteres")
-            .required("Campo obligatorio"),
+            .min(10, 'Debe tener mínimo 10 caracteres')
+            .required('Campo obligatorio'),
           photo: Yup.mixed().test(
-            "format",
-            "Formatos permitidos .jpg .jpeg .png",
+            'format',
+            'Formatos permitidos .jpg .jpeg .png',
             (value) => {
               if (value !== undefined) {
-                return /(.jpg|.jpeg|.png)$/i.test(value);
-              } else return true;
-            }
+                return /(.jpg|.jpeg|.png)$/i.test(value)
+              } else return true
+            },
           ),
         })}
       >
@@ -99,7 +132,7 @@ console.log(url)
         )}
       </Formik>
     </>
-  );
-};
+  )
+}
 
-export default UserForm;
+export default UserForm
