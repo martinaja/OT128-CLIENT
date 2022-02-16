@@ -11,72 +11,70 @@ import Index from '../Components/Home/Index'
 import RegisterForm from '../Components/Auth/RegisterForm';
 import { Donations } from '../Components/Donations/Donations'
 import { Thankyou } from './../Components/Donations/Thankyou';
+import { Route, Switch, Redirect } from 'react-router-dom'
+import LoginForm from '../Components/Auth/LoginForm'
 
 
-export const publicRoutes = [
-  {
-    path: '/home',
-    exact: true,
-    component: Index,
-  },
-  {
-    path: '/home/contacto',
-    exact: true,
-    component: ContactHome,
-  },
-  {
-    path: '/home/register',
-    exact: false,
-    component: RegisterForm,
-  },
-  {
-    path: '/home/novedades/:newsId',
-    exact: false,
-    component: NewsDetail,
-  },
-  {
-    path: '/home/nosotros',
-    exact: true,
-    component: About,
-  },
-  {
-    path: '/home/create-user',
-    exact: true,
-    component: UserForm,
-  },
-  {
-    path: '/home/school-campaign',
-    exact: true,
-    component: SchoolCampaign,
-  },
-  {
-    path: '/home/toys-campaign',
-    exact: true,
-    component: ToysCampaign,
-  },
-  {
-    path: '/home/activities/',
-    exact: true,
-    component: Activities,
-  },
-  {
-    path: '/home/activities/:id',
-    exact: false,
-    component: Detail,
-  },
-  {
-    path: '/home/news',
-    exact: true,
-    component: NewsList,
-  },
-  {
-    path: '/donations',
-    exact: true,
-    component: Donations,
-  },
-  {
-    path: '/gracias',
-    exact: true,
-    component: Thankyou,
-  },
-]
+export const PublicRoutes = () => (
+  <Switch>
+    <Route exact path="/">
+      <Index />
+    </Route>
+
+    <Route exact path="/contacto">
+      <ContactHome />
+    </Route>
+
+    <Route exact path="/nosotros">
+      <About />
+    </Route>
+
+    <Route exact path="/create-user">
+      <UserForm />
+    </Route>
+
+    <Route exact path="/school-campaign">
+      <SchoolCampaign />
+    </Route>
+
+    <Route exact path="/toys-campaign">
+      <ToysCampaign />
+    </Route>
+
+    <Route exact path="/activities">
+      <Activities />
+    </Route>
+
+    <Route exact path="/news">
+      <NewsList />
+    </Route>
+
+    <Route path="/news/:newsId">
+      <NewsDetail />
+    </Route>
+
+    <Route path="/activities/:id">
+      <Detail />
+    </Route>
+
+    <Route path="/login">
+      <LoginForm />
+    </Route>
+
+    <Route path="/register">
+      <RegisterForm />
+    </Route>
+
+    <Route path="/donations">
+      <Donations />
+    </Route>
+
+    <Route path="/gracias">
+      <Thankyou />
+    </Route>
+
+    <Route path="*">
+      <Redirect to="/error-404" />
+    </Route>
+  </Switch>
+)

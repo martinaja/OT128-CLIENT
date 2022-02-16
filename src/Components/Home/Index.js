@@ -4,6 +4,7 @@ import { Container } from '@mui/material'
 import { getOrganization } from './../../Services/apiServices/organizationApiService'
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
+import SlidesSearch from '../Slides/SlidesSearch'
 
 function Index() {
   const [loader, setLoader] = useState(false)
@@ -14,7 +15,7 @@ function Index() {
       (async () => {
         setLoader(true)
         const response = await getOrganization()
-
+        console.log(response)
         if (response.error) {
           alertServiceError(
             response.message,
@@ -23,7 +24,7 @@ function Index() {
         }
 
         const organizationData = response.data?.data
-
+        console.log(organizationData)
         organizationData
           ? setData(organizationData)
           : alertServiceError(
@@ -39,6 +40,7 @@ function Index() {
   ) : (
     <div>
       <Container>
+        <SlidesSearch />
         {data ? <h1>{data.welcome_text}</h1> : null}
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>

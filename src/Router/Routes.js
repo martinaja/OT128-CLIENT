@@ -1,34 +1,38 @@
-import { Switch, Route, Redirect } from 'react-router-dom'
-import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
+import { Route, Switch, Redirect } from 'react-router-dom'
+
 import PublicContent from '../Components/PublicWeb/PublicContent'
-import NotFound from '../Components/NotFound/NotFound'
+import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
 import LoginForm from '../Components/Auth/LoginForm'
 import RegisterForm from '../Components/Auth/RegisterForm'
+import NotFound from '../Components/NotFound/NotFound'
+import { PrivateRoute } from './PrivateRoutes'
 
 export const Routes = () => {
   return (
-    <>
-      <Switch>
-        <Route exact path="/404">
-          <NotFound />
-        </Route>
+    <Switch>
+      <Route path="/error-404">
+        <NotFound />
+      </Route>
 
-        <Redirect exact from="/" to="/home" />
+      <PrivateRoute path="/backoffice">
+        <BackOfficeHome />
+      </PrivateRoute>
 
-        <Route path="/home">
-          <PublicContent />
-        </Route>
+      <Route exact path="/login">
+        <LoginForm />
+      </Route>
 
-        <Route path="/backoffice">
-          <BackOfficeHome />
-        </Route>
+      <Route exact path="/register">
+        <RegisterForm />
+      </Route>
 
-        <Route path="/login" component={LoginForm} />
+      <Route path="/">
+        <PublicContent />
+      </Route>
 
-        <Route path="/register" component={RegisterForm} />
-
-        <Route path="/*" component={NotFound} />
-      </Switch>
-    </>
+      <Route path="*">
+        <Redirect to="/error-404" />
+      </Route>
+    </Switch>
   )
 }
