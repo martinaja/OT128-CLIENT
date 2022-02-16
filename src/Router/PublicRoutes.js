@@ -8,8 +8,11 @@ import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
-
+import { Donations } from '../Components/Donations/Donations'
+import { Thankyou } from './../Components/Donations/Thankyou';
 import { Route, Switch, Redirect } from 'react-router-dom'
+
+
 
 export const PublicRoutes = () => (
   <Switch>
@@ -51,6 +54,14 @@ export const PublicRoutes = () => (
 
     <Route path="/activities/:id">
       <Detail />
+    </Route>
+
+    <Route path="/donations">
+      <Donations />
+    </Route>
+
+    <Route path="/gracias">
+      <Thankyou />
     </Route>
 
     <Route path="*">

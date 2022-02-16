@@ -1,102 +1,147 @@
 import React from 'react'
-import '../FormStyles.css'
+import Avatar from '@material-ui/core/Avatar'
+import Button from '@material-ui/core/Button'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Link from '@material-ui/core/Link'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
+import { Formik, Form } from 'formik'
+import * as Yup from 'yup'
+import { Link as RouterLink, Redirect } from 'react-router-dom'
+import { FormTextInput as TextInput } from './VisualComponents/Inputs'
+import { userRegister } from './../../features/auth/authReducer'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { Formik, Form, Field, ErrorMessage } from 'formik'
+export default function RegisterForm() {
+  const authData = useSelector(({ auth }) => auth)
 
-const RegisterForm = () => {
-  const validateFields = (values) => {
-    // Checks user input is valid
-
-    const errors = {}
-
-    if (!values.email) {
-      errors.email = '* campo obligatorio'
-    }
-    if (!values.password) {
-      errors.password = '* campo obligatorio'
-    }
-    if (!values.confirmPassword) {
-      errors.confirmPassword = '* campo obligatorio'
-    }
-
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = '* direccion de email incorrecta'
-    }
-    if (values.password !== values.confirmPassword)
-      errors.confirmPassword = '* las contraseñas deben coincidir'
-    if (values.password.length < 6) {
-      errors.password = '* a longitud minima es 6'
-    }
-    if (
-      !/^(?=.*\d)(?=.*[a-zA-Záéíóúüñ])(?=.*[$-/:-?{-~!"^_`\[\]])/.test(
-        values.password,
-      )
-    ) {
-      errors.password = '* la contraseña no cumple los parametros solicitados'
-    }
-
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = '* direccion de email incorrecta'
-    }
-    if (values.password !== values.confirmPassword)
-      errors.confirmPassword = '* las contraseñas deben coincidir'
-    if (values.password.length < 6) {
-      errors.password = '* a longitud minima es 6'
-    }
-    if (
-      !/^(?=.*\d)(?=.*[a-zA-Záéíóúüñ])(?=.*[$-/:-?{-~!"^_`\[\]])/.test(
-        values.password,
-      )
-    ) {
-      errors.password = '* la contraseña no cumple los parametros solicitados'
-    }
-
-    return errors
+  if (authData.isAuthenticated) {
+    return <Redirect push to="/backoffice" />
   }
 
-  const handleSubmit = (values) => {
-    const userInfo = {
-      user: values.email,
-      password: values.password,
-    }
-  }
-
-  return (
-    <Formik
-      initialValues={{ email: '', password: '', confirmPassword: '' }}
-      validate={validateFields}
-      onSubmit={(values) => handleSubmit(values)}
-    >
-      {({ isSubmitting }) => (
-        <Form className="form-container">
-          <Field
-            type="email"
-            name="email"
-            className="input-field"
-            placeholder="Ingrese email"
-          />
-          <ErrorMessage name="email" component="div" />
-          <Field
-            type="password"
-            name="password"
-            className="input-field"
-            placeholder="Ingrese contraseña"
-          />
-          <ErrorMessage name="password" component="div" />
-          <Field
-            type="password"
-            name="confirmPassword"
-            className="input-field"
-            placeholder="Confirme su contraseña"
-          />
-          <ErrorMessage name="confirmPassword" component="div" />
-          <button type="submit-btn" disabled={isSubmitting}>
-            Registrarse
-          </button>
-        </Form>
-      )}
-    </Formik>
-  )
+  return <FormLogic authData={authData} />
 }
 
-export default RegisterForm
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}))
+
+const FormLogic = () => {
+  const classes = useStyles()
+  const dispatch = useDispatch()
+
+  return (
+    <Container
+      component="main"
+      maxWidth="xs"
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '2rem',
+      }}
+    >
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <Formik
+          initialValues={{
+            name: '',
+            email: '',
+            password: '',
+            mailerConsent: false,
+          }}
+          validationSchema={Yup.object({
+            name: Yup.string().required('Required'),
+
+            email: Yup.string()
+              .email('Invalid email address')
+              .required('Required'),
+            password: Yup.string()
+              .required('Required')
+              .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&.*])(?=.{8,})/,
+                'Password must contain at least one upper case character, one lower case character, one number, and must be at least 8 characters long',
+              ),
+          })}
+          onSubmit={(values) => {
+            const { name, email, password } = values
+            dispatch(userRegister({ name, email, password }))
+          }}
+        >
+          <Form className={classes.form} noValidate>
+            <TextInput
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="name"
+              name="name"
+              autoComplete="name"
+              autoFocus
+            />
+
+            <TextInput
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+            />
+            <TextInput
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+            />
+
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Registrarse
+            </Button>
+          </Form>
+        </Formik>
+        <Link component={RouterLink} to="/login">
+          {'Ya tiene una cuenta? Ingrese'}
+        </Link>
+      </div>
+    </Container>
+  )
+}

@@ -45,8 +45,6 @@ export default function SearchNewsBackoffice() {
 
   // Filter news
   useEffect(() => {
-    console.log('querySearch', querySearch)
-
     if (querySearch.name?.length < 3 && querySearch.category !== '') {
       const searchOnlyByFilter = {
         name: '',
