@@ -1,16 +1,17 @@
+import { Box } from "@mui/material";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { postPrivateHandler, putPrivateHandler } from "../../Services/BaseHTTP/privateApiService";
 
-import "../FormStyles.css";
+import Swal from 'sweetalert2';
 
 const UserForm = (usuario) => {
 
   const url = process.env.REACT_APP_API_USERS_GET;
 
-console.log(url)
+
   return (
-    <>
+    <Box sx={{ pt: '60px'}}>
       <Formik
         initialValues={{
           name: usuario.name || "",
@@ -20,13 +21,30 @@ console.log(url)
           photo: "",
         }}
         onSubmit={(values) => {
-          if (usuario.id) {
+
+          Swal.fire({
+            title: 'Acepta los terminos y condiciones?',
+            text: "You won't be able to revert this!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              if (usuario.id) {
             putPrivateHandler(url, usuario.id, values);
           } else {
             console.log("usuario no existe");
             postPrivateHandler(url, values);
           }
-          console.log(values);
+              Swal.fire(
+                'Datos procesados',
+                '',
+                'success'
+              )
+            }
+          }) 
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -98,7 +116,7 @@ console.log(url)
           </Form>
         )}
       </Formik>
-    </>
+    </Box>
   );
 };
 

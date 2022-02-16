@@ -92,6 +92,7 @@ export const DonationsMp = ({ text = 'Hacer donativos' }) => {
         }}
       >
         <ImageButton
+
           focusRipple
           key={image.title}
           style={{
