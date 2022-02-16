@@ -5,18 +5,18 @@ export const arrayData = [
   },
   {
     pathName: 'Nosotros',
-    path: '/home/nosotros',
+    path: '/nosotros',
   },
   {
     pathName: 'Contacto',
-    path: '/home/contacto',
+    path: '/contacto',
   },
   {
     pathName: 'Campaña Escuela',
-    path: '/home/school-campaign',
+    path: '/school-campaign',
   },
   {
     pathName: 'Campaña Jugetes',
-    path: '/home/toys-campaign',
+    path: '/toys-campaign',
   },
 ]

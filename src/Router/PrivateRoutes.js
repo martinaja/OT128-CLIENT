@@ -1,4 +1,4 @@
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import ActivitiesForm from '../Components/Activities/ActivitiesForm'
@@ -31,120 +31,98 @@ export const PrivateRoute = ({ children, ...rest }) => {
   )
 }
 
-export const privateRoutes = [
-  {
-    path: '/backoffice/activities',
-    exact: true,
-    component: ActivitiesScreen,
-  },
-  {
-    path: '/backoffice/activities/create',
-    exact: true,
-    component: ActivitiesForm,
-  },
-  {
-    path: '/backoffice/activities/create/:id',
-    exact: false,
-    component: ActivitiesForm,
-  },
-  {
-    path: '/backoffice/categories',
-    exact: true,
-    component: CategoriesHome,
-  },
-  {
-    path: '/backoffice/categories/create',
-    exact: true,
-    component: CategoriesForm,
-  },
-  {
-    path: '/backoffice/categories/create/:id',
-    exact: false,
-    component: CategoriesForm,
-  },
-  {
-    path: '/backoffice/news',
-    exact: true,
-    component: NewsTable,
-  },
-  {
-    path: '/backoffice/news/create',
-    exact: true,
-    component: NewsForm,
-  },
-  {
-    path: '/backoffice/news/create/:newsId',
-    exact: false,
-    component: NewsForm,
-  },
-  {
-    path: '/backoffice/members',
-    exact: true,
-    component: MembersScreen,
-  },
-  {
-    path: '/backoffice/members/create',
-    exact: true,
-    component: MembersForm,
-  },
-  {
-    path: '/backoffice/members/create/:id',
-    exact: false,
-    component: MembersForm,
-  },
-  {
-    path: '/backoffice/slides',
-    exact: true,
-    component: SlidesScreen,
-  },
-  {
-    path: '/backoffice/slides/create',
-    exact: true,
-    component: SlidesForm,
-  },
-  {
-    path: '/backoffice/slides/create/:slideId',
-    exact: false,
-    component: SlidesForm,
-  },
-  {
-    path: '/backoffice/create-testimonials',
-    exact: true,
-    component: TestimonialForm,
-  },
-  {
-    path: '/backoffice/create-testimonials/:id',
-    exact: false,
-    component: TestimonialForm,
-  },
-  {
-    path: '/backoffice/create-project',
-    exact: true,
-    component: ProjectsForm,
-  },
-  {
-    path: '/backoffice/organization',
-    exact: true,
-    component: OrganizationScreen,
-  },
-  {
-    path: '/backoffice/organization/edit',
-    exact: true,
-    component: OrganizationForm,
-  },
-  {
-    path: '/backoffice/users',
-    exact: true,
-    component: UsersHome,
-  },
-  {
-    path: '/backoffice/users/create',
-    exact: true,
-    component: UserForm,
-  },
-  {
-    path: '/backoffice/users/create/:id',
-    exact: false,
-    component: UserForm,
-  },
-]
+export const PrivateRoutes = () => (
+  <Switch>
+    <PrivateRoute path="/backoffice/activities">
+      <ActivitiesScreen />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/activities/create">
+      <ActivitiesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/activities/create/:id">
+      <ActivitiesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/categories">
+      <CategoriesHome />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/categories/create">
+      <CategoriesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/categories/create/:id">
+      <CategoriesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/news">
+      <NewsTable />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/news/create">
+      <NewsForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/news/create/:newsId">
+      <NewsForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/members">
+      <MembersScreen />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/members/create">
+      <MembersForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/members/create/:id">
+      <MembersForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/slides">
+      <SlidesScreen />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/slides/create">
+      <SlidesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/slides/create/:slideId">
+      <SlidesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/create-testimonials">
+      <TestimonialForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/create-testimonials/:id">
+      <TestimonialForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/create-project">
+      <ProjectsForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/organization">
+      <OrganizationScreen />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/organization/edit">
+      <OrganizationForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/users">
+      <UsersHome />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/users/create">
+      <UserForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/users/create/:id">
+      <UserForm />
+    </PrivateRoute>
+  </Switch>
+)
