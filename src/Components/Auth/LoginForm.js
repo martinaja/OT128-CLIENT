@@ -133,7 +133,7 @@ const FormLogic = ({ authData }) => {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link component={RouterLink} to="/home/register">
+                  <Link component={RouterLink} to="/register">
                     {'No tiene una cuenta? Registrese'}
                   </Link>
                 </Grid>
