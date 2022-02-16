@@ -134,7 +134,7 @@ const FormLogic = () => {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              Registrarse
             </Button>
           </Form>
         </Formik>
