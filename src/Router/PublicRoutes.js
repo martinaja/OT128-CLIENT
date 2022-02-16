@@ -10,11 +10,16 @@ import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
 
 import { Route, Switch, Redirect } from 'react-router-dom'
+import PublicNewHome from '../Components/News/PublicNewHome'
 
 export const PublicRoutes = () => (
   <Switch>
     <Route exact path="/">
       <Index />
+    </Route>
+
+    <Route exact path="/novedades">
+      <PublicNewHome />
     </Route>
 
     <Route exact path="/contacto">
