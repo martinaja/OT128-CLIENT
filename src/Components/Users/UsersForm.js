@@ -5,39 +5,21 @@ import {
   postPrivateHandler,
   putPrivateHandler,
 } from '../../Services/BaseHTTP/privateApiService'
-import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
-import terms from '../../../src/assets/terms.pdf'
+
 
 import Swal from 'sweetalert2'
+import { Terms } from './Terms'
 import { useState } from 'react';
+
 
 const UserForm = (usuario) => {
   const url = process.env.REACT_APP_API_USERS_GET
 
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [display, setDisplay] = useState(false)
 
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
-
-  console.log(terms)
 
   return (
     <Box sx={{ pt: '60px' }}>
-  
-  <div>
-      <Document file={terms} onLoadSuccess={onDocumentLoadSuccess}>
-        <Page pageNumber={pageNumber} />
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
-      <button onClick={ () => setPageNumber( pageNumber + 1)}> Siguiente</button>
-    </div>
-
-
       <Formik
         initialValues={{
           name: usuario.name || '',
@@ -137,6 +119,11 @@ const UserForm = (usuario) => {
           </Form>
         )}
       </Formik>
+     
+      <button onClick={() => setDisplay(!display)}>Términos y condiciones</button>
+        <Box  sx={{ display: display ? 'block' : 'none' }}>
+          <Terms /> 
+        </Box>
     </Box>
   )
 }
