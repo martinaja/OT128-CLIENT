@@ -10,31 +10,31 @@ function Index() {
   const [loader, setLoader] = useState(false)
   const [data, setData] = useState()
 
-  // useEffect(
-  //   () =>
-  //     (async () => {
-  //       setLoader(true)
-  //       const response = await getOrganization()
-  //       console.log(response)
-  //       if (response.error) {
-  //         alertServiceError(
-  //           response.message,
-  //           'No se pudo obtener la información solicitada',
-  //         )
-  //       }
+  useEffect(
+    () =>
+      (async () => {
+        setLoader(true)
+        const response = await getOrganization()
+        console.log(response)
+        if (response.error) {
+          alertServiceError(
+            response.message,
+            'No se pudo obtener la información solicitada',
+          )
+        }
 
-  //       const organizationData = response.data?.data
-  //       console.log(organizationData)
-  //       organizationData
-  //         ? setData(organizationData)
-  //         : alertServiceError(
-  //             'No se pudo cargar la pagina',
-  //             'Verificá que la URL sea correcta',
-  //           )
-  //       setLoader(false)
-  //     })(),
-  //   [],
-  // )
+        const organizationData = response.data?.data
+        console.log(organizationData)
+        organizationData
+          ? setData(organizationData)
+          : alertServiceError(
+              'No se pudo cargar la pagina',
+              'Verificá que la URL sea correcta',
+            )
+        setLoader(false)
+      })(),
+    [],
+  )
   return loader ? (
     <Spinner />
   ) : (

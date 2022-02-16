@@ -6,7 +6,7 @@ import {
 } from '../BaseHTTP/privateApiService'
 
 const usersGetUrl = process.env.REACT_APP_API_USERS_GET
-const usersPostUrl = process.env.REACT_APP_API_USERS_POSTPrivate
+const usersPostUrl = process.env.REACT_APP_API_USERS_POST
 const usersPutUrl = process.env.REACT_APP_API_USERS_PUT
 const usersDeleteUrl = process.env.REACT_APP_API_USERS_DELETE
 
