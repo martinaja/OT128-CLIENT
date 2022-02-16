@@ -1,5 +1,5 @@
 import { PublicRoutes } from '../../Router/PublicRoutes'
-import Footer from './Footer/Footer'
+// import Footer from './Footer/Footer' Conflictive Footer
 import Header from './Header/Header'
 
 const PublicContent = () => {
@@ -7,7 +7,7 @@ const PublicContent = () => {
     <>
       <Header />
       <PublicRoutes />
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

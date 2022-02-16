@@ -1,6 +1,5 @@
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
 import ActivitiesForm from '../Components/Activities/ActivitiesForm'
 import CategoriesForm from '../Components/Categories/CategoriesForm'
 import NewsForm from '../Components/News/NewsForm'
@@ -33,11 +32,11 @@ export const PrivateRoute = ({ children, ...rest }) => {
 
 export const PrivateRoutes = () => (
   <Switch>
-    <PrivateRoute path="/backoffice/activities">
+    <PrivateRoute exact path="/backoffice/activities">
       <ActivitiesScreen />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/activities/create">
+    <PrivateRoute exact path="/backoffice/activities/create">
       <ActivitiesForm />
     </PrivateRoute>
 
@@ -45,11 +44,11 @@ export const PrivateRoutes = () => (
       <ActivitiesForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/categories">
+    <PrivateRoute exact path="/backoffice/categories">
       <CategoriesHome />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/categories/create">
+    <PrivateRoute exact path="/backoffice/categories/create">
       <CategoriesForm />
     </PrivateRoute>
 
@@ -57,11 +56,11 @@ export const PrivateRoutes = () => (
       <CategoriesForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/news">
+    <PrivateRoute exact path="/backoffice/news">
       <NewsTable />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/news/create">
+    <PrivateRoute exact path="/backoffice/news/create">
       <NewsForm />
     </PrivateRoute>
 
@@ -69,11 +68,11 @@ export const PrivateRoutes = () => (
       <NewsForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/members">
+    <PrivateRoute exact path="/backoffice/members">
       <MembersScreen />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/members/create">
+    <PrivateRoute exact path="/backoffice/members/create">
       <MembersForm />
     </PrivateRoute>
 
@@ -81,11 +80,11 @@ export const PrivateRoutes = () => (
       <MembersForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/slides">
+    <PrivateRoute exact path="/backoffice/slides">
       <SlidesScreen />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/slides/create">
+    <PrivateRoute exact path="/backoffice/slides/create">
       <SlidesForm />
     </PrivateRoute>
 
@@ -93,7 +92,7 @@ export const PrivateRoutes = () => (
       <SlidesForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/create-testimonials">
+    <PrivateRoute exact path="/backoffice/create-testimonials">
       <TestimonialForm />
     </PrivateRoute>
 
@@ -101,28 +100,32 @@ export const PrivateRoutes = () => (
       <TestimonialForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/create-project">
+    <PrivateRoute exact path="/backoffice/create-project">
       <ProjectsForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/organization">
+    <PrivateRoute exact path="/backoffice/organization">
       <OrganizationScreen />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/organization/edit">
+    <PrivateRoute exact path="/backoffice/organization/edit">
       <OrganizationForm />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/users">
+    <PrivateRoute exact path="/backoffice/users">
       <UsersHome />
     </PrivateRoute>
 
-    <PrivateRoute path="/backoffice/users/create">
+    <PrivateRoute exact path="/backoffice/users/create">
       <UserForm />
     </PrivateRoute>
 
     <PrivateRoute path="/backoffice/users/create/:id">
       <UserForm />
     </PrivateRoute>
+
+    <Route path="/backoffice/*">
+      <Redirect to="/error-404" />
+    </Route>
   </Switch>
 )

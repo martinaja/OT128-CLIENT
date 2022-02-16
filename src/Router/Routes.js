@@ -18,11 +18,11 @@ export const Routes = () => {
         <BackOfficeHome />
       </PrivateRoute>
 
-      <Route path="/login">
+      <Route exact path="/login">
         <LoginForm />
       </Route>
 
-      <Route path="/register">
+      <Route exact path="/register">
         <RegisterForm />
       </Route>
 
