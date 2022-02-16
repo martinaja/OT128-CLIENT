@@ -3,8 +3,6 @@ import About from '../Components/About/About'
 import Activities from '../Components/Activities/ActivitiesDetails'
 import NewsList from '../Components/News/NewsList'
 import UserForm from '../Components/Users/UsersForm'
-import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
-import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
@@ -30,14 +28,6 @@ export const PublicRoutes = () => (
 
     <Route exact path="/create-user">
       <UserForm />
-    </Route>
-
-    <Route exact path="/school-campaign">
-      <SchoolCampaign />
-    </Route>
-
-    <Route exact path="/toys-campaign">
-      <ToysCampaign />
     </Route>
 
     <Route exact path="/activities">

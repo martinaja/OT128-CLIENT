@@ -125,7 +125,7 @@ export const PrivateRoutes = () => (
     </PrivateRoute>
 
     <Route path="/backoffice/*">
-      <Redirect to="/error-404" />
+      <Redirect to="/404" />
     </Route>
   </Switch>
 )
