@@ -6,6 +6,8 @@ import { alertServiceError } from '../../AlertService'
 import Spinner from '../../Spinner'
 import { Controller, Scene } from 'react-scrollmagic'
 import { Tween, Timeline } from 'react-gsap'
+import { Title } from '../../Title'
+import parse from 'html-react-parser'
 
 export default function NewsDetail() {
   const { newsId } = useParams()
@@ -42,56 +44,56 @@ export default function NewsDetail() {
 
   return (
     <>
-      {' '}
-      loader ? (
-      <Spinner />) :
-      <Container>
-        <Controller>
-          <Scene duration={600} triggerHook={0.5} offset={225}>
-            <Box sx={{ flexDirection: 'column' }}>
-              <h1>{news?.name}</h1>
-              <Box
-                component="img"
-                sx={{
-                  maxwidth: 'auto',
-                  maxWidth: { xs: 350, md: 800 },
-                }}
-                alt={news?.name}
-                src={news?.image}
-              />
-              <Box
-                component="span"
-                sx={{ fontSize: 16, mt: 1, display: 'flex' }}
-              >
-                {news && new Date(news.created_at).toLocaleDateString('es-AR')}
+      {loader ? (
+        <Spinner />
+      ) : (
+        <Container sx={{ mt: 4 }}>
+          <Controller>
+            <Scene duration={600} triggerHook={0.5} offset={225}>
+              <Box sx={{ flexDirection: 'column' }}>
+                <Box
+                  component="span"
+                  sx={{ fontSize: 16, mt: 1, display: 'flex' }}
+                >
+                  <small>
+                    <strong>
+                      {news &&
+                        new Date(news.updated_at).toLocaleDateString('es-AR')}
+                    </strong>
+                  </small>
+                </Box>
+
+                <Title image={news?.image}>{news?.name}</Title>
+
+                <Box sx={{ my: 5 }}>{news && parse(news.content)}</Box>
               </Box>
-            </Box>
-          </Scene>
-          <h2>Comentarios</h2>
-          <Scene
-            duration={500}
-            triggerHook={0.75}
-            pin={{ pushFollowers: true }}
-            offset={125}
-          >
-            {(progress) => (
-              <Box>
-                <Timeline totalProgress={progress} paused>
-                  <Timeline
-                    target={
-                      <p>
-                        {news && String(news.content) && 'No hay comentarios'}
-                      </p>
-                    }
-                  >
-                    <Tween from={{ opacity: -1 }} to={{ opacity: 1 }} />
+            </Scene>
+            <h2>Comentarios</h2>
+            <Scene
+              duration={500}
+              triggerHook={0.75}
+              pin={{ pushFollowers: true }}
+              offset={125}
+            >
+              {(progress) => (
+                <Box>
+                  <Timeline totalProgress={progress} paused>
+                    <Timeline
+                      target={
+                        <p>
+                          {news && String(news.content) && 'No hay comentarios'}
+                        </p>
+                      }
+                    >
+                      <Tween from={{ opacity: -1 }} to={{ opacity: 1 }} />
+                    </Timeline>
                   </Timeline>
-                </Timeline>
-              </Box>
-            )}
-          </Scene>
-        </Controller>
-      </Container>
+                </Box>
+              )}
+            </Scene>
+          </Controller>
+        </Container>
+      )}
     </>
   )
 }

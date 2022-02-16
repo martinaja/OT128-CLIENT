@@ -22,6 +22,10 @@ export const PublicRoutes = () => (
       <PublicNewHome />
     </Route>
 
+    <Route path="/novedades/:newsId">
+      <NewsDetail />
+    </Route>
+
     <Route exact path="/contacto">
       <ContactHome />
     </Route>
@@ -44,14 +48,6 @@ export const PublicRoutes = () => (
 
     <Route exact path="/activities">
       <Activities />
-    </Route>
-
-    <Route exact path="/news">
-      <NewsList />
-    </Route>
-
-    <Route path="/news/:newsId">
-      <NewsDetail />
     </Route>
 
     <Route path="/activities/:id">

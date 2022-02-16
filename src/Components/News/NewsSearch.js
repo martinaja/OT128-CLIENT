@@ -1,39 +1,39 @@
-import React, { useState } from 'react';
-import { debounce } from 'lodash';
-import './NewsSearch.css';
+import React, { useState } from 'react'
+import { debounce } from 'lodash'
+import './NewsSearch.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchNew, fetchSearchNews } from '../../features/news/newsReducer'
+import { Typography } from '@mui/material'
 
 const NewsSearch = function () {
-  const [searchedTitle, setSearchedTitle] = useState('');
-  const [message, setMessage] = useState('');
+  const state = useSelector((state) => state.news)
+  const dispatch = useDispatch()
 
   const handleInput = debounce((val) => {
     if (val.length >= 3) {
-      fetch(`http://ongapi.alkemy.org/api/news?search=${val}`)
-        .then((res) => res.json())
-        .then((json) => {
-          setSearchedTitle(json.data);
-          setMessage('No hay resultados para tu búsqueda');
-        });
+      const query = {
+        name: val,
+        category: '',
+      }
+      dispatch(fetchSearchNews(query))
     } else {
-      setMessage('Ingresa al menos 3 caracteres para la búsqueda');
+      dispatch(fetchNew())
     }
-  }, 1000);
+  }, 450)
 
   return (
     <div className="search">
+      <Typography variant="h5" gutterBottom component="div">
+        Buscar novedad por nombre
+      </Typography>
       <input
         type="text"
         placeholder="Buscar titulo"
         className="search-input"
         onChange={(e) => handleInput(e.target.value)}
       />
-      {searchedTitle.length > 0 ? (
-        <div>{searchedTitle.map((i) => <p key={i}>{i.name}</p>)}</div>
-      ) : (
-        <p>{message}</p>
-      )}
     </div>
-  );
-};
+  )
+}
 
-export default NewsSearch;
+export default NewsSearch
