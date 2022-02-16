@@ -1,13 +1,15 @@
 import { Route, Switch, Redirect } from 'react-router-dom'
-
 import PublicContent from '../Components/PublicWeb/PublicContent'
 import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
 import LoginForm from '../Components/Auth/LoginForm'
 import RegisterForm from '../Components/Auth/RegisterForm'
 import NotFound from '../Components/NotFound/NotFound'
 import { PrivateRoute } from './PrivateRoutes'
+import { useSelector } from 'react-redux'
 
 export const Routes = () => {
+  const { isAuthenticated } = useSelector((state) => state.auth)
+
   return (
     <Switch>
       <Route path="/error-404">
@@ -23,7 +25,7 @@ export const Routes = () => {
       </Route>
 
       <Route exact path="/register">
-        <RegisterForm />
+        {isAuthenticated ? <Redirect to="/" /> : <RegisterForm />}
       </Route>
 
       <Route path="/">

@@ -91,7 +91,7 @@ const SideBar = ({ toggle, isOpen, userAuth }) => (
             BackOffice
           </Link>
         ) : (
-          <Link to={'/signin'} className={styles.sidebarRoute}>
+          <Link to={'/login'} className={styles.sidebarRoute}>
             Iniciar sesión
           </Link>
         )}
