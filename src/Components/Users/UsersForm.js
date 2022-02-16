@@ -1,3 +1,5 @@
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import {
@@ -5,61 +7,45 @@ import {
   putPrivateHandler,
 } from '../../Services/BaseHTTP/privateApiService'
 
-import '../FormStyles.css'
-import { useParams, useHistory } from 'react-router-dom'
-import { getUsers } from '../../Services/apiServices/usersApiService'
-import { useEffect, useState } from 'react'
-import { alertServiceError } from '../AlertService'
+import Swal from 'sweetalert2'
+import { Terms } from './Terms'
+import { useState } from 'react'
 
-const UserForm = () => {
-  const { id } = useParams()
-  const history = useHistory()
+const UserForm = (usuario) => {
   const url = process.env.REACT_APP_API_USERS_GET
 
-  const [usuario, setUsuario] = useState({})
-
-  useEffect(() => {
-    if (!id) return
-    ;(async () => {
-      const response = await getUsers(id)
-      if (response.error) {
-        alertServiceError(
-          response.message,
-          'No se pudo obtener la información solicitada',
-        )
-        history.push('/backoffice/users/create')
-      }
-
-      const dataCategory = response.data?.data
-
-      if (dataCategory) {
-        setUsuario(dataCategory)
-      } else {
-        alertServiceError('No se pudo cargar la categoría', 'ID inválido')
-        history.push('/backoffice/users/create')
-      }
-    })()
-  }, [history, id])
+  const [display, setDisplay] = useState(false)
 
   return (
-    <>
+    <Box sx={{ pt: '60px', pl: 2 }}>
       <Formik
-        enableReinitialize
         initialValues={{
           name: usuario.name || '',
           email: usuario.email || '',
           role_id: usuario.role_id || '',
-          description: usuario.description || '',
+          description: '',
           photo: '',
         }}
         onSubmit={(values) => {
-          if (usuario.id) {
-            putPrivateHandler(url, usuario.id, values)
-          } else {
-            console.log('usuario no existe')
-            postPrivateHandler(url, values)
-          }
-          console.log(values)
+          Swal.fire({
+            title: 'Acepta los términos y condiciones?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              if (usuario.id) {
+                putPrivateHandler(url, usuario.id, values)
+              } else {
+                console.log('usuario no existe')
+                postPrivateHandler(url, values)
+              }
+              Swal.fire('Datos procesados', '', 'success')
+            }
+          })
         }}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -131,7 +117,18 @@ const UserForm = () => {
           </Form>
         )}
       </Formik>
-    </>
+
+      <Button
+        sx={{ width: '250px' }}
+        variant="contained"
+        onClick={() => setDisplay(!display)}
+      >
+        Términos y condiciones
+      </Button>
+      <Box sx={{ display: display ? 'block' : 'none' }}>
+        <Terms />
+      </Box>
+    </Box>
   )
 }
 
