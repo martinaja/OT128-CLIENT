@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const initialState = {
   status: '',
-  token: false,
-  isAuthenticated: false,
+  token: true,
+  isAuthenticated: true,
   user: {},
 }
 

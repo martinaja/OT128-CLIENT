@@ -80,10 +80,9 @@ const FormLogic = ({ authData }) => {
             })}
             onSubmit={(values) => {
               const { email, password } = values
-
               const data = { email: email, password: password }
-
               dispatch(userLogin(data))
+            
             }}
           >
             <Form>

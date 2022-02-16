@@ -1,38 +1,45 @@
-import { Route, Switch, Redirect } from 'react-router-dom'
-
+import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom'
 import PublicContent from '../Components/PublicWeb/PublicContent'
 import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
 import LoginForm from '../Components/Auth/LoginForm'
 import RegisterForm from '../Components/Auth/RegisterForm'
 import NotFound from '../Components/NotFound/NotFound'
-import { PrivateRoute } from './PrivateRoutes'
+import { PublicRoutes } from './PublicRoutes'
+import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
+import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 
 export const Routes = () => {
   return (
-    <Switch>
-      <Route path="/error-404">
-        <NotFound />
-      </Route>
-
-      <PrivateRoute path="/backoffice">
-        <BackOfficeHome />
-      </PrivateRoute>
-
-      <Route exact path="/login">
-        <LoginForm />
-      </Route>
-
-      <Route exact path="/register">
-        <RegisterForm />
-      </Route>
-
-      <Route path="/">
-        <PublicContent />
-      </Route>
-
-      <Route path="*">
-        <Redirect to="/error-404" />
-      </Route>
-    </Switch>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          exact
+          path={[
+            '/',
+            '/contacto',
+            '/nosotros',
+            '/create-user',
+            '/activities',
+            '/news',
+            '/news/:newsId',
+            '/activities/:id',
+            '/error-404"',
+          ]}
+        >
+          <PublicContent>
+            <PublicRoutes />
+          </PublicContent>
+        </Route>
+        <Route path="/backoffice" component={BackOfficeHome} />
+        <Route path="/school-campaign" component={SchoolCampaign} />
+        <Route path="/toys-campaign" component={ToysCampaign} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/register" component={RegisterForm} />
+        <Route path="/404" component={NotFound} />
+        <Route path="/*">
+          <Redirect to="/404" />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   )
 }
