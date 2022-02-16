@@ -1,4 +1,5 @@
-import { Box } from '@mui/material'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import {
@@ -6,17 +7,14 @@ import {
   putPrivateHandler,
 } from '../../Services/BaseHTTP/privateApiService'
 
-
 import Swal from 'sweetalert2'
 import { Terms } from './Terms'
-import { useState } from 'react';
-
+import { useState } from 'react'
 
 const UserForm = (usuario) => {
   const url = process.env.REACT_APP_API_USERS_GET
 
   const [display, setDisplay] = useState(false)
-
 
   return (
     <Box sx={{ pt: '60px', pl: 2 }}>
@@ -119,11 +117,17 @@ const UserForm = (usuario) => {
           </Form>
         )}
       </Formik>
-     
-      <button onClick={() => setDisplay(!display)}>Términos y condiciones</button>
-        <Box  sx={{ display: display ? 'block' : 'none' }}>
-          <Terms /> 
-        </Box>
+
+      <Button
+        sx={{ width: '250px' }}
+        variant="contained"
+        onClick={() => setDisplay(!display)}
+      >
+        Términos y condiciones
+      </Button>
+      <Box sx={{ display: display ? 'block' : 'none' }}>
+        <Terms />
+      </Box>
     </Box>
   )
 }
