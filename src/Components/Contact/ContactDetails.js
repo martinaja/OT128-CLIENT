@@ -12,9 +12,13 @@ import EmailIcon from '@mui/icons-material/Email'
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone'
 import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 const ContactDetails = ({ data }) => {
   const { name, phone, email, cellphone } = data
+
+  const state = useSelector((state) => state.organization)
+
   return (
     <>
       <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
@@ -36,7 +40,7 @@ const ContactDetails = ({ data }) => {
               <PermContactCalendarIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Nombre" secondary={name} />
+          <ListItemText primary="Nombre" secondary={state.data.name} />
         </ListItem>
         <Divider />
         <ListItem>
@@ -45,7 +49,7 @@ const ContactDetails = ({ data }) => {
               <EmailIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Email" secondary={email} />
+          <ListItemText primary="Dirección" secondary={state.data.address} />
         </ListItem>
         <Divider />
         <ListItem>
@@ -54,7 +58,7 @@ const ContactDetails = ({ data }) => {
               <ContactPhoneIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Telefono" secondary={phone} />
+          <ListItemText primary="Telefono" secondary={state.data.phone} />
         </ListItem>
         <Divider />
         <ListItem>
@@ -63,7 +67,7 @@ const ContactDetails = ({ data }) => {
               <PhoneIphoneIcon />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText primary="Celular" secondary={cellphone} />
+          <ListItemText primary="Celular" secondary={state.data.cellphone} />
         </ListItem>
       </List>
     </>
