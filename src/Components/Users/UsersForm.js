@@ -1,70 +1,91 @@
-import { Box } from "@mui/material";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import * as Yup from "yup";
-import { postPrivateHandler, putPrivateHandler } from "../../Services/BaseHTTP/privateApiService";
+import { Box } from '@mui/material'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import {
+  postPrivateHandler,
+  putPrivateHandler,
+} from '../../Services/BaseHTTP/privateApiService'
+import { Document, Page } from 'react-pdf/dist/esm/entry.webpack';
+import terms from '../../../src/assets/terms.pdf'
 
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
+import { useState } from 'react';
 
 const UserForm = (usuario) => {
+  const url = process.env.REACT_APP_API_USERS_GET
 
-  const url = process.env.REACT_APP_API_USERS_GET;
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
+
+  console.log(terms)
 
   return (
-    <Box sx={{ pt: '60px'}}>
+    <Box sx={{ pt: '60px' }}>
+  
+  <div>
+      <Document file={terms} onLoadSuccess={onDocumentLoadSuccess}>
+        <Page pageNumber={pageNumber} />
+      </Document>
+      <p>
+        Page {pageNumber} of {numPages}
+      </p>
+      <button onClick={ () => setPageNumber( pageNumber + 1)}> Siguiente</button>
+    </div>
+
+
       <Formik
         initialValues={{
-          name: usuario.name || "",
-          email: usuario.email || "",
-          role_id: usuario.role_id || "",
-          description: "",
-          photo: "",
+          name: usuario.name || '',
+          email: usuario.email || '',
+          role_id: usuario.role_id || '',
+          description: '',
+          photo: '',
         }}
         onSubmit={(values) => {
-
           Swal.fire({
-            title: 'Acepta los terminos y condiciones?',
-            text: "You won't be able to revert this!",
+            title: 'Acepta los términos y condiciones?',
             icon: 'question',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar',
           }).then((result) => {
             if (result.isConfirmed) {
               if (usuario.id) {
-            putPrivateHandler(url, usuario.id, values);
-          } else {
-            console.log("usuario no existe");
-            postPrivateHandler(url, values);
-          }
-              Swal.fire(
-                'Datos procesados',
-                '',
-                'success'
-              )
+                putPrivateHandler(url, usuario.id, values)
+              } else {
+                console.log('usuario no existe')
+                postPrivateHandler(url, values)
+              }
+              Swal.fire('Datos procesados', '', 'success')
             }
-          }) 
+          })
         }}
         validationSchema={Yup.object({
           name: Yup.string()
-            .min(4, "Debe tener mínimo 4 caracteres")
-            .required("Campo obligatorio"),
+            .min(4, 'Debe tener mínimo 4 caracteres')
+            .required('Campo obligatorio'),
           email: Yup.string()
-            .email("Debe ingresar un email valido")
-            .required("Campo obligatorio"),
-          role_id: Yup.string().required("Seleccione una opción"),
+            .email('Debe ingresar un email valido')
+            .required('Campo obligatorio'),
+          role_id: Yup.string().required('Seleccione una opción'),
           description: Yup.string()
-            .min(10, "Debe tener mínimo 10 caracteres")
-            .required("Campo obligatorio"),
+            .min(10, 'Debe tener mínimo 10 caracteres')
+            .required('Campo obligatorio'),
           photo: Yup.mixed().test(
-            "format",
-            "Formatos permitidos .jpg .jpeg .png",
+            'format',
+            'Formatos permitidos .jpg .jpeg .png',
             (value) => {
               if (value !== undefined) {
-                return /(.jpg|.jpeg|.png)$/i.test(value);
-              } else return true;
-            }
+                return /(.jpg|.jpeg|.png)$/i.test(value)
+              } else return true
+            },
           ),
         })}
       >
@@ -117,7 +138,7 @@ const UserForm = (usuario) => {
         )}
       </Formik>
     </Box>
-  );
-};
+  )
+}
 
-export default UserForm;
+export default UserForm
