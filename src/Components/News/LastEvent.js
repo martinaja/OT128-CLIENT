@@ -35,7 +35,7 @@ const LastEvent = () => {
     >
       <Typography variant="h3" component="div" gutterBottom>
         {' '}
-        Nuestro evento pasado!
+        Mira nuestro ultimo evento!
       </Typography>
       <ReactPlayer
         width={sizeVideo.width}

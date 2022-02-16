@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
 import { getNews } from '../../Services/apiServices/newsApiService'
@@ -53,7 +53,9 @@ const NewsList = () => {
                 )
               })
             ) : (
-              <p>No hay novedades</p>
+              <Box sx={{ mt: 4 }}>
+                <p>No hay novedades</p>
+              </Box>
             )}
           </Grid>
         </>

@@ -6,7 +6,6 @@ import { fetchNew, fetchSearchNews } from '../../features/news/newsReducer'
 import { Typography } from '@mui/material'
 
 const NewsSearch = function () {
-  const state = useSelector((state) => state.news)
   const dispatch = useDispatch()
 
   const handleInput = debounce((val) => {
