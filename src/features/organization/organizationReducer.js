@@ -1,30 +1,28 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { getOrganization } from '../../Services/apiServices/organizationApiService'
 
 const initialState = {
   data: {},
-  status: '',
+  status: 'idle',
+  errorMsg: '',
 }
 
 //Export to RegisterForm submitHandle => catch Error
 export const getOrganizationData = createAsyncThunk(
   'organization/getOrganizationData',
-  async (data, { rejectWithValue }) => {
+  async () => {
     try {
-      const response = await axios.get(
-        'http://ongapi.alkemy.org/api/organizations',
-      )
+      const response = await getOrganization()
       return response.data
-    } catch {
-      return rejectWithValue({ error: 'error' })
+    } catch (err) {
+      throw new Error(err)
     }
   },
 )
 
-export const organizationReducer = createSlice({
+export const organizationSlice = createSlice({
   name: 'organization',
   initialState,
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getOrganizationData.pending, (state) => {
@@ -32,12 +30,13 @@ export const organizationReducer = createSlice({
       })
       .addCase(getOrganizationData.fulfilled, (state, action) => {
         state.data = action.payload.data
-        state.status = action.payload.success
+        state.status = 'success'
       })
       .addCase(getOrganizationData.rejected, (state, action) => {
-        state.status = action.payload.error
+        state.errorMsg = action.payload.error
+        state.status = 'error'
       })
   },
 })
 
-export default organizationReducer.reducer
+export default organizationSlice.reducer
