@@ -1,3 +1,5 @@
+import { Box } from '@mui/system'
+import Button from '@mui/material/Button'
 import React, { useState } from 'react'
 import { Document, Page } from 'react-pdf/dist/esm/entry.webpack'
 import terms from '../../../src/assets/terms.pdf'
@@ -12,18 +14,20 @@ export const Terms = () => {
 
   return (
     <>
-      <div>
+      <Box sx={{spacing: '5px'}}>
         <Document file={terms} onLoadSuccess={onDocumentLoadSuccess}>
           <Page pageNumber={pageNumber} />
         </Document>
         <p>
-          Page {pageNumber} of {numPages}
+          Pagina {pageNumber} de {numPages}
         </p>
-        <button onClick={() => setPageNumber(pageNumber + 1)}>
-          {' '}
+        <Button variant="contained" onClick={() => setPageNumber( pageNumber === 1  ?  pageNumber : pageNumber - 1)}>
+          Anterior
+        </Button>
+        <button onClick={() => setPageNumber(  pageNumber === numPages  ?  pageNumber : pageNumber + 1)}>
           Siguiente
         </button>
-      </div>
+      </Box>
     </>
   )
 }

@@ -19,7 +19,7 @@ const UserForm = (usuario) => {
 
 
   return (
-    <Box sx={{ pt: '60px' }}>
+    <Box sx={{ pt: '60px', pl: 2 }}>
       <Formik
         initialValues={{
           name: usuario.name || '',
