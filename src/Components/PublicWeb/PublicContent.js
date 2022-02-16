@@ -1,12 +1,11 @@
-import { PublicRoutes } from '../../Router/PublicRoutes'
-// import Footer from './Footer/Footer' Conflictive Footer
+// import Footer from './Footer/Footer' //Conflictive Footer
 import Header from './Header/Header'
 
-const PublicContent = () => {
+const PublicContent = ({ children }) => {
   return (
     <>
       <Header />
-      <PublicRoutes />
+      {children}
       {/* <Footer /> */}
     </>
   )

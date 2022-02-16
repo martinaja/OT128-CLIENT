@@ -1,85 +1,146 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import React, { useState } from "react";
+import React from 'react'
+import { Formik, Field, Form } from 'formik'
+import * as Yup from 'yup'
+import Typography from '@material-ui/core/Typography'
+import Link from '@material-ui/core/Link'
+import { makeStyles } from '@material-ui/core/styles'
+import Container from '@material-ui/core/Container'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Avatar from '@material-ui/core/Avatar'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import { Link as RouterLink, Redirect } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogin } from './../../features/auth/authReducer'
 
-const LoginForm = () => {
-  const validateFields = (values) => {
-    // Checks user input is valid
-    const errors = {};
+export default function LoginForm() {
+  const authData = useSelector(({ auth }) => auth)
 
-    if (!values.email) {
-      errors.email = "* Campo obligatorio";
-    }
-    if (!values.password) {
-      errors.password = "* Campo obligatorio";
+  if (authData.isAuthenticated) {
+    return <Redirect push to="/backoffice" />
+  }
 
-    }
-    if (!values.confirmPassword) {
-      errors.confirmPassword = "* Campo obligatorio";
-    }
+  return <FormLogic authData={authData} />
+}
 
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "* Direccion de email incorrecta";
-    }
-    if (values.password !== values.confirmPassword)
-      errors.confirmPassword = "* Las contraseñas deben coincidir";
-    if (values.password.length < 6) {
-      errors.password = "* La longitud minima es 6";
-    }
-    if (
-      !/^(?=.*\d)(?=.*[a-zA-Záéíóúüñ])(?=.*[$-/:-?{-~!"^_`\]])/.test(
-        values.password
-      )
-    ) {
-      errors.password = "* La contraseña no cumple los parametros solicitados";
-    }
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}))
 
-    return errors;
-  };
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = (values, loading) => {
-    const userInfo = {
-      user: values.email,
-      password: values.password,
-    };
-  };
+const FormLogic = ({ authData }) => {
+  const classes = useStyles()
+  const dispatch = useDispatch()
 
   return (
-    <Formik
-      initialValues={{ email: "", password: "", confirmPassword: "" }}
-      validate={validateFields}
-      onSubmit={(values) => handleSubmit(values)}
-    >
-      {({ isSubmitting }) => (
-        <Form className="form-container">
-          <Field
-            type="email"
-            name="email"
-            className="input-field"
-            placeholder="Ingrese email"
-          />
-          <ErrorMessage name="email" component="div" />
-          <Field
-            type="password"
-            name="password"
-            className="input-field"
-            placeholder="Ingrese contraseña"
-          />
-          <ErrorMessage name="password" component="div" />
-          <button
-            type="submit-btn"
-            className="submit-btn"
-            disabled={isSubmitting}
-          >
+    <>
+      <Container
+        component="main"
+        maxWidth="xs"
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '2rem',
+        }}
+      >
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
             Ingresar
-          </button>
-         
-         
-        </Form>
-      )}
-    </Formik>
-  );
-};
+          </Typography>
+          <Formik
+            initialValues={{
+              email: '',
+              password: '',
+              rememberUser: false,
+            }}
+            validationSchema={Yup.object({
+              email: Yup.string()
+                .email('Invalid email address')
+                .required('Required'),
+              password: Yup.string().required('No password provided.'),
+            })}
+            onSubmit={(values) => {
+              const { email, password } = values
+              const data = { email: email, password: password }
+              dispatch(userLogin(data))
+            
+            }}
+          >
+            <Form>
+              <Field name="email">
+                {({ field, form, meta }) => (
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                    inputProps={{ ...field }}
+                    error={meta.touched && typeof meta.error !== 'undefined'}
+                  />
+                )}
+              </Field>
+              <Field name="password" type="password">
+                {({ field, form, meta }) => (
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    inputProps={{ ...field }}
+                    error={meta.touched && typeof meta.error !== 'undefined'}
+                  />
+                )}
+              </Field>
 
-export default LoginForm;
-
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Ingresar
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link component={RouterLink} to="/register">
+                    {'No tiene una cuenta? Registrese'}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Form>
+          </Formik>
+        </div>
+      </Container>
+    </>
+  )
+}
