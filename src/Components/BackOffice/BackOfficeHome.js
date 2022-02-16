@@ -1,17 +1,16 @@
 import { Container } from '@mui/material'
-import React from 'react'
+import { PrivateRoutes } from '../../Router/PrivateRoutes'
 import BackOfficeContent from './BackOfficeContent'
-import BackofficeHeader from './HeaderBackoffice'
-
+import HeaderBackoffice from './HeaderBackoffice'
 
 const BackOfficeHome = () => {
   return (
     <>
-      {BackofficeHeader}
+      <HeaderBackoffice />
       <Container>
         <BackOfficeContent />
+        <PrivateRoutes />
       </Container>
-      {/* <Footer /> */}
     </>
   )
 }

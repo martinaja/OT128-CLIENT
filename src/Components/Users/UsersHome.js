@@ -1,5 +1,6 @@
 import { Container } from '@mui/material'
 import React from 'react'
+import InputSearchUsers from './InputSearchUser'
 import TableUsers from './TableUsers'
 
 const UsersHome = () => {

@@ -6,7 +6,6 @@ import { Container } from '@mui/material'
 import { useEffect } from 'react'
 import handleDisplayByID from '../../utils/handleDisplayByID'
 
-
 const ToysCampaign = () => {
   useEffect(() => {
     handleDisplayByID('main-header', 'none')
@@ -20,7 +19,6 @@ const ToysCampaign = () => {
         <Slider />
         <Content />
       </Container>
-      {/* {<Footer /> } */}
     </>
   )
 }

@@ -1,15 +1,37 @@
-
-import { Switch, Route } from 'react-router-dom'
-import { PublicRoutes } from './PublicRoutes';
-import { PrivateRoutes } from './PrivateRoutes';
+import { Route, Switch, Redirect } from 'react-router-dom'
+import PublicContent from '../Components/PublicWeb/PublicContent'
+import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
+import LoginForm from '../Components/Auth/LoginForm'
+import RegisterForm from '../Components/Auth/RegisterForm'
+import NotFound from '../Components/NotFound/NotFound'
+import { PrivateRoute } from './PrivateRoutes'
 
 export const Routes = () => {
   return (
     <Switch>
-      {PublicRoutes}
-      {PrivateRoutes}
-      <Route path={'*'} component={Error404} />
+      <Route path="/error-404">
+        <NotFound />
+      </Route>
+
+      <PrivateRoute path="/backoffice">
+        <BackOfficeHome />
+      </PrivateRoute>
+
+      <Route exact path="/login">
+        <LoginForm />
+      </Route>
+
+      <Route exact path="/register">
+        <RegisterForm />
+      </Route>
+
+      <Route path="/">
+        <PublicContent />
+      </Route>
+
+      <Route path="*">
+        <Redirect to="/error-404" />
+      </Route>
     </Switch>
   )
 }
-const Error404 = () => <h1>ERROR ERRROR</h1>

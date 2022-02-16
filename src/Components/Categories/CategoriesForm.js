@@ -1,115 +1,129 @@
-import React, { useEffect, useState } from "react";
-import "../../Components/FormStyles.css";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import { ErrorMessage, Formik } from "formik";
-import * as Yup from "yup";
-import { Container, TextField, Box, Button, Input } from "@mui/material";
-import { toBase64 } from "../../utils/toBase64";
-import Spinner from "../Spinner";
-import { getCategories, postCategories, putCategories } from "../../Services/apiServices/categoriesApiService";
+import React, { useEffect, useState } from 'react'
+import '../../Components/FormStyles.css'
+import { CKEditor } from '@ckeditor/ckeditor5-react'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { ErrorMessage, Formik } from 'formik'
+import * as Yup from 'yup'
+import { Container, TextField, Box, Button, Input } from '@mui/material'
+import { toBase64 } from '../../utils/toBase64'
+import Spinner from '../Spinner'
+import {
+  getCategories,
+  postCategories,
+  putCategories,
+} from '../../Services/apiServices/categoriesApiService'
+import { useParams, useHistory } from 'react-router-dom'
+import { alertServiceError } from '../AlertService'
 
 const CategoriesForm = (props) => {
-  const idCategory = props.match.params.id;
-  const [loader, setLoader] = useState(false);
-  const [category, setCategory] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
-  const [baseImage, setBaseImage] = useState("");
-  const [previewImg, setPreviewImg] = useState(null);
-  const history = useHistory();
+  const { id } = useParams()
+  const [loader, setLoader] = useState(false)
+  const [category, setCategory] = useState({})
+  const [isEditing, setIsEditing] = useState(false)
+  const [baseImage, setBaseImage] = useState('')
+  const [previewImg, setPreviewImg] = useState(null)
+  const history = useHistory()
 
   // if params.id exist set the component to edit
   useEffect(() => {
-    if (!idCategory) return;
-    (async () => {
-      try {
-        setLoader(true);
-        const fetch = await getCategories(idCategory);
-        const data = fetch?.data;
-        if (data) {
-          setCategory(data);
-          setIsEditing(true);
-        }
-      } catch (e) {
-        console.error(e);
-        history.push("/backoffice/create-category");
-      } finally {
-        setLoader(false);
+    if (!id) return
+    ;(async () => {
+      setLoader(true)
+
+      const response = await getCategories(id)
+      if (response.error) {
+        alertServiceError(
+          response.message,
+          'No se pudo obtener la información solicitada',
+        )
+        setIsEditing(false)
+        history.push('/backoffice/create-category')
       }
-    })();
-  }, [history, idCategory]);
+
+      const dataCategory = response.data?.data
+
+      if (dataCategory) {
+        setCategory(dataCategory)
+        setIsEditing(true)
+      } else {
+        alertServiceError('No se pudo cargar la categoría', 'ID inválido')
+        history.push('/backoffice/create-category')
+      }
+
+      setLoader(false)
+    })()
+  }, [history, id])
 
   useEffect(() => {
-    if (!baseImage) return;
-    const reader = new FileReader();
+    if (!baseImage) return
+    const reader = new FileReader()
     reader.onloadend = () => {
-      setPreviewImg(reader.result);
-    };
-    reader.readAsDataURL(baseImage);
-  }, [baseImage]);
+      setPreviewImg(reader.result)
+    }
+    reader.readAsDataURL(baseImage)
+  }, [baseImage])
 
-  const SUPPORTED_FORMATS = ["image/jpg", "image/png", "image/jpeg"];
+  const SUPPORTED_FORMATS = ['image/jpg', 'image/png', 'image/jpeg']
 
   const validationSchema = Yup.object().shape({
     description: Yup.string()
       .min(1)
-      .max(150, "No se pueden exceder los 150 caracteres")
-      .required("El campo descripción es obligatorio."),
+      .max(150, 'No se pueden exceder los 150 caracteres')
+      .required('El campo descripción es obligatorio.'),
 
     name: Yup.string()
-      .required("El campo nombre es obligatorio.")
-      .min(4, "El nombre debe contener almenos 4 caracteres"),
+      .required('El campo nombre es obligatorio.')
+      .min(4, 'El nombre debe contener almenos 4 caracteres'),
 
     image: Yup.mixed()
-      .required("ingrese una imagen.")
+      .required('ingrese una imagen.')
       .test(
-        "fileType",
-        "Formato incorrecto. Sólo se aceptan archivos .jpg, .jpeg, .png",
+        'fileType',
+        'Formato incorrecto. Sólo se aceptan archivos .jpg, .jpeg, .png',
         (value) => {
-          if (value) return SUPPORTED_FORMATS.includes(value.type);
-        }
+          if (value) return SUPPORTED_FORMATS.includes(value.type)
+        },
       ),
-  });
+  })
 
   //function that format data to be sended to endpoints
   const sendCategory = async (values) => {
-    const fd = new FormData();
-    fd.append("description", values.description);
-    const base64 = await toBase64(values.image);
+    const fd = new FormData()
+    fd.append('description', values.description)
+    const base64 = await toBase64(values.image)
     const newToSend = {
       ...values,
       image: base64,
-    };
+    }
 
     //depending of the state of isEditing call post or put
     if (!isEditing) {
-      postCategories(newToSend);
+      postCategories(newToSend)
     } else {
-      putCategories(idCategory, newToSend);
+      putCategories(id, newToSend)
     }
-  };
+  }
 
   return (
     <>
       {loader ? (
-        <Box sx={{ mt: "4rem" }}>
+        <Box sx={{ mt: '4rem' }}>
           <Spinner />
         </Box>
       ) : (
         <Formik
           enableReinitialize
           initialValues={{
-            name: category.name || "",
-            description: category.description || "",
-            image: "",
+            name: category.name || '',
+            description: category.description || '',
+            image: '',
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            sendCategory(values);
-            setCategory({});
-            setPreviewImg("");
-            history.push("/backoffice/create-category");
+            sendCategory(values)
+            setCategory({})
+            setPreviewImg('')
+            history.push('/backoffice/create-category')
           }}
         >
           {({
@@ -123,10 +137,10 @@ const CategoriesForm = (props) => {
           }) => (
             <Container>
               <Box sx={{ boxShadow: 5, p: 5, mt: 2 }}>
-                <h1>{isEditing ? "Editar Categoría" : "Crear Categoría"}</h1>
+                <h1>{isEditing ? 'Editar Categoría' : 'Crear Categoría'}</h1>
                 {previewImg || category.image ? (
                   <img
-                    style={{ maxWidth: "100%" }}
+                    style={{ maxWidth: '100%' }}
                     src={previewImg || category.image}
                     alt=""
                   />
@@ -149,8 +163,8 @@ const CategoriesForm = (props) => {
                     editor={ClassicEditor}
                     data={values.description}
                     onChange={(event, editor) => {
-                      const data = editor.getData();
-                      setFieldValue("description", data);
+                      const data = editor.getData()
+                      setFieldValue('description', data)
                     }}
                   />
                   <ErrorMessage component="small" name="description" />
@@ -162,20 +176,20 @@ const CategoriesForm = (props) => {
                       multiple
                       type="file"
                       onChange={(e) => {
-                        const file = e.currentTarget.files[0];
-                        setFieldValue("image", file);
-                        setBaseImage(file);
+                        const file = e.currentTarget.files[0]
+                        setFieldValue('image', file)
+                        setBaseImage(file)
                       }}
-                      style={{ display: "none" }}
+                      style={{ display: 'none' }}
                     />
                     <Button fullWidth variant="outlined" component="span">
-                      {!previewImg ? "Subir imagen" : "Subir otra imagen"}
+                      {!previewImg ? 'Subir imagen' : 'Subir otra imagen'}
                     </Button>
                     <ErrorMessage component="small" name="image" />
                   </label>
                   <br />
                   <Button type="submit" variant="contained" fullWidth>
-                    {isEditing ? "Editar Categoría" : "Crear Categoría"}
+                    {isEditing ? 'Editar Categoría' : 'Crear Categoría'}
                   </Button>
                 </form>
               </Box>
@@ -184,7 +198,7 @@ const CategoriesForm = (props) => {
         </Formik>
       )}
     </>
-  );
-};
+  )
+}
 
-export default CategoriesForm;
+export default CategoriesForm

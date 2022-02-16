@@ -1,6 +1,10 @@
-import { deletePrivateHandler, postPrivateHandler, putPrivateHandler } from '../BaseHTTP/privateApiService'
+import {
+  deletePrivateHandler,
+  postPrivateHandler,
+  putPrivateHandler,
+  searchPrivateHandler,
+} from '../BaseHTTP/privateApiService'
 import { getPublicHandler } from '../BaseHTTP/publicApiService'
-
 
 const newsGetUrl = process.env.REACT_APP_API_NEWS_GET
 const newsPostUrl = process.env.REACT_APP_API_NEWS_POST
@@ -21,4 +25,11 @@ export const putNews = (id, bodydata) => {
 
 export const deleteNews = (id) => {
   return deletePrivateHandler(newsDeleteUrl, id)
+}
+
+export const searchNews = (name, category) => {
+  return searchPrivateHandler(
+    newsGetUrl,
+    `?search=${name}&category=${category}`,
+  )
 }

@@ -12,14 +12,7 @@ if (token) {
 
 export const getPrivateHandler = (apiEndpoint, id) => {
   const apiServiceUrl = id ? `${apiEndpoint}/${id}` : `${apiEndpoint}`
-  return apiService.get(apiServiceUrl).catch((err) => {
-    console.log(err)
-    const error = {
-      error: true,
-      message: err.message,
-    }
-    return error
-  })
+  return apiService.get(apiServiceUrl)
 }
 export const postPrivateHandler = (apiEndpoint, bodyData) => {
   return apiService.post(apiEndpoint, bodyData).catch((err) => {
@@ -63,6 +56,19 @@ export const patchPrivateHandler = (apiEndpoint, id, bodyData) => {
   if (!id) return 'error-no-id'
   const apiServiceUrl = `${apiEndpoint}/${id}`
   return apiService.patch(apiServiceUrl, bodyData).catch((err) => {
+    console.log(err)
+    const error = {
+      error: true,
+      message: err.message,
+    }
+    return error
+  })
+}
+
+// Search for word
+export const searchPrivateHandler = (apiEndpoint, search) => {
+  const apiServiceUrl = `${apiEndpoint}${search}`
+  return apiService.get(apiServiceUrl).catch((err) => {
     console.log(err)
     const error = {
       error: true,
