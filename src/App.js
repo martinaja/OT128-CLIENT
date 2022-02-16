@@ -1,6 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles'
 import { createTheme, CssBaseline } from '@mui/material'
 import { Routes } from './Router/Routes'
+import { BrowserRouter } from 'react-router-dom'
 
 const theme = createTheme({
   palette: {
@@ -30,7 +31,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Routes />
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </ThemeProvider>
   )
 }

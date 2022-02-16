@@ -5,7 +5,6 @@ import { getOrganization } from './../../Services/apiServices/organizationApiSer
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
 import SlidesSearch from '../Slides/SlidesSearch'
-import ContactMap from '../Contact/ContactMap'
 
 function Index() {
   const [loader, setLoader] = useState(false)
@@ -41,7 +40,7 @@ function Index() {
   ) : (
     <div>
       <Container>
-      <SlidesSearch/>
+        <SlidesSearch />
         {data ? <h1>{data.welcome_text}</h1> : null}
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>
