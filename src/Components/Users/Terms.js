@@ -8,10 +8,9 @@ export const Terms = () => {
   const [numPages, setNumPages] = useState(null)
   const [pageNumber, setPageNumber] = useState(1)
 
-  const onDocumentLoadSuccess = ({ numPages })  => {
+  const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages)
   }
-
 
   return (
     <>
