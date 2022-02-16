@@ -5,6 +5,7 @@ const initialState = {
   data: {},
   status: 'idle',
   errorMsg: '',
+  loader: false,
 }
 
 //Export to RegisterForm submitHandle => catch Error
@@ -27,14 +28,17 @@ export const organizationSlice = createSlice({
     builder
       .addCase(getOrganizationData.pending, (state) => {
         state.status = 'pending'
+        state.loader = true
       })
       .addCase(getOrganizationData.fulfilled, (state, action) => {
         state.data = action.payload.data
         state.status = 'success'
+        state.loader = false
       })
       .addCase(getOrganizationData.rejected, (state, action) => {
         state.errorMsg = action.payload.error
         state.status = 'error'
+        state.loader = false
       })
   },
 })

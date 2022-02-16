@@ -30,25 +30,10 @@ const ContactMap = () => {
     [],
   )
 
-  useEffect(() => {
-    if (state.status === 'idle') {
-      dispatch(getOrganizationData())
-    }
-
-    if (state.status === 'error') {
-      alertServiceError(
-        state.errorMsg,
-        'Se produjo un error al intentar obtener datos de la organización',
-      )
-    }
-    console.log(state)
-  }, [state.status, dispatch, state.errorMsg])
-
   // Transform the string of adress in latitud and longitud for mapcointaner
   useEffect(() => {
     if (!geo) return
     if (state.status === 'success') {
-      console.log('asdasd')
       ELG.geocode({ apikey: process.env.REACT_APP_GEOCODE_API_KEY })
         .text(state.data.address)
         .run(function (err, results, response) {
@@ -66,7 +51,7 @@ const ContactMap = () => {
     <MapContainer
       center={[geo.y, geo.x]}
       zoom={20}
-      style={{ width: '100%', height: '100vh' }}
+      style={{ width: '100%', height: '80vh' }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
