@@ -23,7 +23,7 @@ export const Routes = () => {
             '/news',
             '/news/:newsId',
             '/activities/:id',
-            '/error-404"',
+            '/404',
           ]}
         >
           <PublicContent>

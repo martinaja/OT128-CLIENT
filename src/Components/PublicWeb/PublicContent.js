@@ -1,12 +1,11 @@
-
-// import Footer from './Footer/Footer' Conflictive Footer
+// import Footer from './Footer/Footer' //Conflictive Footer
 import Header from './Header/Header'
 
-const PublicContent = ({children}) => {
+const PublicContent = ({ children }) => {
   return (
     <>
       <Header />
-       {children}
+      {children}
       {/* <Footer /> */}
     </>
   )
