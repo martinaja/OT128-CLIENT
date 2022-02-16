@@ -72,11 +72,11 @@ export const publicRoutes = [
   {
     path: '/donations',
     exact: true,
-    component: {Donations},
+    component: Donations,
   },
   {
     path: '/gracias',
     exact: true,
-    component: {Thankyou},
+    component: Thankyou,
   },
 ]

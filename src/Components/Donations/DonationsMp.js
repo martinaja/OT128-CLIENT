@@ -15,7 +15,7 @@ export const DonationsMp = ({ text = 'Hacer donativos' }) => {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
     height: 200,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.display('sm')]: {
       width: '60% !important', // Overrides inline-style
       height: 200
 

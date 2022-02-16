@@ -5,9 +5,6 @@ import { getOrganization } from './../../Services/apiServices/organizationApiSer
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
 
-import SearchNewsBackoffice from './../News/SearchNews/SearchNewsBackoffice'
-import { DonationsMp } from './../Donations/DonationsMp'
-
 function Index() {
   const [loader, setLoader] = useState(false)
   const [data, setData] = useState()
@@ -42,8 +39,6 @@ function Index() {
   ) : (
     <div>
       <Container>
-        <DonationsMp />
-        <SearchNewsBackoffice />
         {data ? <h1>{data.welcome_text}</h1> : null}
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>
@@ -55,9 +50,7 @@ function Index() {
         <h2>Testimonios</h2>
         <h4>Aquí iran las cards de testimonial.js</h4>
         <h1>Bienvenidos</h1>
-        <h2>@Somosmás</h2>
-        <h2>Testimonios</h2>
-        <h4>Aquí iran las cards de testimonial.js</h4>
+      
       </Container>
     </div>
   )
