@@ -1,6 +1,5 @@
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
 import ActivitiesForm from '../Components/Activities/ActivitiesForm'
 import CategoriesForm from '../Components/Categories/CategoriesForm'
 import NewsForm from '../Components/News/NewsForm'
@@ -16,7 +15,6 @@ import UserForm from '../Components/Users/UsersForm'
 import SlidesScreen from './../Components/Slides/SlidesList'
 import NewsTable from '../Components/News/Table/NewsTable'
 import CategoriesHome from '../Components/Categories/CategoriesHome'
-
 import UsersHome from '../Components/Users/UsersHome'
 
 export const PrivateRoute = ({ children, ...rest }) => {
@@ -32,119 +30,102 @@ export const PrivateRoute = ({ children, ...rest }) => {
   )
 }
 
-export const privateRoutes = [
-  {
-    path: '/backoffice',
-    exact: true,
-  },
-  {
-    path: '/backoffice/activities',
-    exact: true,
-    component: ActivitiesScreen,
-  },
-  {
-    path: '/backoffice/activities/create',
-    exact: false,
-    component: ActivitiesForm,
-  },
-  {
-    path: '/backoffice/activities/create/:id',
-    exact: false,
-    component: ActivitiesForm,
-  },
-  {
-    path: '/backoffice/categories',
-    exact: true,
-    component: CategoriesHome,
-  },
-  {
-    path: '/backoffice/categories/create',
-    exact: false,
-    component: CategoriesForm,
-  },
-  {
-    path: '/backoffice/categories/create/:id',
-    exact: false,
-    component: CategoriesForm,
-  },
-  {
-    path: '/backoffice/news',
-    exact: true,
-    component: NewsTable,
-  },
-  {
-    path: '/backoffice/news/create',
-    exact: false,
-    component: NewsForm,
-  },
-  {
-    path: '/backoffice/news/create/:newsId',
-    exact: false,
-    component: NewsForm,
-  },
-  {
-    path: '/backoffice/members',
-    exact: true,
-    component: MembersScreen,
-  },
-  {
-    path: '/backoffice/members/create',
-    exact: false,
-    component: MembersForm,
-  },
-  {
-    path: '/backoffice/members/create/:id',
-    exact: false,
-    component: MembersForm,
-  },
-  {
-    path: '/backoffice/slides',
-    exact: true,
-    component: SlidesScreen,
-  },
-  {
-    path: '/backoffice/slides/create',
-    exact: false,
-    component: SlidesForm,
-  },
-  {
-    path: '/backoffice/slides/create/:slideId',
-    exact: false,
-    component: SlidesForm,
-  },
-  {
-    path: '/backoffice/create-testimonials',
-    exact: false,
-    component: TestimonialForm,
-  },
-  {
-    path: '/backoffice/create-testimonials/:id',
-    exact: false,
-    component: TestimonialForm,
-  },
-  {
-    path: '/backoffice/create-project',
-    exact: false,
-    component: ProjectsForm,
-  },
-  {
-    path: '/backoffice/organization',
-    exact: true,
-    component: OrganizationScreen,
-  },
-  {
-    path: '/backoffice/organization/edit',
-    exact: false,
-    component: OrganizationForm,
-  },
-  {
-    path: '/backoffice/users',
-    exact: true,
-    component: UsersHome,
-  },
-  {
-    path: '/backoffice/users/create',
-    exact: false,
-    component: UserForm,
-  },
-]
+export const PrivateRoutes = () => (
+  <Switch>
+    <PrivateRoute exact path="/backoffice/activities">
+      <ActivitiesScreen />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/activities/create">
+      <ActivitiesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/activities/create/:id">
+      <ActivitiesForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/categories">
+      <CategoriesHome />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/categories/create">
+      <CategoriesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/categories/create/:id">
+      <CategoriesForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/news">
+      <NewsTable />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/news/create">
+      <NewsForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/news/create/:newsId">
+      <NewsForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/members">
+      <MembersScreen />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/members/create">
+      <MembersForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/members/create/:id">
+      <MembersForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/slides">
+      <SlidesScreen />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/slides/create">
+      <SlidesForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/slides/create/:slideId">
+      <SlidesForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/create-testimonials">
+      <TestimonialForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/create-testimonials/:id">
+      <TestimonialForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/create-project">
+      <ProjectsForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/organization">
+      <OrganizationScreen />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/organization/edit">
+      <OrganizationForm />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/users">
+      <UsersHome />
+    </PrivateRoute>
+
+    <PrivateRoute exact path="/backoffice/users/create">
+      <UserForm />
+    </PrivateRoute>
+
+    <PrivateRoute path="/backoffice/users/create/:id">
+      <UserForm />
+    </PrivateRoute>
+
+    <Route path="/backoffice/*">
+      <Redirect to="/error-404" />
+    </Route>
+  </Switch>
+)

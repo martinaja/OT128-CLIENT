@@ -1,5 +1,3 @@
-import { Route } from 'react-router-dom'
-import Index from '../Components/Home/Index'
 import NewsDetail from '../Components/News/Detail/NewsDetail'
 import About from '../Components/About/About'
 import Activities from '../Components/Activities/ActivitiesDetails'
@@ -7,27 +5,56 @@ import NewsList from '../Components/News/NewsList'
 import UserForm from '../Components/Users/UsersForm'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
-import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
-import NotFound from '../Components/NotFound/NotFound'
+import Index from '../Components/Home/Index'
 
+import { Route, Switch, Redirect } from 'react-router-dom'
 
-export const publicRoutes = [
-  <Route exact path="/" component={Index} key="Index" />,
-  <Route path="/contacto" component={ContactHome} key="ContactHome" />,
-  <Route path="/novedades/:newsId" component={NewsDetail} key="NewsDetail" />,
-  <Route path="/nosotros" component={About} key="About" />,
-  <Route path="/create-user" component={UserForm} key="UserForm" />,
-  <Route
-    path="/school-campaign"
-    component={SchoolCampaign}
-    key="SchoolCampaign"
-  />,
-  <Route path="/toys-campaign" component={ToysCampaign} key="ToysCampaign" />,
-  <Route path="/login" component={LoginForm} key="LoginForm" />,
-  <Route path="/activities" component={Activities} key="Activities" />,
-  <Route path="/news" component={NewsList} key="NewsList" />,
-  <Route path="/activities/:id" component={Detail} key="Detail" />,
-  <Route exact path="/404" component={NotFound} />,
-]
+export const PublicRoutes = () => (
+  <Switch>
+    <Route exact path="/">
+      <Index />
+    </Route>
+
+    <Route exact path="/contacto">
+      <ContactHome />
+    </Route>
+
+    <Route exact path="/nosotros">
+      <About />
+    </Route>
+
+    <Route exact path="/create-user">
+      <UserForm />
+    </Route>
+
+    <Route exact path="/school-campaign">
+      <SchoolCampaign />
+    </Route>
+
+    <Route exact path="/toys-campaign">
+      <ToysCampaign />
+    </Route>
+
+    <Route exact path="/activities">
+      <Activities />
+    </Route>
+
+    <Route exact path="/news">
+      <NewsList />
+    </Route>
+
+    <Route path="/news/:newsId">
+      <NewsDetail />
+    </Route>
+
+    <Route path="/activities/:id">
+      <Detail />
+    </Route>
+
+    <Route path="*">
+      <Redirect to="/error-404" />
+    </Route>
+  </Switch>
+)
