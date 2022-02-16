@@ -8,11 +8,10 @@ import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
-import RegisterForm from '../Components/Auth/RegisterForm';
 import { Donations } from '../Components/Donations/Donations'
 import { Thankyou } from './../Components/Donations/Thankyou';
 import { Route, Switch, Redirect } from 'react-router-dom'
-import LoginForm from '../Components/Auth/LoginForm'
+
 
 
 export const PublicRoutes = () => (
@@ -55,14 +54,6 @@ export const PublicRoutes = () => (
 
     <Route path="/activities/:id">
       <Detail />
-    </Route>
-
-    <Route path="/login">
-      <LoginForm />
-    </Route>
-
-    <Route path="/register">
-      <RegisterForm />
     </Route>
 
     <Route path="/donations">
