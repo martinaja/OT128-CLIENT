@@ -17,10 +17,10 @@ const Header = () => {
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
 
   return (
-    <>
+    <div id="main-header">
       <NavBar toggle={toggle} pathname={pathname} userAuth={userAuth} />
       <SideBar toggle={toggle} isOpen={isOpen} userAuth={userAuth} />
-    </>
+    </div>
   )
 }
 

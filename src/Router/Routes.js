@@ -25,8 +25,8 @@ export const Routes = () => {
             '/nosotros',
             '/create-user',
             '/activities',
-            '/news',
-            '/news/:newsId',
+            '/novedades',
+            '/novedades/:newsId',
             '/activities/:id',
             '/404',
           ]}
@@ -41,7 +41,7 @@ export const Routes = () => {
         <Route path="/login" component={LoginForm} />
         <Route path="/register" component={RegisterForm} />
         <Route path="/404" component={NotFound} />
-        <Route path="/*">
+        <Route path="*">
           <Redirect to="/404" />
         </Route>
       </AnimatedSwitch>
