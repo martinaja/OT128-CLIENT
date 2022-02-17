@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 export default function NotFound() {
   return (
     <div className={style['container']}>
-      <h1>¡Ups! No se encontrá la página</h1>
+      <h1>¡Ups! No se encontró la página</h1>
 
       <Button
         component={Link}
