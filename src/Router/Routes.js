@@ -36,7 +36,7 @@ export const Routes = () => {
         <Route path="/login" component={LoginForm} />
         <Route path="/register" component={RegisterForm} />
         <Route path="/404" component={NotFound} />
-        <Route path="/*">
+        <Route path="*">
           <Redirect to="/404" />
         </Route>
       </Switch>

@@ -1,6 +1,7 @@
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import LoadingBar from '../Components/LoadingPage/LoadingPage'
+const NotFound = lazy(() => import('../Components/NotFound/NotFound'))
 const NewsDetail = lazy(() => import('../Components/News/Detail/NewsDetail'))
 const About = lazy(() => import('../Components/About/About'))
 const Activities = lazy(() =>
@@ -56,10 +57,10 @@ export const PublicRoutes = () => (
       <Route exact path="/gracias">
         <Thankyou />
       </Route>
-    </Suspense>
 
-    <Route path="*">
-      <Redirect to="/error-404" />
-    </Route>
+      <Route path="*">
+        <NotFound />
+      </Route>
+    </Suspense>
   </Switch>
 )
