@@ -2,6 +2,8 @@ import styled from '@emotion/styled'
 import { Box, ButtonBase, Typography } from '@mui/material'
 import React from 'react'
 import mp from '../../assets/mp.jpg'
+import { alertDonationsMP } from './../AlertService';
+
 
 export const DonationsMp = ({ text = 'Hacer donativos' }) => {
   const image = {
@@ -13,9 +15,11 @@ export const DonationsMp = ({ text = 'Hacer donativos' }) => {
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
     position: 'relative',
     height: 200,
-    [theme.breakpoints.down('sm')]: {
+    [theme.breakpoints.display('sm')]: {
       width: '60% !important', // Overrides inline-style
-      height: 200,
+      height: 200
+
+
     },
     '&:hover, &.Mui-focusVisible': {
       zIndex: 1,
@@ -92,6 +96,7 @@ export const DonationsMp = ({ text = 'Hacer donativos' }) => {
         }}
       >
         <ImageButton
+        onClick={alertDonationsMP}
           focusRipple
           key={image.title}
           style={{

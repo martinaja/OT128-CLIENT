@@ -3,67 +3,59 @@ import About from '../Components/About/About'
 import Activities from '../Components/Activities/ActivitiesDetails'
 import NewsList from '../Components/News/NewsList'
 import UserForm from '../Components/Users/UsersForm'
-import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
-import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
-import LoginForm from '../Components/Auth/LoginForm'
 import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
+import { Donations } from '../Components/Donations/Donations'
+import { Thankyou } from './../Components/Donations/Thankyou';
+import { Route, Switch, Redirect } from 'react-router-dom'
 
-export const publicRoutes = [
-  {
-    path: '/home',
-    exact: true,
-    component: Index,
-  },
-  {
-    path: '/home/contacto',
-    exact: false,
-    component: ContactHome,
-  },
-  {
-    path: '/home/novedades/:newsId',
-    exact: false,
-    component: NewsDetail,
-  },
-  {
-    path: '/home/nosotros',
-    exact: false,
-    component: About,
-  },
-  {
-    path: '/home/create-user',
-    exact: false,
-    component: UserForm,
-  },
-  {
-    path: '/home/school-campaign',
-    exact: false,
-    component: SchoolCampaign,
-  },
-  {
-    path: '/home/toys-campaign',
-    exact: false,
-    component: ToysCampaign,
-  },
-  {
-    path: '/home/login',
-    exact: false,
-    component: LoginForm,
-  },
-  {
-    path: '/home/activities/',
-    exact: false,
-    component: Activities,
-  },
-  {
-    path: '/home/activities/:id',
-    exact: false,
-    component: Detail,
-  },
-  {
-    path: '/home/news',
-    exact: false,
-    component: NewsList,
-  },
-]
+
+
+export const PublicRoutes = () => (
+  <Switch>
+    <Route exact path="/">
+      <Index />
+    </Route>
+
+    <Route exact path="/contacto">
+      <ContactHome />
+    </Route>
+
+    <Route exact path="/nosotros">
+      <About />
+    </Route>
+
+    <Route exact path="/create-user">
+      <UserForm />
+    </Route>
+
+    <Route exact path="/activities">
+      <Activities />
+    </Route>
+
+    <Route exact path="/news">
+      <NewsList />
+    </Route>
+
+    <Route path="/news/:newsId">
+      <NewsDetail />
+    </Route>
+
+    <Route path="/activities/:id">
+      <Detail />
+    </Route>
+
+    <Route path="/donations">
+      <Donations />
+    </Route>
+
+    <Route path="/gracias">
+      <Thankyou />
+    </Route>
+
+    <Route path="*">
+      <Redirect to="/error-404" />
+    </Route>
+  </Switch>
+)
