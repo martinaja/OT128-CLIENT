@@ -1,17 +1,6 @@
-// import NewsDetail from '../Components/News/Detail/NewsDetail'
-// import About from '../Components/About/About'
-// import Activities from '../Components/Activities/ActivitiesDetails'
-// import UserForm from '../Components/Users/UsersForm'
-// import ContactHome from '../Components/Contact/ContactHome'
-// import { Detail } from '../Components/Activities/Detail/Detail'
-// import Index from '../Components/Home/Index'
-// import { Donations } from '../Components/Donations/Donations'
-// import { Thankyou } from './../Components/Donations/Thankyou'
-
-// import PublicNewHome from '../Components/News/PublicNewHome'
-
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
+import LoadingBar from '../Components/LoadingPage/LoadingPage'
 const NewsDetail = lazy(() => import('../Components/News/Detail/NewsDetail'))
 const About = lazy(() => import('../Components/About/About'))
 const Activities = lazy(() =>
@@ -27,7 +16,7 @@ const ContactHome = lazy(() => import('../Components/Contact/ContactHome'))
 
 export const PublicRoutes = () => (
   <Switch>
-    <Suspense fallback={<div>{console.log('Cargando')}</div>}>
+    <Suspense fallback={<LoadingBar />}>
       <Route exact path="/">
         <Index />
       </Route>
@@ -60,11 +49,11 @@ export const PublicRoutes = () => (
         <Detail />
       </Route>
 
-      <Route path="/donations">
+      <Route exact path="/donations">
         <Donations />
       </Route>
 
-      <Route path="/gracias">
+      <Route exact path="/gracias">
         <Thankyou />
       </Route>
     </Suspense>
