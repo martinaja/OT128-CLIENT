@@ -46,11 +46,8 @@
     "react-leaflet": "^3.2.5",
     "react-loader-spinner": "^5.1.0",
     "react-material-ui-carousel": "^3.1.1",
-<<<<<<< HEAD
     "react-player": "^2.9.0",
-=======
     "react-pdf": "^5.7.1",
->>>>>>> 765deb083f3e62d994b6471f08b7daa6b5ab611a
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.0",

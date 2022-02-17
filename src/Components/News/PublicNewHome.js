@@ -8,7 +8,7 @@ import NewsSearch from './NewsSearch'
 const PublicNewHome = () => {
   return (
     <Container sx={{ alignContent: 'center', textAlign: 'center' }}>
-      <Title>Sección de Noticias</Title>
+      <Title>Sección de Novedades</Title>
       <LastEvent />
       <NewsSearch />
       <NewsList />
