@@ -1,108 +1,86 @@
-import {
-    Avatar,
-    Button,
-    Container,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-  } from '@mui/material'
-  import { Link } from 'react-router-dom'
-  
-  const mock = [
-    {
-      id: 1,
-      title: "Titulo 1",
-      image: 'https://picsum.photos/200/200',
-      order: 1
-    },
-    {
-      id: 2,
-      title: 'Titulo 2',
-      image: 'https://picsum.photos/200/200',
-      order: 2
-    },
-    {
-      id: 3,
-      title: 'Titiulo 3',
-      image: 'https://picsum.photos/200/200',
-      order: 3
-    },
-  ]
-  
-  const Slideslist = ({ slide }) => {
-    return (
-      <TableRow
-        key={slide.title}
-        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-      >
-        <TableCell component="th" scope="row">
-          {slide.title}
-        </TableCell>
-        <TableCell>
-          <Avatar
-            src={slide.image}
-            alt={slide.order}
-            variant="square"
-            sx={{ width: 120, height: 120, margin: 'auto' }}
-          />
-          
-        </TableCell>
-        <TableCell  align="center">
-          {slide.order}
-        </TableCell>
-        <TableCell align="right">
-          <Button sx={{ m: 1 }} variant="contained" color="success">
-            Editar
-          </Button>
-        </TableCell>
-        <TableCell align="right">
-          <Button variant="contained" color="success">
-            Eliminar
-          </Button>
-        </TableCell>
-      </TableRow>
-    )
-  }
-  
-  const SlidesScreen = () => {
-    return (
-      <Container>
-        <TableContainer
-          component={Paper}
-          sx={{ boxShadow: 5, marginTop: 5, marginBottom: 5 }}
-        >
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell align="center">Image</TableCell>
-                <TableCell  align="center">Order</TableCell>
-                <TableCell align="right"></TableCell>
-                <TableCell align="right">
-                  <Link
-                    to="/backoffice/slides/create"
-                    style={{ textDecoration: 'none' }}
-                  >
-                    <Button variant="contained" color="success">
-                      Crear slide
-                    </Button>
-                  </Link>
+import {useState, useEffect} from 'react';
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TablePagination from '@mui/material/TablePagination';
+import TableRow from '@mui/material/TableRow';
+
+const Datos = [{
+    id: 1,
+    title: 'Titulo 1',
+    image: '/images/blog-img-04',
+    order: 8
+},
+{
+    id: 2,
+    title: 'Titulo 2',
+    image: '/images/blog-img-02',
+    order: 9 
+}]
+const columns = [
+  'title','image','order'
+];
+
+export default function SlidesList() {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [items, setItems] = useState([])
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = ({target}) => {
+    setRowsPerPage(+target.value);
+    setPage(0);
+  };
+
+  useEffect(() => {
+    setItems([...items].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
+  }, [page])
+
+  return (
+    <Paper >
+      <TableContainer >
+        <Table>
+          <TableHead>
+            <TableRow>
+              {columns.map((column) => (
+                <TableCell>
+                  {column}
                 </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {mock.map((slide) => (
-                <Slideslist key={slide.id} slide={slide} />
               ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Container>
-    )
-  }
-  
-  export default SlidesScreen
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {Datos.map((e,i) => {
+                return (
+                  <TableRow key={i}>
+                    {columns.map((column,i) => {
+                      return (
+                        <TableCell key={i}>
+                          {e[column]}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <TablePagination
+        rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={items.length}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onPageChange={handleChangePage}
+        onRowsPerPageChange={handleChangeRowsPerPage}
+      />
+    </Paper>
+  );
+}
