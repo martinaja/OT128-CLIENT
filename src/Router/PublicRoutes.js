@@ -7,13 +7,16 @@ import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
 import { Donations } from '../Components/Donations/Donations'
-import { Thankyou } from './../Components/Donations/Thankyou';
-import { Route, Switch, Redirect } from 'react-router-dom'
-
-
+import { Thankyou } from './../Components/Donations/Thankyou'
+import { Route, Redirect } from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition'
 
 export const PublicRoutes = () => (
-  <Switch>
+  <AnimatedSwitch
+    atEnter={{ opacity: 0 }}
+    atLeave={{ opacity: 0 }}
+    atActive={{ opacity: 1 }}
+  >
     <Route exact path="/">
       <Index />
     </Route>
@@ -57,5 +60,5 @@ export const PublicRoutes = () => (
     <Route path="*">
       <Redirect to="/error-404" />
     </Route>
-  </Switch>
+  </AnimatedSwitch>
 )
