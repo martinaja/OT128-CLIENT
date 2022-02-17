@@ -3,8 +3,8 @@ import axios from 'axios'
 
 const initialState = {
   status: '',
-  token: true,
-  isAuthenticated: true,
+  token: false,
+  isAuthenticated: false,
   user: {},
 }
 
@@ -49,6 +49,7 @@ export const authReducer = createSlice({
   initialState,
   reducers: {
     userLogout: (state) => {
+      console.log("userLogout")
       localStorage.removeItem('token')
       return initialState
     },

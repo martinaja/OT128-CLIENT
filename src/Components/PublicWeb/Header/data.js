@@ -16,7 +16,7 @@ export const arrayData = [
     path: '/school-campaign',
   },
   {
-    pathName: 'Campaña Jugetes',
+    pathName: 'Campaña Juguetes',
     path: '/toys-campaign',
   },
 ]

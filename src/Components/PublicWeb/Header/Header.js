@@ -2,20 +2,21 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styles from './Header.module.css'
-import logo from './logo-bco.png'
+import logo from './logo-letras-blancas.png'
 import { arrayData } from './data'
+import { useDispatch, useSelector } from 'react-redux'
+import { Button } from '@material-ui/core'
+import { userLogout } from '../../../features/auth/authReducer'
 
-import { useSelector } from 'react-redux'
+
 
 const Header = () => {
+  
   const [isOpen, setIsOpen] = useState(false)
-
   const toggle = () => setIsOpen(!isOpen)
-
   let { pathname = '' } = useLocation()
-
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
-
+ 
   return (
     <>
       <NavBar toggle={toggle} pathname={pathname} userAuth={userAuth} />
@@ -26,8 +27,10 @@ const Header = () => {
 
 export default Header
 
-const NavBar = ({ toggle, pathname, userAuth }) => (
-  <nav className={styles.navbar}>
+const NavBar = ({ toggle, pathname, userAuth }) => {
+  const dispatch = useDispatch();
+
+  return <nav className={styles.navbar}>
     <div className={styles.navbarContainer}>
       <Link className={styles.navLogoLink} to="/">
         <img src={logo} className={styles.navLogo} alt="logo" />
@@ -50,19 +53,28 @@ const NavBar = ({ toggle, pathname, userAuth }) => (
         ))}
       </ul>
       <div className={styles.navBtn}>
-        {userAuth ? (
+        {userAuth && (
           <Link className={styles.navBtnLink} to="/backoffice">
             BackOffice
           </Link>
+        )}
+        {userAuth ? (
+          <Button
+            onClick={()=> dispatch (userLogout())}
+            className={styles.sidebarRoute}
+            to="/"
+          >
+            LogOut
+          </Button>
         ) : (
-          <Link className={styles.navBtnLink} to="/login">
-            Iniciar sesión
+          <Link to={'/login'} className={styles.sidebarRoute}>
+            LogIn
           </Link>
         )}
       </div>
     </div>
   </nav>
-)
+}
 
 const SideBar = ({ toggle, isOpen, userAuth }) => (
   <aside
@@ -91,8 +103,17 @@ const SideBar = ({ toggle, isOpen, userAuth }) => (
             BackOffice
           </Link>
         ) : (
-          <Link to={'/signin'} className={styles.sidebarRoute}>
+          <Link to={'/login'} className={styles.sidebarRoute}>
             Iniciar sesión
+          </Link>
+        )}
+        {userAuth ? (
+          <Link className={styles.sidebarRoute} to="/">
+            LogOut
+          </Link>
+        ) : (
+          <Link to={'/login'} className={styles.sidebarRoute}>
+            LogIn
           </Link>
         )}
       </div>
