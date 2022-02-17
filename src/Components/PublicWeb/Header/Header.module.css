@@ -97,7 +97,7 @@
   }
 }
 .navLinks:hover {
-  color: #050a0a;
+  color: #000000;
 }
 .navLinks:active .navLinksActive {
   border-bottom: 2px solid #4fbdba;
@@ -107,7 +107,7 @@
   display: flex;
   align-items: center;
 }
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1330px) {
   .navBtn {
     display: none;
   }
@@ -115,10 +115,10 @@
 
 .navBtnLink {
   border-radius: 10px;
-  background: #fff;
+  background: rgb(5, 15, 5);
   white-space: nowrap;
   padding: 8px 15px;
-  color: #118383;
+  color: #edf3f3;
   font-size: 16px;
   outline: none;
   border: none;
@@ -211,10 +211,10 @@
 
 .sidebarRoute {
   border-radius: 10px;
-  background: #fff;
+  background: rgb(10, 1, 1);
   white-space: nowrap;
-  padding: 12px 34px;
-  color: #010606;
+  padding: 8px 30px;
+  color: #cce6e6;
   font-size: 14px;
   outline: none;
   border: none;
