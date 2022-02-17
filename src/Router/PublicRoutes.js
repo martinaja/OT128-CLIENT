@@ -7,15 +7,22 @@ import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
 import { Donations } from '../Components/Donations/Donations'
-import { Thankyou } from './../Components/Donations/Thankyou';
+import { Thankyou } from './../Components/Donations/Thankyou'
 import { Route, Switch, Redirect } from 'react-router-dom'
-
-
+import PublicNewHome from '../Components/News/PublicNewHome'
 
 export const PublicRoutes = () => (
   <Switch>
     <Route exact path="/">
       <Index />
+    </Route>
+
+    <Route exact path="/novedades">
+      <PublicNewHome />
+    </Route>
+
+    <Route path="/novedades/:newsId">
+      <NewsDetail />
     </Route>
 
     <Route exact path="/contacto">
@@ -32,14 +39,6 @@ export const PublicRoutes = () => (
 
     <Route exact path="/activities">
       <Activities />
-    </Route>
-
-    <Route exact path="/news">
-      <NewsList />
-    </Route>
-
-    <Route path="/news/:newsId">
-      <NewsDetail />
     </Route>
 
     <Route path="/activities/:id">
