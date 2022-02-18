@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { register, login } from '../../Services/apiServices/authApiService'
 
 const initialState = {
   status: '',
@@ -13,10 +13,7 @@ export const userRegister = createAsyncThunk(
   'auth/userRegister',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        'http://ongapi.alkemy.org/api/register',
-        data,
-      )
+      const response = await register(data)
       return response.data
     } catch (err) {
       return rejectWithValue({ error: err.response.data })
@@ -29,10 +26,7 @@ export const userLogin = createAsyncThunk(
   'auth/userLogin',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        'http://ongapi.alkemy.org/api/login',
-        data,
-      )
+      const response = await login(data)
       if (response.data.success) {
         return response.data
       } else {
@@ -49,7 +43,7 @@ export const authReducer = createSlice({
   initialState,
   reducers: {
     userLogout: (state) => {
-      console.log("userLogout")
+      console.log('userLogout')
       localStorage.removeItem('token')
       return initialState
     },
