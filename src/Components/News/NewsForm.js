@@ -25,6 +25,7 @@ import ButtonLoader from '../ButtonLoader/ButtonLoader'
 import Spinner from '../Spinner'
 
 const NewsForm = () => {
+  // let newsId
   const { newsId } = useParams()
   const history = useHistory()
 
@@ -34,14 +35,14 @@ const NewsForm = () => {
   const [imgUploaded, setImgUploaded] = useState(null)
   const [previewImgUploaded, setPreviewImgUploaded] = useState(null)
 
-  const [loader, setLoader] = useState(false)
+  // const [loader, setLoader] = useState(false)
   const [btnLoader, setBtnLoader] = useState(false)
 
   // Fetch categories
   useEffect(
     () =>
       (async () => {
-        setLoader(true)
+        // setLoader(true)
 
         const fetchCategories = await getCategories()
         if (fetchCategories.error)
@@ -51,7 +52,7 @@ const NewsForm = () => {
           )
 
         const dataCategories = fetchCategories?.data?.data
-        console.log('CATEGORIES', dataCategories)
+        // console.log('CATEGORIES', dataCategories)
 
         dataCategories
           ? setCategories(dataCategories)
@@ -60,7 +61,7 @@ const NewsForm = () => {
               'Verificá que la URL sea correcta',
             )
 
-        setLoader(false)
+        // setLoader(false)
       })(),
     [],
   )
@@ -69,7 +70,7 @@ const NewsForm = () => {
   useEffect(() => {
     if (!newsId) return
     ;(async () => {
-      setLoader(true)
+      // setLoader(true)
 
       const fetchNews = await getNews(newsId)
       if (fetchNews.error) {
@@ -92,7 +93,7 @@ const NewsForm = () => {
         history.push('/backoffice/news')
       }
 
-      setLoader(false)
+      // setLoader(false)
     })()
   }, [newsId, history])
 
@@ -187,109 +188,115 @@ const NewsForm = () => {
     category_id: Yup.string().required('Categoría requerida'),
   })
 
-  return loader ? (
-    <Spinner />
-  ) : (
-    <Formik
-      enableReinitialize
-      initialValues={{
-        name: news.name || '',
-        content: news.content || '',
-        category_id: '',
-        image: '',
-      }}
-      validationSchema={schemaValidate}
-      onSubmit={(val) => {
-        sendNews(val)
-      }}
-    >
-      {({
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        values,
-        errors,
-        setFieldValue,
-        touched,
-      }) => (
-        <Container>
-          <Box sx={{ boxShadow: 5, p: 5 }}>
-            {previewImgUploaded || news.image ? (
-              <img
-                style={{ maxWidth: '100%' }}
-                src={previewImgUploaded || news.image}
-                alt=""
-              />
-            ) : null}
-            <form onSubmit={handleSubmit}>
-              <TextField
-                margin="normal"
-                fullWidth
-                id="name"
-                name="name"
-                label="Título"
-                value={values.name}
-                onChange={handleChange}
-                error={touched.name && Boolean(errors.name)}
-                helperText={touched.name && errors.name}
-                onBlur={handleBlur}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                id="category_id"
-                name="category_id"
-                select
-                label="Categoría"
-                value={values.category_id}
-                onChange={handleChange}
-                helperText={touched.category_id && errors.category_id}
-                onBlur={handleBlur}
-              >
-                {categories.map((cat, i) => (
-                  <MenuItem key={i} value={cat.id}>
-                    {cat.name}-{cat.id}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <CKEditor
-                name="content"
-                editor={ClassicEditor}
-                data={values.content}
-                onChange={(_, editor) => {
-                  const data = editor.getData()
-                  setFieldValue('content', data)
-                }}
-              />
-              <ErrorMessage component="small" name="content" />
-              <label htmlFor="image">
-                <Input
-                  name="image"
-                  accept="image/*"
-                  id="image"
-                  multiple
-                  type="file"
-                  onChange={(e) => {
-                    const file = e.currentTarget.files[0]
-                    setFieldValue('image', file)
-                    setImgUploaded(file)
-                  }}
-                  style={{ display: 'none' }}
+  return (
+    <>
+      <h1>Novedades</h1>
+      <Formik
+        enableReinitialize
+        initialValues={{
+          name: news.name || '',
+          content: news.content || '',
+          category_id: '',
+          image: '',
+        }}
+        validationSchema={schemaValidate}
+        onSubmit={(val) => {
+          sendNews(val)
+        }}
+      >
+        {({
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          values,
+          errors,
+          setFieldValue,
+          touched,
+        }) => (
+          <Container>
+            <Box sx={{ boxShadow: 5, p: 5 }}>
+              {previewImgUploaded || news.image ? (
+                <img
+                  style={{ maxWidth: '100%' }}
+                  src={previewImgUploaded || news.image}
+                  alt=""
+                  data-testid="imagen"
                 />
-                <Button fullWidth variant="outlined" component="span">
-                  {!previewImgUploaded ? 'Subir imagen' : 'Subir otra imagen'}
-                </Button>
-                <ErrorMessage component="small" name="image" />
-              </label>
-              <ButtonLoader
-                label={isEditable ? 'Editar noticia' : 'Crear noticia'}
-                loading={btnLoader}
-              />
-            </form>
-          </Box>
-        </Container>
-      )}
-    </Formik>
+              ) : null}
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  id="name"
+                  name="name"
+                  data-testid="titulo"
+                  label="Título"
+                  value={values.name}
+                  onChange={handleChange}
+                  error={touched.name && Boolean(errors.name)}
+                  helperText={touched.name && errors.name}
+                  onBlur={handleBlur}
+                />
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  id="category_id"
+                  name="category_id"
+                  select
+                  data-testid="categoria"
+                  label="Categoría"
+                  value={values.category_id}
+                  onChange={handleChange}
+                  helperText={touched.category_id && errors.category_id}
+                  onBlur={handleBlur}
+                >
+                  {categories.map((cat, i) => (
+                    <MenuItem key={i} value={cat.id}>
+                      {cat.name}-{cat.id}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <div data-testid="CKEditor">
+                  <CKEditor
+                    name="content"
+                    editor={ClassicEditor}
+                    data={values.content}
+                    onChange={(_, editor) => {
+                      const data = editor.getData()
+                      setFieldValue('content', data)
+                    }}
+                  />
+                  <ErrorMessage component="small" name="content" />
+                </div>
+                <label htmlFor="image">
+                  <Input
+                    name="image"
+                    accept="image/*"
+                    id="image"
+                    multiple
+                    type="file"
+                    onChange={(e) => {
+                      const file = e.currentTarget.files[0]
+                      setFieldValue('image', file)
+                      setImgUploaded(file)
+                    }}
+                    style={{ display: 'none' }}
+                  />
+                  <Button fullWidth variant="outlined" component="span">
+                    {!previewImgUploaded ? 'Subir imagen' : 'Subir otra imagen'}
+                  </Button>
+                  <ErrorMessage component="small" name="image" />
+                </label>
+                <ButtonLoader
+                  label={isEditable ? 'Editar noticia' : 'Crear noticia'}
+                  loading={btnLoader}
+                />
+              </form>
+            </Box>
+          </Container>
+        )}
+      </Formik>
+    </>
   )
 }
 
