@@ -130,7 +130,6 @@ const SideBar = ({ toggle, isOpen, userAuth, dispatch }) => (
             </Link>
           </>
         ) : (
-
           <>
             <Link to={'/login'} className={styles.sidebarRoute}>
               LogIn

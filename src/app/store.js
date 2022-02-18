@@ -7,6 +7,7 @@ import membersReducer from '../features/members/membersReducer'
 import newsReducer from '../features/news/newsReducer'
 import slidesReducer from '../features/slide/slidesReducer'
 import organizationReducer from '../features/organization/organizationReducer'
+import testimonialReducer from '../features/testimonial/testimonialReducer'
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     news: newsReducer,
     slides: slidesReducer,
     organization: organizationReducer,
+    testimonial: testimonialReducer,
   }, //add reducers
 })
 export default store

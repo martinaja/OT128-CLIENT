@@ -68,4 +68,3 @@ export const PublicRoutes = () => (
       </Route>
     </Suspense>
   </AnimatedSwitch>
-)
