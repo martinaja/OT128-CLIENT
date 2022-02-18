@@ -1,4 +1,5 @@
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition'
 import { lazy, Suspense } from 'react'
 import LoadingBar from '../Components/LoadingPage/LoadingPage'
 const NotFound = lazy(() => import('../Components/NotFound/NotFound'))
@@ -16,7 +17,11 @@ const PublicNewHome = lazy(() => import('../Components/News/PublicNewHome'))
 const ContactHome = lazy(() => import('../Components/Contact/ContactHome'))
 
 export const PublicRoutes = () => (
-  <Switch>
+  <AnimatedSwitch
+    atEnter={{ opacity: 0 }}
+    atLeave={{ opacity: 0 }}
+    atActive={{ opacity: 1 }}
+  >
     <Suspense fallback={<LoadingBar />}>
       <Route exact path="/">
         <Index />
@@ -62,5 +67,5 @@ export const PublicRoutes = () => (
         <NotFound />
       </Route>
     </Suspense>
-  </Switch>
+  </AnimatedSwitch>
 )
