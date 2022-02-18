@@ -1,5 +1,5 @@
 .navbar {
-  background: #35858B;
+  background: #35858b;
   height: 70px;
   display: flex;
   justify-content: center;
@@ -10,7 +10,7 @@
   z-index: 10;
   width: 100%;
 }
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1100px) {
   .navbar {
     transition: 0.8s all ease;
   }
@@ -45,7 +45,7 @@
   display: none;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1100px) {
   .mobileIcon {
     display: block;
     position: absolute;
@@ -65,7 +65,7 @@
   text-align: center;
   margin-right: -15px;
 }
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1100px) {
   .navMenu {
     display: none;
   }
@@ -84,6 +84,7 @@
   height: 100%;
   cursor: pointer;
   font-size: 18px;
+<<<<<<< HEAD
   font-weight: lighter
 }
 @media screen and (max-width: 980px) {
@@ -92,10 +93,22 @@
   }
 }
 @media screen and (max-width: 920px) {
+=======
+  font-weight: lighter;
+}
+
+@media screen and (min-width: 1100px) {
+>>>>>>> b4d1f9636934b2213a88a5c738c2ad32b9943eaa
   .navLinks {
     font-size: 14px;
   }
 }
+@media screen and (min-width: 1200px) {
+  .navLinks {
+    font-size: 16px;
+  }
+}
+
 .navLinks:hover {
   color: #000000;
 }
@@ -107,7 +120,11 @@
   display: flex;
   align-items: center;
 }
+<<<<<<< HEAD
 @media screen and (max-width: 1330px) {
+=======
+@media screen and (max-width: 1100px) {
+>>>>>>> b4d1f9636934b2213a88a5c738c2ad32b9943eaa
   .navBtn {
     display: none;
   }
@@ -115,10 +132,17 @@
 
 .navBtnLink {
   border-radius: 10px;
+<<<<<<< HEAD
   background: rgb(5, 15, 5);
   white-space: nowrap;
   padding: 8px 15px;
   color: #edf3f3;
+=======
+  background: #fff;
+  white-space: nowrap;
+  padding: 8px 15px;
+  color: #35858b;
+>>>>>>> b4d1f9636934b2213a88a5c738c2ad32b9943eaa
   font-size: 16px;
   outline: none;
   border: none;
@@ -126,21 +150,22 @@
   transition: all 0.2s ease-in-out;
   text-decoration: none;
 }
-.navBtnLink:hover {
-  transition: all 0.2s ease-in-out;
-  background: #4fbdba;
-  color: #010606;
-}
-@media screen and (max-width: 980px) {
+
+@media screen and (min-width: 1100px) {
   .navBtnLink {
     font-size: 14px;
-    padding: 10px 12px;
+    padding: 10px 18px;
+    margin: 0 1rem;
   }
 }
-@media screen and (max-width: 920px) {
+@media screen and (min-width: 1200px) {
   .navBtnLink {
+<<<<<<< HEAD
     font-size: 14px;
     padding: 10px 10px;
+=======
+    font-size: 16px;
+>>>>>>> b4d1f9636934b2213a88a5c738c2ad32b9943eaa
   }
 }
 
@@ -149,7 +174,7 @@
   z-index: 999;
   width: 100%;
   height: 100vh;
-  background: #272c34;
+  background: #35858b;
   display: grid;
   align-items: center;
   top: 0;
@@ -178,12 +203,14 @@
 .sidebarMenu {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 80px);
+  grid-template-rows: repeat(8, 80px);
   text-align: center;
+  margin-bottom: 3rem;
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-height: 770px) {
   .sidebarMenu {
-    grid-template-rows: repeat(6, 60px);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 80px);
   }
 }
 
@@ -207,15 +234,24 @@
 .sidebarBtnWrap {
   display: flex;
   justify-content: center;
+  column-gap: 2rem;
 }
 
 .sidebarRoute {
   border-radius: 10px;
+<<<<<<< HEAD
   background: rgb(10, 1, 1);
   white-space: nowrap;
   padding: 8px 30px;
   color: #cce6e6;
   font-size: 14px;
+=======
+  background: #fff;
+  white-space: nowrap;
+  padding: 8px 30px;
+  color: #272c34;
+  font-size: 1.3rem;
+>>>>>>> b4d1f9636934b2213a88a5c738c2ad32b9943eaa
   outline: none;
   border: none;
   cursor: pointer;
@@ -225,6 +261,12 @@
 
 .sidebarRoute:hover {
   transition: all 0.2s ease-in-out;
+<<<<<<< HEAD
   background: #4fbdba;
   color: #010606;
 }
+=======
+  background: #272c34;
+  color: #fff;
+}
+>>>>>>> b4d1f9636934b2213a88a5c738c2ad32b9943eaa

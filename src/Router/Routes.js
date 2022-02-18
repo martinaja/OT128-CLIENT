@@ -1,4 +1,5 @@
-import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom'
+import { Route, Redirect, BrowserRouter } from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition'
 import PublicContent from '../Components/PublicWeb/PublicContent'
 import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
 import LoginForm from '../Components/Auth/LoginForm'
@@ -11,7 +12,11 @@ import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 export const Routes = () => {
   return (
     <BrowserRouter>
-      <Switch>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+      >
         <Route
           exact
           path={[
@@ -22,6 +27,7 @@ export const Routes = () => {
             '/activities',
             '/donations',
             '/news',
+            '/testimonios',
             '/news/:newsId',
             '/activities/:id',
             '/404',
@@ -37,10 +43,10 @@ export const Routes = () => {
         <Route path="/login" component={LoginForm} />
         <Route path="/register" component={RegisterForm} />
         <Route path="/404" component={NotFound} />
-        <Route path="/*">
+        <Route path="*">
           <Redirect to="/404" />
         </Route>
-      </Switch>
+      </AnimatedSwitch>
     </BrowserRouter>
   )
 }

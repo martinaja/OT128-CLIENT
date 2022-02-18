@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -13,12 +13,14 @@ import { Link as RouterLink, Redirect } from 'react-router-dom'
 import { FormTextInput as TextInput } from './VisualComponents/Inputs'
 import { userRegister } from './../../features/auth/authReducer'
 import { useDispatch, useSelector } from 'react-redux'
+import RegisterMap from './RegisterMap'
+import { debounce } from 'lodash'
 
 export default function RegisterForm() {
   const authData = useSelector(({ auth }) => auth)
 
   if (authData.isAuthenticated) {
-    return <Redirect push to="/backoffice" />
+    return <Redirect to="/" />
   }
 
   return <FormLogic authData={authData} />
@@ -45,8 +47,13 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const FormLogic = () => {
+  const [ubication, setUbication] = useState('Argentina')
   const classes = useStyles()
   const dispatch = useDispatch()
+
+  const hanldeUbication = debounce((value) => {
+    setUbication(value)
+  }, 1500)
 
   return (
     <Container
@@ -73,6 +80,7 @@ const FormLogic = () => {
             name: '',
             email: '',
             password: '',
+            map: '',
             mailerConsent: false,
           }}
           validationSchema={Yup.object({
@@ -93,50 +101,65 @@ const FormLogic = () => {
             dispatch(userRegister({ name, email, password }))
           }}
         >
-          <Form className={classes.form} noValidate>
-            <TextInput
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="name"
-              name="name"
-              autoComplete="name"
-              autoFocus
-            />
+          {({ handleChange }) => (
+            <Form className={classes.form} noValidate>
+              <TextInput
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="name"
+                name="name"
+                autoComplete="name"
+                autoFocus
+              />
 
-            <TextInput
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-            />
-            <TextInput
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-            />
+              <TextInput
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+              />
+              <TextInput
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+              />
 
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Registrarse
-            </Button>
-          </Form>
+              <TextInput
+                variant="outlined"
+                margin="normal"
+                fullWidth
+                id="map"
+                label="Dirección"
+                name="map"
+                onChange={(e) => {
+                  hanldeUbication(e.target.value)
+                }}
+              />
+              <RegisterMap text={ubication} />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Registrarse
+              </Button>
+            </Form>
+          )}
         </Formik>
         <Link component={RouterLink} to="/login">
           {'Ya tiene una cuenta? Ingrese'}
