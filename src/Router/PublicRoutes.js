@@ -7,10 +7,9 @@ import ContactHome from '../Components/Contact/ContactHome'
 import { Detail } from '../Components/Activities/Detail/Detail'
 import Index from '../Components/Home/Index'
 import { Donations } from '../Components/Donations/Donations'
-import { Thankyou } from './../Components/Donations/Thankyou';
+import { Thankyou } from './../Components/Donations/Thankyou'
+import TestimonialHome from '../Components/Testimonials/TestimonialHome'
 import { Route, Switch, Redirect } from 'react-router-dom'
-
-
 
 export const PublicRoutes = () => (
   <Switch>
@@ -20,6 +19,10 @@ export const PublicRoutes = () => (
 
     <Route exact path="/contacto">
       <ContactHome />
+    </Route>
+
+    <Route exact path="/testimonios">
+      <TestimonialHome />
     </Route>
 
     <Route exact path="/nosotros">
@@ -44,6 +47,10 @@ export const PublicRoutes = () => (
 
     <Route path="/activities/:id">
       <Detail />
+    </Route>
+
+    <Route path="/donations">
+      <Donations />
     </Route>
 
     <Route path="/donations">

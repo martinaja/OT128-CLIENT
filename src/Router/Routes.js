@@ -21,6 +21,7 @@ export const Routes = () => {
             '/create-user',
             '/activities',
             '/news',
+            '/testimonios',
             '/news/:newsId',
             '/activities/:id',
             '/404',
