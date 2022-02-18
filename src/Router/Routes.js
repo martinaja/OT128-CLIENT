@@ -20,6 +20,7 @@ export const Routes = () => {
             '/nosotros',
             '/create-user',
             '/activities',
+            '/donations',
             '/news',
             '/news/:newsId',
             '/activities/:id',

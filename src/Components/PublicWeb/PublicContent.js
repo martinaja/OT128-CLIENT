@@ -1,4 +1,5 @@
-// import Footer from './Footer/Footer' //Conflictive Footer
+
+import Footer from './Footer/Footer'
 import Header from './Header/Header'
 
 const PublicContent = ({ children }) => {
@@ -7,7 +8,7 @@ const PublicContent = ({ children }) => {
       <Header />
      
       {children}
-      {/* <Footer /> */}
+      { <Footer /> }
     </>
   )
 }
