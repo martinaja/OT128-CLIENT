@@ -65,7 +65,6 @@ export const authReducer = createSlice({
   initialState,
   reducers: {
     userLogout: (state) => {
-      console.log('userLogout')
       localStorage.removeItem('token')
       return initialState
     },

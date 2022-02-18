@@ -38,6 +38,7 @@ const Header = () => {
 
 export default Header
 
+
 const NavBar = ({ toggle, pathname, userAuth, dispatch, role }) => {
   return (
     <nav className={styles.navbar}>
