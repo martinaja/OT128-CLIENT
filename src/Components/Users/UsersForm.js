@@ -7,7 +7,7 @@ import {
   putPrivateHandler,
 } from '../../Services/BaseHTTP/privateApiService'
 
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2-react-content'
 import { Terms } from './Terms'
 import { useState } from 'react'
 
