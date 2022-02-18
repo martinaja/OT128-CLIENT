@@ -16,7 +16,7 @@ const Header = () => {
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
 
   return (
-    <>
+    <div id="main-header">
       <NavBar
         toggle={toggle}
         pathname={pathname}
@@ -29,7 +29,7 @@ const Header = () => {
         userAuth={userAuth}
         dispatch={dispatch}
       />
-    </>
+    </div>
   )
 }
 

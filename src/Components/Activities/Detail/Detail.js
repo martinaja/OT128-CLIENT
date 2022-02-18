@@ -7,7 +7,7 @@ import { getActivity } from '../../../Services/apiServices/activitiesApiService'
 import { alertServiceError } from '../../AlertService'
 import { useHistory } from 'react-router-dom'
 
-export const Detail = (props) => {
+const Detail = (props) => {
   const [data, setData] = useState(undefined)
   const [loader, setLoader] = useState(false)
   const history = useHistory()
@@ -60,3 +60,5 @@ export const Detail = (props) => {
     </>
   )
 }
+
+export default Detail

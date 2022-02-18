@@ -1,11 +1,12 @@
 import React from 'react'
-import { DonationsMp } from './DonationsMp';
+import { DonationsMp } from './DonationsMp'
 
-export const Donations = () => {
+const Donations = () => {
   return (
-   <>
+    <>
       <DonationsMp />
-
-   </>
+    </>
   )
 }
+
+export default Donations
