@@ -8,15 +8,27 @@ export const arrayData = [
     path: '/nosotros',
   },
   {
+    pathName: 'Actividades',
+    path: '/activities',
+  },
+  {
+    pathName: 'Novedades',
+    path: '/news',
+  },
+  {
+    pathName: 'Testimonios',
+    path: '/testimonios',
+  },
+  {
     pathName: 'Contacto',
     path: '/contacto',
   },
   {
-    pathName: 'Campaña Escuela',
-    path: '/school-campaign',
+    pathName: 'Contribuye',
+    path: '/donations',
   },
   {
-    pathName: 'Campaña Juguetes',
-    path: '/toys-campaign',
+    pathName: 'Campañas',
+    path: '/',
   },
 ]
