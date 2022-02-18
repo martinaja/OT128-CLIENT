@@ -20,7 +20,7 @@ export default function RegisterForm() {
   const authData = useSelector(({ auth }) => auth)
 
   if (authData.isAuthenticated) {
-    return <Redirect push to="/backoffice" />
+    return <Redirect to="/" />
   }
 
   return <FormLogic authData={authData} />

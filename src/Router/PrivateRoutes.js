@@ -1,4 +1,5 @@
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition'
 import { useSelector } from 'react-redux'
 import ActivitiesForm from '../Components/Activities/ActivitiesForm'
 import CategoriesForm from '../Components/Categories/CategoriesForm'
@@ -31,7 +32,11 @@ export const PrivateRoute = ({ children, ...rest }) => {
 }
 
 export const PrivateRoutes = () => (
-  <Switch>
+  <AnimatedSwitch
+    atEnter={{ opacity: 0 }}
+    atLeave={{ opacity: 0 }}
+    atActive={{ opacity: 1 }}
+  >
     <PrivateRoute exact path="/backoffice/activities">
       <ActivitiesScreen />
     </PrivateRoute>
@@ -127,5 +132,5 @@ export const PrivateRoutes = () => (
     <Route path="/backoffice/*">
       <Redirect to="/404" />
     </Route>
-  </Switch>
+  </AnimatedSwitch>
 )
