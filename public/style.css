@@ -872,6 +872,9 @@ ul.socials-top li:hover i{
     background-color: #00a6eb;
 }
 .process .raised span:after {
+  font-family: 'Noto Sans', sans-serif;
+font-family: 'Oxygen', sans-serif;
+font-family: 'Quicksand', sans-serif;
     content: "";
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
