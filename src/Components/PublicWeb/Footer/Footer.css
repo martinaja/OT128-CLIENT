@@ -1,47 +1,36 @@
 * {
-margin: initial;
+margin: auto;
   padding:0;
-  box-sizing:border-box;}
+  box-sizing:border-box;
+  font-family: "Roboto";
+}
 
 .container{
   padding-top: 50px;
-  margin: 0;
-  font: 14px "Roboto";
+  margin: auto;
+  font: 14px ;
   text-align: center;
+  font-weight: lighter;
 }
 
 .footer__container{
- 
- background-color: #272C34;
+
+ background-color: #35858B;
 }
 
 .logo{
   margin-top: 50px;
-  width: 5rem;
+  width: 7rem;
   margin-right: 1rem;
- 
+ margin-bottom: 2rem;
   margin-left: 2rem;
 }
 
-.logo__name{
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.5rem;
-  margin-bottom: 1rem;
-  color: #eeeeee;
-}
 
-.logo__description{
-  padding-right: 1rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  letter-spacing: 0.05rem;
-  color: #eee;
-}
 
 .hr{
   display: none;
-  margin-top: 1rem;
+margin-top: 1rem;
   margin-bottom: 1rem;
   border-radius: 50%;
   background-color: #eee;
@@ -49,20 +38,24 @@ margin: initial;
 }
 
 .col{
-  padding: 1rem;
+  margin-left: 2rem;
+  padding: 1.2rem;
   color: #eee ;
+  text-decoration: none;
 }
 
 .col__title{
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: lighter;
   margin-bottom: 1rem;
+ 
 }
 
 .col__links{
   color: rgba(238, 238, 238, 0.548);
   text-decoration: none;
   transition: 0.2s ease;
+  font-weight: lighter;
 }
 
 .col__links:hover{
@@ -70,16 +63,18 @@ margin: initial;
 }
 
 .social{
-  width: 100%;
+  width: 70%;
   color: #eee;
-  
+  margin-left: 1rem;
+
+ 
 }
 
 .social__hr{
-  margin-top: 1rem;
+
   margin-bottom: 1rem;
   background-color: #eee;
-  
+ 
 }
 
 .social__tags{
@@ -87,11 +82,13 @@ margin: initial;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  
+  position: center;
+ 
 }
 
 .social__tags__color{
-  color: rgba(238, 238, 238, 0.637); 
+  color: whitesmoke; 
+  margin-right: 3rem;
 }
 
 .social__tags__color:hover{
@@ -105,6 +102,7 @@ margin: initial;
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 0.7rem;
+
 }
 
 @media screen and (max-width: 960px){
@@ -125,7 +123,7 @@ margin: initial;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 2rem;
+   
   }
 }
 
@@ -141,7 +139,7 @@ margin: initial;
     bottom: 0;
  
     
-    background-color: #272C34;
+    background-color: #35858B;
   }
 }
 
@@ -163,7 +161,7 @@ margin: initial;
 
 .col__title{
   font-size: 1rem;
-  font-weight: 500;
+
   margin-bottom: 1rem;
   margin-right: 1rem;
   margin-left: 1rem;
@@ -199,7 +197,8 @@ margin: initial;
 }
 
 .social__tags__color{
-  color: rgba(238, 238, 238, 0.637); 
+  color: rgb(8, 10, 10);
+ 
 }
 
 .social__tags__color:hover{
@@ -251,9 +250,10 @@ margin: initial;
   }
 
   .footer__container{
- 
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 0rem!important;
     padding: 2rem;
-    background-color: #272C34;
+    background-color: #35858B;
   }
 }

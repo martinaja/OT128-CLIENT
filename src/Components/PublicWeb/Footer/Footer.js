@@ -1,71 +1,66 @@
-import { Grid, IconButton } from '@material-ui/core'
-import FacebookIcon from '@material-ui/icons/Facebook'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import LinkedInIcon from '@material-ui/icons/LinkedIn'
+import { Box, Grid } from '@material-ui/core'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Footer.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faLinkedin,
+  faFacebook,
+  faTwitter,
+  faInstagram,
+} from '@fortawesome/free-brands-svg-icons'
 
 function Footer() {
   return (
     <>
       <div className="container">
-      
         <Grid container className="footer__container">
-          <Grid
-            item
-            container
-            md={4}
-            sm={12}
-            alignItems="center"
-            className="center"
-          >
-            <img
-              alt="Logo ong."
-              src="/images/logo-bco.png"
-              className="logo"
-            />
-            
+          <Grid container alignItems="center" className="center">
+            <Link to={'/'}>
+              <img
+                alt="Logo ong."
+                src="/images/logo-bco.png"
+                className="logo"
+              />
+            </Link>
+            <Box style={{ display: 'flex' }} className="col">
+              <Link to={'/news'} className="col">
+                <p className="col__title">Novedades</p>
+              </Link>
+              <Link to={'/activities'} className="col">
+                <p className="col__title">Actividades</p>
+              </Link>
+              <Link to={'/nosotros'} className="col">
+                <p className="col__title">Nosotros</p>
+              </Link>
+              <Link to={'/testimonios'} className="col">
+                <p className="col__title">Testimonios </p>
+              </Link>
+              <Link to={'/donations'} className="col">
+                <p className="col__title">Contribuye</p>
+              </Link>
+              <Link to={'/contacto'} className="col" xs={12}>
+                <p className="col__title">Contacto</p>
+              </Link>
+            </Box>
           </Grid>
-
-          <Grid item container md sm={12}>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Noticias</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Actividades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Novedades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Testimonios </div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Nosotros</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Contacto</div>
-            </Grid>
-          </Grid>
-         
-
-          <Grid item md={12} sm={12} className="social">
+          <Grid className="social">
             <hr className="social__hr" />
-            <div className="social__tags">
-              <IconButton>
-                <FacebookIcon className="social__tags__color" />
-              </IconButton>
-              <IconButton>
-                <LinkedInIcon className="social__tags__color" />
-              </IconButton>
-              <IconButton>
-                <TwitterIcon className="social__tags__color" />
-              </IconButton>
-              <IconButton>
-                <GitHubIcon className="social__tags__color" />
-              </IconButton>
-            </div>
+            <Box className="social__tags_color">
+              <a className="social" href="https://www.facebook.com">
+                <FontAwesomeIcon icon={faFacebook} size="2x" />
+              </a>
+
+              <a className="social" href="https://www.twitter.com">
+                <FontAwesomeIcon icon={faTwitter} size="2x" />
+              </a>
+              <a className="social" href="https://www.instagram.com">
+                <FontAwesomeIcon icon={faInstagram} size="2x" />
+              </a>
+              <a className="social" href="https://www.linkedin.com">
+                <FontAwesomeIcon icon={faLinkedin} size="2x" />
+              </a>
+            </Box>
             <div className="social__copyrights">
               © 2020 Somos mas. All Rights Reserved.
             </div>
