@@ -14,6 +14,7 @@ import {
 } from '../../Services/apiServices/categoriesApiService'
 import { useParams, useHistory } from 'react-router-dom'
 import { alertServiceError } from '../AlertService'
+import getBase64FromUrl from '../../utils/apiToBase64'
 
 const CategoriesForm = (props) => {
   const { id } = useParams()
@@ -21,6 +22,7 @@ const CategoriesForm = (props) => {
   const [category, setCategory] = useState({})
   const [isEditing, setIsEditing] = useState(false)
   const [baseImage, setBaseImage] = useState('')
+  const [imageApi, setImageApi] = useState('')
   const [previewImg, setPreviewImg] = useState(null)
   const history = useHistory()
 
@@ -51,6 +53,7 @@ const CategoriesForm = (props) => {
       }
 
       setLoader(false)
+      setImageApi(await getBase64FromUrl(category.image))
     })()
   }, [history, id])
 
@@ -95,6 +98,7 @@ const CategoriesForm = (props) => {
       ...values,
       image: base64,
     }
+    console.log(newToSend.image)
 
     //depending of the state of isEditing call post or put
     if (!isEditing) {
@@ -116,7 +120,7 @@ const CategoriesForm = (props) => {
           initialValues={{
             name: category.name || '',
             description: category.description || '',
-            image: '',
+            image: imageApi || '',
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
@@ -140,6 +144,7 @@ const CategoriesForm = (props) => {
                 <h1>{isEditing ? 'Editar Categoría' : 'Crear Categoría'}</h1>
                 {previewImg || category.image ? (
                   <img
+                    id="imageid"
                     style={{ maxWidth: '100%' }}
                     src={previewImg || category.image}
                     alt=""

@@ -58,7 +58,7 @@ export const PublicRoutes = () => (
         <Thankyou />
       </Route>
 
-      <Route path="*">
+      <Route path="/404">
         <NotFound />
       </Route>
     </Suspense>

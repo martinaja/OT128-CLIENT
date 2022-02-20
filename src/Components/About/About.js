@@ -4,7 +4,7 @@ import { getOrganization } from './../../Services/apiServices/organizationApiSer
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
 
-export default function About({ title }) {
+const About = ({ title }) => {
   const [loader, setLoader] = useState(false)
   const [data, setData] = useState()
 
@@ -46,3 +46,5 @@ export default function About({ title }) {
     </Container>
   )
 }
+
+export default About
