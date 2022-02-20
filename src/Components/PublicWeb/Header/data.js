@@ -13,7 +13,7 @@ export const arrayData = [
   },
   {
     pathName: 'Novedades',
-    path: '/news',
+    path: '/novedades',
   },
   {
     pathName: 'Testimonios',

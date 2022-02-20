@@ -1,7 +1,8 @@
-import { Route, Redirect } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import { AnimatedSwitch } from 'react-router-transition'
 import { lazy, Suspense } from 'react'
 import LoadingBar from '../Components/LoadingPage/LoadingPage'
+import TestimonialHome from '../Components/Testimonials/TestimonialHome'
 const NotFound = lazy(() => import('../Components/NotFound/NotFound'))
 const NewsDetail = lazy(() => import('../Components/News/Detail/NewsDetail'))
 const About = lazy(() => import('../Components/About/About'))
@@ -45,6 +46,10 @@ export const PublicRoutes = () => (
 
       <Route exact path="/create-user">
         <UserForm />
+      </Route>
+
+      <Route exact path="/testimonios">
+        <TestimonialHome />
       </Route>
 
       <Route exact path="/activities">

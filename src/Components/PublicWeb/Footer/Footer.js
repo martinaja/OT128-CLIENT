@@ -23,8 +23,8 @@ function Footer() {
                 className="logo"
               />
             </Link>
-            <Box style={{ display: 'flex' }} className="col">
-              <Link to={'/news'} className="col">
+            <Grid style={{ display: 'flex' }} className="col">
+              <Link to={'/novedades'} className="col">
                 <p className="col__title">Novedades</p>
               </Link>
               <Link to={'/activities'} className="col">
@@ -42,10 +42,9 @@ function Footer() {
               <Link to={'/contacto'} className="col" xs={12}>
                 <p className="col__title">Contacto</p>
               </Link>
-            </Box>
+            </Grid>
           </Grid>
           <Grid className="social">
-            <hr className="social__hr" />
             <Box className="social__tags_color">
               <a className="social" href="https://www.facebook.com">
                 <FontAwesomeIcon icon={faFacebook} size="2x" />
