@@ -1,5 +1,4 @@
-import Swal from 'sweetalert2'
-
+import Swal from 'sweetalert2-react-content'
 
 export function alertServiceInfoTimer(
   position,
@@ -55,24 +54,23 @@ export function alertServiceError(title, text) {
   })
 }
 
-export function alertDonationsMP ( image) {
-  
+export function alertDonationsMP(image) {
   Swal.fire({
     title: 'Ingrese su donación',
     input: 'text',
     inputAttributes: {
-      autocapitalize: 'off'
+      autocapitalize: 'off',
     },
     color: 'White',
     background: 'Black',
     showCancelButton: true,
-    
+
     confirmButtonText: 'Aceptar',
     showLoaderOnConfirm: true,
     preConfirm: () => {
       return 1
     },
-    allowOutsideClick: () => !Swal.isLoading()
+    allowOutsideClick: () => !Swal.isLoading(),
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
@@ -80,9 +78,9 @@ export function alertDonationsMP ( image) {
         imageUrl: image,
         confirmButtonText: 'Ok',
         preConfirm: () => {
-        return  window.location.replace('/gracias')
+          return window.location.replace('/gracias')
         },
       })
     }
   })
-  }
+}
