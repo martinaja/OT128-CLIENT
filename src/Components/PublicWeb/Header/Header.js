@@ -14,6 +14,13 @@ const Header = () => {
   const toggle = () => setIsOpen(!isOpen)
   let { pathname = '' } = useLocation()
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
+  const role = useSelector((state) => state.auth.role)
+  let arrayDataAdmin = []
+
+  if (role === 'Admin')
+    arrayDataAdmin = arrayData.filter((data) => {
+      return data.pathName !== 'Contacto'
+    })
 
   return (
     <div id="main-header">
@@ -22,12 +29,20 @@ const Header = () => {
         pathname={pathname}
         userAuth={userAuth}
         dispatch={dispatch}
+        role={role}
+        arrayDataToShow={
+          arrayDataAdmin.length !== 0 ? arrayDataAdmin : arrayData
+        }
       />
       <SideBar
         toggle={toggle}
         isOpen={isOpen}
         userAuth={userAuth}
+        role={role}
         dispatch={dispatch}
+        arrayDataToShow={
+          arrayDataAdmin.length !== 0 ? arrayDataAdmin : arrayData
+        }
       />
     </div>
   )
@@ -35,7 +50,14 @@ const Header = () => {
 
 export default Header
 
-const NavBar = ({ toggle, pathname, userAuth, dispatch }) => {
+const NavBar = ({
+  toggle,
+  pathname,
+  userAuth,
+  dispatch,
+  role,
+  arrayDataToShow,
+}) => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainer}>
@@ -48,7 +70,7 @@ const NavBar = ({ toggle, pathname, userAuth, dispatch }) => {
         </div>
 
         <ul className={styles.navMenu}>
-          {arrayData.map((link, key) => (
+          {arrayDataToShow.map((link, key) => (
             <li
               className={` ${styles.navItem}  ${
                 pathname === link.path ? styles.navLinksActive : ''
@@ -72,9 +94,11 @@ const NavBar = ({ toggle, pathname, userAuth, dispatch }) => {
               >
                 LogOut
               </Link>
-              <Link className={styles.navBtnLink} to={'/backoffice'}>
-                BackOffice
-              </Link>
+              {role !== 'Admin' ? null : (
+                <Link className={styles.sidebarRoute} to={'/backoffice'}>
+                  BackOffice
+                </Link>
+              )}
             </>
           ) : (
             <>
@@ -92,7 +116,14 @@ const NavBar = ({ toggle, pathname, userAuth, dispatch }) => {
   )
 }
 
-const SideBar = ({ toggle, isOpen, userAuth, dispatch }) => (
+const SideBar = ({
+  toggle,
+  isOpen,
+  userAuth,
+  role,
+  dispatch,
+  arrayDataToShow,
+}) => (
   <aside
     className={styles.sidebarContainer}
     style={
@@ -106,7 +137,7 @@ const SideBar = ({ toggle, isOpen, userAuth, dispatch }) => (
 
     <div className={styles.sidebarWrapper}>
       <ul className={styles.sidebarMenu}>
-        {arrayData.map((link, key) => (
+        {arrayDataToShow.map((link, key) => (
           <li className={styles.sidebarLink} key={key}>
             <Link className={styles.sidebarLink} to={link.path}>
               {link.pathName}
@@ -125,9 +156,11 @@ const SideBar = ({ toggle, isOpen, userAuth, dispatch }) => (
             >
               LogOut
             </Link>
-            <Link className={styles.sidebarRoute} to={'/backoffice'}>
-              BackOffice
-            </Link>
+            {role !== 'Admin' ? null : (
+              <Link className={styles.sidebarRoute} to={'/backoffice'}>
+                BackOffice
+              </Link>
+            )}
           </>
         ) : (
           <>

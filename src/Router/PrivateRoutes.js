@@ -20,13 +20,19 @@ import UsersHome from '../Components/Users/UsersHome'
 import BackofficeHome from '../Components/BackOffice/BackOfficeHome'
 
 export const PrivateRoute = ({ children, ...rest }) => {
-  const { isAuthenticated } = useSelector((state) => state.auth)
+  const { isAuthenticated, role } = useSelector((state) => state.auth)
+
+  console.log(role)
 
   return (
     <Route
       {...rest}
       render={() => {
-        return isAuthenticated === true ? children : <Redirect to="/login" />
+        return isAuthenticated === true && role === 'Admin' ? (
+          children
+        ) : (
+          <Redirect to="/" />
+        )
       }}
     />
   )

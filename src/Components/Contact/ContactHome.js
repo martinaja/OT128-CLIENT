@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { getOrganizationData } from '../../features/organization/organizationReducer.js'
 import { alertServiceError } from '../AlertService.js'
 import Spinner from '../Spinner.js'
@@ -43,6 +44,9 @@ const ContactHome = () => {
       )
     }
   }, [state.status, dispatch, state.errorMsg])
+
+  const { role } = useSelector((state) => state.auth)
+  if (role === 'Admin') return <Redirect to="/" />
 
   return (
     <Box
