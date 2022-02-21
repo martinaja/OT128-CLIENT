@@ -11,7 +11,7 @@ import Swal from 'sweetalert2'
 // import { Terms } from './Terms'
 import { useState } from 'react'
 
-const UserForm = ({usuario}) => {
+const UserForm = ({usuario = undefined}) => {
   const url = process.env.REACT_APP_API_USERS_GET
 
   const [display, setDisplay] = useState(false)
@@ -21,6 +21,7 @@ const UserForm = ({usuario}) => {
     <Box sx={{ pt: '60px', pl: 2 }}>
       <Formik
         initialValues={{
+          id: usuario ? usuario.id : '',
           name: usuario ? usuario?.name : '',
           email: usuario ? usuario?.email : '',
           role_id: usuario ? usuario?.role_id : '',
@@ -38,7 +39,7 @@ const UserForm = ({usuario}) => {
             cancelButtonText: 'Cancelar',
           }).then((result) => {
             if (result.isConfirmed) {
-              if (usuario.id) {
+              if (usuario?.id) {
                 putPrivateHandler(url, usuario.id, values)
               } else {
                 postPrivateHandler(url, values)

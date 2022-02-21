@@ -1,12 +1,9 @@
 import React from 'react'
-import { render, screen, waitFor, fireEvent } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { prettyDOM } from '@testing-library/dom'
 import UserForm from './../../Components/Users/UsersForm'
-import { wait } from '@testing-library/user-event/dist/utils'
-import { act } from 'react-dom/test-utils'
 
-describe('Tests in UserForm.js, checking for error messages', () => {
+describe('Tests in UserForm.js, checking for messages', () => {
   const usuario = {
     id: '1215',
     name: '',
@@ -52,11 +49,18 @@ describe('Tests in UserForm.js, checking for error messages', () => {
     photo: '',
   }
 
-  const handleSubmit = jest.fn()
+  // const usuario6 = {
+  //   id: '1215',
+  //   name: 'John',
+  //   email: 'John@gmail.com',
+  //   role_id: '1',
+  //   description: 'Description text for examlple',
+  //   photo: '',
+  // }
 
   test('Debe mostrar mensaje de Campo obligatorio', async () => {
     await waitFor(() => {
-      render(<UserForm onSubmit={handleSubmit} usuario={usuario} />)
+      render(<UserForm usuario={usuario} />)
     })
 
     userEvent.click(screen.getByText('Send'))
@@ -66,7 +70,7 @@ describe('Tests in UserForm.js, checking for error messages', () => {
 
   test('Debe mostrar mensaje de Debe tener mínimo 4 caracteres', async () => {
     await waitFor(() => {
-      render(<UserForm onSubmit={handleSubmit} usuario={usuario2} />)
+      render(<UserForm usuario={usuario2} />)
     })
 
     userEvent.click(screen.getByText('Send'))
@@ -78,7 +82,7 @@ describe('Tests in UserForm.js, checking for error messages', () => {
 
   test('Debe mostrar mensaje de Debe ingresar un email valido', async () => {
     await waitFor(() => {
-      render(<UserForm onSubmit={handleSubmit} usuario={usuario3} />)
+      render(<UserForm usuario={usuario3} />)
     })
 
     userEvent.click(screen.getByText('Send'))
@@ -90,19 +94,17 @@ describe('Tests in UserForm.js, checking for error messages', () => {
 
   test('Debe mostrar mensaje de Seleccione una opción', async () => {
     await waitFor(() => {
-      render(<UserForm onSubmit={handleSubmit} usuario={usuario4} />)
+      render(<UserForm usuario={usuario4} />)
     })
 
     userEvent.click(screen.getByText('Send'))
 
-    expect(
-      await screen.findByText('Seleccione una opción'),
-    ).toBeInTheDocument()
+    expect(await screen.findByText('Seleccione una opción')).toBeInTheDocument()
   })
 
   test('Debe mostrar mensaje de Debe tener mínimo 10 caracteres', async () => {
     await waitFor(() => {
-      render(<UserForm onSubmit={handleSubmit} usuario={usuario5} />)
+      render(<UserForm usuario={usuario5} />)
     })
 
     userEvent.click(screen.getByText('Send'))
@@ -111,6 +113,18 @@ describe('Tests in UserForm.js, checking for error messages', () => {
       await screen.findByText('Debe tener mínimo 10 caracteres'),
     ).toBeInTheDocument()
   })
+
+  // test('Debe mostrar mensaje de Datos procesados', async () => {
+  //   await waitFor(() => {
+  //     render(<UserForm usuario={usuario6} />)
+  //   })
+
+  //   userEvent.click(screen.getByText('Send'))
+
+  //   expect(
+  //     await screen.findByText('Datos procesados'),
+  //   ).toBeInTheDocument()
+  // })
 
 
 })
