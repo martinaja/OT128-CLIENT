@@ -15,6 +15,12 @@ const Header = () => {
   let { pathname = '' } = useLocation()
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
   const role = useSelector((state) => state.auth.role)
+  let arrayDataAdmin = []
+
+  if (role === 'Admin')
+    arrayDataAdmin = arrayData.filter((data) => {
+      return data.pathName !== 'Contacto'
+    })
 
   return (
     <div id="main-header">
@@ -24,6 +30,9 @@ const Header = () => {
         userAuth={userAuth}
         dispatch={dispatch}
         role={role}
+        arrayDataToShow={
+          arrayDataAdmin.length !== 0 ? arrayDataAdmin : arrayData
+        }
       />
       <SideBar
         toggle={toggle}
@@ -31,6 +40,9 @@ const Header = () => {
         userAuth={userAuth}
         role={role}
         dispatch={dispatch}
+        arrayDataToShow={
+          arrayDataAdmin.length !== 0 ? arrayDataAdmin : arrayData
+        }
       />
     </div>
   )
@@ -38,8 +50,14 @@ const Header = () => {
 
 export default Header
 
-
-const NavBar = ({ toggle, pathname, userAuth, dispatch, role }) => {
+const NavBar = ({
+  toggle,
+  pathname,
+  userAuth,
+  dispatch,
+  role,
+  arrayDataToShow,
+}) => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainer}>
@@ -52,7 +70,7 @@ const NavBar = ({ toggle, pathname, userAuth, dispatch, role }) => {
         </div>
 
         <ul className={styles.navMenu}>
-          {arrayData.map((link, key) => (
+          {arrayDataToShow.map((link, key) => (
             <li
               className={` ${styles.navItem}  ${
                 pathname === link.path ? styles.navLinksActive : ''
@@ -98,7 +116,14 @@ const NavBar = ({ toggle, pathname, userAuth, dispatch, role }) => {
   )
 }
 
-const SideBar = ({ toggle, isOpen, userAuth, role, dispatch }) => (
+const SideBar = ({
+  toggle,
+  isOpen,
+  userAuth,
+  role,
+  dispatch,
+  arrayDataToShow,
+}) => (
   <aside
     className={styles.sidebarContainer}
     style={
@@ -112,7 +137,7 @@ const SideBar = ({ toggle, isOpen, userAuth, role, dispatch }) => (
 
     <div className={styles.sidebarWrapper}>
       <ul className={styles.sidebarMenu}>
-        {arrayData.map((link, key) => (
+        {arrayDataToShow.map((link, key) => (
           <li className={styles.sidebarLink} key={key}>
             <Link className={styles.sidebarLink} to={link.path}>
               {link.pathName}
