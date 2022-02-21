@@ -19,7 +19,7 @@ export default function LoginForm() {
   const authData = useSelector(({ auth }) => auth)
 
   if (authData.isAuthenticated) {
-    return <Redirect push to="/backoffice" />
+    return <Redirect to="/" />
   }
 
   return <FormLogic authData={authData} />
@@ -82,7 +82,6 @@ const FormLogic = ({ authData }) => {
               const { email, password } = values
               const data = { email: email, password: password }
               dispatch(userLogin(data))
-            
             }}
           >
             <Form>
