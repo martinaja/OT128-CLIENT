@@ -1,5 +1,5 @@
 import { Box, InputAdornment, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   searchActivitie,
@@ -13,11 +13,6 @@ export const ActivitiesSearch = () => {
   const dispatch = useDispatch()
   const isLoading = useSelector((state) => state.activities.loading)
   const [error, setError] = useState(false)
-
-  useEffect(() => {
-    dispatch(setLoading(true))
-    dispatch(getActivities())
-  }, [dispatch])
 
   const handleChange = debounce((value) => {
     dispatch(setLoading(true))
