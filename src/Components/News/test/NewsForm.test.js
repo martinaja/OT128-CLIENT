@@ -3,18 +3,23 @@ import {
   render,
   waitFor,
   screen,
-  wait,
-  waitForElementToBeRemoved,
-  queryByText,
+  within,
+  getByTestId,
 } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import React from 'react'
 import Router from 'react-router-dom'
 // import { App, LocationDisplay } from './app'
 import NewsForm from '../NewsForm'
-import { getNews, putNews } from '../../../Services/apiServices/newsApiService'
+import { getNews, postNews } from '../../../Services/apiServices/newsApiService'
 import { getCategories } from '../../../Services/apiServices/categoriesApiService'
 import { act } from 'react-dom/test-utils'
+import {
+  getPrivateHandler,
+  postPrivateHandler,
+} from '../../../Services/BaseHTTP/privateApiService'
+import { Provider } from 'react-redux'
+import store from '../../../app/store'
 
 jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),
@@ -24,36 +29,27 @@ jest.mock('react-router-dom', () => ({
   }),
 }))
 
+const getCategoriesMock = jest.fn(getCategories)
+const postNewsMock = jest.fn(postNews)
+
+jest.mock('../../../Services/BaseHTTP/privateApiService', () => ({
+  getPrivateHandler: jest.fn(),
+  postPrivateHandler: jest.fn(),
+}))
+
 const mockData = {
-  id: 1536,
-  name: 'otra prueba',
-  content: 'prueba 123',
-  image: 'http://ongapi.alkemy.org/storage/ipyPTvCPXG.jpeg',
-  category_id: 1665,
+  id: 1535,
+  name: 'asdaasd',
+  content: 'asdasdasd',
+  image: 'http://ongapi.alkemy.org/storage/lGUCfSRfzq.jpeg',
+  category_id: 1669,
 }
 
-const fetchGetNews = jest.fn(getNews)
-const fetchPutNews = jest.fn(putNews)
-const fetchGetCategories = jest.fn(getCategories)
-
 beforeEach(() => {
-  fetchGetCategories.mockReturnValue({
-    data: {
-      data: [
-        {
-          id: 1402,
-          name: 'Partners',
-          description: 'Testing redux',
-          image: 'http://ongapi.alkemy.org/storage/9TAHHq64hc.png',
-          parent_category_id: null,
-          created_at: '2021-12-27T21:29:37.000000Z',
-          updated_at: '2021-12-28T19:49:49.000000Z',
-          deleted_at: null,
-          group_id: null,
-        },
-      ],
-    },
-  })
+  localStorage.setItem(
+    'token',
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9vbmdhcGkuYWxrZW15Lm9yZ1wvYXBpXC9sb2dpbiIsImlhdCI6MTY0MDIwMTkyOSwiZXhwIjoxNjQwMjA1NTI5LCJuYmYiOjE2NDAyMDE5MjksImp0aSI6InB2Q052aUxRQUFMdVhWcEoiLCJzdWIiOjExNjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.EOXvZwy3JZZ1wciFnxC4f4F7iLdqJIG7vGMV--s9rVc',
+  )
 })
 
 test('Render content when is creating a new', async () => {
@@ -85,21 +81,33 @@ test('Fields must be valitated (post)', async () => {
   expect(await screen.findByText(/categoría requerida/i)).toBeInTheDocument()
 })
 
-test('Render content when is editing a new', async () => {
-  fetchGetNews.mockResolvedValue({
-    data: {
-      data: mockData,
-    },
-  })
-  jest.spyOn(Router, 'useParams').mockReturnValue({ newsId: 1536 })
+test('Render content when is editing a news', async () => {
+  jest.spyOn(Router, 'useParams').mockReturnValue({ newsId: 1535 })
   await waitFor(() => {
     render(<NewsForm />)
   })
+  await getPrivateHandler.mockImplementation(() => {
+    return Promise.resolve({
+      data: {
+        success: true,
+        data: [
+          {
+            id: '1669',
+            name: 'Prueba 4',
+            description: '<p>gasdasfgasas</p>',
+            image: 'http://ongapi.alkemy.org/storage/AzfwClSQKY.png',
+            parent_category_id: null,
+            created_at: '2022-02-11T02:31:07.000000Z',
+            updated_at: '2022-02-15T11:48:37.000000Z',
+            deleted_at: null,
+            group_id: 36,
+          },
+        ],
+      },
+    })
+  })
+  expect(screen.getByTestId(/imagen/i)).toHaveAttribute('src', mockData.image)
 
-  expect(await screen.findByTestId(/imagen/i)).toHaveAttribute(
-    'src',
-    mockData.image,
-  )
   expect(
     screen.getByRole('textbox', {
       name: /rich text editor, main/i,
@@ -109,69 +117,82 @@ test('Render content when is editing a new', async () => {
   expect(screen.getByTestId(/titulo/i).querySelector('input')).toHaveValue(
     mockData.name,
   )
+
   expect(screen.getByTestId(/categoria/i).querySelector('input')).toHaveValue(
     mockData.category_id.toString(),
   )
-  const btnEdit = await screen.findByTestId('boton')
-
-  expect(btnEdit).toHaveTextContent(/editar noticia/i)
-
-  act(() =>
-    userEvent.click(screen.findByRole('button', { name: /clickeame/i })),
-  )
-
-  // userEvent.click(btnEdit.querySelector('button'))
-
-  // screen.debug()
-  expect(await screen.findByText('Click')).toBeInTheDocument()
-  // expect(fetchPutNews).toHaveBeenCalled()
 })
 
-// test('should allow submit if the form was completed (put)', async () => {
-//   fetchGetNews.mockResolvedValue({
-//     data: {
-//       data: mockData,
-//     },
-//   })
-//   jest.spyOn(Router, 'useParams').mockReturnValue({ id: 1535 })
-//   await waitFor(() => {
-//     render(<NewsForm />)
-//   })
-//   expect(screen.findByTestId('boton')).toHaveTextContent(/editar noticia/i)
-// expect(await screen.findByTestId('boton')).toBeInTheDocument()
+test('Should post data', async () => {
+  jest.spyOn(Router, 'useParams').mockReturnValue({ newsId: undefined })
 
-// userEvent.click(await screen.findByText('Editar noticia'))
+  await getPrivateHandler.mockImplementation(() => {
+    return Promise.resolve({
+      data: {
+        success: true,
+        data: [
+          {
+            id: '1669',
+            name: 'Prueba 4',
+            description: '<p>gasdasfgasas</p>',
+            image: 'http://ongapi.alkemy.org/storage/AzfwClSQKY.png',
+            parent_category_id: null,
+            created_at: '2022-02-11T02:31:07.000000Z',
+            updated_at: '2022-02-15T11:48:37.000000Z',
+            deleted_at: null,
+            group_id: 36,
+          },
+        ],
+      },
+    })
+  })
 
-// await act(async () => {
-//   userEvent.click(
-//     await screen.findByRole('button', { name: /editar noticia/i }),
-//   )
-// })
-// expect(fetchPutNews).toHaveBeenCalled()
-// })
+  await waitFor(() => {
+    render(<NewsForm />)
+  })
 
-// primer test
+  userEvent.click(await screen.findByRole('button', { name: /categoría ​/i }))
 
-// beforeEach(async () => {
-//   await waitFor(() => {
-//     render(<NewsForm />)
-//   })
-// })
+  userEvent.click(screen.getByRole('option', { name: '1669' }))
 
-// test('should render component', async () => {
-//   const title = screen.getByText(/novedades/i)
-//   expect(title).toBeInTheDocument()
-// })
+  userEvent.type(
+    screen.getByRole('textbox', {
+      name: /rich text editor, main/i,
+    }),
+    'Este es el contenido',
+  )
 
-// test('full app rendering/navigating', () => {
-//   const history = createMemoryHistory()
-//   history.push('/backoffice/news/create')
-//   render(
-//     <Router history={history}>
-//       <NewsForm />
-//     </Router>,
-//   )
-//   // verify page content for expected route
-//   // often you'd use a data-testid or role query, but this is also possible
-//   expect(screen.getByText(/Novedades/i)).toBeInTheDocument()
-// })
+  userEvent.type(
+    screen.getByTestId(/titulo/i).querySelector('input'),
+    'Este es el título',
+  )
+
+  const file = new File(['hello'], 'hello.png', { type: 'image/png' })
+  userEvent.upload(screen.getByTestId(/subirImagen/i), file)
+
+  userEvent.click(await screen.findByText(/crear noticia/i))
+
+  userEvent.click(await screen.findByText(/crear noticia/i))
+
+  expect(
+    screen.getByRole('textbox', {
+      name: /rich text editor, main/i,
+    }),
+  ).toHaveTextContent('Este es el contenido')
+
+  expect(screen.getByTestId(/titulo/i).querySelector('input')).toHaveValue(
+    'Este es el título',
+  )
+
+  expect(screen.getByTestId(/categoria/i).querySelector('input')).toHaveValue(
+    '1669',
+  )
+
+  // await postPrivateHandler.mockImplementation(() => {
+  //   return Promise.resolve({
+  //     data: {
+  //       success: true,
+  //     },
+  //   })
+  // })
+})

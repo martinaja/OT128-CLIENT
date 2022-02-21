@@ -30,8 +30,6 @@ const NewsForm = () => {
   const { newsId } = useParams()
   const history = useHistory()
 
-  const [clic, setClic] = useState(false)
-
   const [news, setNew] = useState([])
   const [categories, setCategories] = useState([])
   const [isEditable, setIsEditable] = useState(false)
@@ -39,7 +37,7 @@ const NewsForm = () => {
   const [previewImgUploaded, setPreviewImgUploaded] = useState(null)
   const [imgFromApi, setImgFromApi] = useState(null)
 
-  console.log('imgFromApi', imgFromApi)
+  // console.log('imgFromApi', imgFromApi)
   // const [loader, setLoader] = useState(false)
   const [btnLoader, setBtnLoader] = useState(false)
 
@@ -50,9 +48,9 @@ const NewsForm = () => {
         // setLoader(true)
 
         const fetchCategories = await getCategories()
-        if (fetchCategories.error)
+        if (fetchCategories?.error || fetchCategories?.data?.success === false)
           alertServiceError(
-            fetchCategories.message,
+            'Error',
             'No se pudo obtener la información solicitada',
           )
 
@@ -65,6 +63,8 @@ const NewsForm = () => {
               'No se pudo cargar la noticia',
               'Verificá que la URL sea correcta',
             )
+
+        console.log('CATEGORIES MOCK?', categories)
 
         // setLoader(false)
       })(),
@@ -88,7 +88,7 @@ const NewsForm = () => {
       }
 
       const dataNews = fetchNews.data?.data
-      console.log('DATA DE LA NOTICIA', dataNews)
+      // console.log('DATA DE LA NOTICIA', dataNews)
 
       if (dataNews) {
         setNew(dataNews)
@@ -116,7 +116,7 @@ const NewsForm = () => {
 
   const sendNews = async (data) => {
     setBtnLoader(true)
-    console.log('DATA DE FORMIK ANTES DE MANDAR', data)
+    // console.log('DATA DE FORMIK ANTES DE MANDAR', data)
     let newsToSend = { ...data }
 
     if (typeof data.image !== 'string') {
@@ -127,12 +127,12 @@ const NewsForm = () => {
       }
     }
 
-    console.log('DATA LISTA PARA ENVIAR', newsToSend)
+    // console.log('DATA LISTA PARA ENVIAR', newsToSend)
     if (isEditable)
       // Putting a news
       (async () => {
         const putRequest = await putNews(newsId, newsToSend)
-        console.log('REQUEST PUT NEWS', putRequest)
+        // console.log('REQUEST PUT NEWS', putRequest)
         if (putRequest.error) {
           alertServiceError(
             putRequest.message,
@@ -145,7 +145,7 @@ const NewsForm = () => {
         // Redirect to the news
         const fetch = await getNews(newsId)
         const data = fetch.data?.data
-        console.log('DATA FROM NEWS BY ID', data)
+        // console.log('DATA FROM NEWS BY ID', data)
         data
           ? setNew(data)
           : alertServiceError(
@@ -159,7 +159,7 @@ const NewsForm = () => {
     else
       (async () => {
         const postRequest = await postNews(newsToSend)
-        console.log('REQUEST POST NEWS', postRequest)
+        // console.log('REQUEST POST NEWS', postRequest)
         if (postRequest.error)
           alertServiceError(
             postRequest.message,
@@ -254,7 +254,8 @@ const NewsForm = () => {
                 >
                   {categories.map((cat, i) => (
                     <MenuItem key={i} value={cat.id}>
-                      {cat.name}-{cat.id}
+                      {cat.id}
+                      {/* {cat.name}-{cat.id} */}
                     </MenuItem>
                   ))}
                 </TextField>
@@ -270,7 +271,7 @@ const NewsForm = () => {
                   />
                   <ErrorMessage component="small" name="content" />
                 </div>
-                <label htmlFor="image">
+                <label data-testid="subirImagen" htmlFor="image">
                   <Input
                     name="image"
                     accept="image/*"
@@ -294,11 +295,16 @@ const NewsForm = () => {
                     label={isEditable ? 'Editar noticia' : 'Crear noticia'}
                     loading={btnLoader}
                   />
-                  <button onClick={() => setClic(true)}>Clickeame</button>
                 </div>
-                {clic && 'Click'}
               </form>
             </Box>
+            <p data-testid="mock">
+              {categories?.map((cat) => (
+                <ul key={cat.id}>
+                  <li>{cat.name}</li>
+                </ul>
+              ))}
+            </p>
           </Container>
         )}
       </Formik>
