@@ -1,0 +1,27 @@
+.timer__container {
+  text-align: center;
+  padding: 35px 0;
+}
+
+.timer__box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4em;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.timer__block__container {
+  padding: 1.3em;
+  min-width: 3em;
+}
+
+.timer__header {
+  font-size: 1.3rem;
+}
+
+.timer__data {
+  font-size: 4em;
+}
