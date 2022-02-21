@@ -14,6 +14,7 @@ const Header = () => {
   const toggle = () => setIsOpen(!isOpen)
   let { pathname = '' } = useLocation()
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
+  const role = useSelector((state) => state.auth.role)
 
   return (
     <div id="main-header">
@@ -22,11 +23,13 @@ const Header = () => {
         pathname={pathname}
         userAuth={userAuth}
         dispatch={dispatch}
+        role={role}
       />
       <SideBar
         toggle={toggle}
         isOpen={isOpen}
         userAuth={userAuth}
+        role={role}
         dispatch={dispatch}
       />
     </div>
@@ -35,7 +38,8 @@ const Header = () => {
 
 export default Header
 
-const NavBar = ({ toggle, pathname, userAuth, dispatch }) => {
+
+const NavBar = ({ toggle, pathname, userAuth, dispatch, role }) => {
   return (
     <nav className={styles.navbar}>
       <div className={styles.navbarContainer}>
@@ -72,9 +76,11 @@ const NavBar = ({ toggle, pathname, userAuth, dispatch }) => {
               >
                 LogOut
               </Link>
-              <Link className={styles.navBtnLink} to={'/backoffice'}>
-                BackOffice
-              </Link>
+              {role !== 'Admin' ? null : (
+                <Link className={styles.sidebarRoute} to={'/backoffice'}>
+                  BackOffice
+                </Link>
+              )}
             </>
           ) : (
             <>
@@ -92,7 +98,7 @@ const NavBar = ({ toggle, pathname, userAuth, dispatch }) => {
   )
 }
 
-const SideBar = ({ toggle, isOpen, userAuth, dispatch }) => (
+const SideBar = ({ toggle, isOpen, userAuth, role, dispatch }) => (
   <aside
     className={styles.sidebarContainer}
     style={
@@ -125,9 +131,11 @@ const SideBar = ({ toggle, isOpen, userAuth, dispatch }) => (
             >
               LogOut
             </Link>
-            <Link className={styles.sidebarRoute} to={'/backoffice'}>
-              BackOffice
-            </Link>
+            {role !== 'Admin' ? null : (
+              <Link className={styles.sidebarRoute} to={'/backoffice'}>
+                BackOffice
+              </Link>
+            )}
           </>
         ) : (
           <>
