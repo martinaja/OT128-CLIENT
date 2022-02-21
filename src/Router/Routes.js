@@ -1,4 +1,5 @@
-import { Route, Redirect, HashRouter,BrowserRouter } from 'react-router-dom'
+import { Route, Redirect, HashRouter } from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition'
 import { PublicRoutes } from './PublicRoutes'
 import { PrivateRoutes } from './PrivateRoutes'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
@@ -7,7 +8,12 @@ import NotFound from '../Components/NotFound/NotFound'
 
 export const Routes = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+      >
         <Route
           exact
           path={[
@@ -62,11 +68,12 @@ export const Routes = () => {
 
         <Route path="/toys-campaign" component={ToysCampaign} />
 
-        {/* <Route path="/404" component={NotFound} />
+        <Route path="/404" component={NotFound} />
 
         <Route path="*">
           <Redirect to="/404" />
-        </Route> */}
-    </BrowserRouter>
+        </Route>
+      </AnimatedSwitch>
+    </HashRouter>
   )
 }
