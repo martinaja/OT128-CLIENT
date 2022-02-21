@@ -155,7 +155,12 @@ const ActivitiesForm = () => {
                 </Button>
                 <ErrorMessage component="small" name="image" />
               </label>
-              <Button type="submit" variant="contained" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                disabled={isLoading}
+              >
                 {id ? 'Editar actividad' : 'Crear actividad'}
               </Button>
               <LinearProgressFeedback isActive={isLoading} />
