@@ -91,6 +91,7 @@ export default function Sidebar() {
         variant="temporary"
         anchor="right"
         open={open}
+        onBlur={handleDrawerClose}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
