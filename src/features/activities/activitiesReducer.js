@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
   getActivity,
+  getPublicActivity,
   searchActivities,
 } from '../../Services/apiServices/activitiesApiService'
 
@@ -28,6 +29,18 @@ export const searchActivitie = createAsyncThunk(
   async (query) => {
     try {
       const response = await searchActivities(query)
+      return response.data
+    } catch (err) {
+      throw new Error(err)
+    }
+  },
+)
+
+export const getPublicActivities = createAsyncThunk(
+  'activities/getPublicActivitiesData',
+  async () => {
+    try {
+      const response = await getPublicActivity()
       return response.data
     } catch (err) {
       throw new Error(err)
@@ -65,6 +78,21 @@ export const activitiesSlice = createSlice({
         state.loader = false
       })
       .addCase(searchActivitie.rejected, (state, action) => {
+        state.errorMsg = action.payload.error
+        state.status = 'error'
+        state.loader = false
+      })
+
+      .addCase(getPublicActivities.pending, (state) => {
+        state.status = 'pending'
+        state.loader = true
+      })
+      .addCase(getPublicActivities.fulfilled, (state, action) => {
+        state.data = action.payload.data
+        state.status = 'success'
+        state.loader = false
+      })
+      .addCase(getPublicActivities.rejected, (state, action) => {
         state.errorMsg = action.payload.error
         state.status = 'error'
         state.loader = false
