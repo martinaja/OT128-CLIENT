@@ -1,11 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import {
+  register,
+  login,
+  getRole,
+} from '../../Services/apiServices/authApiService'
 
 const initialState = {
   status: '',
   token: false,
   isAuthenticated: false,
   user: {},
+  role: undefined,
 }
 
 //Export to RegisterForm submitHandle => catch Error
@@ -13,10 +18,7 @@ export const userRegister = createAsyncThunk(
   'auth/userRegister',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        'http://ongapi.alkemy.org/api/register',
-        data,
-      )
+      const response = await register(data)
       return response.data
     } catch (err) {
       return rejectWithValue({ error: err.response.data })
@@ -29,14 +31,28 @@ export const userLogin = createAsyncThunk(
   'auth/userLogin',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        'http://ongapi.alkemy.org/api/login',
-        data,
-      )
+      const response = await login(data)
       if (response.data.success) {
         return response.data
       } else {
         return rejectWithValue(response.data) // if error is no token the user input data is wrong
+      }
+    } catch (err) {
+      return rejectWithValue({ error: err.response.data.message })
+    }
+  },
+)
+
+export const getUserRole = createAsyncThunk(
+  'auth/getUserRole',
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await getRole(id)
+
+      if (response.data.success) {
+        return response.data
+      } else {
+        return rejectWithValue(response.data)
       }
     } catch (err) {
       return rejectWithValue({ error: err.response.data.message })
@@ -49,7 +65,6 @@ export const authReducer = createSlice({
   initialState,
   reducers: {
     userLogout: (state) => {
-      console.log("userLogout")
       localStorage.removeItem('token')
       return initialState
     },
@@ -82,6 +97,18 @@ export const authReducer = createSlice({
         localStorage.setItem('token', action.payload.data.token)
       })
       .addCase(userLogin.rejected, (state, action) => {
+        state.status = action.payload
+      })
+
+    builder
+      .addCase(getUserRole.pending, (state) => {
+        state.status = 'pending'
+      })
+      .addCase(getUserRole.fulfilled, (state, action) => {
+        state.status = 'fulfilled'
+        state.role = action.payload.data.description
+      })
+      .addCase(getUserRole.rejected, (state, action) => {
         state.status = action.payload
       })
   },

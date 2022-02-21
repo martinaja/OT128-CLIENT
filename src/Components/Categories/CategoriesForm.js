@@ -16,7 +16,7 @@ import { useParams, useHistory } from 'react-router-dom'
 import { alertServiceError } from '../AlertService'
 import getBase64FromUrl from '../../utils/apiToBase64'
 
-const CategoriesForm = (props) => {
+const CategoriesForm = () => {
   const { id } = useParams()
   const [loader, setLoader] = useState(false)
   const [category, setCategory] = useState({})
@@ -39,7 +39,7 @@ const CategoriesForm = (props) => {
           'No se pudo obtener la información solicitada',
         )
         setIsEditing(false)
-        history.push('/backoffice/create-category')
+        history.push('/backoffice/categories')
       }
 
       const dataCategory = response.data?.data
@@ -49,7 +49,7 @@ const CategoriesForm = (props) => {
         setIsEditing(true)
       } else {
         alertServiceError('No se pudo cargar la categoría', 'ID inválido')
-        history.push('/backoffice/create-category')
+        history.push('/backoffice/categories')
       }
 
       setLoader(false)
@@ -99,12 +99,18 @@ const CategoriesForm = (props) => {
       image: base64,
     }
     console.log(newToSend.image)
-
+    let response
     //depending of the state of isEditing call post or put
     if (!isEditing) {
-      postCategories(newToSend)
+      response = postCategories(newToSend)
     } else {
-      putCategories(id, newToSend)
+      response = putCategories(id, newToSend)
+    }
+    if (response.success === false) {
+      alertServiceError(
+        'Se produjo un error ',
+        'Por favor intente nuevamente mas tarde.',
+      )
     }
   }
 

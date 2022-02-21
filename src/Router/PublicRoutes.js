@@ -1,8 +1,10 @@
-import { Route, Redirect } from 'react-router-dom'
-import { AnimatedSwitch } from 'react-router-transition'
+import { Route, Switch } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import LoadingBar from '../Components/LoadingPage/LoadingPage'
-const NotFound = lazy(() => import('../Components/NotFound/NotFound'))
+import PublicContent from '../Components/PublicWeb/PublicContent'
+import RegisterForm from '../Components/Auth/RegisterForm'
+import LoginForm from '../Components/Auth/LoginForm'
+
 const NewsDetail = lazy(() => import('../Components/News/Detail/NewsDetail'))
 const About = lazy(() => import('../Components/About/About'))
 const Activities = lazy(() =>
@@ -17,55 +19,57 @@ const PublicNewHome = lazy(() => import('../Components/News/PublicNewHome'))
 const ContactHome = lazy(() => import('../Components/Contact/ContactHome'))
 
 export const PublicRoutes = () => (
-  <AnimatedSwitch
-    atEnter={{ opacity: 0 }}
-    atLeave={{ opacity: 0 }}
-    atActive={{ opacity: 1 }}
-  >
+  <Switch>
     <Suspense fallback={<LoadingBar />}>
-      <Route exact path="/">
-        <Index />
-      </Route>
+      <PublicContent>
+        <Route exact path="/">
+          <Index />
+        </Route>
 
-      <Route exact path="/novedades">
-        <PublicNewHome />
-      </Route>
+        <Route exact path="/novedades">
+          <PublicNewHome />
+        </Route>
 
-      <Route path="/novedades/:newsId">
-        <NewsDetail />
-      </Route>
+        <Route path="/novedades/:newsId">
+          <NewsDetail />
+        </Route>
 
-      <Route exact path="/contacto">
-        <ContactHome />
-      </Route>
+        <Route exact path="/contacto">
+          <ContactHome />
+        </Route>
 
-      <Route exact path="/nosotros">
-        <About />
-      </Route>
+        <Route exact path="/nosotros">
+          <About />
+        </Route>
 
-      <Route exact path="/create-user">
-        <UserForm />
-      </Route>
+        <Route exact path="/create-user">
+          <UserForm />
+        </Route>
 
-      <Route exact path="/activities">
-        <Activities />
-      </Route>
+        <Route exact path="/activities">
+          <Activities />
+        </Route>
 
-      <Route path="/activities/:id">
-        <Detail />
-      </Route>
+        <Route path="/activities/:id">
+          <Detail />
+        </Route>
 
-      <Route exact path="/donations">
-        <Donations />
-      </Route>
+        <Route exact path="/donations">
+          <Donations />
+        </Route>
 
-      <Route exact path="/gracias">
-        <Thankyou />
-      </Route>
+        <Route exact path="/gracias">
+          <Thankyou />
+        </Route>
 
-      <Route path="/404">
-        <NotFound />
-      </Route>
+        <Route exact path="/login">
+          <LoginForm />
+        </Route>
+
+        <Route exact path="/register">
+          <RegisterForm />
+        </Route>
+      </PublicContent>
     </Suspense>
-  </AnimatedSwitch>
+  </Switch>
 )
