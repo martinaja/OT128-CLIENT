@@ -66,10 +66,6 @@ export const PublicRoutes = () => (
           <LoginForm />
         </Route>
 
-        <Route path="/404">
-          <NotFound />
-        </Route>
-
         <Route exact path="/register">
           <RegisterForm />
         </Route>
