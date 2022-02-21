@@ -8,6 +8,10 @@ import NotFound from '../Components/NotFound/NotFound'
 import { PublicRoutes } from './PublicRoutes'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
+import { Donations } from '../Components/Donations/Donations'
+import Thankyou from '../Components/Donations/Thankyou'
+
+
 
 export const Routes = () => {
   return (
@@ -41,6 +45,8 @@ export const Routes = () => {
         <Route path="/toys-campaign" component={ToysCampaign} />
         <Route path="/login" component={LoginForm} />
         <Route path="/register" component={RegisterForm} />
+        <Route path="/donations" component={Donations} />
+        <Route path="/gracias" component={Thankyou} />
         <Route path="/404" component={NotFound} />
         <Route path="*">
           <Redirect to="/404" />

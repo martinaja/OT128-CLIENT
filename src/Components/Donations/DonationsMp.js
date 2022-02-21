@@ -2,7 +2,8 @@ import styled from '@emotion/styled'
 import { Box, ButtonBase, Typography } from '@mui/material'
 import React from 'react'
 import mp from '../../assets/mp.jpg'
-import { alertDonationsMP } from './../AlertService';
+import { alertDonationsMP } from '../AlertService'
+
 
 
 export const DonationsMp = ({ text = 'Hacer donativos' }) => {
@@ -13,14 +14,14 @@ export const DonationsMp = ({ text = 'Hacer donativos' }) => {
   }
 
   const ImageButton = styled(ButtonBase)(({ theme }) => ({
-    position: 'relative',
+    position: 'center',
     height: 200,
-    [theme.breakpoints.display('sm')]: {
-      width: '60% !important', // Overrides inline-style
-      height: 200
+    // [theme.breakpoints.display('sm')]: {
+    //   width: '60% !important', // Overrides inline-style
+    //   height: 200
 
 
-    },
+    // },
     '&:hover, &.Mui-focusVisible': {
       zIndex: 1,
       '& .MuiImageBackdrop-root': {
