@@ -1,4 +1,5 @@
-// import Footer from './Footer/Footer' //Conflictive Footer
+
+import Footer from './Footer/Footer'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getUserRole } from '../../features/auth/authReducer'
@@ -16,7 +17,7 @@ const PublicContent = ({ children }) => {
     <>
       <Header />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }

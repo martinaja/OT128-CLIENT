@@ -5,7 +5,7 @@ import { PrivateRoutes } from '../../Router/PrivateRoutes'
 import BackOfficeContent from './BackOfficeContent'
 import HeaderBackoffice from './HeaderBackoffice'
 
-const BackOfficeHome = () => {
+const BackOfficeHome = ({children}) => {
   const { isAuthenticated, role } = useSelector((state) => state.auth)
   if (!isAuthenticated || role !== 'Admin') return <Redirect to="/" />
   return (
@@ -13,7 +13,7 @@ const BackOfficeHome = () => {
       <HeaderBackoffice />
       <Container>
         <BackOfficeContent />
-        <PrivateRoutes />
+        {children}
       </Container>
     </>
   )
