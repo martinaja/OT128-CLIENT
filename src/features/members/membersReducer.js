@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
   getMembers,
+  postMembers,
+  putMembers,
   searchMembers,
 } from '../../Services/apiServices/membersApiService'
 
@@ -11,14 +13,17 @@ const initialState = {
   errMsg: '',
 }
 
-export const fetchMember = createAsyncThunk('members/getMembers', async () => {
-  try {
-    const response = await getMembers()
-    return response.data
-  } catch (error) {
-    throw new Error(error)
-  }
-})
+export const fetchMember = createAsyncThunk(
+  'members/getMembers',
+  async (id) => {
+    try {
+      const response = await getMembers(id)
+      return response.data
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+)
 
 export const search = createAsyncThunk(
   'members/searchMembers',
@@ -32,11 +37,38 @@ export const search = createAsyncThunk(
   },
 )
 
+export const postMemberRedux = createAsyncThunk(
+  'members/postMemberRedux',
+  async (body) => {
+    try {
+      console.log(body)
+      const response = await postMembers(body)
+      return response.data
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+)
+
+export const putMemberRedux = createAsyncThunk(
+  'members/putMemberRedux',
+  async ({ id, body }) => {
+    try {
+      console.log(id, body)
+      const response = await putMembers(id, body)
+      return response.data
+    } catch (error) {
+      throw new Error(error)
+    }
+  },
+)
+
 export const membersSlice = createSlice({
   name: 'members',
   initialState,
   extraReducers: (builder) => {
     builder
+      // fetch members reducers
       .addCase(fetchMember.pending, (state) => {
         state.status = 'pending'
         state.loader = true
@@ -52,6 +84,7 @@ export const membersSlice = createSlice({
         state.loader = false
       })
 
+      // search members reducers
       .addCase(search.pending, (state) => {
         state.status = 'pending'
         state.loader = true
@@ -62,6 +95,36 @@ export const membersSlice = createSlice({
         state.loader = false
       })
       .addCase(search.rejected, (state, action) => {
+        state.status = 'error'
+        state.errMsg = action.error.message
+        state.loader = false
+      })
+
+      // post members reducers
+      .addCase(postMemberRedux.pending, (state) => {
+        state.status = 'pending'
+        state.loader = true
+      })
+      .addCase(postMemberRedux.fulfilled, (state, action) => {
+        state.status = action.payload.message
+        state.loader = false
+      })
+      .addCase(postMemberRedux.rejected, (state, action) => {
+        state.status = 'error'
+        state.errMsg = action.error.message
+        state.loader = false
+      })
+
+      // put members reducers
+      .addCase(putMemberRedux.pending, (state) => {
+        state.status = 'pending'
+        state.loader = true
+      })
+      .addCase(putMemberRedux.fulfilled, (state, action) => {
+        state.status = action.payload.message
+        state.loader = false
+      })
+      .addCase(putMemberRedux.rejected, (state, action) => {
         state.status = 'error'
         state.errMsg = action.error.message
         state.loader = false

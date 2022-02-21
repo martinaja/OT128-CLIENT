@@ -14,13 +14,15 @@ import {
 } from '../../Services/apiServices/categoriesApiService'
 import { useParams, useHistory } from 'react-router-dom'
 import { alertServiceError } from '../AlertService'
+import getBase64FromUrl from '../../utils/apiToBase64'
 
-const CategoriesForm = (props) => {
+const CategoriesForm = () => {
   const { id } = useParams()
   const [loader, setLoader] = useState(false)
   const [category, setCategory] = useState({})
   const [isEditing, setIsEditing] = useState(false)
   const [baseImage, setBaseImage] = useState('')
+  const [imageApi, setImageApi] = useState('')
   const [previewImg, setPreviewImg] = useState(null)
   const history = useHistory()
 
@@ -37,7 +39,7 @@ const CategoriesForm = (props) => {
           'No se pudo obtener la información solicitada',
         )
         setIsEditing(false)
-        history.push('/backoffice/create-category')
+        history.push('/backoffice/categories')
       }
 
       const dataCategory = response.data?.data
@@ -47,10 +49,11 @@ const CategoriesForm = (props) => {
         setIsEditing(true)
       } else {
         alertServiceError('No se pudo cargar la categoría', 'ID inválido')
-        history.push('/backoffice/create-category')
+        history.push('/backoffice/categories')
       }
 
       setLoader(false)
+      setImageApi(await getBase64FromUrl(category.image))
     })()
   }, [history, id])
 
@@ -95,12 +98,19 @@ const CategoriesForm = (props) => {
       ...values,
       image: base64,
     }
-
+    console.log(newToSend.image)
+    let response
     //depending of the state of isEditing call post or put
     if (!isEditing) {
-      postCategories(newToSend)
+      response = postCategories(newToSend)
     } else {
-      putCategories(id, newToSend)
+      response = putCategories(id, newToSend)
+    }
+    if (response.success === false) {
+      alertServiceError(
+        'Se produjo un error ',
+        'Por favor intente nuevamente mas tarde.',
+      )
     }
   }
 
@@ -116,7 +126,7 @@ const CategoriesForm = (props) => {
           initialValues={{
             name: category.name || '',
             description: category.description || '',
-            image: '',
+            image: imageApi || '',
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
@@ -140,6 +150,7 @@ const CategoriesForm = (props) => {
                 <h1>{isEditing ? 'Editar Categoría' : 'Crear Categoría'}</h1>
                 {previewImg || category.image ? (
                   <img
+                    id="imageid"
                     style={{ maxWidth: '100%' }}
                     src={previewImg || category.image}
                     alt=""

@@ -17,7 +17,7 @@ import {
 } from 'react-social-plugins'
 import { Helmet } from 'react-helmet'
 
-export default function About({ title }) {
+const About = ({ title }) => {
   const [loader, setLoader] = useState(false)
   const [data, setData] = useState()
 
@@ -149,3 +149,5 @@ export default function About({ title }) {
     </>
   )
 }
+
+export default About
