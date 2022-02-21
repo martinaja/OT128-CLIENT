@@ -23,18 +23,23 @@ import {
 import { alertServiceError } from '../AlertService'
 import ButtonLoader from '../ButtonLoader/ButtonLoader'
 import Spinner from '../Spinner'
+import getBase64FromUrl from '../../utils/apiToBase64'
 
 const NewsForm = () => {
   // let newsId
   const { newsId } = useParams()
   const history = useHistory()
 
+  const [clic, setClic] = useState(false)
+
   const [news, setNew] = useState([])
   const [categories, setCategories] = useState([])
   const [isEditable, setIsEditable] = useState(false)
   const [imgUploaded, setImgUploaded] = useState(null)
   const [previewImgUploaded, setPreviewImgUploaded] = useState(null)
+  const [imgFromApi, setImgFromApi] = useState(null)
 
+  console.log('imgFromApi', imgFromApi)
   // const [loader, setLoader] = useState(false)
   const [btnLoader, setBtnLoader] = useState(false)
 
@@ -93,9 +98,11 @@ const NewsForm = () => {
         history.push('/backoffice/news')
       }
 
+      setImgFromApi(await getBase64FromUrl(news.image))
+
       // setLoader(false)
     })()
-  }, [newsId, history])
+  }, [newsId, history, news.image])
 
   // Preview the uploaded image
   useEffect(() => {
@@ -110,20 +117,14 @@ const NewsForm = () => {
   const sendNews = async (data) => {
     setBtnLoader(true)
     console.log('DATA DE FORMIK ANTES DE MANDAR', data)
-    // let newsToSend = data;
-    //  If  user has uploaded a new image, parse it to send
-    // if (imgUploaded) {
-    //   const parseImg = await toBase64(data.image);
-    //   newsToSend = {
-    //     ...data,
-    //     image: parseImg,
-    //   };
-    // }
+    let newsToSend = { ...data }
 
-    const parseImg = await toBase64(data.image)
-    const newsToSend = {
-      ...data,
-      image: parseImg,
+    if (typeof data.image !== 'string') {
+      const parseImg = await toBase64(data.image)
+      newsToSend = {
+        ...data,
+        image: parseImg,
+      }
     }
 
     console.log('DATA LISTA PARA ENVIAR', newsToSend)
@@ -138,7 +139,7 @@ const NewsForm = () => {
             'No se pudo editar la información',
           )
         } else {
-          history.push(`/novedades/${newsId}`)
+          // history.push(`/novedades/${newsId}`)
         }
 
         // Redirect to the news
@@ -171,7 +172,7 @@ const NewsForm = () => {
         if (postRequest.statusText === 'OK') {
           const postRequestData = postRequest.data?.data
           const newNewsID = postRequestData?.id
-          history.push(`/novedades/${newNewsID}`)
+          // history.push(`/novedades/${newNewsID}`)
         }
       })()
   }
@@ -190,14 +191,14 @@ const NewsForm = () => {
 
   return (
     <>
-      <h1>Novedades</h1>
+      {/* <h1>Novedades</h1> */}
       <Formik
         enableReinitialize
         initialValues={{
           name: news.name || '',
           content: news.content || '',
-          category_id: '',
-          image: '',
+          category_id: news.category_id || '',
+          image: imgFromApi || '',
         }}
         validationSchema={schemaValidate}
         onSubmit={(val) => {
@@ -246,6 +247,7 @@ const NewsForm = () => {
                   data-testid="categoria"
                   label="Categoría"
                   value={values.category_id}
+                  defaultValue=""
                   onChange={handleChange}
                   helperText={touched.category_id && errors.category_id}
                   onBlur={handleBlur}
@@ -287,10 +289,14 @@ const NewsForm = () => {
                   </Button>
                   <ErrorMessage component="small" name="image" />
                 </label>
-                <ButtonLoader
-                  label={isEditable ? 'Editar noticia' : 'Crear noticia'}
-                  loading={btnLoader}
-                />
+                <div data-testid="boton">
+                  <ButtonLoader
+                    label={isEditable ? 'Editar noticia' : 'Crear noticia'}
+                    loading={btnLoader}
+                  />
+                  <button onClick={() => setClic(true)}>Clickeame</button>
+                </div>
+                {clic && 'Click'}
               </form>
             </Box>
           </Container>

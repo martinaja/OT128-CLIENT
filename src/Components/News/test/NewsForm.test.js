@@ -14,6 +14,7 @@ import Router from 'react-router-dom'
 import NewsForm from '../NewsForm'
 import { getNews, putNews } from '../../../Services/apiServices/newsApiService'
 import { getCategories } from '../../../Services/apiServices/categoriesApiService'
+import { act } from 'react-dom/test-utils'
 
 jest.mock('react-router-dom', () => ({
   useParams: jest.fn(),
@@ -24,16 +25,15 @@ jest.mock('react-router-dom', () => ({
 }))
 
 const mockData = {
-  id: 1535,
-  name: 'novedad',
-  content:
-    '<p>ONG dedicada a la educación busca recolectar fondos para niños y niñas afectados por el covid en El Milagro</p>',
-  image: 'http://ongapi.alkemy.org/storage/D3JXQZbuTc.jpeg',
-  category_id: 1669,
+  id: 1536,
+  name: 'otra prueba',
+  content: 'prueba 123',
+  image: 'http://ongapi.alkemy.org/storage/ipyPTvCPXG.jpeg',
+  category_id: 1665,
 }
 
 const fetchGetNews = jest.fn(getNews)
-// const fetchPutNews = jest.fn(putNews)
+const fetchPutNews = jest.fn(putNews)
 const fetchGetCategories = jest.fn(getCategories)
 
 beforeEach(() => {
@@ -54,11 +54,6 @@ beforeEach(() => {
       ],
     },
   })
-
-  // localStorage.setItem(
-  //   'token',
-  //   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9vbmdhcGkuYWxrZW15Lm9yZ1wvYXBpXC9sb2dpbiIsImlhdCI6MTY0MDIwMTkyOSwiZXhwIjoxNjQwMjA1NTI5LCJuYmYiOjE2NDAyMDE5MjksImp0aSI6InB2Q052aUxRQUFMdVhWcEoiLCJzdWIiOjExNjEsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.EOXvZwy3JZZ1wciFnxC4f4F7iLdqJIG7vGMV--s9rVc',
-  // )
 })
 
 test('Render content when is creating a new', async () => {
@@ -73,18 +68,7 @@ test('Render content when is creating a new', async () => {
   expect(screen.getByLabelText(/Categoría/i)).toBeInTheDocument()
 })
 
-test('Render content when is creating a new', async () => {
-  jest.spyOn(Router, 'useParams').mockReturnValue({ newsId: undefined })
-  await waitFor(() => {
-    render(<NewsForm />)
-  })
-  expect(screen.getByLabelText(/Título/i)).toBeInTheDocument()
-  expect(screen.getByLabelText(/Imagen/i)).toBeInTheDocument()
-  expect(screen.getByTestId(/CKEditor/i)).toBeInTheDocument()
-  expect(screen.getByLabelText(/Categoría/i)).toBeInTheDocument()
-})
-
-test('Fields must be valitated', async () => {
+test('Fields must be valitated (post)', async () => {
   jest.spyOn(Router, 'useParams').mockReturnValue({ newsId: undefined })
 
   await waitFor(() => {
@@ -95,40 +79,76 @@ test('Fields must be valitated', async () => {
     await screen.findByText(/la noticia debe tener un título/i),
   ).toBeInTheDocument()
   expect(
-    await screen.findByText(/No podés enviar una noticia sin cuerpo/i),
+    await screen.findByText(/no podés enviar una noticia sin cuerpo/i),
   ).toBeInTheDocument()
-  expect(await screen.findByText(/Imagen requerida/i)).toBeInTheDocument()
-  expect(await screen.findByText(/Categoría requerida/i)).toBeInTheDocument()
+  expect(await screen.findByText(/imagen requerida/i)).toBeInTheDocument()
+  expect(await screen.findByText(/categoría requerida/i)).toBeInTheDocument()
 })
 
 test('Render content when is editing a new', async () => {
-  jest.spyOn(Router, 'useParams').mockReturnValue({ newsId: 1535 })
-  await waitFor(() => {
-    return render(<NewsForm />)
-  })
-  // console.log('container', container)
   fetchGetNews.mockResolvedValue({
     data: {
       data: mockData,
     },
   })
-  expect(screen.getByLabelText(/Título/i)).toBeInTheDocument()
-  expect(screen.getByLabelText(/Imagen/i)).toBeInTheDocument()
-  expect(screen.getByTestId(/CKEditor/i)).toBeInTheDocument()
-  expect(screen.getByLabelText(/Categoría/i)).toBeInTheDocument()
+  jest.spyOn(Router, 'useParams').mockReturnValue({ newsId: 1536 })
+  await waitFor(() => {
+    render(<NewsForm />)
+  })
 
   expect(await screen.findByTestId(/imagen/i)).toHaveAttribute(
     'src',
     mockData.image,
   )
-  expect(await screen.findByLabelText(/name/i)).toHaveValue(mockData.name)
+  expect(
+    screen.getByRole('textbox', {
+      name: /rich text editor, main/i,
+    }),
+  ).toHaveTextContent(mockData.content)
 
-  // // screen.debug()
-  // expect(screen.).toHaveValue(mockData.name)
+  expect(screen.getByTestId(/titulo/i).querySelector('input')).toHaveValue(
+    mockData.name,
+  )
+  expect(screen.getByTestId(/categoria/i).querySelector('input')).toHaveValue(
+    mockData.category_id.toString(),
+  )
+  const btnEdit = await screen.findByTestId('boton')
 
-  // expect(await screen.findByText(mockData.content)).toBeInTheDocument()
-  // expect(screen.getByLabelText(/Categoría/i)).toHaveValue(mockData.category_id)
+  expect(btnEdit).toHaveTextContent(/editar noticia/i)
+
+  act(() =>
+    userEvent.click(screen.findByRole('button', { name: /clickeame/i })),
+  )
+
+  // userEvent.click(btnEdit.querySelector('button'))
+
+  // screen.debug()
+  expect(await screen.findByText('Click')).toBeInTheDocument()
+  // expect(fetchPutNews).toHaveBeenCalled()
 })
+
+// test('should allow submit if the form was completed (put)', async () => {
+//   fetchGetNews.mockResolvedValue({
+//     data: {
+//       data: mockData,
+//     },
+//   })
+//   jest.spyOn(Router, 'useParams').mockReturnValue({ id: 1535 })
+//   await waitFor(() => {
+//     render(<NewsForm />)
+//   })
+//   expect(screen.findByTestId('boton')).toHaveTextContent(/editar noticia/i)
+// expect(await screen.findByTestId('boton')).toBeInTheDocument()
+
+// userEvent.click(await screen.findByText('Editar noticia'))
+
+// await act(async () => {
+//   userEvent.click(
+//     await screen.findByRole('button', { name: /editar noticia/i }),
+//   )
+// })
+// expect(fetchPutNews).toHaveBeenCalled()
+// })
 
 // primer test
 
