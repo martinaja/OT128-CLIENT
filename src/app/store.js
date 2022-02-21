@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from '../features/auth/authReducer'
-import activitiesReducer from '../features/activitiesReducer'
+import activitiesReducer from '../features/activities/activitiesReducer'
 import categoriesReducer from '../features/categories/categoriesReducer'
 import usersReducer from '../features/backofficeUsers/usersReducer'
 import membersReducer from '../features/members/membersReducer'

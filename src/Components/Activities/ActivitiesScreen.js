@@ -14,7 +14,7 @@ import {
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import { getActivities, setLoading } from '../../features/activitiesReducer'
+import { getActivities } from '../../features/activities/activitiesReducer'
 import { deleteActivity } from '../../Services/apiServices/activitiesApiService'
 import { alertServiceConfirm } from '../AlertService'
 import { ActivitiesSearch } from './ActivitiesSearch'
@@ -27,12 +27,11 @@ const ActivitieRow = ({ activitie }) => {
 
   const removeActivitie = () => {
     alertServiceConfirm(
-      '¿Está seguro de eliminar este miembro?',
+      '¿Está seguro de eliminar esta actividad?',
       'Aceptar',
       () => {
         deleteActivity(id)
         setTimeout(() => {
-          dispatch(setLoading(true))
           dispatch(getActivities())
         }, 1000)
       },
@@ -79,9 +78,9 @@ const ActivitieRow = ({ activitie }) => {
 
 const ActivitiesScreen = () => {
   const dispatch = useDispatch()
-  const response = useSelector((state) => state.activities)
+  const response = useSelector((state) => state.activities.data)
+
   useEffect(() => {
-    dispatch(setLoading(true))
     dispatch(getActivities())
   }, [dispatch])
 
@@ -112,7 +111,7 @@ const ActivitiesScreen = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {response.activities.map((activitie) => (
+            {response.map((activitie) => (
               <ActivitieRow key={activitie.id} activitie={activitie} />
             ))}
           </TableBody>
