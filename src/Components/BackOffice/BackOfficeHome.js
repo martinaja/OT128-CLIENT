@@ -1,15 +1,14 @@
 import { Container } from '@mui/material'
-import { PrivateRoutes } from '../../Router/PrivateRoutes'
 import BackOfficeContent from './BackOfficeContent'
 import HeaderBackoffice from './HeaderBackoffice'
 
-const BackOfficeHome = () => {
+const BackOfficeHome = ({ children }) => {
   return (
     <>
       <HeaderBackoffice />
       <Container>
         <BackOfficeContent />
-        <PrivateRoutes />
+        {children}
       </Container>
     </>
   )
