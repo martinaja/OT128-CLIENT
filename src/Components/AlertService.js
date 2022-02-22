@@ -1,12 +1,6 @@
-import Swal from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
 
-export function alertServiceInfoTimer(
-  position,
-  icon,
-  title,
-  showConfirmButton,
-  timer,
-) {
+export function alertServiceInfoTimer(title, showConfirmButton, timer) {
   Swal.fire({
     position: 'center',
     icon: 'info',
@@ -50,7 +44,7 @@ export function alertServiceError(title, text) {
     text,
     color: 'White',
     background: 'Black',
-    errorButtonColor: '#072227',
+    // errorButtonColor: '#072227',
   })
 }
 

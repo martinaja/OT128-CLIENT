@@ -14,9 +14,7 @@ import PhoneIphoneIcon from '@mui/icons-material/PhoneIphone'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-const ContactDetails = ({ data }) => {
-  const { name, phone, email, cellphone } = data
-
+const ContactDetails = () => {
   const state = useSelector((state) => state.organization)
 
   return (

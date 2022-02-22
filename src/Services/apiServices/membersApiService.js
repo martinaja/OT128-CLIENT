@@ -5,11 +5,16 @@ import {
   deletePrivateHandler,
   getPrivateHandler,
 } from '../BaseHTTP/privateApiService'
+import { getPublicHandler } from '../BaseHTTP/publicApiService'
 
 const memberGetUrl = process.env.REACT_APP_API_MEMBERS_GET
 const memberPostUrl = process.env.REACT_APP_API_MEMBERS_POST
 const memberPutUrl = process.env.REACT_APP_API_MEMBERS_PUT
 const memberDeleteUrl = process.env.REACT_APP_API_MEMBERS_DELETE
+
+export const getPublicMembers = () => {
+  return getPublicHandler(memberGetUrl)
+}
 
 export const getMembers = (id) => {
   return getPrivateHandler(memberGetUrl, id)

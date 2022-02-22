@@ -22,6 +22,7 @@ import { MemberSearch } from './MemberSearch'
 const MemberRow = ({ member }) => {
   const { id, name, image } = member
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const removeMember = () => {
     alertServiceConfirm(
@@ -30,7 +31,7 @@ const MemberRow = ({ member }) => {
       () => {
         deleteMembers(id)
         setTimeout(() => {
-          window.location.reload()
+          dispatch(fetchMember())
         }, 1000)
       },
     )

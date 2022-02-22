@@ -10,18 +10,16 @@ import {
 } from '@mui/material'
 import React from 'react'
 import { useEffect, useState } from 'react'
-import { getPublicHandler } from './../../Services/BaseHTTP/publicApiService'
 import { Facebook } from '@material-ui/icons'
 import { LinkedIn } from '@material-ui/icons'
 import parse from 'html-react-parser'
+import { getPublicMembers } from '../../Services/apiServices/membersApiService'
 
 export const MembersList = () => {
-  const url = process.env.REACT_APP_API_MEMBERS_GET
-
   const [data, setData] = useState('')
 
   useEffect(() => {
-    getPublicHandler(url).then(({ data }) => setData(data.data))
+    getPublicMembers().then(({ data }) => setData(data.data))
   }, [])
 
   return (
@@ -57,7 +55,7 @@ export const MembersList = () => {
                       <Typography gutterBottom variant="h5" component="div">
                         <h4>{element.name}</h4>
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography variant="h7" color="text.secondary">
                         {parse(element.description)}
                       </Typography>
                     </CardContent>

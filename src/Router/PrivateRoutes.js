@@ -21,8 +21,6 @@ import BackofficeHome from '../Components/BackOffice/BackOfficeHome'
 export const PrivateRoute = ({ children, ...rest }) => {
   const { isAuthenticated, role } = useSelector((state) => state.auth)
 
-  console.log(role)
-
   return (
     <Route
       {...rest}
