@@ -93,6 +93,15 @@ const NavBar = ({
               >
                 LogOut
               </Link>
+              {role !== 'Admin' ? (
+                <Link to="/donations">
+                  <img
+                    alt="Logo ong"
+                    src="/images/MP.png"
+                    className={styles.navBtnDonar}
+                  />
+                </Link>
+              ) : null}
               {role !== 'Admin' ? null : (
                 <Link className={styles.sidebarRoute} to={'/backoffice'}>
                   BackOffice
@@ -109,12 +118,6 @@ const NavBar = ({
               </Link>
             </>
           )}
-          <IconButton> <img
-                alt="Logo ong."
-                src="/images/MP.png"
-                className={styles.navBtnDonar}
-               
-                /></IconButton>
         </div>
       </div>
     </nav>
@@ -161,6 +164,15 @@ const SideBar = ({
             >
               LogOut
             </Link>
+            {role !== 'Admin' ? (
+              <Link to="/donations">
+                <img
+                  alt="Logo ong"
+                  src="/images/MP.png"
+                  className={styles.navBtnDonar}
+                />
+              </Link>
+            ) : null}
             {role !== 'Admin' ? null : (
               <Link className={styles.sidebarRoute} to={'/backoffice'}>
                 BackOffice
