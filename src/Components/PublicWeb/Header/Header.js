@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styles from './Header.module.css'
 import logo from './logo-letras-blancas.png'
@@ -13,7 +13,6 @@ const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
-  let { pathname = '' } = useLocation()
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
   const role = useSelector((state) => state.auth.role)
   let arrayDataAdmin = []
@@ -27,7 +26,6 @@ const Header = () => {
     <div id="main-header">
       <NavBar
         toggle={toggle}
-        pathname={pathname}
         userAuth={userAuth}
         dispatch={dispatch}
         role={role}
@@ -95,6 +93,15 @@ const NavBar = ({
               >
                 LogOut
               </Link>
+              {role !== 'Admin' ? (
+                <Link to="/donations">
+                  <img
+                    alt="Logo ong"
+                    src="/images/MP.png"
+                    className={styles.navBtnDonar}
+                  />
+                </Link>
+              ) : null}
               {role !== 'Admin' ? null : (
                 <Link className={styles.sidebarRoute} to={'/backoffice'}>
                   BackOffice
@@ -163,6 +170,15 @@ const SideBar = ({
             >
               LogOut
             </Link>
+            {role !== 'Admin' ? (
+              <Link to="/donations">
+                <img
+                  alt="Logo ong"
+                  src="/images/MP.png"
+                  className={styles.navBtnDonar}
+                />
+              </Link>
+            ) : null}
             {role !== 'Admin' ? null : (
               <Link className={styles.sidebarRoute} to={'/backoffice'}>
                 BackOffice
