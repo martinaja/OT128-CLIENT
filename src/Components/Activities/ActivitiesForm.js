@@ -23,7 +23,7 @@ import {
 } from '@mui/material'
 
 const ActivitiesForm = () => {
-  let id = useParams().id
+  const id = useParams().id
   const [responseServer, setResponseServer] = useState(undefined)
   const [isLoading, setIsLoading] = useState(false)
   const history = useHistory()
