@@ -1,13 +1,6 @@
 import Swal from 'sweetalert2'
 
-
-export function alertServiceInfoTimer(
-  position,
-  icon,
-  title,
-  showConfirmButton,
-  timer,
-) {
+export function alertServiceInfoTimer(title, showConfirmButton, timer) {
   Swal.fire({
     position: 'center',
     icon: 'info',
@@ -51,38 +44,7 @@ export function alertServiceError(title, text) {
     text,
     color: 'White',
     background: 'Black',
-    errorButtonColor: '#072227',
+    // errorButtonColor: '#072227',
   })
 }
 
-export function alertDonationsMP ( image) {
-  
-  Swal.fire({
-    title: 'Ingrese su donación',
-    input: 'text',
-    inputAttributes: {
-      autocapitalize: 'off'
-    },
-    color: 'White',
-    background: 'Black',
-    showCancelButton: true,
-    
-    confirmButtonText: 'Aceptar',
-    showLoaderOnConfirm: true,
-    preConfirm: () => {
-      return 1
-    },
-    allowOutsideClick: () => !Swal.isLoading()
-  }).then((result) => {
-    if (result.isConfirmed) {
-      Swal.fire({
-        title: ` Gracias por su donación `,
-        imageUrl: image,
-        confirmButtonText: 'Ok',
-        preConfirm: () => {
-        return  window.location.replace('/gracias')
-        },
-      })
-    }
-  })
-  }

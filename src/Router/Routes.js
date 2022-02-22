@@ -1,45 +1,79 @@
-import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom'
-import PublicContent from '../Components/PublicWeb/PublicContent'
-import BackOfficeHome from '../Components/BackOffice/BackOfficeHome'
-import LoginForm from '../Components/Auth/LoginForm'
-import RegisterForm from '../Components/Auth/RegisterForm'
-import NotFound from '../Components/NotFound/NotFound'
+import { Route, Redirect, HashRouter } from 'react-router-dom'
+import { AnimatedSwitch } from 'react-router-transition'
 import { PublicRoutes } from './PublicRoutes'
+import { PrivateRoutes } from './PrivateRoutes'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
+import NotFound from '../Components/NotFound/NotFound'
 
 export const Routes = () => {
   return (
-    <BrowserRouter>
-      <Switch>
+    <HashRouter>
+      <AnimatedSwitch
+        atEnter={{ opacity: 0 }}
+        atLeave={{ opacity: 0 }}
+        atActive={{ opacity: 1 }}
+      >
         <Route
           exact
           path={[
             '/',
+            '/novedades',
+            '/novedades/:newsId',
             '/contacto',
             '/nosotros',
             '/create-user',
             '/activities',
-            '/novedades',
-            '/novedades/:newsId',
             '/activities/:id',
-            '/404',
+            '/donations',
+            '/gracias',
+            '/testimonios',
+            '/login',
+            '/register',
           ]}
-        >
-          <PublicContent>
-            <PublicRoutes />
-          </PublicContent>
-        </Route>
-        <Route path="/backoffice" component={BackOfficeHome} />
+          component={PublicRoutes}
+        />
+
+        <Route
+          exact
+          path={[
+            '/backoffice',
+            '/backoffice/activities',
+            '/backoffice/activities/create',
+            '/backoffice/activities/create/:id',
+            '/backoffice/categories',
+            '/backoffice/categories/create',
+            '/backoffice/categories/create/:id',
+            '/backoffice/news',
+            '/backoffice/news/create',
+            '/backoffice/news/create/:newsId',
+            '/backoffice/members',
+            '/backoffice/members/create',
+            '/backoffice/members/create/:id',
+            '/backoffice/slides',
+            '/backoffice/slides/create',
+            '/backoffice/slides/create/:slideId',
+            '/backoffice/create-testimonials',
+            '/backoffice/create-testimonials/:id',
+            '/backoffice/create-project',
+            '/backoffice/organization',
+            '/backoffice/organization/edit',
+            '/backoffice/users',
+            '/backoffice/users/create',
+            '/backoffice/users/create/:id',
+          ]}
+          component={PrivateRoutes}
+        />
+
         <Route path="/school-campaign" component={SchoolCampaign} />
+
         <Route path="/toys-campaign" component={ToysCampaign} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/register" component={RegisterForm} />
         <Route path="/404" component={NotFound} />
+
         <Route path="*">
           <Redirect to="/404" />
         </Route>
-      </Switch>
-    </BrowserRouter>
+      </AnimatedSwitch>
+    </HashRouter>
   )
 }

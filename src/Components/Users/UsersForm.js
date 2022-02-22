@@ -8,22 +8,24 @@ import {
 } from '../../Services/BaseHTTP/privateApiService'
 
 import Swal from 'sweetalert2'
-import { Terms } from './Terms'
+// import { Terms } from './Terms'
 import { useState } from 'react'
 
-const UserForm = (usuario) => {
+const UserForm = ({usuario = undefined}) => {
   const url = process.env.REACT_APP_API_USERS_GET
 
   const [display, setDisplay] = useState(false)
+
 
   return (
     <Box sx={{ pt: '60px', pl: 2 }}>
       <Formik
         initialValues={{
-          name: usuario.name || '',
-          email: usuario.email || '',
-          role_id: usuario.role_id || '',
-          description: '',
+          id: usuario ? usuario.id : '',
+          name: usuario ? usuario?.name : '',
+          email: usuario ? usuario?.email : '',
+          role_id: usuario ? usuario?.role_id : '',
+          description: usuario ? usuario?.description : '',
           photo: '',
         }}
         onSubmit={(values) => {
@@ -37,10 +39,9 @@ const UserForm = (usuario) => {
             cancelButtonText: 'Cancelar',
           }).then((result) => {
             if (result.isConfirmed) {
-              if (usuario.id) {
+              if (usuario?.id) {
                 putPrivateHandler(url, usuario.id, values)
               } else {
-                console.log('usuario no existe')
                 postPrivateHandler(url, values)
               }
               Swal.fire('Datos procesados', '', 'success')
@@ -126,10 +127,10 @@ const UserForm = (usuario) => {
         Términos y condiciones
       </Button>
       <Box sx={{ display: display ? 'block' : 'none' }}>
-        <Terms />
+        {/* <Terms /> */}
       </Box>
     </Box>
   )
 }
 
-export default UserForm
+export default UserForm 

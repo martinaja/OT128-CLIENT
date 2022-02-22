@@ -6,7 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { toBase64 } from '../../utils/toBase64'
 import { SUPPORTED_FORMATS } from '../../utils/supportedFormatsImg'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { LinearProgressFeedback } from '../LinearProgress'
 import {
   postActivity,
@@ -26,6 +26,7 @@ const ActivitiesForm = () => {
   let id = useParams().id
   const [responseServer, setResponseServer] = useState(undefined)
   const [isLoading, setIsLoading] = useState(false)
+  const history = useHistory()
 
   const formikInitialValues = {
     name: '',
@@ -78,6 +79,7 @@ const ActivitiesForm = () => {
   useEffect(() => {
     if (responseServer?.error) {
       alertServiceError('Error', responseServer.message)
+      setIsLoading(false)
     } else if (responseServer?.data) {
       alertServiceInfoTimer(
         'top',
@@ -86,12 +88,13 @@ const ActivitiesForm = () => {
         false,
         3000,
       )
+      setIsLoading(false)
+      setTimeout(() => {
+        setResponseServer(undefined)
+        history.push('/backoffice/activities')
+      }, 3000)
     }
-
-    setTimeout(() => {
-      setResponseServer(undefined)
-    }, 3000)
-  }, [responseServer])
+  }, [responseServer, history])
 
   return (
     <Formik
@@ -152,7 +155,12 @@ const ActivitiesForm = () => {
                 </Button>
                 <ErrorMessage component="small" name="image" />
               </label>
-              <Button type="submit" variant="contained" fullWidth>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                disabled={isLoading}
+              >
                 {id ? 'Editar actividad' : 'Crear actividad'}
               </Button>
               <LinearProgressFeedback isActive={isLoading} />

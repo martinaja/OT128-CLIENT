@@ -1,26 +1,19 @@
 import { Box, InputAdornment, TextField } from '@mui/material'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   searchActivitie,
   getActivities,
-  setLoading,
-} from '../../features/activitiesReducer'
+} from '../../features/activities/activitiesReducer'
 import { debounce } from 'lodash'
 import Spinner from '../Spinner'
 
 export const ActivitiesSearch = () => {
   const dispatch = useDispatch()
-  const isLoading = useSelector((state) => state.activities.loading)
+  const isLoading = useSelector((state) => state.activities.loader)
   const [error, setError] = useState(false)
 
-  useEffect(() => {
-    dispatch(setLoading(true))
-    dispatch(getActivities())
-  }, [dispatch])
-
   const handleChange = debounce((value) => {
-    dispatch(setLoading(true))
     value.length < 3 ? setError(true) : setError(false)
     if (value.length >= 3) {
       dispatch(searchActivitie(value))

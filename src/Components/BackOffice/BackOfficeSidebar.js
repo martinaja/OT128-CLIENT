@@ -9,7 +9,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft'
 import ChevronRightIcon from '@mui/icons-material/ChevronRight'
 import ListItem from '@mui/material/ListItem'
 import { useEffect, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const drawerWidth = 220
 
@@ -52,7 +52,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Sidebar() {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
-  const history = useHistory()
+  const location = useLocation()
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -64,7 +64,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     setOpen(false)
-  }, [history.location.pathname])
+  }, [location.pathname])
 
   return (
     <>
@@ -91,6 +91,7 @@ export default function Sidebar() {
         variant="temporary"
         anchor="right"
         open={open}
+        onBlur={handleDrawerClose}
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>

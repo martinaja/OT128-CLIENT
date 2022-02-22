@@ -1,7 +1,6 @@
 .navbar {
-  background: #272c34;
-  height: 80px;
-  /* margin-top: -80px; */
+  background: #35858b;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,8 +8,9 @@
   position: sticky;
   top: 0;
   z-index: 10;
+  width: 100%;
 }
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 1100px) {
   .navbar {
     transition: 0.8s all ease;
   }
@@ -22,8 +22,8 @@
   height: 80px;
   z-index: 1;
   width: 100%;
-  padding: 0 24px;
-  max-width: 1100px;
+  padding: 0 20px;
+  max-width: 1400px;
 }
 
 .navLogoLink {
@@ -32,21 +32,20 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  margin-left: 24px;
-  font-weight: bold;
   text-decoration: none;
 }
 
 .navLogo {
-  height: 35px;
-  width: 5rem;
+  height: 40px;
+  width: 6rem;
+  margin-bottom: 13px;
 }
 
 .mobileIcon {
   display: none;
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1100px) {
   .mobileIcon {
     display: block;
     position: absolute;
@@ -64,16 +63,16 @@
   align-items: center;
   list-style: none;
   text-align: center;
-  margin-right: -22px;
+  margin-right: -10px;
 }
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1100px) {
   .navMenu {
     display: none;
   }
 }
 
 .navItem {
-  height: 80px;
+  height: 70px;
 }
 
 .navLinks {
@@ -81,46 +80,52 @@
   display: flex;
   align-items: center;
   text-decoration: none;
+  margin-top: -6px;
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: lighter;
+
 }
-@media screen and (max-width: 980px) {
+
+@media screen and (min-width: 1100px) {
+  .navLinks {
+    font-size: 14px;
+    
+  }
+}
+@media screen and (min-width: 1200px) {
   .navLinks {
     font-size: 16px;
   }
 }
-@media screen and (max-width: 920px) {
-  .navLinks {
-    font-size: 14px;
-  }
-}
+
 .navLinks:hover {
-  color: #4fbdba;
+  color: #000000;
 }
 .navLinks:active .navLinksActive {
-  border-bottom: 3px solid #4fbdba;
+  border-bottom: 2px solid #4fbdba;
 }
 
 .navBtn {
   display: flex;
   align-items: center;
 }
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1100px) {
   .navBtn {
     display: none;
   }
 }
 
 .navBtnLink {
-  border-radius: 50px;
-  background: #fff;
+  border-radius: 5px;
+  background: #4FBDBA;
   white-space: nowrap;
-  padding: 10px 22px;
-  color: #010606;
-  font-size: 16px;
+  padding: 5px 25px;
+  color: #f5f8f8;
+  font-size: 13px;
+  font-weight: normal;
   outline: none;
   border: none;
   cursor: pointer;
@@ -128,20 +133,21 @@
   text-decoration: none;
 }
 .navBtnLink:hover {
-  transition: all 0.2s ease-in-out;
-  background: #4fbdba;
-  color: #010606;
+  color: #001F3F;
+  background-color: #fff;
 }
-@media screen and (max-width: 980px) {
+
+@media screen and (min-width: 1100px) {
   .navBtnLink {
     font-size: 14px;
-    padding: 10px 12px;
+    padding: 6px 14px;
+    margin: 0 0.7rem;
+    margin-bottom: 12px;
   }
 }
-@media screen and (max-width: 920px) {
+@media screen and (min-width: 1200px) {
   .navBtnLink {
-    font-size: 12px;
-    padding: 10px 10px;
+    font-size: 16px;
   }
 }
 
@@ -150,7 +156,7 @@
   z-index: 999;
   width: 100%;
   height: 100vh;
-  background: #272c34;
+  background: #35858b;
   display: grid;
   align-items: center;
   top: 0;
@@ -179,12 +185,14 @@
 .sidebarMenu {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(6, 80px);
+  grid-template-rows: repeat(8, 80px);
   text-align: center;
+  margin-bottom: 3rem;
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-height: 770px) {
   .sidebarMenu {
-    grid-template-rows: repeat(6, 60px);
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 80px);
   }
 }
 
@@ -199,6 +207,7 @@
   text-decoration: none;
   color: #fff;
   cursor: pointer;
+  
 }
 .sidebarLink:hover {
   color: #4fbdba;
@@ -208,15 +217,17 @@
 .sidebarBtnWrap {
   display: flex;
   justify-content: center;
+  column-gap: 2rem;
+  
 }
 
 .sidebarRoute {
-  border-radius: 50px;
+  border-radius: 10px;
   background: #fff;
   white-space: nowrap;
-  padding: 16px 64px;
-  color: #010606;
-  font-size: 16px;
+  padding: 8px 30px;
+  color: #272c34;
+  font-size: 1.3rem;
   outline: none;
   border: none;
   cursor: pointer;
@@ -226,6 +237,6 @@
 
 .sidebarRoute:hover {
   transition: all 0.2s ease-in-out;
-  background: #4fbdba;
-  color: #010606;
+  background: #272c34;
+  color: #fff;
 }

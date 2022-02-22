@@ -1,14 +1,8 @@
-body {
-
-font-family: -apple-system, BlinkMacSystemFont, "Roboto";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
+body{
+  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Oxygen', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
-code {
-  font-family:  "Roboto",
-    monospace;
-}
 
 
