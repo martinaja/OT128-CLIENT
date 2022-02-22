@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { getUserRole } from '../../features/auth/authReducer'
 import Header from './Header/Header'
+import { Container } from '@mui/material';
 
 const PublicContent = ({ children }) => {
   const { isAuthenticated, role, user } = useSelector((state) => state.auth)
@@ -16,8 +17,10 @@ const PublicContent = ({ children }) => {
   return (
     <>
       <Header />
+      <Container style={{minHeight:"80vh"}}>
       {children}
-      <Footer />
+      </Container>
+   <Footer />
     </>
   )
 }

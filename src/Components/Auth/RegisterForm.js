@@ -39,10 +39,12 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.success.main,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    backgroundColor: theme.palette.success.main,
+   
   },
 }))
 
@@ -153,7 +155,7 @@ const FormLogic = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="inehrit"
                 className={classes.submit}
               >
                 Registrarse

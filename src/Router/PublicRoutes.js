@@ -4,6 +4,9 @@ import LoadingBar from '../Components/LoadingPage/LoadingPage'
 import PublicContent from '../Components/PublicWeb/PublicContent'
 import RegisterForm from '../Components/Auth/RegisterForm'
 import LoginForm from '../Components/Auth/LoginForm'
+import { Donations } from '../Components/Donations/Donations'
+import Thankyou from './../Components/Donations/Thankyou';
+
 
 const NewsDetail = lazy(() => import('../Components/News/Detail/NewsDetail'))
 const About = lazy(() => import('../Components/About/About'))
@@ -13,10 +16,11 @@ const Activities = lazy(() =>
 const UserForm = lazy(() => import('../Components/Users/UsersForm'))
 const Detail = lazy(() => import('../Components/Activities/Detail/Detail'))
 const Index = lazy(() => import('../Components/Home/Index'))
-const Donations = lazy(() => import('../Components/Donations/Donations'))
-const Thankyou = lazy(() => import('./../Components/Donations/Thankyou'))
+
+
 const PublicNewHome = lazy(() => import('../Components/News/PublicNewHome'))
 const ContactHome = lazy(() => import('../Components/Contact/ContactHome'))
+
 
 export const PublicRoutes = () => (
   <Switch>
