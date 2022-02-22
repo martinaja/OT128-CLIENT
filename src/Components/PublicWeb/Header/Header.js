@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styles from './Header.module.css'
 import logo from './logo-letras-blancas.png'
@@ -12,7 +12,6 @@ const Header = () => {
 
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
-  let { pathname = '' } = useLocation()
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
   const role = useSelector((state) => state.auth.role)
   let arrayDataAdmin = []
@@ -26,7 +25,6 @@ const Header = () => {
     <div id="main-header">
       <NavBar
         toggle={toggle}
-        pathname={pathname}
         userAuth={userAuth}
         dispatch={dispatch}
         role={role}
