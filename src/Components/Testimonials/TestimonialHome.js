@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react'
-
 import { Grid } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
-
 import { useDispatch, useSelector } from 'react-redux'
 import { getTestimonial } from '../../features/testimonial/testimonialReducer'
 

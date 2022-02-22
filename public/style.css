@@ -6,7 +6,7 @@ Assigned to:    Andrew Noah
 Primary use:    ThemeDunk 
 -------------------------------------------------------------------*/
 
-@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,700&amp;subset=latin-ext');
+
 @import url(libs/wow/css/animate.css);
 @import url(libs/font-awesome/css/font-awesome.min.css);
 @import url(libs/bootstrap/css/bootstrap.min.css);
@@ -74,8 +74,8 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 body{
     font-size: 14px;
     color: #110f0f;
-    font-family: 'Rubik', sans-serif;
-    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-weight: lighter;
 }
 h1,
 h2,
@@ -85,7 +85,7 @@ h5,
 h6 {
     clear: both;
     color: #1b1a1a;
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
 }
 h1 {
@@ -113,7 +113,7 @@ img{
     width: 100%;
 }
 a{
-    color:#222222;
+    color:#f3e9e9;
     display: block;
 }
 a:hover{

@@ -26,6 +26,7 @@ export const Routes = () => {
             '/activities',
             '/activities/:id',
             '/donations',
+            '/gracias',
             '/testimonios',
             '/login',
             '/register',
@@ -67,7 +68,6 @@ export const Routes = () => {
         <Route path="/school-campaign" component={SchoolCampaign} />
 
         <Route path="/toys-campaign" component={ToysCampaign} />
-
         <Route path="/404" component={NotFound} />
 
         <Route path="*">
