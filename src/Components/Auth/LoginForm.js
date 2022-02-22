@@ -34,10 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.success.main,
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    BackgroundColor: theme.palette.success.main,
   },
 }))
 
@@ -125,7 +126,7 @@ const FormLogic = ({ authData }) => {
                 fullWidth
                 variant="contained"
                 color="primary"
-                className={classes.submit}
+                marginTop="1rem"
               >
                 Ingresar
               </Button>
