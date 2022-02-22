@@ -8,9 +8,9 @@ import {
 const initialState = {
   status: '',
   token: false,
-  isAuthenticated: true,
+  isAuthenticated: false,
   user: {},
-  role: 'Standard',
+  role: undefined,
 }
 
 //Export to RegisterForm submitHandle => catch Error
