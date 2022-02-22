@@ -35,6 +35,17 @@
   text-decoration: none;
 }
 
+.navBtnDonar {
+margin-bottom: 0.85rem;
+  justify-self: flex-start;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  width: 90px;
+  height: 35px;
+}
+
 .navLogo {
   height: 40px;
   width: 6rem;
@@ -240,3 +251,4 @@
   background: #272c34;
   color: #fff;
 }
+
