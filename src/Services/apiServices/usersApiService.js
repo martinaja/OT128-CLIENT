@@ -15,7 +15,7 @@ export const getUsers = (id) => {
 }
 
 export const postUsers = (id, bodydata) => {
-  return postPrivateHandler(usersPostUrl, id, bodydata)
+  return postPrivateHandler(usersPostUrl, id, bodydata) 
 }
 
 export const putUsers = (id, bodydata) => {
