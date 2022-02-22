@@ -11,24 +11,45 @@ import {
   TableRow,
   Typography,
 } from '@mui/material'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
+import { getActivities } from '../../features/activities/activitiesReducer'
+import { deleteActivity } from '../../Services/apiServices/activitiesApiService'
+import { alertServiceConfirm } from '../AlertService'
 import { ActivitiesSearch } from './ActivitiesSearch'
 
 const ActivitieRow = ({ activitie }) => {
+  const { id, name, image } = activitie
+  const history = useHistory()
   const createdAt = activitie['created_at'].slice(0, 10)
+  const dispatch = useDispatch()
+
+  const removeActivitie = () => {
+    alertServiceConfirm(
+      '¿Está seguro de eliminar esta actividad?',
+      'Aceptar',
+      () => {
+        deleteActivity(id)
+        setTimeout(() => {
+          dispatch(getActivities())
+        }, 1000)
+      },
+    )
+  }
+
   return (
     <TableRow
-      key={activitie.name}
+      key={name}
       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
       <TableCell component="th" scope="row">
-        {activitie.name}
+        {name}
       </TableCell>
       <TableCell>
         <Avatar
-          src={activitie.image}
-          alt={activitie.name}
+          src={image}
+          alt={name}
           variant="square"
           sx={{ width: 120, height: 120, margin: 'auto' }}
         />
@@ -37,12 +58,17 @@ const ActivitieRow = ({ activitie }) => {
         <Typography variant="body">{createdAt}</Typography>
       </TableCell>
       <TableCell align="right">
-        <Button sx={{ m: 1 }} variant="contained" color="success">
+        <Button
+          sx={{ m: 1 }}
+          variant="contained"
+          color="success"
+          onClick={() => history.push(`/backoffice/activities/create/${id}`)}
+        >
           Editar
         </Button>
       </TableCell>
       <TableCell align="right">
-        <Button variant="contained" color="success">
+        <Button variant="contained" color="success" onClick={removeActivitie}>
           Eliminar
         </Button>
       </TableCell>
@@ -51,7 +77,12 @@ const ActivitieRow = ({ activitie }) => {
 }
 
 const ActivitiesScreen = () => {
-  const response = useSelector((state) => state.activities)
+  const dispatch = useDispatch()
+  const response = useSelector((state) => state.activities.data)
+
+  useEffect(() => {
+    dispatch(getActivities())
+  }, [dispatch])
 
   return (
     <Container>
@@ -80,7 +111,7 @@ const ActivitiesScreen = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {response.activities.map((activitie) => (
+            {response.map((activitie) => (
               <ActivitieRow key={activitie.id} activitie={activitie} />
             ))}
           </TableBody>

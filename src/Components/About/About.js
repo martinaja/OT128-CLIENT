@@ -26,7 +26,6 @@ const About = ({ title }) => {
       (async () => {
         setLoader(true)
         const response = await getOrganization()
-        console.log(response)
         if (response.error) {
           alertServiceError(
             response.message,
@@ -35,7 +34,6 @@ const About = ({ title }) => {
         }
 
         const organizationData = response.data?.data
-        console.log(organizationData)
         organizationData
           ? setData(organizationData)
           : alertServiceError(
@@ -55,7 +53,7 @@ const About = ({ title }) => {
         <script
           async
           src="https://platform.twitter.com/widgets.js"
-          charset="utf-8"
+          charSet="utf-8"
         />
         <script
           src="https://platform.linkedin.com/in.js"
@@ -122,7 +120,7 @@ const About = ({ title }) => {
           <Grid item sx={12} md={3}>
             <div style={{ padding: '25px', margin: 'auto' }}>
               <a
-                class="twitter-timeline"
+                className="twitter-timeline"
                 data-lang="es"
                 // data-width="1000"
                 data-height="650"
@@ -135,7 +133,7 @@ const About = ({ title }) => {
               <script
                 async
                 src="https://platform.twitter.com/widgets.js"
-                charset="utf-8"
+                charSet="utf-8"
               ></script>
             </div>
           </Grid>
