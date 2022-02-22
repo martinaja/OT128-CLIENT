@@ -26,6 +26,7 @@ export const Routes = () => {
             '/activities',
             '/activities/:id',
             '/donations',
+            '/gracias',
             '/testimonios',
             '/login',
             '/register',
