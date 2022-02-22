@@ -1,23 +1,15 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Box, Button, Container, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { getOrganizationData } from '../../features/organization/organizationReducer.js'
 import { alertServiceError } from '../AlertService.js'
 import Spinner from '../Spinner.js'
-import { Title } from '../Title.js'
 import ContactDetails from './ContactDetails.js'
 import { ContactForm } from './ContactForm.js'
 import ContactMap from './ContactMap.js'
 
 const ContactHome = () => {
-  const data = {
-    name: 'placeholder Nombre',
-    phone: 'placeholder Telefono',
-    cellphone: 'placeholder Celular',
-    email: 'placeholder Email',
-  }
-
   // Function that show form if the button gets clicked
   const [show, setShow] = useState(false)
 
@@ -58,25 +50,32 @@ const ContactHome = () => {
         <Spinner />
       ) : (
         <>
-          <Title image="/images/campaign-recent-02.jpg">Contacto</Title>
-          <ContactDetails data={data} />
+          <img width="100%" src="/images/imagen contacto.png" />
 
-          <hr />
+          <Container>
+            <ContactDetails />
 
-          <Button variant="contained" sx={{ my: 2 }} onClick={handleClick}>
-            Envianos un mensaje!
-          </Button>
-          <Box sx={{ display: show ? 'block' : 'none' }}>
-            <ContactForm />
-          </Box>
+            <hr />
+            <Button variant="contained" sx={{ my: 2 }} onClick={handleClick}>
+              Envianos un mensaje!
+            </Button>
+            <Box sx={{ display: show ? 'block' : 'none' }}>
+              <ContactForm />
+            </Box>
 
-          <hr />
-          <Typography variant="h3" gutterBottom component="div" sx={{ mt: 2 }}>
-            Visitanos en nuestra sede
-          </Typography>
-          <Box sx={{ m: 6, boxShadow: 5, border: 1 }}>
-            <ContactMap />
-          </Box>
+            <hr />
+            <Typography
+              variant="h3"
+              gutterBottom
+              component="div"
+              sx={{ mt: 2 }}
+            >
+              Visitanos en nuestra sede
+            </Typography>
+            <Box sx={{ m: 6, boxShadow: 5, border: 1 }}>
+              <ContactMap />
+            </Box>
+          </Container>
         </>
       )}
     </Box>

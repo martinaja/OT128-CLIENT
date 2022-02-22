@@ -2,13 +2,10 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import { Icon } from 'leaflet'
 import * as ELG from 'esri-leaflet-geocoder'
-import { useDispatch, useSelector } from 'react-redux'
-import { alertServiceError } from '../AlertService'
-import { getOrganizationData } from '../../features/organization/organizationReducer'
+import { useSelector } from 'react-redux'
 import Spinner from '../Spinner'
 
 const ContactMap = () => {
-  const dispatch = useDispatch()
   const state = useSelector((state) => state.organization)
 
   const [showInfo, setShowInfo] = useState(false)
@@ -50,7 +47,7 @@ const ContactMap = () => {
   return geo.y ? (
     <MapContainer
       center={[geo.y, geo.x]}
-      zoom={20}
+      zoom={16}
       style={{ width: '100%', height: '80vh' }}
     >
       <TileLayer
