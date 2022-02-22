@@ -8,7 +8,7 @@ export const register = (data) => {
   return postHandler(registerUrl, data)
 }
 
-export const login = (data) => {
+export const login = (data) => { 
   return postHandler(loginUrl, data)
 }
 

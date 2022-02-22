@@ -5,7 +5,6 @@ import { getOrganization } from './../../Services/apiServices/organizationApiSer
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
 
-
 function Index() {
   const [loader, setLoader] = useState(false)
   const [data, setData] = useState()
@@ -15,7 +14,6 @@ function Index() {
       (async () => {
         setLoader(true)
         const response = await getOrganization()
-        console.log(response)
         if (response.error) {
           alertServiceError(
             response.message,
@@ -24,7 +22,6 @@ function Index() {
         }
 
         const organizationData = response.data?.data
-        console.log(organizationData)
         organizationData
           ? setData(organizationData)
           : alertServiceError(
@@ -40,7 +37,6 @@ function Index() {
   ) : (
     <div>
       <Container>
-  
         {data ? <h1>{data.welcome_text}</h1> : null}
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>

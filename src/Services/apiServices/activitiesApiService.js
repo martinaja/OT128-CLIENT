@@ -4,11 +4,16 @@ import {
   postPrivateHandler,
   putPrivateHandler,
 } from '../BaseHTTP/privateApiService'
+import { getPublicHandler } from '../BaseHTTP/publicApiService'
 
 const activityGetUrl = process.env.REACT_APP_API_ACTIVITY_GET
 const activityPostUrl = process.env.REACT_APP_API_ACTIVITY_POST
 const activityPutUrl = process.env.REACT_APP_API_ACTIVITY_PUT
 const activityDeleteUrl = process.env.REACT_APP_API_ACTIVITY_DELETE
+
+export const getPublicActivity = () => {
+  return getPublicHandler(activityGetUrl)
+}
 
 export const getActivity = (id) => {
   return getPrivateHandler(activityGetUrl, id)

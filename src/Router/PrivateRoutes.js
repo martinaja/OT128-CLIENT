@@ -1,5 +1,4 @@
 import { Route, Redirect } from 'react-router-dom'
-import { AnimatedSwitch } from 'react-router-transition'
 import { useSelector } from 'react-redux'
 import ActivitiesForm from '../Components/Activities/ActivitiesForm'
 import CategoriesForm from '../Components/Categories/CategoriesForm'
@@ -22,8 +21,6 @@ import BackofficeHome from '../Components/BackOffice/BackOfficeHome'
 export const PrivateRoute = ({ children, ...rest }) => {
   const { isAuthenticated, role } = useSelector((state) => state.auth)
 
-  console.log(role)
-
   return (
     <Route
       {...rest}
@@ -39,11 +36,6 @@ export const PrivateRoute = ({ children, ...rest }) => {
 }
 
 export const PrivateRoutes = () => (
-  <AnimatedSwitch
-    atEnter={{ opacity: 0 }}
-    atLeave={{ opacity: 0 }}
-    atActive={{ opacity: 1 }}
-  >
     <BackofficeHome>
       <PrivateRoute exact path="/backoffice/activities">
         <ActivitiesScreen />
@@ -137,5 +129,4 @@ export const PrivateRoutes = () => (
         <UserForm />
       </PrivateRoute>
     </BackofficeHome>
-  </AnimatedSwitch>
 )
