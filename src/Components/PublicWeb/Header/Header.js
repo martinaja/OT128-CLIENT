@@ -6,6 +6,7 @@ import logo from './logo-letras-blancas.png'
 import { arrayData } from './data'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../../features/auth/authReducer'
+import { IconButton } from '@mui/material'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -108,6 +109,12 @@ const NavBar = ({
               </Link>
             </>
           )}
+          <IconButton> <img
+                alt="Logo ong."
+                src="/images/MP.png"
+                className={styles.navBtnDonar}
+               
+                /></IconButton>
         </div>
       </div>
     </nav>
