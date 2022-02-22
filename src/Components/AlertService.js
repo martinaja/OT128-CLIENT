@@ -3,7 +3,7 @@ import Swal from 'sweetalert2'
 export function alertServiceInfoTimer(title, showConfirmButton, timer) {
   Swal.fire({
     position: 'center',
-    icon: 'info',
+    icon: 'success',
     title,
     showConfirmButton,
     timer,
