@@ -4,6 +4,11 @@ import userEvent from '@testing-library/user-event'
 import UserForm from './../../Components/Users/UsersForm'
 
 describe('Tests in UserForm.js, checking for messages', () => {
+
+  // Usuarios de ejemplo para las pruebas en el cual cada uno tiene caracteristicas diferentes,
+  // de tal manera que se puedan testear los distintos mensajes de error en pantalla.
+
+  // Usuario sin el campo name
   const usuario = {
     id: '1215',
     name: '',
@@ -12,7 +17,7 @@ describe('Tests in UserForm.js, checking for messages', () => {
     description: 'Description text for examlple',
     photo: '',
   }
-
+  // Usuario con el campo name incorrecto
   const usuario2 = {
     id: '1215',
     name: 'J',
@@ -21,7 +26,7 @@ describe('Tests in UserForm.js, checking for messages', () => {
     description: 'Description text for examlple',
     photo: '',
   }
-
+// Usuario con el campo email incorrecto
   const usuario3 = {
     id: '1215',
     name: 'John',
@@ -30,7 +35,7 @@ describe('Tests in UserForm.js, checking for messages', () => {
     description: 'Description text for examlple',
     photo: '',
   }
-
+// Usuario sin el campo role_id
   const usuario4 = {
     id: '1215',
     name: 'John',
@@ -39,7 +44,7 @@ describe('Tests in UserForm.js, checking for messages', () => {
     description: 'Description text for examlple',
     photo: '',
   }
-
+// Usuario con el campo description incorrecto
   const usuario5 = {
     id: '1215',
     name: 'John',
@@ -48,15 +53,6 @@ describe('Tests in UserForm.js, checking for messages', () => {
     description: 'text',
     photo: '',
   }
-
-  // const usuario6 = {
-  //   id: '1215',
-  //   name: 'John',
-  //   email: 'John@gmail.com',
-  //   role_id: '1',
-  //   description: 'Description text for examlple',
-  //   photo: '',
-  // }
 
   test('Debe mostrar mensaje de Campo obligatorio', async () => {
     await waitFor(() => {
@@ -113,18 +109,5 @@ describe('Tests in UserForm.js, checking for messages', () => {
       await screen.findByText('Debe tener mínimo 10 caracteres'),
     ).toBeInTheDocument()
   })
-
-  // test('Debe mostrar mensaje de Datos procesados', async () => {
-  //   await waitFor(() => {
-  //     render(<UserForm usuario={usuario6} />)
-  //   })
-
-  //   userEvent.click(screen.getByText('Send'))
-
-  //   expect(
-  //     await screen.findByText('Datos procesados'),
-  //   ).toBeInTheDocument()
-  // })
-
 
 })
