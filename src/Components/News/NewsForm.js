@@ -22,11 +22,10 @@ import {
 } from '../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../AlertService'
 import ButtonLoader from '../ButtonLoader/ButtonLoader'
-import Spinner from '../Spinner'
+// import Spinner from '../Spinner'
 import getBase64FromUrl from '../../utils/apiToBase64'
 
 const NewsForm = () => {
-  // let newsId
   const { newsId } = useParams()
   const history = useHistory()
 
@@ -37,23 +36,18 @@ const NewsForm = () => {
   const [previewImgUploaded, setPreviewImgUploaded] = useState(null)
   const [imgFromApi, setImgFromApi] = useState(null)
 
-  // console.log('imgFromApi', imgFromApi)
-  // const [loader, setLoader] = useState(false)
   const [btnLoader, setBtnLoader] = useState(false)
 
   // Fetch categories
   useEffect(
     () =>
       (async () => {
-        // setLoader(true)
-
         const fetchCategories = await getCategories()
         if (fetchCategories?.error || fetchCategories?.data?.success === false)
           alertServiceError(
             'Error',
             'No se pudo obtener la información solicitada',
           )
-
         const dataCategories = fetchCategories?.data?.data
         // console.log('CATEGORIES', dataCategories)
 
@@ -63,10 +57,6 @@ const NewsForm = () => {
               'No se pudo cargar la noticia',
               'Verificá que la URL sea correcta',
             )
-
-        console.log('CATEGORIES MOCK?', categories)
-
-        // setLoader(false)
       })(),
     [],
   )
@@ -75,19 +65,17 @@ const NewsForm = () => {
   useEffect(() => {
     if (!newsId) return
     ;(async () => {
-      // setLoader(true)
-
       const fetchNews = await getNews(newsId)
-      if (fetchNews.error) {
+      if (fetchNews?.error || fetchNews?.data?.success === false) {
         alertServiceError(
-          fetchNews.message,
+          'Error',
           'No se pudo obtener la información solicitada',
         )
         setIsEditable(false)
         history.push('/backoffice/news')
       }
 
-      const dataNews = fetchNews.data?.data
+      const dataNews = fetchNews?.data?.data
       // console.log('DATA DE LA NOTICIA', dataNews)
 
       if (dataNews) {
@@ -97,10 +85,7 @@ const NewsForm = () => {
         alertServiceError('No se pudo cargar la noticia', 'ID inválido')
         history.push('/backoffice/news')
       }
-
       setImgFromApi(await getBase64FromUrl(news.image))
-
-      // setLoader(false)
     })()
   }, [newsId, history, news.image])
 
@@ -139,7 +124,7 @@ const NewsForm = () => {
             'No se pudo editar la información',
           )
         } else {
-          // history.push(`/novedades/${newsId}`)
+          history.push(`/novedades/${newsId}`)
         }
 
         // Redirect to the news
@@ -172,7 +157,7 @@ const NewsForm = () => {
         if (postRequest.statusText === 'OK') {
           const postRequestData = postRequest.data?.data
           const newNewsID = postRequestData?.id
-          // history.push(`/novedades/${newNewsID}`)
+          history.push(`/novedades/${newNewsID}`)
         }
       })()
   }
@@ -191,7 +176,6 @@ const NewsForm = () => {
 
   return (
     <>
-      {/* <h1>Novedades</h1> */}
       <Formik
         enableReinitialize
         initialValues={{
@@ -221,7 +205,7 @@ const NewsForm = () => {
                   style={{ maxWidth: '100%' }}
                   src={previewImgUploaded || news.image}
                   alt=""
-                  data-testid="imagen"
+                  data-testid="timg"
                 />
               ) : null}
               <form onSubmit={handleSubmit}>
@@ -230,7 +214,7 @@ const NewsForm = () => {
                   fullWidth
                   id="name"
                   name="name"
-                  data-testid="titulo"
+                  data-testid="ttitle"
                   label="Título"
                   value={values.name}
                   onChange={handleChange}
@@ -244,7 +228,7 @@ const NewsForm = () => {
                   id="category_id"
                   name="category_id"
                   select
-                  data-testid="categoria"
+                  data-testid="tcategory"
                   label="Categoría"
                   value={values.category_id}
                   defaultValue=""
@@ -254,8 +238,8 @@ const NewsForm = () => {
                 >
                   {categories.map((cat, i) => (
                     <MenuItem key={i} value={cat.id}>
-                      {cat.id}
-                      {/* {cat.name}-{cat.id} */}
+                      {/* {cat.id} */}
+                      {cat.name}-{cat.id}
                     </MenuItem>
                   ))}
                 </TextField>
@@ -271,7 +255,7 @@ const NewsForm = () => {
                   />
                   <ErrorMessage component="small" name="content" />
                 </div>
-                <label data-testid="subirImagen" htmlFor="image">
+                <label data-testid="tuploadimg" htmlFor="image">
                   <Input
                     name="image"
                     accept="image/*"
@@ -290,7 +274,7 @@ const NewsForm = () => {
                   </Button>
                   <ErrorMessage component="small" name="image" />
                 </label>
-                <div data-testid="boton">
+                <div data-testid="tbtn">
                   <ButtonLoader
                     label={isEditable ? 'Editar noticia' : 'Crear noticia'}
                     loading={btnLoader}
@@ -298,13 +282,6 @@ const NewsForm = () => {
                 </div>
               </form>
             </Box>
-            <p data-testid="mock">
-              {categories?.map((cat) => (
-                <ul key={cat.id}>
-                  <li>{cat.name}</li>
-                </ul>
-              ))}
-            </p>
           </Container>
         )}
       </Formik>
