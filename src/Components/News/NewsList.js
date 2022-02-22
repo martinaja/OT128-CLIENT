@@ -8,7 +8,7 @@ import { alertServiceError } from '../AlertService'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchNew } from '../../features/news/newsReducer'
 
-const NewsList = () => {
+const NewsList = ({ from }) => {
   const dispatch = useDispatch()
   const state = useSelector((state) => state.news)
 
@@ -25,6 +25,18 @@ const NewsList = () => {
     }
   }, [state.status, dispatch, state.errorMsg])
 
+  let sliceNews
+  switch (from) {
+    case 'home':
+      sliceNews = 4
+      break
+    case 'newsHome':
+      sliceNews = state.news.length
+      break
+    default:
+      break
+  }
+
   return (
     <>
       {state.loader ? (
@@ -39,8 +51,8 @@ const NewsList = () => {
             rows={{ xs: 1, sm: 8, md: 6 }}
             spacing={{ xs: 2, md: 3 }}
           >
-            {state.news?.length > 0 ? (
-              state.news?.map((element) => {
+            {state.news?.length ? (
+              state.news?.slice(0, sliceNews).map((element) => {
                 return (
                   <Grid item key={element.id}>
                     <CustomCard

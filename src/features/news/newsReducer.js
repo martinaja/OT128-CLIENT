@@ -7,6 +7,7 @@ import {
 
 const initialState = {
   news: [],
+  searchedNews: [],
   status: 'idle',
   loader: false,
   errMsg: '',
@@ -48,6 +49,7 @@ export const fetchDeleteNews = createAsyncThunk(
 export const newsSlice = createSlice({
   name: 'news',
   initialState,
+  reducer: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchNew.pending, (state) => {
@@ -71,7 +73,7 @@ export const newsSlice = createSlice({
       })
       .addCase(fetchSearchNews.fulfilled, (state, action) => {
         state.status = action.payload.message
-        state.news = action.payload.data
+        state.searchedNews = action.payload.data
         state.loader = false
       })
       .addCase(fetchSearchNews.rejected, (state, action) => {

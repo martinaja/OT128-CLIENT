@@ -20,7 +20,7 @@ const SchoolCampaign = () => {
         <Slider />
         <Content />
       </Container>
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

@@ -4,6 +4,7 @@ import { Container } from '@mui/material'
 import { getOrganization } from './../../Services/apiServices/organizationApiService'
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
+import NewsList from '../News/NewsList'
 
 function Index() {
   const [loader, setLoader] = useState(false)
@@ -38,6 +39,7 @@ function Index() {
     <div>
       <Container>
         {data ? <h1>{data.welcome_text}</h1> : null}
+        <NewsList from="home" />
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>
         <h2>@Somosmás</h2>

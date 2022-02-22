@@ -26,7 +26,7 @@ const ContactDetails = () => {
       </Typography>
 
       <Grid container spacing={0} sx={{ mb: 3 }}>
-        <Grid item xs={0} md={8}>
+        <Grid item md={8}>
           <Box
             display={{ xs: 'none', md: 'block' }}
             sx={{ boxShadow: 3 }}
@@ -35,7 +35,7 @@ const ContactDetails = () => {
             <img width="100%" src="/images/datos contacto.png" />
           </Box>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item md={4}>
           <List
             sx={{
               bgcolor: 'background.paper',
