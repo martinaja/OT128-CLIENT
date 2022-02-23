@@ -4,7 +4,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import mp from '../../assets/mp.jpg'
 import Swal from 'sweetalert2'
-// import 'animate.css'
+
 
 export const DonationsMp = ({ text = <h1>Colabore</h1> }) => {
   const image = {

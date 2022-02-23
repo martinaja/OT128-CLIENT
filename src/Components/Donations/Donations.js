@@ -4,15 +4,16 @@ import { useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { DonationsMp } from './DonationsMp'
 
-export const Donations = () => {
+const Donations = () => {
   const userAuth = useSelector((state) => state.auth.isAuthenticated)
   const role = useSelector((state) => state.auth.role)
 
-  if (!userAuth || role === 'Admin') return <Redirect to="/" />
+  // if (!userAuth || role === 'Admin') return <Redirect to="/" />
 
+  
   return (
     <>
-      <DonationsMp />
+      <DonationsMp /> 
       <Box sx={{ p: '1rem', maxWidth: '40em', marginTop: '35px' }}>
         <h3
           class="animate__animated animate__backInLeft"
@@ -28,5 +29,10 @@ export const Donations = () => {
         </h3>
       </Box>
     </>
+
   )
-}
+  
+ }
+
+ export default Donations;
+  
