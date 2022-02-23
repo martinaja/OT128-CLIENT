@@ -25,6 +25,8 @@ import { MembersBackOffice } from '../pages/PrivateLayout/MembersBackOffice/Memb
 import { CreateMemberBackOffice } from '../pages/PrivateLayout/CreateMemberBackOffice/idex'
 import { OrganizationBackOffice } from '../pages/PrivateLayout/OrganizationBackOffice/OrganizationBackOffice'
 import { EditOrganizationBackOffice } from '../pages/PrivateLayout/EditOrganizationBackOffice/index'
+import { UsersBackOffice } from '../pages/PrivateLayout/UsersBackOffice/UsersBackOffice'
+import { CreateUserBackOffice } from '../pages/PrivateLayout/CreateUsersBackOffice/index'
 
 import { Routes, Route } from 'react-router-dom'
 
@@ -79,6 +81,10 @@ export const AppRoutes = () => {
           path="organizacion/editar"
           element={<EditOrganizationBackOffice />}
         />
+
+        <Route path="usuarios" element={<UsersBackOffice />} />
+        <Route path="usuarios/crear" element={<CreateUserBackOffice />} />
+        <Route path="usuarios/crear/:id" element={<CreateUserBackOffice />} />
       </Route>
     </Routes>
   )

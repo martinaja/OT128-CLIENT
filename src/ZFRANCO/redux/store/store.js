@@ -30,7 +30,8 @@ import newsReducer from '../reducers/newsReducer/newsReducer'
 import organizationReducer from '../reducers/organizationReducer/organizationReducer'
 import testimoniesReducer from '../reducers/testimoniesReducer/testimoniesReducer'
 import activitiesReducer from '../reducers/activitiesReducer/activitiesReducer'
-import membersReducer from '../../../features/members/membersReducer'
+import membersReducer from '../reducers/membersReducer/membersReducer'
+import usersReducer from '../reducers/usersReducer/userReducer'
 
 const store = configureStore({
   reducer: {
@@ -40,6 +41,7 @@ const store = configureStore({
     organization: organizationReducer,
     activities: activitiesReducer,
     members: membersReducer,
+    users: usersReducer,
   },
 })
 

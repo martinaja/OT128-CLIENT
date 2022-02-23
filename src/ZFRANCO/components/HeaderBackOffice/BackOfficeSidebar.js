@@ -30,7 +30,7 @@ const links = [
   },
   {
     name: 'Usuarios',
-    path: '/backoffice/users',
+    path: '/backoffice/usuarios',
   },
   {
     name: 'Catetegorías',
