@@ -19,9 +19,12 @@ const CustomCard = ({
       sx={{
         maxWidth: 330,
         minWidth: 330,
+        height: 400,
         background: 'rgba(255,255,255,0.6)',
         boxShadow: 3,
-        m: 1,
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
       }}
     >
       <CardMedia
@@ -30,14 +33,28 @@ const CustomCard = ({
         image={String(image)}
         alt="card image"
       />
-      <CardContent>
+      <CardContent
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          paddingBottom: 0,
+          height: 200,
+        }}
+      >
         <Typography gutterBottom variant="h5" component="div">
           {String(name)}
         </Typography>
         <Typography component={'span'} variant={'body2'} color="text.secondary">
-          {parse(String(description ? description : ''))}
+          {parse(
+            String(
+              description
+                ? description.slice(0, 95).concat('...')
+                : 'no se proporsionó descripción',
+            ),
+          )}
         </Typography>
-        <CardActions sx={{ mt: 3 }}>
+        <CardActions>
           <Button size="small" component={Link} to={`/novedades/${id}`}>
             Leer más
           </Button>

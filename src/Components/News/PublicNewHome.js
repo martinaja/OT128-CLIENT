@@ -7,12 +7,19 @@ import NewsSearch from './NewsSearch'
 
 const PublicNewHome = () => {
   return (
-    <Container sx={{ alignContent: 'center', textAlign: 'center' }}>
-      <Title>Sección de Novedades</Title>
-      <LastEvent />
-      <NewsSearch />
-      <NewsList />
-    </Container>
+    <>
+      <img
+        width="100%"
+        src="/images/Lee todas las novedades!.png"
+        alt="imagen novedades bienvenida"
+      />
+
+      <Container sx={{ alignContent: 'center', textAlign: 'center' }}>
+        <LastEvent />
+        <NewsSearch />
+        <NewsList />
+      </Container>
+    </>
   )
 }
 
