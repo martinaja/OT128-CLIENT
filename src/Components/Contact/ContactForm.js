@@ -5,7 +5,10 @@ import * as Yup from 'yup'
 
 import '../FormStyles.css'
 import { alertServiceError, alertServiceInfoTimer } from '../AlertService'
+<<<<<<< HEAD
 import { Box, Grid, Typography } from '@mui/material'
+=======
+>>>>>>> 20a0c288d27c79b2362e8b533259ae70dffea842
 
 export const ContactForm = () => {
   const sendContact = (data) =>

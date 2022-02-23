@@ -75,7 +75,11 @@ test('Should display the error message when try to send the form and fail ', asy
   userEvent.type(phoneInput, dataForm.phone)
   userEvent.type(msgInput, dataForm.message)
 
+<<<<<<< HEAD
   const button = screen.getByRole('button', { name: /enviar/i })
+=======
+  const button = screen.getByRole('button', { name: /send/i })
+>>>>>>> 20a0c288d27c79b2362e8b533259ae70dffea842
   userEvent.click(button)
   await waitFor(async () => {
     expect(
@@ -105,7 +109,11 @@ test('Should display a success message when correctly send the form ', async () 
   userEvent.type(phoneInput, dataForm.phone)
   userEvent.type(msgInput, dataForm.message)
 
+<<<<<<< HEAD
   const button = screen.getByRole('button', { name: /enviar/i })
+=======
+  const button = screen.getByRole('button', { name: /send/i })
+>>>>>>> 20a0c288d27c79b2362e8b533259ae70dffea842
   userEvent.click(button)
   await waitFor(async () => {
     expect(
