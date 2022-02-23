@@ -35,7 +35,7 @@ const CustomCard = ({
           {String(name)}
         </Typography>
         <Typography component={'span'} variant={'body2'} color="text.secondary">
-          {parse(String(description))}
+          {parse(String(description ? description : ''))}
         </Typography>
         <CardActions sx={{ mt: 3 }}>
           <Button size="small" component={Link} to={`/novedades/${id}`}>

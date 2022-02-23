@@ -41,7 +41,7 @@ test('Render title component', () => {
 //Se prueba que al pulsar el boton "send" sin ningun valor en los campos se muestre correctamente los errores correspondientes
 //=======================================//=======================================//=======================================
 test('Send form without information should show error messages', async () => {
-  const button = screen.getByRole('button', { name: /send/i })
+  const button = screen.getByRole('button', { name: /enviar/i })
   userEvent.click(button)
   expect(
     await screen.findByText('El campo nombre es obligatorio'),
@@ -75,7 +75,8 @@ test('Should display the error message when try to send the form and fail ', asy
   userEvent.type(phoneInput, dataForm.phone)
   userEvent.type(msgInput, dataForm.message)
 
-  const button = screen.getByRole('button', { name: /send/i })
+  const button = screen.getByRole('button', { name: /enviar/i })
+
   userEvent.click(button)
   await waitFor(async () => {
     expect(
@@ -105,7 +106,8 @@ test('Should display a success message when correctly send the form ', async () 
   userEvent.type(phoneInput, dataForm.phone)
   userEvent.type(msgInput, dataForm.message)
 
-  const button = screen.getByRole('button', { name: /send/i })
+  const button = screen.getByRole('button', { name: /enviar/i })
+
   userEvent.click(button)
   await waitFor(async () => {
     expect(

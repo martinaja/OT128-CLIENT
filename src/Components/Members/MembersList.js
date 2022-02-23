@@ -56,7 +56,7 @@ export const MembersList = () => {
                         <h4>{element.name}</h4>
                       </Typography>
                       <Typography variant="h7" color="text.secondary">
-                        {parse(element.description)}
+                        {parse(element.description ? element.description : '')}
                       </Typography>
                     </CardContent>
 
