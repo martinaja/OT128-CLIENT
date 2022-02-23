@@ -1,20 +1,19 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Box, Grid } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
-import { getNews } from '../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../AlertService'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchNew } from '../../features/news/newsReducer'
+import { getTestimonial } from '../../features/testimonial/testimonialReducer'
 
-const NewsList = ({ from }) => {
+const TestimonialsList = ({ from }) => {
   const dispatch = useDispatch()
-  const state = useSelector((state) => state.news)
+  const state = useSelector((state) => state.testimonial)
 
   useEffect(() => {
     if (state.status === 'idle') {
-      dispatch(fetchNew())
+      dispatch(getTestimonial())
     }
 
     if (state.status === 'error') {
@@ -25,13 +24,13 @@ const NewsList = ({ from }) => {
     }
   }, [state.status, dispatch, state.errorMsg])
 
-  let sliceNews
+  let sliceTestimonials
   switch (from) {
     case 'home':
-      sliceNews = state.news.length - 3
+      sliceTestimonials = state.testimonials.length - 3
       break
-    case 'newsHome':
-      sliceNews = state.news.length
+    case 'TestimonialsHome':
+      sliceTestimonials = state.testimonials.length
       break
     default:
       break
@@ -44,15 +43,17 @@ const NewsList = ({ from }) => {
       ) : (
         <>
           {' '}
-          <h1>Novedades</h1>
+          <h1 style={{ textAlign: 'center', marginTop: '5rem' }}>
+            Testimonios
+          </h1>
           <Grid
             sx={{ justifyContent: 'space-evenly' }}
             container
             rows={{ xs: 1, sm: 8, md: 6 }}
             spacing={{ xs: 2, md: 3 }}
           >
-            {state.news?.length ? (
-              state.news?.slice(sliceNews).map((element) => {
+            {state.testimonials?.length ? (
+              state.testimonials?.slice(sliceTestimonials).map((element) => {
                 return (
                   <Grid item key={element.id}>
                     <CustomCard
@@ -60,14 +61,14 @@ const NewsList = ({ from }) => {
                       image={element.image}
                       name={element.name}
                       description={element.content}
-                      link="novedades"
+                      link="testimonios"
                     />
                   </Grid>
                 )
               })
             ) : (
               <Box sx={{ mt: 4 }}>
-                <p>No hay novedades</p>
+                <p>No hay testimonios</p>
               </Box>
             )}
           </Grid>
@@ -77,4 +78,4 @@ const NewsList = ({ from }) => {
   )
 }
 
-export default NewsList
+export default TestimonialsList

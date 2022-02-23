@@ -23,13 +23,15 @@ const LastEvent = () => {
     }
   }, [isMatchTablet, isMatchDesktop])
 
+  const image = '/images/Presentación video.png'
+
   return (
     <Box
       sx={{
         alignItems: 'center',
         my: 9,
         pb: 2,
-        backgroundColor: 'rgba(255,255,255, 0.5)',
+        backgroundImage: 'url(/images/Presentación video.png)',
         boxShadow: 3,
       }}
     >
