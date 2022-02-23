@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 
 import '../FormStyles.css'
 import { alertServiceError, alertServiceInfoTimer } from '../AlertService'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 
 export const ContactForm = () => {
   const sendContact = (data) =>
@@ -48,7 +48,14 @@ export const ContactForm = () => {
         {(formik) => (
           <>
             {' '}
-            <h1> Formulario de contacto.</h1>
+            <Typography
+              sx={{ mt: 4, mb: 2 }}
+              display={{ xs: 'block', md: 'none' }}
+              variant="h3"
+              component="div"
+            >
+              Formulario de contacto
+            </Typography>
             <Grid container spacing={0} sx={{ mb: 3 }}>
               <Grid item xs={12} md={4}>
                 <Box
