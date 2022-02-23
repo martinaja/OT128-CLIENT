@@ -60,6 +60,7 @@ const NewsList = ({ from }) => {
                       image={element.image}
                       name={element.name}
                       description={element.content}
+                      link="novedades"
                     />
                   </Grid>
                 )

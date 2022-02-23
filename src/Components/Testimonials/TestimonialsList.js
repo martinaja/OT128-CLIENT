@@ -61,6 +61,7 @@ const TestimonialsList = ({ from }) => {
                       image={element.image}
                       name={element.name}
                       description={element.content}
+                      link="testimonios"
                     />
                   </Grid>
                 )

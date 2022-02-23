@@ -13,6 +13,7 @@ const CustomCard = ({
   image = '/images/placeholder/150x150.png',
   name,
   description,
+  link,
 }) => {
   return (
     <Card
@@ -55,7 +56,7 @@ const CustomCard = ({
           )}
         </Typography>
         <CardActions>
-          <Button size="small" component={Link} to={`/novedades/${id}`}>
+          <Button size="small" component={Link} to={`/${link}/${id}`}>
             Leer más
           </Button>
         </CardActions>
