@@ -1,4 +1,5 @@
 import { Route, Redirect, BrowserRouter } from 'react-router-dom'
+// import { AnimatedSwitch } from 'react-router-transition'
 import { PublicRoutes } from './PublicRoutes'
 import { PrivateRoutes } from './PrivateRoutes'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
@@ -13,65 +14,65 @@ export const Routes = () => {
         atLeave={{ opacity: 0 }}
         atActive={{ opacity: 1 }}
       > */}
-      <Route
-        exact
-        path={[
-          '/',
-          '/novedades',
-          '/novedades/:newsId',
-          '/contacto',
-          '/nosotros',
-          '/create-user',
-          '/activities',
-          '/activities/:id',
-          '/donations',
-          '/testimonios',
-          '/login',
-          '/register',
-        ]}
-        component={PublicRoutes}
-      />
+        <Route
+          exact
+          path={[
+            '/',
+            '/novedades',
+            '/novedades/:newsId',
+            '/contacto',
+            '/nosotros',
+            '/create-user',
+            '/activities',
+            '/activities/:id',
+            '/donations',
+            '/testimonios',
+            '/login',
+            '/register',
+          ]}
+          component={PublicRoutes}
+        />
 
-      <Route
-        exact
-        path={[
-          '/backoffice',
-          '/backoffice/activities',
-          '/backoffice/activities/create',
-          '/backoffice/activities/create/:id',
-          '/backoffice/categories',
-          '/backoffice/categories/create',
-          '/backoffice/categories/create/:id',
-          '/backoffice/news',
-          '/backoffice/news/create',
-          '/backoffice/news/create/:newsId',
-          '/backoffice/members',
-          '/backoffice/members/create',
-          '/backoffice/members/create/:id',
-          '/backoffice/slides',
-          '/backoffice/slides/create',
-          '/backoffice/slides/create/:slideId',
-          '/backoffice/create-testimonials',
-          '/backoffice/create-testimonials/:id',
-          '/backoffice/create-project',
-          '/backoffice/organization',
-          '/backoffice/organization/edit',
-          '/backoffice/users',
-          '/backoffice/users/create',
-          '/backoffice/users/create/:id',
-        ]}
-        component={PrivateRoutes}
-      />
+        <Route
+          exact
+          path={[
+            '/backoffice',
+            '/backoffice/activities',
+            '/backoffice/activities/create',
+            '/backoffice/activities/create/:id',
+            '/backoffice/categories',
+            '/backoffice/categories/create',
+            '/backoffice/categories/create/:id',
+            '/backoffice/news',
+            '/backoffice/news/create',
+            '/backoffice/news/create/:newsId',
+            '/backoffice/members',
+            '/backoffice/members/create',
+            '/backoffice/members/create/:id',
+            '/backoffice/slides',
+            '/backoffice/slides/create',
+            '/backoffice/slides/create/:slideId',
+            '/backoffice/create-testimonials',
+            '/backoffice/create-testimonials/:id',
+            '/backoffice/create-project',
+            '/backoffice/organization',
+            '/backoffice/organization/edit',
+            '/backoffice/users',
+            '/backoffice/users/create',
+            '/backoffice/users/create/:id',
+          ]}
+          component={PrivateRoutes}
+        />
 
-      <Route path="/school-campaign" component={SchoolCampaign} />
+        <Route path="/school-campaign" component={SchoolCampaign} />
 
-      <Route path="/toys-campaign" component={ToysCampaign} />
+        <Route path="/toys-campaign" component={ToysCampaign} />
 
-      <Route path="/404" component={NotFound} />
+        <Route path="/404" component={NotFound} />
 
-      <Route path="*">
-        <Redirect to="/404" />
-      </Route>
+        <Route path="*">
+          <Redirect to="/404" />
+        </Route>
       {/* </AnimatedSwitch> */}
     </BrowserRouter>
   )
