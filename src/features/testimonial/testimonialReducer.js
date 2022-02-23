@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { getTestimony } from '../../Services/apiServices/testimonyApiService'
 
 const initialState = {
   testimonials: [],
@@ -12,9 +12,7 @@ export const getTestimonial = createAsyncThunk(
   'testimonial/getTestimonial',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        'http://ongapi.alkemy.org/api/testimonials',
-      )
+      const response = await getTestimony()
       if (response.data.success) {
         return response.data.data
       } else {
