@@ -7,13 +7,13 @@ export const DonationsMp = () => {
   return (
     <Box
       sx={{
-        pl: { md: '15%', xs: '20%' },
+        pl: { xl: '5%' ,md: '15%', xs: '20%' },
         pt: { md: '10%', xs: '15%' },
       }}
     >
-      <a class="button" href="#">
+      <button class="button" style={{border: 'none'}}>
         Donar!
-      </a>
+      </button>
     </Box>
   )
 }
