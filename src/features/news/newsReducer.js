@@ -48,6 +48,11 @@ export const fetchDeleteNews = createAsyncThunk(
 export const newsSlice = createSlice({
   name: 'news',
   initialState,
+  reducers: {
+    resetStatus: (state) => {
+      state.status = 'idle'
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNew.pending, (state) => {
@@ -55,8 +60,8 @@ export const newsSlice = createSlice({
         state.loader = true
       })
       .addCase(fetchNew.fulfilled, (state, action) => {
-        state.status = action.payload.message
-        state.news = action.payload.data
+        state.status = action.payload?.message
+        state.news = action.payload?.data
         state.loader = false
       })
       .addCase(fetchNew.rejected, (state, action) => {
@@ -95,4 +100,5 @@ export const newsSlice = createSlice({
   },
 })
 
+export const { resetStatus } = newsSlice.actions
 export default newsSlice.reducer

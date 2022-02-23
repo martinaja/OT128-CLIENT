@@ -24,10 +24,6 @@ export const arrayData = [
     path: '/contacto',
   },
   {
-    pathName: 'Contribuye',
-    path: '/donations',
-  },
-  {
     pathName: 'Campañas',
     path: '/',
   },
