@@ -5,6 +5,7 @@ import { PrivateRoutes } from './PrivateRoutes'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
 import ToysCampaign from '../Campaigns/Toys/ToysCampaign'
 import NotFound from '../Components/NotFound/NotFound'
+import Index from '../Components/Home/Index'
 
 export const Routes = () => {
   return (
