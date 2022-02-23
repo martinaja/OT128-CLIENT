@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 
 import '../FormStyles.css'
 import { alertServiceError, alertServiceInfoTimer } from '../AlertService'
+import { Box, Grid, Typography } from '@mui/material'
 
 export const ContactForm = () => {
   const sendContact = (data) =>
@@ -47,40 +48,71 @@ export const ContactForm = () => {
         {(formik) => (
           <>
             {' '}
-            <h1> Formulario de contacto.</h1>
-            <Form className="form-container">
-              <Field
-                name="name"
-                type="text"
-                placeholder="nombre"
-                className="input-field"
-              />
-              <ErrorMessage name="name" component="span" />
-              <Field
-                name="email"
-                type="text"
-                placeholder="email"
-                className="input-field"
-              />
-              <ErrorMessage name="email" component="span" />
-              <Field
-                name="phone"
-                type="text"
-                placeholder="telefono"
-                className="input-field"
-              ></Field>
-              <ErrorMessage name="phone" component="span" />
-              <Field
-                name="message"
-                type="text"
-                placeholder="mensaje"
-                className="input-field"
-              />
-              <ErrorMessage name="message" component="span" />
-              <button className="submit-btn" type="submit">
-                Send
-              </button>
-            </Form>
+            <Typography
+              sx={{ mt: 4, mb: 2 }}
+              display={{ xs: 'block', md: 'none' }}
+              variant="h3"
+              component="div"
+            >
+              Formulario de contacto
+            </Typography>
+            <Grid container spacing={0} sx={{ mb: 3 }}>
+              <Grid item xs={12} md={4}>
+                <Box
+                  sx={{
+                    background: 'white',
+                    py: 1,
+                    boxShadow: 3,
+                    display: 'grid',
+                    height: '100%',
+                  }}
+                >
+                  <Form className="form-container">
+                    <Field
+                      name="name"
+                      type="text"
+                      placeholder="nombre"
+                      className="input-field"
+                    />
+                    <ErrorMessage name="name" component="span" />
+                    <Field
+                      name="email"
+                      type="text"
+                      placeholder="email"
+                      className="input-field"
+                    />
+                    <ErrorMessage name="email" component="span" />
+                    <Field
+                      name="phone"
+                      type="text"
+                      placeholder="telefono"
+                      className="input-field"
+                    ></Field>
+                    <ErrorMessage name="phone" component="span" />
+                    <Field
+                      name="message"
+                      type="text"
+                      placeholder="mensaje"
+                      className="input-field"
+                    />
+                    <ErrorMessage name="message" component="span" />
+                    <button className="submit-btn" type="submit">
+                      enviar
+                    </button>
+                  </Form>
+                </Box>
+              </Grid>
+
+              <Grid item xs={0} md={8}>
+                <Box
+                  display={{ xs: 'none', md: 'block' }}
+                  sx={{ boxShadow: 3 }}
+                  height={'100%'}
+                >
+                  <img width="100%" src="/images/formulario de contacto.png" />
+                </Box>
+              </Grid>
+            </Grid>
           </>
         )}
       </Formik>
