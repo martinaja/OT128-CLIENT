@@ -73,14 +73,18 @@ const ActivitiesList = () => {
           }}
         >
           {activities.length > 0 ? (
+
             activities.map((activity, index) => {
+
               return (
                 <ActivitiesCard
                   name={activity.name}
                   image={activity.image}
                   description={activity.description}
                   isMin={true}
+
                   key={index}
+
                 />
               )
             })
@@ -101,14 +105,19 @@ const ActivitiesList = () => {
           }}
         >
           {activities.length > 0 ? (
+
             activities.map((activity, index) => {
+
               return (
                 <ActivitiesCard
                   name={activity.name}
                   image={activity.image}
                   description={activity.description}
                   isMin={false}
+
                   key={index}
+
+
                 />
               )
             })
