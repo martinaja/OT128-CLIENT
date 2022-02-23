@@ -4,14 +4,20 @@ import { Container } from '@mui/material'
 import { getOrganization } from './../../Services/apiServices/organizationApiService'
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
+import NewsList from '../News/NewsList'
+import { resetStatus } from '../../features/news/newsReducer'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Index() {
   const [loader, setLoader] = useState(false)
   const [data, setData] = useState()
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state.news)
 
   useEffect(
     () =>
       (async () => {
+        dispatch(resetStatus())
         setLoader(true)
         const response = await getOrganization()
         if (response.error) {
@@ -38,6 +44,7 @@ function Index() {
     <div>
       <Container>
         {data ? <h1>{data.welcome_text}</h1> : null}
+        <NewsList from="home" />
         {/* <SlidesList/> */}
         <h1>Bienvenidos</h1>
         <h2>@Somosmás</h2>
