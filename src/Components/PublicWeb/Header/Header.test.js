@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { configureStore, createSlice } from '@reduxjs/toolkit'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import Header from './Header'
 
 //=======================================//=======================================
@@ -26,12 +26,14 @@ test('Render components users not autenticated in desktop and mobile', async () 
   })
 
   render(
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <Header />
       </Provider>
-    </HashRouter>,
+    </BrowserRouter>,
   )
+
+  const displayedImage = document.querySelector('img[alt="Logo ong"]')
 
   // Renderizado de los elementos del Header para el usuario no autenticado en desktop
   expect(
@@ -91,9 +93,10 @@ test('Render components users not autenticated in desktop and mobile', async () 
     await screen.getAllByRole('link', { name: /Register/i })[1],
   ).toBeInTheDocument()
 
+  expect(displayedImage).toBeInTheDocument()
+
   expect(await screen.queryByText(/Backoffice/i)).not.toBeInTheDocument()
   expect(await screen.queryByText(/LogOut/i)).not.toBeInTheDocument()
-  expect(await screen.queryByAltText(/Logo ong/i)).not.toBeInTheDocument()
 })
 
 //=======================================//=======================================
@@ -118,11 +121,11 @@ test('Render components users autenticated with admin role in desktop and mobile
   })
 
   render(
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <Header />
       </Provider>
-    </HashRouter>,
+    </BrowserRouter>,
   )
 
   // Renderizado de los elementos del Header para el usuario Administrador en desktop
@@ -205,11 +208,11 @@ test('Render components users autenticated with standar role in desktop and mobi
   })
 
   render(
-    <HashRouter>
+    <BrowserRouter>
       <Provider store={store}>
         <Header />
       </Provider>
-    </HashRouter>,
+    </BrowserRouter>,
   )
 
   const displayedImage = document.querySelector('img[alt="Logo ong"]')
