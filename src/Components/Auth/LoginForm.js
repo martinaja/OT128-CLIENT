@@ -1,6 +1,8 @@
 import React from 'react'
-import { Formik, Field, Form } from 'formik'
+
+import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+
 import Typography from '@material-ui/core/Typography'
 import Link from '@material-ui/core/Link'
 import { makeStyles } from '@material-ui/core/styles'
@@ -11,19 +13,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
+
 import { Link as RouterLink, Redirect } from 'react-router-dom'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin } from './../../features/auth/authReducer'
-
-export default function LoginForm() {
-  const authData = useSelector(({ auth }) => auth)
-
-  if (authData.isAuthenticated) {
-    return <Redirect to="/" />
-  }
-
-  return <FormLogic authData={authData} />
-}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,10 +33,25 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  errorText: {
+    color: '#de1b1b',
+    fontSize: '16px',
+  },
 }))
 
-const FormLogic = ({ authData }) => {
+export default function LoginForm() {
+  const authData = useSelector(({ auth }) => auth)
+
   const classes = useStyles()
+
+  if (authData.isAuthenticated) {
+    return <Redirect to="/" />
+  }
+
+  return <FormLogic classes={classes} authData={authData} />
+}
+
+export const FormLogic = ({ classes, authData }) => {
   const dispatch = useDispatch()
 
   return (
@@ -74,9 +83,11 @@ const FormLogic = ({ authData }) => {
             }}
             validationSchema={Yup.object({
               email: Yup.string()
-                .email('Invalid email address')
-                .required('Required'),
-              password: Yup.string().required('No password provided.'),
+                .email('Ingrese un email correcto')
+                .required('Ingrese un email correcto'),
+              password: Yup.string().required(
+                'Ingrese una contraseña correcta',
+              ),
             })}
             onSubmit={(values) => {
               const { email, password } = values
@@ -86,14 +97,13 @@ const FormLogic = ({ authData }) => {
           >
             <Form>
               <Field name="email">
-                {({ field, form, meta }) => (
+                {({ field, meta }) => (
                   <TextField
                     variant="outlined"
                     margin="normal"
-                    required
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Correo electrónico"
                     name="email"
                     autoComplete="email"
                     autoFocus
@@ -102,15 +112,22 @@ const FormLogic = ({ authData }) => {
                   />
                 )}
               </Field>
+              <ErrorMessage name="email">
+                {(msg) => (
+                  <span style={{ color: '#de1b1b', fontSize: '16px' }}>
+                    {msg}
+                  </span>
+                )}
+              </ErrorMessage>
+
               <Field name="password" type="password">
-                {({ field, form, meta }) => (
+                {({ field, meta }) => (
                   <TextField
                     variant="outlined"
                     margin="normal"
-                    required
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="Contraseña"
                     type="password"
                     id="password"
                     autoComplete="current-password"
@@ -119,6 +136,13 @@ const FormLogic = ({ authData }) => {
                   />
                 )}
               </Field>
+              <ErrorMessage name="password">
+                {(msg) => (
+                  <span style={{ color: '#de1b1b', fontSize: '16px' }}>
+                    {msg}
+                  </span>
+                )}
+              </ErrorMessage>
 
               <Button
                 type="submit"
@@ -129,6 +153,18 @@ const FormLogic = ({ authData }) => {
               >
                 Ingresar
               </Button>
+              {authData?.status === 'error' && (
+                <div
+                  style={{
+                    color: '#de1b1b',
+                    fontSize: '16px',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  Error, el usuario no se encuentra registrado
+                </div>
+              )}
+              {authData?.status === 'success' && <div>Bienvenido</div>}
               <Grid container>
                 <Grid item>
                   <Link component={RouterLink} to="/register">
