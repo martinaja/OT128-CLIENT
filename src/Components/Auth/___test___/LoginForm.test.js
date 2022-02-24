@@ -40,9 +40,9 @@ const setupRender = (authData) => {
 
 const typeIntoForm = ({ email, password }) => {
   const emailInputElement = screen.getByRole('textbox', {
-    name: 'Email Address',
+    name: 'Correo electrónico',
   })
-  const passwordInputElement = screen.getByLabelText('Password')
+  const passwordInputElement = screen.getByLabelText('Contraseña')
 
   if (email) {
     userEvent.type(emailInputElement, email)
@@ -70,7 +70,7 @@ describe('Form tests', () => {
     setupRender()
 
     const emailInputElement = screen.getByRole('textbox', {
-      name: 'Email Address',
+      name: 'Correo electrónico',
     })
 
     userEvent.type(emailInputElement, 'testing')
@@ -81,7 +81,7 @@ describe('Form tests', () => {
   test('Should be able to type in password field', () => {
     setupRender()
 
-    const passwordInputElement = screen.getByLabelText('Password')
+    const passwordInputElement = screen.getByLabelText('Contraseña')
 
     userEvent.type(passwordInputElement, 'testing')
 

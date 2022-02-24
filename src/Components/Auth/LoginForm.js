@@ -33,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  errorText: {
+    color: '#de1b1b',
+    fontSize: '16px',
+  },
 }))
 
 export default function LoginForm() {
@@ -99,7 +103,7 @@ export const FormLogic = ({ classes, authData }) => {
                     margin="normal"
                     fullWidth
                     id="email"
-                    label="Email Address"
+                    label="Correo electrónico"
                     name="email"
                     autoComplete="email"
                     autoFocus
@@ -109,7 +113,11 @@ export const FormLogic = ({ classes, authData }) => {
                 )}
               </Field>
               <ErrorMessage name="email">
-                {(msg) => <div>{msg}</div>}
+                {(msg) => (
+                  <span style={{ color: '#de1b1b', fontSize: '16px' }}>
+                    {msg}
+                  </span>
+                )}
               </ErrorMessage>
 
               <Field name="password" type="password">
@@ -119,7 +127,7 @@ export const FormLogic = ({ classes, authData }) => {
                     margin="normal"
                     fullWidth
                     name="password"
-                    label="Password"
+                    label="Contraseña"
                     type="password"
                     id="password"
                     autoComplete="current-password"
@@ -129,7 +137,11 @@ export const FormLogic = ({ classes, authData }) => {
                 )}
               </Field>
               <ErrorMessage name="password">
-                {(msg) => <div>{msg}</div>}
+                {(msg) => (
+                  <span style={{ color: '#de1b1b', fontSize: '16px' }}>
+                    {msg}
+                  </span>
+                )}
               </ErrorMessage>
 
               <Button
@@ -142,7 +154,15 @@ export const FormLogic = ({ classes, authData }) => {
                 Ingresar
               </Button>
               {authData?.status === 'error' && (
-                <div>Error, el usuario no se encuentra registrado</div>
+                <div
+                  style={{
+                    color: '#de1b1b',
+                    fontSize: '16px',
+                    marginBottom: '1rem',
+                  }}
+                >
+                  Error, el usuario no se encuentra registrado
+                </div>
               )}
               {authData?.status === 'success' && <div>Bienvenido</div>}
               <Grid container>
