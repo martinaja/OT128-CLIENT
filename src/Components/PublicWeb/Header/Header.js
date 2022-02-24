@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styles from './Header.module.css'
 import logo from './logo-letras-blancas.png'
+import logoMp from '../../../assets/MP.png'
 import { arrayData } from './data'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../../features/auth/authReducer'
+import { style } from '@mui/system'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -83,6 +85,9 @@ const NavBar = ({
         </ul>
 
         <div className={styles.navBtn}>
+          {role !== 'Admin' ? (
+            <Link className={styles.navDonationLink} to="/donations"></Link>
+          ) : null}
           {userAuth ? (
             <>
               <Link
@@ -90,19 +95,10 @@ const NavBar = ({
                 className={styles.navBtnLink}
                 to={'/'}
               >
-                LogOut
+                Cerrar Sesión
               </Link>
-              {role !== 'Admin' ? (
-                <Link to="/donations">
-                  <img
-                    alt="Logo ong"
-                    src="/images/MP.png"
-                    className={styles.navBtnDonar}
-                  />
-                </Link>
-              ) : null}
               {role !== 'Admin' ? null : (
-                <Link className={styles.sidebarRoute} to={'/backoffice'}>
+                <Link className={styles.navBtnLink} to={'/backoffice'}>
                   BackOffice
                 </Link>
               )}
@@ -110,10 +106,10 @@ const NavBar = ({
           ) : (
             <>
               <Link to={'/login'} className={styles.navBtnLink}>
-                LogIn
+                Iniciar Sesión
               </Link>
               <Link to={'/register'} className={styles.navBtnLink}>
-                Register
+                Registrarse
               </Link>
             </>
           )}
@@ -154,6 +150,9 @@ const SideBar = ({
       </ul>
 
       <div className={styles.sidebarBtnWrap}>
+        {role !== 'Admin' ? (
+          <Link className={styles.navDonationLink} to="/donations"></Link>
+        ) : null}
         {userAuth ? (
           <>
             <Link
@@ -161,17 +160,8 @@ const SideBar = ({
               className={styles.sidebarRoute}
               to={'/'}
             >
-              LogOut
+              Cerrar Sesión
             </Link>
-            {role !== 'Admin' ? (
-              <Link to="/donations">
-                <img
-                  alt="Logo ong"
-                  src="/images/MP.png"
-                  className={styles.navBtnDonar}
-                />
-              </Link>
-            ) : null}
             {role !== 'Admin' ? null : (
               <Link className={styles.sidebarRoute} to={'/backoffice'}>
                 BackOffice
@@ -181,10 +171,10 @@ const SideBar = ({
         ) : (
           <>
             <Link to={'/login'} className={styles.sidebarRoute}>
-              LogIn
+              Iniciar Sesión
             </Link>
             <Link to={'/register'} className={styles.sidebarRoute}>
-              Register
+              Registrarse
             </Link>
           </>
         )}
