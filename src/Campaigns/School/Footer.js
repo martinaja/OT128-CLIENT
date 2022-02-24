@@ -4,14 +4,14 @@ import Twitter from '@material-ui/icons/Twitter';
 import Instagram from '@material-ui/icons/Instagram';
 import LinkedIn from '@material-ui/icons/LinkedIn';
 import React from 'react'
-import '../../Components/PublicWeb/Footer/Footer.module.css'
+// import '../../Components/PublicWeb/Footer/Footer.module.css'
 
 function Footer() {
   return (
     <>
       <div className="container">
         <div style={{ minHeight: '65vh' }}></div>
-        <Grid container className="footer__container">
+        <Grid >
           <Grid
             item
             container
