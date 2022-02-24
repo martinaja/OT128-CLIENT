@@ -21,7 +21,7 @@ const CustomCard = ({
         maxWidth: 330,
         minWidth: 330,
         height: 400,
-        background: 'rgba(255,255,255,0.6)',
+        background: 'rgba(0,0,0,0.03)',
         boxShadow: 3,
         display: 'flex',
         justifyContent: 'space-between',
@@ -57,7 +57,7 @@ const CustomCard = ({
         </Typography>
         <CardActions>
           <Button size="small" component={Link} to={`/${link}/${id}`}>
-            Leer más
+            <strong>> Leer más</strong>
           </Button>
         </CardActions>
       </CardContent>

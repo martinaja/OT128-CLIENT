@@ -65,7 +65,14 @@ export default function NewsDetail() {
 
                 <Title image={news?.image}>{news?.name}</Title>
 
-                <Box sx={{ my: 5 }}>{news && parse(news.content)}</Box>
+                <Box sx={{ my: 5 }}>
+                  {news &&
+                    parse(
+                      news.content
+                        ? news.content
+                        : 'no se proporcionó descripción',
+                    )}
+                </Box>
               </Box>
             </Scene>
             <h2>Comentarios</h2>
