@@ -51,12 +51,7 @@ const NewsList = ({ from }) => {
           <Grid
             sx={{
               justifyContent: 'space-evenly',
-              // border: 1,
-              // borderRadius: 4,
-              backgroundColor: 'white',
-              boxShadow: 2,
               py: 2,
-              // borderColor: 'rgb(53, 133, 139)',
             }}
             container
             rows={{ xs: 1, sm: 8, md: 6 }}
