@@ -8,10 +8,10 @@ import { useEffect } from 'react'
 import handleDisplayByID from '../../utils/handleDisplayByID'
 
 const SchoolCampaign = () => {
-  useEffect(() => {
-    handleDisplayByID('main-header', 'none')
-    return () => handleDisplayByID('main-header', '')
-  }, [])
+  // useEffect(() => {
+  //   handleDisplayByID('main-header', 'none')
+  //   return () => handleDisplayByID('main-header', '')
+  // }, [])
 
   return (
     <>

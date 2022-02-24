@@ -2,11 +2,10 @@ import { Box, Grid } from '@material-ui/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import style from './Footer.module.css'
-import Facebook from '@material-ui/icons/Facebook';
-import Twitter from '@material-ui/icons/Twitter';
-import Instagram from '@material-ui/icons/Instagram';
-import LinkedIn from '@material-ui/icons/LinkedIn';
-
+import Facebook from '@material-ui/icons/Facebook'
+import Twitter from '@material-ui/icons/Twitter'
+import Instagram from '@material-ui/icons/Instagram'
+import LinkedIn from '@material-ui/icons/LinkedIn'
 
 function Footer() {
   return (
