@@ -129,6 +129,13 @@
   text-decoration: none;
 }
 
+.navBtnLink:hover,
+.navDonationLink:hover {
+  transition: background-color color 0.2s ease-in-out;
+  background-color: transparent;
+  color: #fff;
+}
+
 @media screen and (min-width: 1100px) {
   .navBtnLink,
   .navDonationLink {
@@ -229,8 +236,8 @@
 }
 
 .sidebarRoute:hover {
-  transition: all 0.2s ease-in-out;
-  background: #272c34;
+  transition: background-color color 0.2s ease-in-out;
+  background-color: transparent;
   color: #fff;
 }
 

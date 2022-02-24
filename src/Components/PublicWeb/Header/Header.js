@@ -98,7 +98,7 @@ const NavBar = ({
                 LogOut
               </Link>
               {role !== 'Admin' ? null : (
-                <Link className={styles.sidebarRoute} to={'/backoffice'}>
+                <Link className={styles.navBtnLink} to={'/backoffice'}>
                   BackOffice
                 </Link>
               )}
