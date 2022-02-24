@@ -95,7 +95,7 @@ const NavBar = ({
                 className={styles.navBtnLink}
                 to={'/'}
               >
-                LogOut
+                Cerrar Sesión
               </Link>
               {role !== 'Admin' ? null : (
                 <Link className={styles.navBtnLink} to={'/backoffice'}>
@@ -106,10 +106,10 @@ const NavBar = ({
           ) : (
             <>
               <Link to={'/login'} className={styles.navBtnLink}>
-                LogIn
+                Iniciar Sesión
               </Link>
               <Link to={'/register'} className={styles.navBtnLink}>
-                Register
+                Registrarse
               </Link>
             </>
           )}
@@ -160,7 +160,7 @@ const SideBar = ({
               className={styles.sidebarRoute}
               to={'/'}
             >
-              LogOut
+              Cerrar Sesión
             </Link>
             {role !== 'Admin' ? null : (
               <Link className={styles.sidebarRoute} to={'/backoffice'}>
@@ -171,10 +171,10 @@ const SideBar = ({
         ) : (
           <>
             <Link to={'/login'} className={styles.sidebarRoute}>
-              LogIn
+              Iniciar Sesión
             </Link>
             <Link to={'/register'} className={styles.sidebarRoute}>
-              Register
+              Registrarse
             </Link>
           </>
         )}
