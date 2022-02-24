@@ -27,10 +27,10 @@ const NewsList = ({ from }) => {
   let sliceNews
   switch (from) {
     case 'home':
-      sliceNews = state.news.length - 3
+      sliceNews = state.news?.length - 3
       break
     case 'newsHome':
-      sliceNews = state.news.length
+      sliceNews = state.news?.length
       break
     default:
       break

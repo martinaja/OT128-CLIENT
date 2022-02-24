@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import styles from './Header.module.css'
 import logo from './logo-letras-blancas.png'
+import logoMp from '../../../assets/MP.png'
 import { arrayData } from './data'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from '../../../features/auth/authReducer'
+import { style } from '@mui/system'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -83,6 +85,9 @@ const NavBar = ({
         </ul>
 
         <div className={styles.navBtn}>
+          {role !== 'Admin' ? (
+            <Link className={styles.navDonationLink} to="/donations"></Link>
+          ) : null}
           {userAuth ? (
             <>
               <Link
@@ -92,15 +97,6 @@ const NavBar = ({
               >
                 LogOut
               </Link>
-              {role !== 'Admin' ? (
-                <Link to="/donations">
-                  <img
-                    alt="Logo ong"
-                    src="/images/MP.png"
-                    className={styles.navBtnDonar}
-                  />
-                </Link>
-              ) : null}
               {role !== 'Admin' ? null : (
                 <Link className={styles.sidebarRoute} to={'/backoffice'}>
                   BackOffice
@@ -154,6 +150,9 @@ const SideBar = ({
       </ul>
 
       <div className={styles.sidebarBtnWrap}>
+        {role !== 'Admin' ? (
+          <Link className={styles.navDonationLink} to="/donations"></Link>
+        ) : null}
         {userAuth ? (
           <>
             <Link
@@ -163,15 +162,6 @@ const SideBar = ({
             >
               LogOut
             </Link>
-            {role !== 'Admin' ? (
-              <Link to="/donations">
-                <img
-                  alt="Logo ong"
-                  src="/images/MP.png"
-                  className={styles.navBtnDonar}
-                />
-              </Link>
-            ) : null}
             {role !== 'Admin' ? null : (
               <Link className={styles.sidebarRoute} to={'/backoffice'}>
                 BackOffice

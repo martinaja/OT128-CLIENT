@@ -27,10 +27,10 @@ const TestimonialsList = ({ from }) => {
   let sliceTestimonials
   switch (from) {
     case 'home':
-      sliceTestimonials = state.testimonials.length - 3
+      sliceTestimonials = state.testimonials?.length - 3
       break
     case 'TestimonialsHome':
-      sliceTestimonials = state.testimonials.length
+      sliceTestimonials = state.testimonials?.length
       break
     default:
       break
