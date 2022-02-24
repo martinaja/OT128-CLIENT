@@ -8,7 +8,11 @@ export const Title = ({ children, image }) => {
       <Box sx={{ mt: 4 }}>
         <img width="100%" src={image || defaultImage} alt={children} />
       </Box>
-      <h1 style={{ textAlign: 'center', marginBottom: '8rem' }}>{children}</h1>
+      <h1
+        style={{ textAlign: 'center', marginBottom: '8rem', fontSize: '3rem' }}
+      >
+        {children}
+      </h1>
     </Box>
   )
 }

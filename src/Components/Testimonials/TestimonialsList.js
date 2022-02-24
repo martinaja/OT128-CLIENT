@@ -43,7 +43,13 @@ const TestimonialsList = ({ from }) => {
       ) : (
         <>
           {' '}
-          <h1 style={{ textAlign: 'center', marginTop: '5rem' }}>
+          <h1
+            style={{
+              textAlign: 'center',
+              marginTop: '5rem',
+              marginBottom: '2rem',
+            }}
+          >
             Testimonios
           </h1>
           <Grid

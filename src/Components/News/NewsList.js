@@ -1,9 +1,8 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Box, Grid } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
-import { getNews } from '../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../AlertService'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchNew } from '../../features/news/newsReducer'
@@ -44,7 +43,14 @@ const NewsList = ({ from }) => {
       ) : (
         <>
           {' '}
-          <h1>Novedades</h1>
+          <h1
+            style={{
+              textAlign: 'center',
+              marginBottom: '2rem',
+            }}
+          >
+            Novedades
+          </h1>
           <Grid
             sx={{ justifyContent: 'space-evenly' }}
             container
