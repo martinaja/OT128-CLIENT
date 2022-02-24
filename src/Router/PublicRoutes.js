@@ -4,14 +4,16 @@ import LoadingBar from '../Components/LoadingPage/LoadingPage'
 import PublicContent from '../Components/PublicWeb/PublicContent'
 import RegisterForm from '../Components/Auth/RegisterForm'
 import LoginForm from '../Components/Auth/LoginForm'
+import TestimonialHome from '../Components/Testimonials/TestimonialHome'
+import TestimonialDetails from '../Components/Testimonials/TestimonialDetails'
+import ActivityDetail from '../Components/Activities/ActivitiesDetails'
 
 const NewsDetail = lazy(() => import('../Components/News/Detail/NewsDetail'))
 const About = lazy(() => import('../Components/About/About'))
-const Activities = lazy(() =>
-  import('../Components/Activities/ActivitiesDetails'),
+const ActivitiesList = lazy(() =>
+  import('../Components/Activities/ActivitiesList'),
 )
 const UserForm = lazy(() => import('../Components/Users/UsersForm'))
-const Detail = lazy(() => import('../Components/Activities/Detail/Detail'))
 const Index = lazy(() => import('../Components/Home/Index'))
 const Donations = lazy(() => import('../Components/Donations/Donations'))
 const Thankyou = lazy(() => import('./../Components/Donations/Thankyou'))
@@ -47,15 +49,23 @@ export const PublicRoutes = () => (
         </Route>
 
         <Route exact path="/activities">
-          <Activities />
+          <ActivitiesList />
         </Route>
 
-        <Route path="/activities/:id">
-          <Detail />
+        <Route exact path="/activities/:id">
+          <ActivityDetail />
         </Route>
 
         <Route exact path="/donations">
           <Donations />
+        </Route>
+
+        <Route exact path="/testimonios">
+          <TestimonialHome />
+        </Route>
+
+        <Route exact path="/testimonios/:id">
+          <TestimonialDetails />
         </Route>
 
         <Route exact path="/gracias">

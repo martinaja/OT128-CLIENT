@@ -26,6 +26,7 @@ const CustomCard = ({
         display: 'flex',
         justifyContent: 'space-between',
         flexDirection: 'column',
+        mb: 4,
       }}
     >
       <CardMedia
@@ -57,7 +58,7 @@ const CustomCard = ({
         </Typography>
         <CardActions>
           <Button size="small" component={Link} to={`/${link}/${id}`}>
-            <strong>> Leer más</strong>
+            <strong> Leer más</strong>
           </Button>
         </CardActions>
       </CardContent>
