@@ -17,7 +17,7 @@ const PublicContent = ({ children }) => {
     <>
       <Header />
       {children}
-      <Footer />
+       <Footer /> 
     </>
   )
 }
