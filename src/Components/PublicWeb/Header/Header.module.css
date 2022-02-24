@@ -86,6 +86,10 @@
   font-weight: lighter;
 }
 
+.navLinks:active {
+  transform: translate(-1px, 1px);
+}
+
 @media screen and (min-width: 1150px) {
   .navLinks {
     font-size: 14px;
@@ -134,6 +138,10 @@
   transition: background-color color 0.2s ease-in-out;
   background-color: transparent;
   color: #fff;
+}
+
+.navBtnLink:active {
+  transform: translate(-1px, 1px);
 }
 
 @media screen and (min-width: 1150px) {
@@ -222,6 +230,9 @@
 }
 
 .sidebarRoute {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border-radius: 10px;
   background: #fff;
   white-space: nowrap;
@@ -235,10 +246,22 @@
   text-decoration: none;
 }
 
+@media screen and (max-width: 600px) {
+  .navBtnLink,
+  .sidebarRoute {
+    font-size: 16px;
+    padding: 6px 14px;
+  }
+}
+
 .sidebarRoute:hover {
   transition: background-color color 0.2s ease-in-out;
   background-color: transparent;
   color: #fff;
+}
+
+.sidebarRoute:active {
+  transform: translate(-1px, 1px);
 }
 
 .navBtnDonar {
