@@ -7,31 +7,31 @@ import Spinner from '../Spinner'
 import { Title } from '../Title'
 import parse from 'html-react-parser'
 import { Tween, Timeline } from 'react-gsap'
-import { getActivity } from '../../Services/apiServices/activitiesApiService'
+import { getTestimony } from '../../Services/apiServices/testimonyApiService'
 
-export default function ActivityDetail() {
+export default function NewsDetail() {
   const { id } = useParams()
   const history = useHistory()
   const [loader, setLoader] = useState(false)
-  const [activity, setActivity] = useState(null)
+  const [testimony, setTestimony] = useState(null)
 
   useEffect(
     () =>
       (async () => {
         setLoader(true)
-        const requestActivity = await getActivity(id)
-        console.log(requestActivity.data.data)
-        if (requestActivity.error) {
+        const requestTestimony = await getTestimony(id)
+        console.log(requestTestimony.data.data)
+        if (requestTestimony.error) {
           alertServiceError(
-            requestActivity.message,
+            requestTestimony.message,
             'No se pudo obtener la información solicitada',
           )
           history.push('/')
         }
 
-        const activityData = requestActivity.data?.data
-        activityData
-          ? setActivity(activityData)
+        const newsData = requestTestimony.data?.data
+        newsData
+          ? setTestimony(newsData)
           : alertServiceError(
               'No se pudo cargar el testimonio',
               'Verificá que la URL sea correcta',
@@ -57,21 +57,21 @@ export default function ActivityDetail() {
                 >
                   <small>
                     <strong>
-                      {activity &&
-                        new Date(activity.updated_at).toLocaleDateString(
+                      {testimony &&
+                        new Date(testimony.updated_at).toLocaleDateString(
                           'es-AR',
                         )}
                     </strong>
                   </small>
                 </Box>
 
-                <Title image={activity?.image}>{activity?.name}</Title>
+                <Title image={testimony?.image}>{testimony?.name}</Title>
 
                 <Box sx={{ my: 5 }}>
-                  {activity &&
+                  {testimony &&
                     parse(
-                      activity.content
-                        ? activity.content
+                      testimony.content
+                        ? testimony.content
                         : 'no se proporcionó descripción',
                     )}
                 </Box>
@@ -90,8 +90,8 @@ export default function ActivityDetail() {
                     <Timeline
                       target={
                         <p>
-                          {activity &&
-                            String(activity.content) &&
+                          {testimony &&
+                            String(testimony.content) &&
                             'No hay comentarios'}
                         </p>
                       }

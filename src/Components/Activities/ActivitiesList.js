@@ -1,46 +1,10 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import { Typography } from '@mui/material'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getPublicActivities } from '../../features/activities/activitiesReducer'
 import '../CardListStyles.css'
-import parse from 'html-react-parser'
 import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
-
-const ActivitiesCard = ({ name, image, description, isMin }) => {
-  let minWidth = isMin ? 400 : 330
-
-  return (
-    <Card
-      sx={{
-        minWidth: minWidth,
-        maxWidth: minWidth,
-        background: 'rgba(255,255,255,0.6)',
-        boxShadow: 3,
-        m: 3,
-      }}
-    >
-      <CardMedia component="img" height="300" image={image} alt={name} />
-      <CardContent>
-        <Typography
-          textAlign="center"
-          gutterBottom
-          variant="h5"
-          component="div"
-        >
-          {name}
-        </Typography>
-        <Typography
-          textAlign="center"
-          component={'span'}
-          variant={'body2'}
-          color="text.secondary"
-        >
-          {description === null ? null : parse(String(description))}
-        </Typography>
-      </CardContent>
-    </Card>
-  )
-}
+import CustomCard from '../Card/CustomCard'
 
 const ActivitiesList = () => {
   const activities = useSelector((state) => state.activities.data)
@@ -73,18 +37,13 @@ const ActivitiesList = () => {
           }}
         >
           {activities.length > 0 ? (
-
             activities.map((activity, index) => {
-
               return (
-                <ActivitiesCard
+                <CustomCard
                   name={activity.name}
                   image={activity.image}
                   description={activity.description}
-                  isMin={true}
-
                   key={index}
-
                 />
               )
             })
@@ -105,19 +64,15 @@ const ActivitiesList = () => {
           }}
         >
           {activities.length > 0 ? (
-
             activities.map((activity, index) => {
-
               return (
-                <ActivitiesCard
+                <CustomCard
+                  id={activity.id}
+                  link="activities"
                   name={activity.name}
                   image={activity.image}
                   description={activity.description}
-                  isMin={false}
-
                   key={index}
-
-
                 />
               )
             })
