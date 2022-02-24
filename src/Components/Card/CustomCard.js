@@ -21,7 +21,7 @@ const CustomCard = ({
         maxWidth: 330,
         minWidth: 330,
         height: 400,
-        background: 'rgba(0,0,0,0.03)',
+        background: 'rgba(255,255,255,0.2)',
         boxShadow: 3,
         display: 'flex',
         justifyContent: 'space-between',
