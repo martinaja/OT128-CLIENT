@@ -1,0 +1,20 @@
+
+  h3 {
+	margin: 6rem;
+
+	font-family: "Paytone One";
+	color: #202020;
+	text-transform: uppercase;
+	letter-spacing: -2px;
+  }
+  
+  h3 span {
+	  display: block;
+	text-align-last: center;
+	margin: 11px 0 17px 0;
+	font-size: 80px;
+	line-height: 80px;
+	color: #0e0d0c;
+	text-shadow: 0 13.36px 8.896px #4FBDBA,0 -2px 1px #AEFEFF;
+	letter-spacing: -4px;
+  }
