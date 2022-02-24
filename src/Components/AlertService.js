@@ -64,7 +64,8 @@ export function alertDonationsMP(image) {
     preConfirm: () => {
       return 1
     },
-    allowOutsideClick: () => !Swal.isLoading(),
+    backdrop: false,
+    allowOutsideClick: false,
   }).then((result) => {
     if (result.isConfirmed) {
       Swal.fire({
