@@ -7,13 +7,13 @@ const Donations = () => {
     <>
       <Box
         as="img"
-        sx={{ width: '99.1vw' }}
+        sx={{ width: '99.1vw'}}
         src="/images/donaciones.png"
         alt="donaciones"
       />
       <Container>
         <DonationsMp />
-        <Typography variant="body1" gutterBottom>
+        <Typography variant="h6">
           ¿POR QUÉ ES TAN IMPORTANTE TU DONATIVO? Tus donativos son la esperanza
           de muchas personas SOMOS MAS se compromete a informar a las personas e
           instituciones que hagan aportaciones finalistas sobre el proyecto o

@@ -8,7 +8,7 @@ export const DonationsMp = () => {
     <>
       <Box
         sx={{
-          pl: { xl: '5%', md: '15%', xs: '20%' },
+          pl: { xl: '15%', md: '15%', xs: '20%' },
           pt: { md: '10%', xs: '15%' },
         }}
       >
