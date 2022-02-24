@@ -29,14 +29,6 @@ jest.mock('../../Services/BaseHTTP/publicApiService', () => ({
   postHandler: jest.fn(),
 }))
 
-//=======================================//=======================================
-//Se comprueba que el título formulario de contacto se muestre correctamente
-//=======================================//=======================================
-test('Render title component', () => {
-  const title = screen.getByText(/formulario de contacto./i)
-  expect(title).toBeInTheDocument()
-})
-
 //=======================================//=======================================//=======================================
 //Se prueba que al pulsar el boton "send" sin ningun valor en los campos se muestre correctamente los errores correspondientes
 //=======================================//=======================================//=======================================
