@@ -24,11 +24,11 @@ const NewsSearch = function () {
   return (
     <div className="search">
       <Typography variant="h5" gutterBottom component="div">
-        Buscar novedad por nombre
+        Buscar novedades por nombre
       </Typography>
       <TextField
         id="filled-basic"
-        label="Buscar título"
+        label="Ingresar título"
         variant="filled"
         onChange={(e) => handleInput(e.target.value)}
         InputProps={{

@@ -23,6 +23,7 @@ export const Routes = () => {
             '/donations',
             '/gracias',
             '/testimonios',
+            '/testimonios/:id',
             '/login',
             '/register',
           ]}
