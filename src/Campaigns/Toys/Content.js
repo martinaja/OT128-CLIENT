@@ -33,13 +33,13 @@ const Content = () => {
       <Grid item xs={12}>
         <Paper elevation={5} className="date-container">
           <div>
-            <CalendarTodayIcon /> <span>Fecha</span>
+            <CalendarTodayIcon /> <span>5 de marzo</span>
           </div>
           <div>
-            <AccessTimeIcon /> <span>Hora</span>
+            <AccessTimeIcon /> <span>20:00</span>
           </div>
           <div>
-            <PlaceIcon /> <span>Lugar</span>
+            <PlaceIcon /> <span>Av siempre viva 123</span>
           </div>
         </Paper>
       </Grid>
@@ -106,7 +106,7 @@ const Content = () => {
       )}
       {isMatchTablet && (
         <Grid item xs={12} style={{ padding: '50px 0' }}>
-          <Timer date="2022-03-02T00:00:00.000000Z" />
+          <Timer date="2022-03-05T20:00:00.000000Z" />
         </Grid>
       )}
     </Grid>

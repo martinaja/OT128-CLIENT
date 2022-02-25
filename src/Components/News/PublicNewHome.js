@@ -27,7 +27,7 @@ const PublicNewHome = () => {
             px: 1,
           }}
         >
-          <NewsList />
+          <NewsList from={'newsHome'} />
         </Box>
       </Container>
     </>
