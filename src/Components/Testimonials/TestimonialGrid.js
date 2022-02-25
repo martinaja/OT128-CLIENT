@@ -44,6 +44,7 @@ export const TestimonialGrid = ({ id, link, name, image, description }) => {
           <Button
             style={{ position: 'absolute', bottom: 5, right: 5 }}
             component={Link}
+            to={`${link}/${id}`}
           >
             Leer Más
           </Button>
