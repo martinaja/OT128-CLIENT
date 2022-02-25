@@ -38,8 +38,8 @@ export const MembersList = () => {
                 <Grid item key={element.id}>
                   <Card
                     sx={{
-                      maxWidth: 260,
-                      minHeight: 400,
+                      width: 300,
+                      minHeight: 550,
                       display: 'flex',
                       justifyContent: 'space-between',
                       flexDirection: 'column',
@@ -49,6 +49,10 @@ export const MembersList = () => {
                       component="img"
                       image={element.image}
                       alt={element.name}
+                      style={{
+                        height: '300px',
+                        objectFit: 'cover',
+                      }}
                     />
 
                     <CardContent>

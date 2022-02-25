@@ -1,40 +1,57 @@
+import { Container, Typography } from '@mui/material'
 import React, { useEffect } from 'react'
-
-import { Grid } from '@mui/material'
-import CustomCard from './../Card/CustomCard'
-
 import { useDispatch, useSelector } from 'react-redux'
+import '../CardListStyles.css'
 import { getTestimonial } from '../../features/testimonial/testimonialReducer'
+import { TestimonialGrid } from './TestimonialGrid'
 
 const TestimonialHome = () => {
+  const testimonialState = useSelector(
+    (state) => state.testimonial.testimonials,
+  )
   const dispatch = useDispatch()
-
-  const testimonialState = useSelector((state) => state.testimonial)
 
   useEffect(() => {
     dispatch(getTestimonial())
-  }, [])
+  }, [dispatch])
 
   return (
     <>
-      <h1>Testimonios</h1>
-      <Grid container rows={{ xs: 1, sm: 8, md: 6 }} spacing={{ xs: 2, md: 3 }}>
-        {testimonialState.status === 'fulfilled' ? (
-          testimonialState.data.map((element) => {
+      <Typography variant="h3" textAlign="center" mt={5}>
+        Testimonios
+      </Typography>
+      <Typography variant="body1" textAlign="center" p={2}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
+        blanditiis enim ipsa nemo asperiores illo, perspiciatis ratione rem non
+        corporis itaque, ea reiciendis dolorem doloribus expedita vero
+        necessitatibus quasi magni?
+      </Typography>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 550px))',
+          justifyContent: 'center',
+        }}
+      >
+        {testimonialState?.length > 0 ? (
+          testimonialState.map((testimony, index) => {
             return (
-              <Grid item key={element.id}>
-                <CustomCard
-                  image={element.image}
-                  name={element.name}
-                  description={element.description}
+              <Container>
+                <TestimonialGrid
+                  id={testimony.id}
+                  link="testimonios"
+                  name={testimony.name}
+                  image={testimony.image}
+                  description={testimony.description}
+                  key={index}
                 />
-              </Grid>
+              </Container>
             )
           })
         ) : (
-          <p>No hay testimonios</p>
+          <p>No se encontraron testimonios</p>
         )}
-      </Grid>
+      </div>
     </>
   )
 }

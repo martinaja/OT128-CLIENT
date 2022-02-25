@@ -23,7 +23,9 @@ export const Routes = () => {
             '/donations',
             '/gracias',
             '/testimonios',
+            '/testimonios/:id',
             '/login',
+            '/campaign',
             '/register',
           ]}
           component={PublicRoutes}
