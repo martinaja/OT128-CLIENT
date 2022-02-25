@@ -1,4 +1,4 @@
-import {  Box, Container } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import React from 'react'
 import './/ThankYou.css'
 
@@ -15,14 +15,17 @@ const Thankyou = () => {
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
           backgroundSize: 'cover',
-          padding:"50px 30px",
-          textAlign:"center",
-        
+          padding: '50px 30px',
+          textAlign: 'center',
         }}
       >
         <h3 className="tenkiuH3">
           {' '}
-          <span  className="animate__animated animate__backInDown">GRACIAS</span> <span className="animate__animated animate__backInDown">POR</span> <span className="animate__animated animate__backInDown">SU</span>
+          <span className="animate__animated animate__backInDown">
+            GRACIAS
+          </span>{' '}
+          <span className="animate__animated animate__backInDown">POR</span>{' '}
+          <span className="animate__animated animate__backInDown">SU</span>
           <span className="animate__animated animate__backInDown">AYUDA</span>
         </h3>
       </Box>
