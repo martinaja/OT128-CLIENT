@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Container } from '@mui/material'
-import { useHistory, useParams } from 'react-router-dom'
+import { Box, Button, Container } from '@mui/material'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { getNews } from '../../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../../AlertService'
 import Spinner from '../../Spinner'
@@ -57,6 +57,7 @@ export default function NewsDetail() {
                 >
                   <small>
                     <strong>
+                      FECHA :
                       {news &&
                         new Date(news.updated_at).toLocaleDateString('es-AR')}
                     </strong>
@@ -65,7 +66,19 @@ export default function NewsDetail() {
 
                 <Title image={news?.image}>{news?.name}</Title>
 
-                <Box sx={{ my: 5 }}>{news && parse(news.content)}</Box>
+                <Box sx={{ my: 1, background: '#4FBDBA', p: 4 }}>
+                  {news &&
+                    parse(
+                      news.content
+                        ? news.content
+                        : 'no se proporcionó descripción',
+                    )}
+                  <Box sx={{ textAlign: 'end' }}>
+                    <Button size="small" component={Link} to={`/novedades`}>
+                      <strong>Volver atrás </strong>
+                    </Button>
+                  </Box>
+                </Box>
               </Box>
             </Scene>
             <h2>Comentarios</h2>

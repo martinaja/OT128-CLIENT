@@ -1,72 +1,62 @@
-import { Grid, IconButton } from '@material-ui/core'
-import FacebookIcon from '@material-ui/icons/Facebook'
-import GitHubIcon from '@material-ui/icons/GitHub'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import LinkedInIcon from '@material-ui/icons/LinkedIn'
+import { Box, Grid } from '@material-ui/core'
 import React from 'react'
-import './Footer.css'
+import { Link } from 'react-router-dom'
+import style from './Footer.module.css'
+import Facebook from '@material-ui/icons/Facebook'
+import Twitter from '@material-ui/icons/Twitter'
+import Instagram from '@material-ui/icons/Instagram'
+import LinkedIn from '@material-ui/icons/LinkedIn'
 
 function Footer() {
   return (
     <>
-      <div className="container">
-      
-        <Grid container className="footer__container">
-          <Grid
-            item
-            container
-            md={4}
-            sm={12}
-            alignItems="center"
-            className="center"
-          >
-            <img
-              alt="Logo ong."
-              src="/images/logo-bco.png"
-              className="logo"
-            />
-            
-          </Grid>
-
-          <Grid item container md sm={12}>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Noticias</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Actividades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Novedades</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Testimonios </div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Nosotros</div>
-            </Grid>
-            <Grid item className="col" xs={12} sm md>
-              <div className="col__title">Contacto</div>
+      <div className={style.container}>
+        <Grid container className={style.footer__container}>
+          <Grid container alignItems="center" className={style.center}>
+            <Link to={'/'}>
+              <img
+                alt="Logo ong."
+                src="/images/logo-bco.png"
+                className={style.logo}
+              />
+            </Link>
+            <Grid className={style.col}>
+              <Link to={'/novedades'} className={style.col}>
+                <p className={style.col__title}>Novedades</p>
+              </Link>
+              <Link to={'/activities'} className={style.col}>
+                <p className={style.col__title}>Actividades</p>
+              </Link>
+              <Link to={'/nosotros'} className={style.col}>
+                <p className={style.col__title}>Nosotros</p>
+              </Link>
+              <Link to={'/testimonios'} className={style.col}>
+                <p className={style.col__title}>Testimonios </p>
+              </Link>
+              <Link to={'/donations'} className={style.col}>
+                <p className={style.col__title}>Contribuye</p>
+              </Link>
+              <Link to={'/contacto'} className={style.col} xs={12}>
+                <p className={style.col__title}>Contacto</p>
+              </Link>
             </Grid>
           </Grid>
-         
-
-          <Grid item md={12} sm={12} className="social">
-            <hr className="social__hr" />
-            <div className="social__tags">
-              <IconButton>
-                <FacebookIcon className="social__tags__color" />
-              </IconButton>
-              <IconButton>
-                <LinkedInIcon className="social__tags__color" />
-              </IconButton>
-              <IconButton>
-                <TwitterIcon className="social__tags__color" />
-              </IconButton>
-              <IconButton>
-                <GitHubIcon className="social__tags__color" />
-              </IconButton>
-            </div>
-            <div className="social__copyrights">
+          <Grid className={style.social}>
+            <Box className={style.social__tags_color}>
+              <a className={style.social} href="https://www.facebook.com">
+                <Facebook size="2x" />
+              </a>
+              <a className={style.social} href="https://www.twitter.com">
+                <Twitter size="2x" />
+              </a>
+              <a className={style.social} href="https://www.instagram.com">
+                <Instagram size="2x" />
+              </a>
+              <a className={style.social} href="https://www.linkedin.com">
+                <LinkedIn size="2x" />
+              </a>
+            </Box>
+            <div className={style.social__copyrights}>
               © 2020 Somos mas. All Rights Reserved.
             </div>
           </Grid>

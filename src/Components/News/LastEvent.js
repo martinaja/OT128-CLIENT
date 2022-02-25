@@ -1,48 +1,50 @@
-import { Box, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Box, Container, Grid, Typography } from '@mui/material'
+import React from 'react'
 import ReactPlayer from 'react-player/lazy'
 
-import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
-
 const LastEvent = () => {
-  const isMatchDesktop = useBreakPoints('(min-width: 1200px)')
-  const isMatchTablet = useBreakPoints('(min-width: 600px)')
-
-  const [sizeVideo, setSizeVideo] = useState({
-    width: '320px',
-    height: '180px',
-  })
-
-  useEffect(() => {
-    if (isMatchDesktop) {
-      setSizeVideo({ width: '680px', height: '360px' })
-    } else if (isMatchTablet) {
-      setSizeVideo({ width: '530px', height: '250px' })
-    } else {
-      setSizeVideo({ width: '320px', height: '180px' })
-    }
-  }, [isMatchTablet, isMatchDesktop])
-
   return (
     <Box
       sx={{
         alignItems: 'center',
-        my: 9,
+        mb: 4,
         pb: 2,
-        backgroundColor: 'rgba(255,255,255, 0.5)',
+        backgroundColor: '#4fbdba',
+        backgroundImage:
+          ' url(https://www.transparenttextures.com/patterns/pyramid.png)',
         boxShadow: 3,
+        textAlign: 'center',
       }}
     >
-      <Typography variant="h3" component="div" gutterBottom>
-        {' '}
-        Mira nuestro ultimo evento!
-      </Typography>
-      <ReactPlayer
-        width={sizeVideo.width}
-        height={sizeVideo.height}
-        style={{ marginLeft: 'auto', marginRight: 'auto' }}
-        url="https://www.youtube.com/watch?v=4YnSk1gI_Oo"
-      />
+      {' '}
+      <Container>
+        <Grid container spacing={2} sx={{ px: 2, py: 4, minHeight: '400px ' }}>
+          <Grid item xs={12} sm={6}>
+            <ReactPlayer
+              width="100%"
+              height="100%"
+              style={{ marginLeft: 'auto', marginRight: 'auto' }}
+              url="https://www.youtube.com/watch?v=4YnSk1gI_Oo"
+            />
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <Box sx={{ py: 2 }}>
+              <Typography variant="h3" component="div" gutterBottom>
+                Mira nuestro ultimo evento!
+              </Typography>
+              <Typography variant="button" display="block" gutterBottom>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
   )
 }

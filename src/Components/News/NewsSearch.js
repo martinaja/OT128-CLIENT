@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { debounce } from 'lodash'
 import './NewsSearch.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetchNew, fetchSearchNews } from '../../features/news/newsReducer'
-import { Typography } from '@mui/material'
+import { TextField, Typography } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 
 const NewsSearch = function () {
   const dispatch = useDispatch()
@@ -23,13 +24,16 @@ const NewsSearch = function () {
   return (
     <div className="search">
       <Typography variant="h5" gutterBottom component="div">
-        Buscar novedad por nombre
+        Buscar novedades por nombre
       </Typography>
-      <input
-        type="text"
-        placeholder="Buscar titulo"
-        className="search-input"
+      <TextField
+        id="filled-basic"
+        label="Ingresar título"
+        variant="filled"
         onChange={(e) => handleInput(e.target.value)}
+        InputProps={{
+          endAdornment: <SearchIcon />,
+        }}
       />
     </div>
   )

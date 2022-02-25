@@ -1,0 +1,23 @@
+
+  .tenkiuH3 {
+
+margin:0%;
+	font-family: "Paytone One";
+	color: #202020;
+	text-transform: uppercase;
+	letter-spacing: -15px;
+	
+  }
+  
+  .tenkiu {
+	letter-spacing: 11px;
+	  display: block;
+	text-align-last: center;
+ margin: 20px 0 22px 0;
+	font-size: 80px;
+	line-height: 80px;
+	color: #21565a;
+	text-shadow: 0 13.36px 8.896px #4FBDBA,0 -2px 1px #AEFEFF;
+	
+	/* padding: 15px */
+  }

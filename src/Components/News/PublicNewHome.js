@@ -1,18 +1,36 @@
-import { Container } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import React from 'react'
-import { Title } from '../Title'
 import LastEvent from './LastEvent'
 import NewsList from './NewsList'
 import NewsSearch from './NewsSearch'
 
 const PublicNewHome = () => {
   return (
-    <Container sx={{ alignContent: 'center', textAlign: 'center' }}>
-      <Title>Sección de Novedades</Title>
+    <>
+      <img
+        width="100%"
+        src="/images/Lee todas las novedades!.png"
+        alt="imagen novedades bienvenida"
+      />
       <LastEvent />
-      <NewsSearch />
-      <NewsList />
-    </Container>
+      <Container sx={{ alignContent: 'center', textAlign: 'center' }}>
+        <NewsSearch />
+
+        <Box
+          sx={{
+            backgroundColor: '#4fbdba',
+            backgroundImage:
+              ' url(https://www.transparenttextures.com/patterns/pyramid.png)',
+            boxShadow: 3,
+            borderRadius: 2,
+            pt: 3,
+            px: 1,
+          }}
+        >
+          <NewsList />
+        </Box>
+      </Container>
+    </>
   )
 }
 

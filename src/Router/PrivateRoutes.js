@@ -36,97 +36,97 @@ export const PrivateRoute = ({ children, ...rest }) => {
 }
 
 export const PrivateRoutes = () => (
-    <BackofficeHome>
-      <PrivateRoute exact path="/backoffice/activities">
-        <ActivitiesScreen />
-      </PrivateRoute>
+  <BackofficeHome>
+    <PrivateRoute exact path="/backoffice/activities">
+      <ActivitiesScreen />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/activities/create">
-        <ActivitiesForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/activities/create">
+      <ActivitiesForm />
+    </PrivateRoute>
 
-      <PrivateRoute path="/backoffice/activities/create/:id">
-        <ActivitiesForm />
-      </PrivateRoute>
+    <PrivateRoute path="/backoffice/activities/create/:id">
+      <ActivitiesForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/categories">
-        <CategoriesHome />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/categories">
+      <CategoriesHome />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/categories/create">
-        <CategoriesForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/categories/create">
+      <CategoriesForm />
+    </PrivateRoute>
 
-      <PrivateRoute path="/backoffice/categories/create/:id">
-        <CategoriesForm />
-      </PrivateRoute>
+    <PrivateRoute path="/backoffice/categories/create/:id">
+      <CategoriesForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/news">
-        <NewsTable />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/news">
+      <NewsTable />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/news/create">
-        <NewsForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/news/create">
+      <NewsForm />
+    </PrivateRoute>
 
-      <PrivateRoute path="/backoffice/news/create/:newsId">
-        <NewsForm />
-      </PrivateRoute>
+    <PrivateRoute path="/backoffice/news/create/:newsId">
+      <NewsForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/members">
-        <MembersScreen />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/members">
+      <MembersScreen />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/members/create">
-        <MembersForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/members/create">
+      <MembersForm />
+    </PrivateRoute>
 
-      <PrivateRoute path="/backoffice/members/create/:id">
-        <MembersForm />
-      </PrivateRoute>
+    <PrivateRoute path="/backoffice/members/create/:id">
+      <MembersForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/slides">
-        <SlidesScreen />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/slides">
+      <SlidesScreen />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/slides/create">
-        <SlidesForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/slides/create">
+      <SlidesForm />
+    </PrivateRoute>
 
-      <PrivateRoute path="/backoffice/slides/create/:slideId">
-        <SlidesForm />
-      </PrivateRoute>
+    <PrivateRoute path="/backoffice/slides/create/:slideId">
+      <SlidesForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/create-testimonials">
-        <TestimonialForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/create-testimonials">
+      <TestimonialForm />
+    </PrivateRoute>
 
-      <PrivateRoute path="/backoffice/create-testimonials/:id">
-        <TestimonialForm />
-      </PrivateRoute>
+    <PrivateRoute path="/backoffice/create-testimonials/:id">
+      <TestimonialForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/create-project">
-        <ProjectsForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/create-project">
+      <ProjectsForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/organization">
-        <OrganizationScreen />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/organization">
+      <OrganizationScreen />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/organization/edit">
-        <OrganizationForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/organization/edit">
+      <OrganizationForm />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/users">
-        <UsersHome />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/users">
+      <UsersHome />
+    </PrivateRoute>
 
-      <PrivateRoute exact path="/backoffice/users/create">
-        <UserForm />
-      </PrivateRoute>
+    <PrivateRoute exact path="/backoffice/users/create">
+      <UserForm />
+    </PrivateRoute>
 
-      <PrivateRoute path="/backoffice/users/create/:id">
-        <UserForm />
-      </PrivateRoute>
-    </BackofficeHome>
+    <PrivateRoute path="/backoffice/users/create/:id">
+      <UserForm />
+    </PrivateRoute>
+  </BackofficeHome>
 )

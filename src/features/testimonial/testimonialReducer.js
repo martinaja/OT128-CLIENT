@@ -1,20 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+import { getTestimony } from '../../Services/apiServices/testimonyApiService'
 
 const initialState = {
-  status: '',
-  data: '',
+  testimonials: [],
+  status: 'idle',
+  loader: false,
+  errMsg: '',
 }
 
 export const getTestimonial = createAsyncThunk(
   'testimonial/getTestimonial',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        'http://ongapi.alkemy.org/api/testimonials',
-      )
+      const response = await getTestimony()
       if (response.data.success) {
-        return response.data.data.slice(0, 6)
+        return response.data.data
       } else {
         return rejectWithValue({ error: 'not success' }) // if error is no token the user input data is wrong
       }
@@ -27,18 +27,21 @@ export const getTestimonial = createAsyncThunk(
 export const testimonialReducer = createSlice({
   name: 'testimonial',
   initialState,
-  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(getTestimonial.pending, (state) => {
         state.status = 'pending'
+        state.loader = true
       })
       .addCase(getTestimonial.fulfilled, (state, action) => {
-        state.status = 'fulfilled'
-        state.data = action.payload
+        state.status = action.payload?.message
+        state.testimonials = action.payload
+        state.loader = false
       })
       .addCase(getTestimonial.rejected, (state, action) => {
-        state.status = action.payload
+        state.status = 'error'
+        state.errMsg = action.error.message
+        state.loader = false
       })
   },
 })
