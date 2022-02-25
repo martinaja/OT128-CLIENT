@@ -22,7 +22,8 @@ import {
 } from '../../Services/apiServices/newsApiService'
 import { alertServiceError } from '../AlertService'
 import ButtonLoader from '../ButtonLoader/ButtonLoader'
-import Spinner from '../Spinner'
+// import Spinner from '../Spinner'
+import getBase64FromUrl from '../../utils/apiToBase64'
 
 const NewsForm = () => {
   const { newsId } = useParams()
@@ -33,25 +34,22 @@ const NewsForm = () => {
   const [isEditable, setIsEditable] = useState(false)
   const [imgUploaded, setImgUploaded] = useState(null)
   const [previewImgUploaded, setPreviewImgUploaded] = useState(null)
+  const [imgFromApi, setImgFromApi] = useState(null)
 
-  const [loader, setLoader] = useState(false)
   const [btnLoader, setBtnLoader] = useState(false)
 
   // Fetch categories
   useEffect(
     () =>
       (async () => {
-        setLoader(true)
-
         const fetchCategories = await getCategories()
-        if (fetchCategories.error)
+        if (fetchCategories?.error || fetchCategories?.data?.success === false)
           alertServiceError(
-            fetchCategories.message,
+            'Error',
             'No se pudo obtener la información solicitada',
           )
-
         const dataCategories = fetchCategories?.data?.data
-        console.log('CATEGORIES', dataCategories)
+        // console.log('CATEGORIES', dataCategories)
 
         dataCategories
           ? setCategories(dataCategories)
@@ -59,8 +57,6 @@ const NewsForm = () => {
               'No se pudo cargar la noticia',
               'Verificá que la URL sea correcta',
             )
-
-        setLoader(false)
       })(),
     [],
   )
@@ -69,20 +65,18 @@ const NewsForm = () => {
   useEffect(() => {
     if (!newsId) return
     ;(async () => {
-      setLoader(true)
-
       const fetchNews = await getNews(newsId)
-      if (fetchNews.error) {
+      if (fetchNews?.error || fetchNews?.data?.success === false) {
         alertServiceError(
-          fetchNews.message,
+          'Error',
           'No se pudo obtener la información solicitada',
         )
         setIsEditable(false)
         history.push('/backoffice/news')
       }
 
-      const dataNews = fetchNews.data?.data
-      console.log('DATA DE LA NOTICIA', dataNews)
+      const dataNews = fetchNews?.data?.data
+      // console.log('DATA DE LA NOTICIA', dataNews)
 
       if (dataNews) {
         setNew(dataNews)
@@ -91,10 +85,9 @@ const NewsForm = () => {
         alertServiceError('No se pudo cargar la noticia', 'ID inválido')
         history.push('/backoffice/news')
       }
-
-      setLoader(false)
+      setImgFromApi(await getBase64FromUrl(news.image))
     })()
-  }, [newsId, history])
+  }, [newsId, history, news.image])
 
   // Preview the uploaded image
   useEffect(() => {
@@ -108,29 +101,23 @@ const NewsForm = () => {
 
   const sendNews = async (data) => {
     setBtnLoader(true)
-    console.log('DATA DE FORMIK ANTES DE MANDAR', data)
-    // let newsToSend = data;
-    //  If  user has uploaded a new image, parse it to send
-    // if (imgUploaded) {
-    //   const parseImg = await toBase64(data.image);
-    //   newsToSend = {
-    //     ...data,
-    //     image: parseImg,
-    //   };
-    // }
+    // console.log('DATA DE FORMIK ANTES DE MANDAR', data)
+    let newsToSend = { ...data }
 
-    const parseImg = await toBase64(data.image)
-    const newsToSend = {
-      ...data,
-      image: parseImg,
+    if (typeof data.image !== 'string') {
+      const parseImg = await toBase64(data.image)
+      newsToSend = {
+        ...data,
+        image: parseImg,
+      }
     }
 
-    console.log('DATA LISTA PARA ENVIAR', newsToSend)
+    // console.log('DATA LISTA PARA ENVIAR', newsToSend)
     if (isEditable)
       // Putting a news
       (async () => {
         const putRequest = await putNews(newsId, newsToSend)
-        console.log('REQUEST PUT NEWS', putRequest)
+        // console.log('REQUEST PUT NEWS', putRequest)
         if (putRequest.error) {
           alertServiceError(
             putRequest.message,
@@ -143,7 +130,7 @@ const NewsForm = () => {
         // Redirect to the news
         const fetch = await getNews(newsId)
         const data = fetch.data?.data
-        console.log('DATA FROM NEWS BY ID', data)
+        // console.log('DATA FROM NEWS BY ID', data)
         data
           ? setNew(data)
           : alertServiceError(
@@ -157,7 +144,7 @@ const NewsForm = () => {
     else
       (async () => {
         const postRequest = await postNews(newsToSend)
-        console.log('REQUEST POST NEWS', postRequest)
+        // console.log('REQUEST POST NEWS', postRequest)
         if (postRequest.error)
           alertServiceError(
             postRequest.message,
@@ -187,109 +174,118 @@ const NewsForm = () => {
     category_id: Yup.string().required('Categoría requerida'),
   })
 
-  return loader ? (
-    <Spinner />
-  ) : (
-    <Formik
-      enableReinitialize
-      initialValues={{
-        name: news.name || '',
-        content: news.content || '',
-        category_id: '',
-        image: '',
-      }}
-      validationSchema={schemaValidate}
-      onSubmit={(val) => {
-        sendNews(val)
-      }}
-    >
-      {({
-        handleSubmit,
-        handleChange,
-        handleBlur,
-        values,
-        errors,
-        setFieldValue,
-        touched,
-      }) => (
-        <Container>
-          <Box sx={{ boxShadow: 5, p: 5 }}>
-            {previewImgUploaded || news.image ? (
-              <img
-                style={{ maxWidth: '100%' }}
-                src={previewImgUploaded || news.image}
-                alt=""
-              />
-            ) : null}
-            <form onSubmit={handleSubmit}>
-              <TextField
-                margin="normal"
-                fullWidth
-                id="name"
-                name="name"
-                label="Título"
-                value={values.name}
-                onChange={handleChange}
-                error={touched.name && Boolean(errors.name)}
-                helperText={touched.name && errors.name}
-                onBlur={handleBlur}
-              />
-              <TextField
-                margin="normal"
-                fullWidth
-                id="category_id"
-                name="category_id"
-                select
-                label="Categoría"
-                value={values.category_id}
-                onChange={handleChange}
-                helperText={touched.category_id && errors.category_id}
-                onBlur={handleBlur}
-              >
-                {categories.map((cat, i) => (
-                  <MenuItem key={i} value={cat.id}>
-                    {cat.name}-{cat.id}
-                  </MenuItem>
-                ))}
-              </TextField>
-              <CKEditor
-                name="content"
-                editor={ClassicEditor}
-                data={values.content}
-                onChange={(_, editor) => {
-                  const data = editor.getData()
-                  setFieldValue('content', data)
-                }}
-              />
-              <ErrorMessage component="small" name="content" />
-              <label htmlFor="image">
-                <Input
-                  name="image"
-                  accept="image/*"
-                  id="image"
-                  multiple
-                  type="file"
-                  onChange={(e) => {
-                    const file = e.currentTarget.files[0]
-                    setFieldValue('image', file)
-                    setImgUploaded(file)
-                  }}
-                  style={{ display: 'none' }}
+  return (
+    <>
+      <Formik
+        enableReinitialize
+        initialValues={{
+          name: news.name || '',
+          content: news.content || '',
+          category_id: news.category_id || '',
+          image: imgFromApi || '',
+        }}
+        validationSchema={schemaValidate}
+        onSubmit={(val) => {
+          sendNews(val)
+        }}
+      >
+        {({
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          values,
+          errors,
+          setFieldValue,
+          touched,
+        }) => (
+          <Container>
+            <Box sx={{ boxShadow: 5, p: 5 }}>
+              {previewImgUploaded || news.image ? (
+                <img
+                  style={{ maxWidth: '100%' }}
+                  src={previewImgUploaded || news.image}
+                  alt=""
+                  data-testid="timg"
                 />
-                <Button fullWidth variant="outlined" component="span">
-                  {!previewImgUploaded ? 'Subir imagen' : 'Subir otra imagen'}
-                </Button>
-                <ErrorMessage component="small" name="image" />
-              </label>
-              <ButtonLoader
-                label={isEditable ? 'Editar noticia' : 'Crear noticia'}
-                loading={btnLoader}
-              />
-            </form>
-          </Box>
-        </Container>
-      )}
-    </Formik>
+              ) : null}
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  id="name"
+                  name="name"
+                  data-testid="ttitle"
+                  label="Título"
+                  value={values.name}
+                  onChange={handleChange}
+                  error={touched.name && Boolean(errors.name)}
+                  helperText={touched.name && errors.name}
+                  onBlur={handleBlur}
+                />
+                <TextField
+                  margin="normal"
+                  fullWidth
+                  id="category_id"
+                  name="category_id"
+                  select
+                  data-testid="tcategory"
+                  label="Categoría"
+                  value={values.category_id}
+                  defaultValue=""
+                  onChange={handleChange}
+                  helperText={touched.category_id && errors.category_id}
+                  onBlur={handleBlur}
+                >
+                  {categories.map((cat, i) => (
+                    <MenuItem key={i} value={cat.id}>
+                      {/* {cat.id} */}
+                      {cat.name}-{cat.id}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                <div data-testid="CKEditor">
+                  <CKEditor
+                    name="content"
+                    editor={ClassicEditor}
+                    data={values.content}
+                    onChange={(_, editor) => {
+                      const data = editor.getData()
+                      setFieldValue('content', data)
+                    }}
+                  />
+                  <ErrorMessage component="small" name="content" />
+                </div>
+                <label data-testid="tuploadimg" htmlFor="image">
+                  <Input
+                    name="image"
+                    accept="image/*"
+                    id="image"
+                    multiple
+                    type="file"
+                    onChange={(e) => {
+                      const file = e.currentTarget.files[0]
+                      setFieldValue('image', file)
+                      setImgUploaded(file)
+                    }}
+                    style={{ display: 'none' }}
+                  />
+                  <Button fullWidth variant="outlined" component="span">
+                    {!previewImgUploaded ? 'Subir imagen' : 'Subir otra imagen'}
+                  </Button>
+                  <ErrorMessage component="small" name="image" />
+                </label>
+                <div data-testid="tbtn">
+                  <ButtonLoader
+                    label={isEditable ? 'Editar noticia' : 'Crear noticia'}
+                    loading={btnLoader}
+                  />
+                </div>
+              </form>
+            </Box>
+          </Container>
+        )}
+      </Formik>
+    </>
   )
 }
 

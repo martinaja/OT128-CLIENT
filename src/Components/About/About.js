@@ -115,7 +115,6 @@ const About = ({ title }) => {
                 vitae, dapibus odio.
               </p>
             </Box>
-            <MembersList />
           </Grid>
           <Grid item sx={12} md={3}>
             <div style={{ padding: '25px', margin: 'auto' }}>
@@ -123,7 +122,7 @@ const About = ({ title }) => {
                 className="twitter-timeline"
                 data-lang="es"
                 // data-width="1000"
-                data-height="650"
+                data-height="600"
                 data-dnt="true"
                 data-theme="light"
                 href="https://twitter.com/somosmas?ref_src=twsrc%5Etfw"
@@ -138,6 +137,7 @@ const About = ({ title }) => {
             </div>
           </Grid>
         </Grid>
+        <MembersList />
         {/* <link
           type="IN/FollowCompany"
           data-id={3144678}
