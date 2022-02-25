@@ -19,10 +19,8 @@ font-style: initial;
 	  display: block;
 	text-align-last: center;
  margin: 20px 0 22px 0;
-	font-size: 80px;
+	font-size: 70px;
 	line-height: 80px;
 	color: #171b1b;
 	text-shadow: 0 13.36px 8.896px #77ec85,0 -2px 1px #1d2727;
-	
-	/* padding: 15px */
-  }
+}
