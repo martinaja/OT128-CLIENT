@@ -7,7 +7,7 @@ import LoginForm from '../Components/Auth/LoginForm'
 import TestimonialHome from '../Components/Testimonials/TestimonialHome'
 import TestimonialDetails from '../Components/Testimonials/TestimonialDetails'
 import ActivityDetail from '../Components/Activities/ActivitiesDetails'
-
+const CampaignSelect = lazy(() => import('../Campaigns/CampaignSelect'))
 const NewsDetail = lazy(() => import('../Components/News/Detail/NewsDetail'))
 const About = lazy(() => import('../Components/About/About'))
 const ActivitiesList = lazy(() =>
@@ -74,6 +74,10 @@ export const PublicRoutes = () => (
 
         <Route exact path="/login">
           <LoginForm />
+        </Route>
+
+        <Route exact path="/campaign">
+          <CampaignSelect />
         </Route>
 
         <Route exact path="/register">

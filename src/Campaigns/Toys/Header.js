@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppBar, Box, Toolbar, Typography } from '@material-ui/core'
 import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   const isMatchSmartTv = useBreakPoints('(min-width: 1536px)')
@@ -17,17 +18,19 @@ const Header = () => {
       >
         <Toolbar>
           {isMatchTablet && (
-            <Box
-              component="img"
-              sx={{
-                width: 108,
-                height: 53,
-                m: 0,
-                p: 1,
-              }}
-              alt="Logo ong."
-              src="/images/Logo Somos Mas.png"
-            />
+            <Link to="/">
+              <Box
+                component="img"
+                sx={{
+                  width: 108,
+                  height: 53,
+                  m: 0,
+                  p: 1,
+                }}
+                alt="Logo ong."
+                src="/images/Logo Somos Mas.png"
+              />
+            </Link>
           )}
 
           <Box

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
 import { alertServiceError } from '../AlertService'
@@ -41,17 +41,13 @@ const TestimonialsList = ({ from }) => {
       {state.loader ? (
         <SkeletonArticle />
       ) : (
-        <>
+        <Box sx={{ mb: '100px' }}>
           {' '}
-          <h1
-            style={{
-              textAlign: 'center',
-              marginTop: '5rem',
-              marginBottom: '2rem',
-            }}
-          >
-            Testimonios
-          </h1>
+          <Box sx={{ pb: 4, textAlign: 'center' }}>
+            <Typography variant="h4" gutterBottom component="div">
+              Testimonios
+            </Typography>
+          </Box>
           <Grid
             sx={{ justifyContent: 'space-evenly' }}
             container
@@ -78,7 +74,7 @@ const TestimonialsList = ({ from }) => {
               </Box>
             )}
           </Grid>
-        </>
+        </Box>
       )}
     </>
   )
