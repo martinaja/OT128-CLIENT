@@ -30,7 +30,7 @@ const NewsList = ({ from }) => {
       sliceNews = state.news?.length - 3
       break
     case 'newsHome':
-      sliceNews = state.news?.length
+      sliceNews = state.news?.length - 9
       break
     default:
       break
@@ -45,13 +45,14 @@ const NewsList = ({ from }) => {
           {' '}
           <Box sx={{ pb: 4, textAlign: 'center' }}>
             <Typography variant="h4" gutterBottom component="div">
-              Todas las novedades
+              Ultimas novedades
             </Typography>
           </Box>
           <Grid
             sx={{
               justifyContent: 'space-evenly',
               py: 2,
+              mb: 4,
             }}
             container
             rows={{ xs: 1, sm: 8, md: 6 }}

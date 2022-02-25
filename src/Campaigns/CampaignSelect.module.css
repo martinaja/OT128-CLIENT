@@ -1,0 +1,9 @@
+.imgcard {
+  opacity: 1;
+  transition: 0.15s;
+}
+
+.imgcard:hover {
+  cursor: pointer;
+  filter: brightness(120%);
+}
