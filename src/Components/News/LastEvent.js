@@ -29,7 +29,7 @@ const LastEvent = () => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <Box sx={{ py: 2 }}>
-              <Typography variant="h3" component="div" gutterBottom>
+              <Typography variant="h4" component="div" gutterBottom>
                 Mira nuestro ultimo evento!
               </Typography>
               <Typography variant="button" display="block" gutterBottom>

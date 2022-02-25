@@ -29,8 +29,6 @@ const NewsList = ({ from }) => {
     }
   }, [state.status, dispatch, state.errorMsg])
 
-  console.log(state.news?.length)
-
   let sliceNews
   let startSlice
   switch (from) {
@@ -77,6 +75,7 @@ const NewsList = ({ from }) => {
                       image={element.image}
                       name={element.name}
                       description={element.content}
+                      fecha={element.updated_at}
                       link="novedades"
                     />
                   </Grid>
@@ -89,15 +88,22 @@ const NewsList = ({ from }) => {
             )}
 
             {/* pagination only for newsHome  */}
+
             {from === 'newsHome' && (
-              <Stack spacing={2}>
-                <Pagination
-                  color="primary"
-                  count={Math.ceil(state.news?.length / 6)}
-                  page={page}
-                  onChange={handleChange}
-                />
-              </Stack>
+              <Grid
+                Item
+                xs={12}
+                sx={{ justifyContent: 'center', display: 'flex' }}
+              >
+                <Stack spacing={2}>
+                  <Pagination
+                    color="primary"
+                    count={Math.ceil(state.news?.length / 6)}
+                    page={page}
+                    onChange={handleChange}
+                  />
+                </Stack>
+              </Grid>
             )}
           </Grid>
         </>
