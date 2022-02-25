@@ -44,7 +44,8 @@
 .social {
   width: 70%;
   color: #eee;
-  margin-left: 1rem;
+  margin: 5px 10px;
+  /* margin-left: 1rem; */
 }
 
 .social__tags {
