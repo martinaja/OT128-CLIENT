@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Pagination, Stack, Typography } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
 import { alertServiceError } from '../AlertService'
@@ -10,6 +10,11 @@ import { fetchNew } from '../../features/news/newsReducer'
 const NewsList = ({ from }) => {
   const dispatch = useDispatch()
   const state = useSelector((state) => state.news)
+
+  const [page, setPage] = useState(1)
+  const handleChange = (event, value) => {
+    setPage(value)
+  }
 
   useEffect(() => {
     if (state.status === 'idle') {
@@ -24,13 +29,18 @@ const NewsList = ({ from }) => {
     }
   }, [state.status, dispatch, state.errorMsg])
 
+  console.log(state.news?.length)
+
   let sliceNews
+  let startSlice
   switch (from) {
     case 'home':
-      sliceNews = state.news?.length - 3
+      sliceNews = 3
+      startSlice = 0
       break
     case 'newsHome':
-      sliceNews = state.news?.length - 9
+      sliceNews = 6 * page
+      startSlice = sliceNews - 6
       break
     default:
       break
@@ -59,7 +69,7 @@ const NewsList = ({ from }) => {
             spacing={{ xs: 2, md: 3 }}
           >
             {state.news?.length ? (
-              state.news?.slice(sliceNews).map((element) => {
+              state.news?.slice(startSlice, sliceNews).map((element) => {
                 return (
                   <Grid item key={element.id}>
                     <CustomCard
@@ -76,6 +86,18 @@ const NewsList = ({ from }) => {
               <Box sx={{ mt: 4 }}>
                 <p>No hay novedades</p>
               </Box>
+            )}
+
+            {/* pagination only for newsHome  */}
+            {from === 'newsHome' && (
+              <Stack spacing={2}>
+                <Pagination
+                  color="primary"
+                  count={Math.ceil(state.news?.length / 6)}
+                  page={page}
+                  onChange={handleChange}
+                />
+              </Stack>
             )}
           </Grid>
         </>

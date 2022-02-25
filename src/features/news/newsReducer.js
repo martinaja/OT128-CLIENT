@@ -61,7 +61,7 @@ export const newsSlice = createSlice({
       })
       .addCase(fetchNew.fulfilled, (state, action) => {
         state.status = action.payload?.message
-        state.news = action.payload?.data
+        state.news = action.payload?.data.reverse()
         state.loader = false
       })
       .addCase(fetchNew.rejected, (state, action) => {
@@ -76,7 +76,7 @@ export const newsSlice = createSlice({
       })
       .addCase(fetchSearchNews.fulfilled, (state, action) => {
         state.status = action.payload.message
-        state.news = action.payload.data
+        state.news = action.payload.data.reverse()
         state.loader = false
       })
       .addCase(fetchSearchNews.rejected, (state, action) => {
