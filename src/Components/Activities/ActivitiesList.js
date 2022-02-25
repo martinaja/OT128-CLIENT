@@ -5,8 +5,9 @@ import { getPublicActivities } from '../../features/activities/activitiesReducer
 import '../CardListStyles.css'
 import parse from 'html-react-parser'
 import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
+import { AllProjects } from './Pagination'
 
-const ActivitiesCard = ({ name, image, description, isMin }) => {
+export const ActivitiesCard = ({ name, image, description, isMin }) => {
   let minWidth = isMin ? 400 : 330
 
   return (
@@ -55,6 +56,7 @@ const ActivitiesList = () => {
 
   return (
     <>
+    {/* <AllProjects projectsList={activities}/> */}
       <Typography variant="h3" textAlign="center" mt={5}>
         Actividades
       </Typography>
@@ -74,20 +76,7 @@ const ActivitiesList = () => {
         >
           {activities.length > 0 ? (
 
-            activities.map((activity, index) => {
-
-              return (
-                <ActivitiesCard
-                  name={activity.name}
-                  image={activity.image}
-                  description={activity.description}
-                  isMin={true}
-
-                  key={index}
-
-                />
-              )
-            })
+            <AllProjects projectsList={activities}/>
           ) : (
             <p>No hay actividades</p>
           )}
@@ -106,21 +95,7 @@ const ActivitiesList = () => {
         >
           {activities.length > 0 ? (
 
-            activities.map((activity, index) => {
-
-              return (
-                <ActivitiesCard
-                  name={activity.name}
-                  image={activity.image}
-                  description={activity.description}
-                  isMin={false}
-
-                  key={index}
-
-
-                />
-              )
-            })
+            <AllProjects projectsList={activities}/>
           ) : (
             <p>No hay actividades</p>
           )}

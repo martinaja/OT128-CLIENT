@@ -1,6 +1,4 @@
 * {
-  margin: auto;
-  padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto';
 }
@@ -20,7 +18,7 @@
 .logo {
   margin-top: 50px;
   width: 7rem;
-  margin-right: 1rem;
+  margin-right: 2rem;
   margin-bottom: 2rem;
   margin-left: 2rem;
 }

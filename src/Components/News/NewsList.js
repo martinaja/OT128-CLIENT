@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
 import { alertServiceError } from '../AlertService'
@@ -43,16 +43,21 @@ const NewsList = ({ from }) => {
       ) : (
         <>
           {' '}
-          <h1
-            style={{
-              textAlign: 'center',
-              marginBottom: '2rem',
-            }}
-          >
-            Novedades
-          </h1>
+          <Box sx={{ pb: 4, textAlign: 'center' }}>
+            <Typography variant="h4" gutterBottom component="div">
+              Todas las novedades
+            </Typography>
+          </Box>
           <Grid
-            sx={{ justifyContent: 'space-evenly' }}
+            sx={{
+              justifyContent: 'space-evenly',
+              // border: 1,
+              // borderRadius: 4,
+              backgroundColor: 'white',
+              boxShadow: 2,
+              py: 2,
+              // borderColor: 'rgb(53, 133, 139)',
+            }}
             container
             rows={{ xs: 1, sm: 8, md: 6 }}
             spacing={{ xs: 2, md: 3 }}
