@@ -105,13 +105,14 @@ export default function Sidebar() {
         <Divider />
         <List>
           {links.map((link) => (
-            <ListItem button key={link.name}>
+            <ListItem button key={link.name} style={{ padding: '0' }}>
               <Link
                 to={link.path}
                 style={{
                   textDecoration: 'none',
                   width: '100%',
                   color: 'inherit',
+                  padding: '10px 15px',
                 }}
               >
                 {link.name}
