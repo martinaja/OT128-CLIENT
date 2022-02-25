@@ -32,6 +32,7 @@ export const userLogin = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await login(data)
+      console.log(response.data)
       if (response.data.success) {
         return response.data
       } else {
@@ -97,7 +98,7 @@ export const authReducer = createSlice({
         localStorage.setItem('token', action.payload.data.token)
       })
       .addCase(userLogin.rejected, (state, action) => {
-        state.status = action.payload
+        state.status = 'error'
       })
 
     builder
