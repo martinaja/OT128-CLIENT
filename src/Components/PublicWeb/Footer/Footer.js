@@ -12,7 +12,12 @@ function Footer() {
     <>
       <div className={style.container}>
         <Grid container className={style.footer__container}>
-          <Grid container alignItems="center" className={style.center}>
+          <Grid
+            container
+            alignItems="center"
+            className={style.center}
+            style={{ justifyContent: 'space-evenly' }}
+          >
             <Link to={'/'}>
               <img
                 alt="Logo ong."

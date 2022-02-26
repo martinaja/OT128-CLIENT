@@ -8,7 +8,7 @@ import {
 } from '../../Services/BaseHTTP/privateApiService'
 
 import Swal from 'sweetalert2'
-// import { Terms } from './Terms'
+
 import { useState } from 'react'
 
 const UserForm = ({usuario = undefined}) => {
@@ -119,7 +119,7 @@ const UserForm = ({usuario = undefined}) => {
         )}
       </Formik>
 
-      <Button
+      {/* <Button
         sx={{ width: '250px' }}
         variant="contained"
         onClick={() => setDisplay(!display)}
@@ -127,8 +127,8 @@ const UserForm = ({usuario = undefined}) => {
         Términos y condiciones
       </Button>
       <Box sx={{ display: display ? 'block' : 'none' }}>
-        {/* <Terms /> */}
-      </Box>
+        <Terms />
+      </Box> */}
     </Box>
   )
 }
