@@ -1,4 +1,4 @@
-import { Container } from '@mui/material'
+import { Box, Container } from '@mui/material'
 import React from 'react'
 import LastEvent from './LastEvent'
 import NewsList from './NewsList'
@@ -15,7 +15,20 @@ const PublicNewHome = () => {
       <LastEvent />
       <Container sx={{ alignContent: 'center', textAlign: 'center' }}>
         <NewsSearch />
-        <NewsList />
+
+        <Box
+          sx={{
+            backgroundColor: '#4fbdba',
+            backgroundImage:
+              ' url(https://www.transparenttextures.com/patterns/pyramid.png)',
+            boxShadow: 3,
+            borderRadius: 2,
+            pt: 3,
+            px: 1,
+          }}
+        >
+          <NewsList from={'newsHome'} />
+        </Box>
       </Container>
     </>
   )

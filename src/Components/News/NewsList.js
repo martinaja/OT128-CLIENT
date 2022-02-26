@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Pagination, Stack, Typography } from '@mui/material'
 import CustomCard from './../Card/CustomCard'
 import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
 import { alertServiceError } from '../AlertService'
@@ -10,6 +10,11 @@ import { fetchNew } from '../../features/news/newsReducer'
 const NewsList = ({ from }) => {
   const dispatch = useDispatch()
   const state = useSelector((state) => state.news)
+
+  const [page, setPage] = useState(1)
+  const handleChange = (event, value) => {
+    setPage(value)
+  }
 
   useEffect(() => {
     if (state.status === 'idle') {
@@ -25,12 +30,15 @@ const NewsList = ({ from }) => {
   }, [state.status, dispatch, state.errorMsg])
 
   let sliceNews
+  let startSlice
   switch (from) {
     case 'home':
-      sliceNews = state.news?.length - 3
+      sliceNews = 3
+      startSlice = 0
       break
     case 'newsHome':
-      sliceNews = state.news?.length
+      sliceNews = 6 * page
+      startSlice = sliceNews - 6
       break
     default:
       break
@@ -45,25 +53,21 @@ const NewsList = ({ from }) => {
           {' '}
           <Box sx={{ pb: 4, textAlign: 'center' }}>
             <Typography variant="h4" gutterBottom component="div">
-              Todas las novedades
+              Ultimas novedades
             </Typography>
           </Box>
           <Grid
             sx={{
               justifyContent: 'space-evenly',
-              // border: 1,
-              // borderRadius: 4,
-              backgroundColor: 'white',
-              boxShadow: 2,
               py: 2,
-              // borderColor: 'rgb(53, 133, 139)',
+              mb: 4,
             }}
             container
             rows={{ xs: 1, sm: 8, md: 6 }}
             spacing={{ xs: 2, md: 3 }}
           >
             {state.news?.length ? (
-              state.news?.slice(sliceNews).map((element) => {
+              state.news?.slice(startSlice, sliceNews).map((element) => {
                 return (
                   <Grid item key={element.id}>
                     <CustomCard
@@ -71,6 +75,7 @@ const NewsList = ({ from }) => {
                       image={element.image}
                       name={element.name}
                       description={element.content}
+                      fecha={element.updated_at}
                       link="novedades"
                     />
                   </Grid>
@@ -80,6 +85,25 @@ const NewsList = ({ from }) => {
               <Box sx={{ mt: 4 }}>
                 <p>No hay novedades</p>
               </Box>
+            )}
+
+            {/* pagination only for newsHome  */}
+
+            {from === 'newsHome' && (
+              <Grid
+                Item
+                xs={12}
+                sx={{ justifyContent: 'center', display: 'flex' }}
+              >
+                <Stack spacing={2}>
+                  <Pagination
+                    color="primary"
+                    count={Math.ceil(state.news?.length / 6)}
+                    page={page}
+                    onChange={handleChange}
+                  />
+                </Stack>
+              </Grid>
             )}
           </Grid>
         </>
