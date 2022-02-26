@@ -1,5 +1,5 @@
-import { Container, Typography } from '@mui/material'
-import React, { useEffect } from 'react'
+import { Container, Grid, Pagination, Stack, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import '../CardListStyles.css'
 import { getTestimonial } from '../../features/testimonial/testimonialReducer'
@@ -11,6 +11,13 @@ const TestimonialHome = () => {
     (state) => state.testimonial.testimonials,
   )
   const dispatch = useDispatch()
+
+  const [page, setPage] = useState(1)
+  const handleChange = (event, value) => {
+    setPage(value)
+  }
+  const sliceTestimonials = 6 * page
+  const startSlice = sliceTestimonials - 6
 
   useEffect(() => {
     dispatch(getTestimonial())
@@ -32,20 +39,22 @@ const TestimonialHome = () => {
           }}
         >
           {testimonialState?.length > 0 ? (
-            testimonialState.map((testimony, index) => {
-              return (
-                <Container>
-                  <TestimonialGrid
-                    id={testimony.id}
-                    link="testimonios"
-                    name={testimony.name}
-                    image={testimony.image}
-                    description={testimony.description}
-                    key={index}
-                  />
-                </Container>
-              )
-            })
+            testimonialState
+              .slice(startSlice, sliceTestimonials)
+              .map((testimony, index) => {
+                return (
+                  <Container>
+                    <TestimonialGrid
+                      id={testimony.id}
+                      link="testimonios"
+                      name={testimony.name}
+                      image={testimony.image}
+                      description={testimony.description}
+                      key={index}
+                    />
+                  </Container>
+                )
+              })
           ) : (
             <p style={{ textAlign: 'center' }}>No se encontraron testimonios</p>
           )}
@@ -53,6 +62,20 @@ const TestimonialHome = () => {
       ) : (
         <SkeletonArticle />
       )}
+      <Grid
+        Item
+        xs={12}
+        sx={{ justifyContent: 'center', display: 'flex', mb: 3 }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            color="primary"
+            count={Math.ceil(testimonialState?.length / 6)}
+            page={page}
+            onChange={handleChange}
+          />
+        </Stack>
+      </Grid>
     </>
   )
 }
