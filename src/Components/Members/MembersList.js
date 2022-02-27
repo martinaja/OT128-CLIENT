@@ -17,20 +17,17 @@ import { getPublicMembers } from '../../Services/apiServices/membersApiService'
 
 const mock = [
   {
-    image:
-      'https://images.unsplash.com/photo-1573497491765-dccce02b29df?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8dGVhbSUyMG1lbWJlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+    image: 'images/membermock1.jpg',
     name: 'Juana González',
     description: 'Trabajadora social',
   },
   {
-    image:
-      'https://images.unsplash.com/photo-1562788869-4ed32648eb72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dGVhbSUyMG1lbWJlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+    image: 'images/membermock3.jpg',
     name: 'Diego Pérez',
     description: 'Finanzas',
   },
   {
-    image:
-      'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8dGVhbSUyMG1lbWJlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60',
+    image: 'images/membermock2.jpg',
     name: 'Sofía Sánchez',
     description: 'Logística',
   },
@@ -56,7 +53,6 @@ export const MembersList = () => {
           {
             // MOCK FOR PRESENTATION
             // mock?.length > 0 ? (
-
             //   mock?.map((element) => {
             //     return (
             //       <Grid item key={element.id}>
@@ -84,7 +80,9 @@ export const MembersList = () => {
             //               <h4>{element.name}</h4>
             //             </Typography>
             //             <Typography variant="h7" color="text.secondary">
-            //               {parse(element.description ? element.description : '')}
+            //               {parse(
+            //                 element.description ? element.description : '',
+            //               )}
             //             </Typography>
             //           </CardContent>
 
