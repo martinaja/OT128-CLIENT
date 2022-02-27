@@ -24,9 +24,9 @@ export const AllProjects = ({ projectsList }, { numItems = 6 }) => {
 
   return (
     <Box sx={{
-      alignItems: 'center',
+      maxWidth: '1400px',
       justifyContent: 'center',
-      pl:{ md: '45px' }
+      mx: 'auto',
     }}>
       <Grid container>
         {projectsList
@@ -46,7 +46,7 @@ export const AllProjects = ({ projectsList }, { numItems = 6 }) => {
           })}      
       </Grid>
       <Divider />
-      <Box component="span" >
+      <Box component="span" sx={{ mt:'20px'}}>
         <Pagination
           count={noOfPages}
           page={page}
