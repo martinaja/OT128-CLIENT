@@ -13,7 +13,7 @@ const Donations = () => {
       />
       <Container>
         <DonationsMp />
-        <Typography variant="h6">
+        <Typography variant="h6" marginBottom={3}>
           ¿POR QUÉ ES TAN IMPORTANTE TU DONATIVO? Tus donativos son la esperanza
           de muchas personas SOMOS MAS se compromete a informar a las personas e
           instituciones que hagan aportaciones finalistas sobre el proyecto o
