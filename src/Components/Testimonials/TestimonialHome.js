@@ -1,10 +1,10 @@
-import { Typography } from '@mui/material'
-import React, { useEffect } from 'react'
+import { Container, Grid, Pagination, Stack, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import '../CardListStyles.css'
-import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
 import { getTestimonial } from '../../features/testimonial/testimonialReducer'
-import CustomCard from '../Card/CustomCard'
+import { TestimonialGrid } from './TestimonialGrid'
+import { SkeletonArticle } from '../Skeleton/SkeletonArticle'
 
 const TestimonialHome = () => {
   const testimonialState = useSelector(
@@ -12,8 +12,12 @@ const TestimonialHome = () => {
   )
   const dispatch = useDispatch()
 
-  const isMatchMin = useBreakPoints('(max-width: 694px)')
-  const isMatchRest = useBreakPoints('(min-width: 695px)')
+  const [page, setPage] = useState(1)
+  const handleChange = (event, value) => {
+    setPage(value)
+  }
+  const sliceTestimonials = 6 * page
+  const startSlice = sliceTestimonials - 6
 
   useEffect(() => {
     dispatch(getTestimonial())
@@ -21,70 +25,57 @@ const TestimonialHome = () => {
 
   return (
     <>
+      <img src="/images/testimonios.jpeg" alt="testomonios" width="100%" />
       <Typography variant="h3" textAlign="center" mt={5}>
         Testimonios
       </Typography>
-      <Typography variant="body1" textAlign="center" p={2}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-        blanditiis enim ipsa nemo asperiores illo, perspiciatis ratione rem non
-        corporis itaque, ea reiciendis dolorem doloribus expedita vero
-        necessitatibus quasi magni?
-      </Typography>
-      {isMatchMin && (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          {testimonialState?.length > 0 ? (
-            testimonialState.map((testimony, index) => {
-              return (
-                <CustomCard
-                  id={testimony.id}
-                  link="testimonios"
-                  name={testimony.name}
-                  image={testimony.image}
-                  description={testimony.description}
-                  key={index}
-                />
-              )
-            })
-          ) : (
-            <p>No se encontraron testimonios</p>
-          )}
-        </div>
-      )}
-
-      {isMatchRest && (
+      {testimonialState?.length > 0 ? (
         <div
           style={{
             display: 'grid',
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyItems: 'center',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 550px))',
+            justifyContent: 'center',
+            marginTop: '3rem',
           }}
         >
           {testimonialState?.length > 0 ? (
-            testimonialState.map((testimony, index) => {
-              return (
-                <CustomCard
-                  id={testimony.id}
-                  link="testimonios"
-                  name={testimony.name}
-                  image={testimony.image}
-                  description={testimony.description}
-                  key={index}
-                />
-              )
-            })
+            testimonialState
+              .slice(startSlice, sliceTestimonials)
+              .map((testimony, index) => {
+                return (
+                  <Container>
+                    <TestimonialGrid
+                      id={testimony.id}
+                      link="testimonios"
+                      name={testimony.name}
+                      image={testimony.image}
+                      description={testimony.description}
+                      key={index}
+                    />
+                  </Container>
+                )
+              })
           ) : (
-            <p>No se encontraron testimonios</p>
+            <p style={{ textAlign: 'center' }}>No se encontraron testimonios</p>
           )}
         </div>
+      ) : (
+        <SkeletonArticle />
       )}
+      <Grid
+        Item
+        xs={12}
+        sx={{ justifyContent: 'center', display: 'flex', mb: 3 }}
+      >
+        <Stack spacing={2}>
+          <Pagination
+            color="primary"
+            count={Math.ceil(testimonialState?.length / 6)}
+            page={page}
+            onChange={handleChange}
+          />
+        </Stack>
+      </Grid>
     </>
   )
 }

@@ -121,10 +121,10 @@
 .navBtnLink,
 .navDonationLink {
   border-radius: 10px;
-  background: #fff;
+  background: #FFF;
   white-space: nowrap;
-  padding: 8px 15px;
-  color: #35858b;
+  padding: 6px 8px;
+  color: rgb(12, 9, 9);
   font-size: 16px;
   outline: none;
   border: none;
@@ -136,7 +136,7 @@
 .navBtnLink:hover,
 .navDonationLink:hover {
   transition: background-color color 0.2s ease-in-out;
-  background-color: transparent;
+  background-color: #272c34;
   color: #fff;
 }
 
@@ -219,7 +219,7 @@
   cursor: pointer;
 }
 .sidebarLink:hover {
-  color: #4fbdba;
+  color: #AEFEFF;
   transition: 0.2s ease-in-out;
 }
 
@@ -234,10 +234,10 @@
   flex-direction: column;
   justify-content: center;
   border-radius: 10px;
-  background: #fff;
+  background: #272c34;
   white-space: nowrap;
   padding: 8px 30px;
-  color: #272c34;
+  color: #fff;
   font-size: 1.3rem;
   outline: none;
   border: none;
@@ -257,7 +257,7 @@
 .sidebarRoute:hover {
   transition: background-color color 0.2s ease-in-out;
   background-color: transparent;
-  color: #fff;
+  color: rgb(20, 18, 18);
 }
 
 .sidebarRoute:active {
@@ -270,11 +270,11 @@
 }
 
 .navDonationLink {
-  background-color: transparent;
+  background-color: #FFF;
   background-image: url('../../../assets/MP.png');
-  background-size: contain;
+  background-size: 70%;
   background-repeat: no-repeat;
   background-position: center;
-  width: 5rem;
-  height: 2.5rem;
+  width: 7.7rem;
+  height: 2.2rem;
 }

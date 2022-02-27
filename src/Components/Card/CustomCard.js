@@ -14,6 +14,7 @@ const CustomCard = ({
   name,
   description,
   link,
+  fecha,
 }) => {
   return (
     <Card
@@ -21,12 +22,13 @@ const CustomCard = ({
         maxWidth: 330,
         minWidth: 330,
         height: 400,
-        background: 'rgba(255,255,255,0.2)',
+        background: 'rgba(255,255,255,0.75)',
         boxShadow: 3,
         display: 'flex',
         justifyContent: 'space-between',
         flexDirection: 'column',
         mb: 4,
+        position: 'relative',
       }}
     >
       <CardMedia
@@ -35,6 +37,23 @@ const CustomCard = ({
         image={String(image)}
         alt="card image"
       />
+      {fecha && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '0',
+            left: '0',
+            zIndex: '1000',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            color: 'white',
+            padding: '2px',
+            paddingLeft: '6px',
+            paddingRight: '4px',
+          }}
+        >
+          <small>{new Date(fecha).toLocaleDateString('es-AR')}</small>
+        </div>
+      )}
       <CardContent
         style={{
           display: 'flex',
