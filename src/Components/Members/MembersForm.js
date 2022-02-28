@@ -24,8 +24,8 @@ const MembersForm = () => {
   const state = useSelector((state) => state.members)
   const dispatch = useDispatch()
 
-  // const { id } = useParams()
-  let id
+  const { id } = useParams()
+  // let id
   const history = useHistory()
 
   const [editable, setEditable] = useState(false)
@@ -119,7 +119,7 @@ const MembersForm = () => {
       initialValues={{
         name: state.members.name || '',
         image: state.members.image || '',
-        // description: state.members.description || '',
+        description: state.members.description || '',
         facebookUrl: state.members.facebookUrl || '',
         linkedinUrl: state.members.linkedinUrl || '',
       }}
