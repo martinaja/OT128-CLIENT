@@ -55,7 +55,7 @@ const Header = () => {
                 m: 'auto',
               }}
             >
-              Eslogan ejemplo.
+              Estudiar salva vidas
             </Typography>
           )}
         </Toolbar>

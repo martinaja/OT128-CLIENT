@@ -57,7 +57,7 @@ const Header = () => {
                 m: 'auto',
               }}
             >
-              Eslogan ejemplo.
+              Jugate!
             </Typography>
           )}
         </Toolbar>

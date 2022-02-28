@@ -24,15 +24,16 @@ export const AllProjects = ({ projectsList }, { numItems = 6 }) => {
 
   return (
     <Box sx={{
-      alignItems: 'center',
+      maxWidth: '1400px',
       justifyContent: 'center',
+      mx: 'auto',
     }}>
       <Grid container maxWidth='1300px' m='auto'>
         {projectsList
           .slice((page - 1) * itemsPerPage, page * itemsPerPage)
           .map((projectItem, index) => {
             return (
-              <Grid item xs={8} md={6} lg={4} key={index}>
+              <Grid item xs={8} md={6} lg={4} key={index} mx='auto'>
                 <ActivitiesCard
                   name={projectItem.name}
                   image={projectItem.image}
@@ -44,8 +45,8 @@ export const AllProjects = ({ projectsList }, { numItems = 6 }) => {
             )
           })}      
       </Grid>
-      <Divider sx={{ pb:'20px' }}/>
-      <Box component="span" sx={{ px:'20px'}}>
+      <Divider />
+      <Box component="span" sx={{ mx:'20px'}}>
         <Pagination
           count={noOfPages}
           page={page}
