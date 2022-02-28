@@ -1,5 +1,5 @@
 import React from 'react'
-import defaultImage from '../assets/defaultImage.jpg'
+// import defaultImage from '../assets/defaultImage.jpg'
 import { Box } from '@mui/material'
 
 export const Title = ({ children, image }) => {
