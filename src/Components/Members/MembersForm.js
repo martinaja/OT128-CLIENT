@@ -25,7 +25,6 @@ const MembersForm = () => {
   const dispatch = useDispatch()
 
   const { id } = useParams()
-  // let id
   const history = useHistory()
 
   const [editable, setEditable] = useState(false)

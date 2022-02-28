@@ -29,6 +29,7 @@ const Content = () => {
       container
       spacing={1}
       style={{ background: isTV && 'rgba(7, 34, 39, .1)' }}
+      id="grid-campaign"
     >
       <Grid item xs={12}>
         <Paper elevation={5} className="date-container">
