@@ -21,12 +21,6 @@ const Header = () => {
       return data.pathName !== 'Contacto'
     })
 
-  if (isOpen) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = 'visible'
-  }
-
   return (
     <div id="main-header">
       <NavBar

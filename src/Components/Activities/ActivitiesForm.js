@@ -113,7 +113,7 @@ const ActivitiesForm = () => {
         touched,
       }) => (
         <Container>
-          <Box sx={{ boxShadow: 5, p: 5, mt: 2 }}>
+          <Box sx={{ boxShadow: 5, p: 5, mt: 2, background: 'white' }}>
             <Typography variant="h4">
               {!id ? 'Crear Actividad' : 'Editar Actividad'}
             </Typography>
