@@ -105,7 +105,6 @@ const CategoriesForm = () => {
       ...values,
       image: base64,
     }
-    console.log(newToSend.image)
     let response
     //depending of the state of isEditing call post or put
     if (!isEditing) {
@@ -140,7 +139,7 @@ const CategoriesForm = () => {
             sendCategory(values)
             setCategory({})
             setPreviewImg('')
-            history.push('/backoffice/create-category')
+            history.push('/backoffice/categories')
           }}
         >
           {({

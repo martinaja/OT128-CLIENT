@@ -52,58 +52,8 @@ export const MembersList = () => {
         >
           {
             // MOCK FOR PRESENTATION
-            // mock?.length > 0 ? (
-            //   mock?.map((element) => {
-            //     return (
-            //       <Grid item key={element.id}>
-            //         <Card
-            //           sx={{
-            //             width: 300,
-            //             minHeight: 500,
-            //             display: 'flex',
-            //             justifyContent: 'space-between',
-            //             flexDirection: 'column',
-            //           }}
-            //         >
-            //           <CardMedia
-            //             component="img"
-            //             image={element.image}
-            //             alt={element.name}
-            //             style={{
-            //               height: '275px',
-            //               objectFit: 'cover',
-            //             }}
-            //           />
-
-            //           <CardContent>
-            //             <Typography gutterBottom variant="h5" component="div">
-            //               <h4>{element.name}</h4>
-            //             </Typography>
-            //             <Typography variant="h7" color="text.secondary">
-            //               {parse(
-            //                 element.description ? element.description : '',
-            //               )}
-            //             </Typography>
-            //           </CardContent>
-
-            //           <CardActions
-            //             style={{ marginLeft: 'auto', marginRight: 'auto' }}
-            //           >
-            //             <Button size="small" href={element.facebookUrl}>
-            //               <Facebook color="primary" /> Facebook
-            //             </Button>
-            //             <Button size="small" href={element.linkedinUrl}>
-            //               <LinkedIn color="primary" /> LinkedIn
-            //             </Button>
-            //           </CardActions>
-            //         </Card>
-            //       </Grid>
-            //     )
-            //   })
-            // API DATA
-
-            data?.length > 0 ? (
-              data?.map((element) => {
+            mock?.length > 0 ? (
+              mock?.map((element) => {
                 return (
                   <Grid item key={element.id}>
                     <Card
@@ -151,6 +101,56 @@ export const MembersList = () => {
                 )
               })
             ) : (
+              // API DATA
+
+              // data?.length > 0 ? (
+              //   data?.map((element) => {
+              //     return (
+              //       <Grid item key={element.id}>
+              //         <Card
+              //           sx={{
+              //             width: 300,
+              //             minHeight: 500,
+              //             display: 'flex',
+              //             justifyContent: 'space-between',
+              //             flexDirection: 'column',
+              //           }}
+              //         >
+              //           <CardMedia
+              //             component="img"
+              //             image={element.image}
+              //             alt={element.name}
+              //             style={{
+              //               height: '275px',
+              //               objectFit: 'cover',
+              //             }}
+              //           />
+
+              //           <CardContent>
+              //             <Typography gutterBottom variant="h5" component="div">
+              //               <h4>{element.name}</h4>
+              //             </Typography>
+              //             <Typography variant="h7" color="text.secondary">
+              //               {parse(
+              //                 element.description ? element.description : '',
+              //               )}
+              //             </Typography>
+              //           </CardContent>
+
+              //           <CardActions
+              //             style={{ marginLeft: 'auto', marginRight: 'auto' }}
+              //           >
+              //             <Button size="small" href={element.facebookUrl}>
+              //               <Facebook color="primary" /> Facebook
+              //             </Button>
+              //             <Button size="small" href={element.linkedinUrl}>
+              //               <LinkedIn color="primary" /> LinkedIn
+              //             </Button>
+              //           </CardActions>
+              //         </Card>
+              //       </Grid>
+              //     )
+              //   })
               <h1>No se encontraron resultados</h1>
             )
           }
