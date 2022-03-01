@@ -4,16 +4,15 @@ import {
   FormControl,
   FormLabel,
   Input,
-  TableFooter,
   Typography,
+  TextField,
 } from '@mui/material'
 import { useState } from 'react'
-
 
 export const FooterSuscribe = () => {
   const isUserSubscribe = localStorage.getItem('isUserSubscribe')
 
-  return <footer>{!isUserSubscribe && <SubscribeForm />}</footer>
+  return <>{!isUserSubscribe && <SubscribeForm />}</>
 }
 
 const SubscribeForm = () => {
@@ -21,12 +20,12 @@ const SubscribeForm = () => {
   const [inputError, setInputError] = useState('')
 
   const handleSubmit = (e) => {
-    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(inputEmail)) {
-      setInputError('* direccion de email incorrecta')
-      return null // Later add alert message for user input error
-    }
-
     e.preventDefault()
+
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(inputEmail)) {
+      setInputError('* Direccion de email incorrecta')
+      return console.log('error') // Later add alert message for user input error
+    }
 
     localStorage.setItem('isUserSubscribe', true)
 
@@ -34,33 +33,40 @@ const SubscribeForm = () => {
   }
 
   return (
-    <TableFooter>
-      <Container >
-        <div className="subscribe__container">
-          <Typography>Informate</Typography>
-          <FormControl onSubmit={handleSubmit}>
-            <FormLabel>
-              <Typography>e-mail</Typography>
-              <Input
-                color="warning"
-                type="email"
-                name="subscribeEmail"
-                value={inputEmail}
-                onChange={(e) => setInputEmail(e.target.value)}
-              />
-            </FormLabel>
-            <small>{inputError}</small>
-            <Button
-              type="submit"
-              value="Subscribe"
-              width="18px"
-              color="inherit"
-            >
-              Suscribe
-            </Button>
-          </FormControl>
-        </div>
-      </Container>
-    </TableFooter>
+    <Container>
+      {/* <div className="subscribe__container">
+        
+        <FormControl onSubmit={handleSubmit}>
+          <FormLabel>
+            <Typography>Correo electrónico</Typography>
+            <Input
+              color="warning"
+              type="email"
+              name="subscribeEmail"
+              value={inputEmail}
+              onChange={(e) => setInputEmail(e.target.value)}
+            />
+          </FormLabel>
+          <small>{inputError}</small>
+          <Button type="submit" value="Subscribe" width="18px" color="inherit">
+            Suscribirme
+          </Button>
+        </FormControl>
+      </div> */}
+      <FormControl onSubmit={handleSubmit}>
+        <Typography>Recibir las ultimas novedades</Typography>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          id="email"
+          label="Correo electrónico"
+          name="email"
+          error={inputError}
+        />
+        <Button type="submit" value="Subscribe" width="18px" color="inherit">
+          Suscribirme
+        </Button>
+      </FormControl>
+    </Container>
   )
 }

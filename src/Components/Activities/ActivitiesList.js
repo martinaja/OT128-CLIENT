@@ -17,8 +17,8 @@ export const ActivitiesCard = ({ name, image, description, isMin }) => {
         maxWidth: minWidth,
         background: 'rgba(255,255,255,0.6)',
         boxShadow: 3,
-        m: {xs:'1px', sm:3},
-        mb: {xs:'10px', sm:3},
+        m: { xs: '1px', sm: 3 },
+        mb: { xs: '10px', sm: 3 },
       }}
     >
       <CardMedia component="img" height="300" image={image} alt={name} />
@@ -59,7 +59,7 @@ const ActivitiesList = () => {
     <>
       <Box
         as="img"
-        sx={{ width: '100vw', height: '45vh'}}
+        sx={{ width: '100vw', height: '45vh' }}
         src="/images/actividades1.jpg"
         alt="actividades"
       />
@@ -72,8 +72,7 @@ const ActivitiesList = () => {
       {isMatchMin && (
         <div>
           {activities.length > 0 ? (
-
-            <AllProjects projectsList={activities}/>
+            <AllProjects projectsList={activitiesMokData} />
           ) : (
             <p>No hay actividades</p>
           )}
@@ -83,8 +82,7 @@ const ActivitiesList = () => {
       {isMatchRest && (
         <div>
           {activities.length > 0 ? (
-
-            <AllProjects projectsList={activities}/>
+            <AllProjects projectsList={activitiesMokData} />
           ) : (
             <p>No hay actividades</p>
           )}
