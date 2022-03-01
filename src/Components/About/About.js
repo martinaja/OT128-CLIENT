@@ -107,8 +107,15 @@ const About = ({ title }) => {
               </ul>
             </Box>
           </Grid>
-          <Grid item sx={12} md={3}>
-            <div style={{ padding: '25px', margin: 'auto' }}>
+          <Grid
+            item
+            sx={12}
+            md={3}
+            style={{
+              width: '100%',
+            }}
+          >
+            <div style={{ padding: '25px' }}>
               <a
                 className="twitter-timeline"
                 data-lang="es"
