@@ -10,39 +10,39 @@ export const TestimonialGrid = ({ id, link, name, image, description }) => {
         boxShadow: 8,
         backgroundColor: 'transparent',
         position: 'relative',
+        display: 'flex',
+        flexDirection: { xs: 'column', md: 'row' },
+        marginBottom: '2rem',
+        width: '100%',
+        maxHeight: '30rem',
+        padding: '1rem',
+        gap: '15px',
       }}
     >
+      <Avatar
+        sx={{
+          width: 200,
+          height: 200,
+          alignSelf: { xs: 'center', md: 'start' },
+        }}
+        src={image}
+        alt={name}
+      />
       <div
         style={{
-          display: 'flex',
-          marginBottom: '2rem',
           width: '100%',
-          maxHeight: '15rem',
-          padding: '1rem',
+          overflow: 'auto',
+          // paddingLeft: '10px',
         }}
       >
-        <Avatar
-          sx={{
-            width: 200,
-            height: 200,
-          }}
-          src={image}
-          alt={name}
-        />
-        <div
-          style={{
-            width: '100%',
-          }}
-        >
-          <Typography variant="h5" sx={{ mb: 2 }}>
-            {name}
-          </Typography>
-          <Typography variant="body1" textAlign="center">
-            {descriptionParse?.length > 0
-              ? descriptionParse
-              : 'no se proporcionó descripción'}
-          </Typography>
-        </div>
+        <Typography variant="h5" sx={{ mb: 2 }}>
+          {name}
+        </Typography>
+        <Typography variant="body1">
+          {descriptionParse?.length > 0
+            ? descriptionParse
+            : 'no se proporcionó descripción'}
+        </Typography>
       </div>
     </Paper>
   )
