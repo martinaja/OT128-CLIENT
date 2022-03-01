@@ -53,7 +53,7 @@ const About = ({ title }) => {
           lang: es_AR
         </script>
       </Helmet>
-      <img src="images/nosotros.jpeg" width="100%" alt="nosotros" />
+      <img src="images/nosotros.png" width="100%" alt="nosotros" />
       <Container style={{ textAlign: 'center' }}>
         {/* <Title>Nosotros</Title> */}
         {/* <Box>

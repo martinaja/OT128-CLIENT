@@ -25,7 +25,7 @@ const TestimonialHome = () => {
 
   return (
     <>
-      <img src="/images/testimonios.jpeg" alt="testomonios" width="100%" />
+      <img src="/images/testimonios.png" alt="testomonios" width="100%" />
       <Typography variant="h3" textAlign="center" mt={5}>
         Testimonios
       </Typography>
