@@ -113,3 +113,5 @@ const NewsList = ({ from }) => {
 }
 
 export default NewsList
+
+
