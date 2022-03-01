@@ -139,7 +139,7 @@ const CategoriesForm = () => {
             sendCategory(values)
             setCategory({})
             setPreviewImg('')
-            history.push('/backoffice/create-category')
+            history.push('/backoffice/categories')
           }}
         >
           {({

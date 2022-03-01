@@ -162,10 +162,10 @@ const MembersForm = () => {
         <Container>
           <Box sx={{ boxShadow: 5, p: 5, mt: 2, backgroundColor: 'white' }}>
             <h1>{editable ? 'Editar Miembro' : 'Crear Miembro'}</h1>
-            {previewMemberImg || state.members.image ? (
+            {previewMemberImg || urlImage ? (
               <img
                 style={{ maxWidth: '100%' }}
-                src={previewMemberImg || state.members.image}
+                src={previewMemberImg || urlImage}
                 alt={state.members.name}
               />
             ) : null}
