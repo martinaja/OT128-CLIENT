@@ -5,7 +5,7 @@ import { getPublicActivities } from '../../features/activities/activitiesReducer
 import '../CardListStyles.css'
 import parse from 'html-react-parser'
 import { useBreakPoints } from '../../utils/hooks/useBreakPoints'
-import { AllProjects } from './Pagination'
+import { activitiesMokData, AllProjects } from './Pagination'
 
 export const ActivitiesCard = ({ name, image, description, isMin }) => {
   let minWidth = isMin ? 390 : 330
