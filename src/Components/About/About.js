@@ -3,7 +3,6 @@ import { Box, Container, Grid } from '@mui/material'
 import { getOrganization } from './../../Services/apiServices/organizationApiService'
 import { alertServiceError } from '../AlertService'
 import Spinner from '../Spinner'
-import { Title } from '../Title'
 import { MembersList } from '../Members/MembersList'
 import { LinkedinFollowCompany } from 'react-social-plugins'
 import { Helmet } from 'react-helmet'
@@ -68,44 +67,44 @@ const About = ({ title }) => {
               />
               <h3 style={{ margin: '15px 0' }}>{data?.welcome_text}</h3>
               {/* <p style={{ margin: '35px 0' }}>{data?.long_description}</p> */}
-              <p style={{ margin: '15px 0' }}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin
-                vel placerat nisi. Proin aliquam finibus nulla eget vehicula.
-                Aliquam sodales semper porta. Quisque aliquet felis ante, vitae
-                accumsan erat ultricies a. Ut iaculis velit urna, mattis
-                bibendum sem congue elementum. Duis tempus odio ut purus
-                ullamcorper aliquam. In vehicula justo in lacus molestie
-                bibendum. Nulla ipsum leo, congue et feugiat in, pellentesque a
-                lorem.
-              </p>
-              <p style={{ margin: '15px 0' }}>
-                Duis id orci nisl. Duis aliquam rutrum felis vel pretium. Donec
-                vestibulum urna et augue dignissim, id hendrerit dui aliquet.
-                Morbi finibus tellus tellus, vel venenatis ex hendrerit a. Morbi
-                ac consectetur nulla. Aliquam efficitur, odio non sagittis
-                condimentum, arcu ipsum luctus nibh, vitae vehicula turpis metus
-                a purus. Maecenas ac turpis sed metus pulvinar lobortis non quis
-                arcu. Sed ut leo nec arcu semper auctor. Integer aliquet sed
-                justo posuere tempor. Quisque augue urna, vulputate vitae purus
-                a, viverra dictum neque. Proin commodo felis nec nibh varius
-                pulvinar. Vivamus scelerisque massa eget justo luctus aliquet.
-                In euismod lacinia tempor. Sed interdum purus at mollis
-                condimentum. Aenean neque mauris, gravida sit amet felis eu,
-                interdum viverra arcu. Aliquam tellus est, sodales eu ipsum
-                tincidunt, malesuada viverra ex.
-              </p>
-              <p style={{ margin: '15px 0' }}>
-                In vel lectus sapien. Morbi porta odio tristique, aliquam eros
-                vel, dapibus erat. Morbi consectetur pulvinar nulla vitae
-                scelerisque. Quisque mauris ante, porttitor sit amet hendrerit
-                vitae, congue non est. Duis vestibulum tortor eu tellus finibus
-                egestas. Sed sed ligula rutrum, maximus odio ut, efficitur
-                nulla. Praesent sed ultrices eros. Proin facilisis ultricies
-                orci vel hendrerit. Morbi gravida non nunc at scelerisque.
-                Aliquam auctor sed erat at blandit. Nunc sollicitudin est vitae
-                ligula venenatis laoreet. Donec at metus pulvinar, rhoncus leo
-                vitae, dapibus odio.
-              </p>
+              <ul>
+                <li>
+                  <b>Nosotros</b>
+                </li>
+                <p style={{ margin: '15px 0' }}>
+                  Desde 1997 en Somos Más trabajamos con los chicos y chicas,
+                  mamás y papás, abuelos y vecinos del barrio La Cava generando
+                  procesos procesos de crecimiento y de inserción social.
+                  Uniendo las manos de todas las familias, las que vivien en el
+                  barrio y las que viven fuera de él, es que podemos pensar,
+                  crear y garantizar estos procesos. Somos una asociación sin
+                  fines de lucro que se creó en 1997 con la intención de dar
+                  alimentos a las familias del barrio. Con el tiempo fuimos
+                  involucrándonos con la comunidad y agrandando y mejorando
+                  nuestra capacidad de trabajo. Hoy somos un centro comunitario
+                  que acompaña a más de 700 personas a través de las áreas de:
+                  Educación, deportes, primera infancia, salud, alimentación y
+                  trabajo social.
+                </p>
+                <li>
+                  <b>Visión</b>
+                </li>
+                <p style={{ margin: '15px 0' }}>
+                  Mejorar la calidad de ida de niños y familias en situación de
+                  vulnerabilidad en el barrio La Cava, otorgando un cambio de
+                  rumbo en cada individuo a través de la educación, salud,
+                  deporte, responsabilidad y compromiso
+                </p>
+                <li>
+                  <b>Misión</b>
+                </li>
+                <p style={{ margin: '15px 0' }}>
+                  Trabajar articuladamente con los distintos aspectos de la vida
+                  de las familias, generando espacios de desarrollo personal y
+                  familiar, brindando herramientas que logren mejorar la calidad
+                  de vida a través de su propio esfuerzo.
+                </p>
+              </ul>
             </Box>
           </Grid>
           <Grid item sx={12} md={3}>
