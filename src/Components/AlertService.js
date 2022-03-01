@@ -50,7 +50,7 @@ export function alertServiceError(title, text) {
 
 export function alertDonationsMP(image) {
   Swal.fire({
-    title: 'Ingrese su donación',
+    title: 'Ingrese su ayuda',
     input: 'text',
     inputAttributes: {
       autocapitalize: 'off',
