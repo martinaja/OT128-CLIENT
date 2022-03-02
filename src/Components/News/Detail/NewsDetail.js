@@ -8,6 +8,7 @@ import { Controller, Scene } from 'react-scrollmagic'
 import { Tween, Timeline } from 'react-gsap'
 import { Title } from '../../Title'
 import parse from 'html-react-parser'
+import { mockNews } from '../mockNews'
 
 export default function NewsDetail() {
   const { newsId } = useParams()
@@ -19,23 +20,26 @@ export default function NewsDetail() {
     () =>
       (async () => {
         setLoader(true)
+        if (newsId < 100) {
+          setNews(await mockNews.find((element) => element.id === newsId))
+        } else {
+          const requestNews = await getNews(newsId)
+          if (requestNews.error) {
+            alertServiceError(
+              requestNews.message,
+              'No se pudo obtener la información solicitada',
+            )
+            history.push('/')
+          }
 
-        const requestNews = await getNews(newsId)
-        if (requestNews.error) {
-          alertServiceError(
-            requestNews.message,
-            'No se pudo obtener la información solicitada',
-          )
-          history.push('/')
+          const newsData = requestNews.data?.data
+          newsData
+            ? setNews(newsData)
+            : alertServiceError(
+                'No se pudo cargar la noticia',
+                'Verificá que la URL sea correcta',
+              ) && history.push('/')
         }
-
-        const newsData = requestNews.data?.data
-        newsData
-          ? setNews(newsData)
-          : alertServiceError(
-              'No se pudo cargar la noticia',
-              'Verificá que la URL sea correcta',
-            ) && history.push('/')
 
         setLoader(false)
       })(),
@@ -47,7 +51,7 @@ export default function NewsDetail() {
       {loader ? (
         <Spinner />
       ) : (
-        <Container sx={{ mt: 4 }}>
+        <Container sx={{ mt: 10 }}>
           <Controller>
             <Scene duration={600} triggerHook={0.5} offset={225}>
               <Box sx={{ flexDirection: 'column' }}>

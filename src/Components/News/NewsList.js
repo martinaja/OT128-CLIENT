@@ -6,6 +6,7 @@ import { SkeletonArticle } from './../Skeleton/SkeletonArticle'
 import { alertServiceError } from '../AlertService'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchNew } from '../../features/news/newsReducer'
+import { mockNews } from './mockNews'
 
 const NewsList = ({ from }) => {
   const dispatch = useDispatch()
@@ -67,7 +68,8 @@ const NewsList = ({ from }) => {
             spacing={{ xs: 2, md: 3 }}
           >
             {state.news?.length ? (
-              state.news?.slice(startSlice, sliceNews).map((element) => {
+              // state.news?.slice(startSlice, sliceNews).map((element) => {
+              mockNews.slice(startSlice, sliceNews).map((element) => {
                 return (
                   <Grid item key={element.id}>
                     <CustomCard
@@ -98,7 +100,8 @@ const NewsList = ({ from }) => {
                 <Stack spacing={2}>
                   <Pagination
                     color="primary"
-                    count={Math.ceil(state.news?.length / 6)}
+                    // count={Math.ceil(state.news?.length / 6)}
+                    count={Math.ceil(mockNews.length / 6)}
                     page={page}
                     onChange={handleChange}
                   />
@@ -113,5 +116,3 @@ const NewsList = ({ from }) => {
 }
 
 export default NewsList
-
-
