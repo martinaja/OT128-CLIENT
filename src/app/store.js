@@ -1,8 +1,25 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from '@reduxjs/toolkit'
+import authReducer from '../features/auth/authReducer'
+import activitiesReducer from '../features/activities/activitiesReducer'
+import categoriesReducer from '../features/categories/categoriesReducer'
+import usersReducer from '../features/backofficeUsers/usersReducer'
+import membersReducer from '../features/members/membersReducer'
+import newsReducer from '../features/news/newsReducer'
+import slidesReducer from '../features/slide/slidesReducer'
+import organizationReducer from '../features/organization/organizationReducer'
+import testimonialReducer from '../features/testimonial/testimonialReducer'
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    counter: counterReducer,
-  },
-});
+    auth: authReducer,
+    members: membersReducer,
+    users: usersReducer,
+    categories: categoriesReducer,
+    activities: activitiesReducer,
+    news: newsReducer,
+    slides: slidesReducer,
+    organization: organizationReducer,
+    testimonial: testimonialReducer,
+  }, //add reducers
+})
+export default store

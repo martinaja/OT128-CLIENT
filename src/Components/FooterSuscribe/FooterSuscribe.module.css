@@ -1,0 +1,56 @@
+.formContainer {
+  margin: 2rem 0;
+}
+
+.formTitle,
+.formButton {
+  margin: 1rem 0 !important;
+  font-size: 1.1rem !important;
+}
+
+.formControl input,
+.formControl label {
+  font-size: 1.1rem !important;
+  color: white !important;
+}
+
+.formControl input {
+  height: 3rem;
+}
+
+.errorText {
+  color: red !important;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .formControl {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    align-items: center !important;
+  }
+  .formButton {
+    grid-column: 1 / 3 !important;
+    width: 100%;
+  }
+
+  .formTitle,
+  .formButton {
+    font-size: 1.4rem !important;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .formControl {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr !important;
+  }
+  .formButton {
+    grid-column: 3 !important;
+  }
+
+  .formTitle,
+  .formButton {
+    font-size: 1.4rem !important;
+  }
+}
