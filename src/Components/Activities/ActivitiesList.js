@@ -59,7 +59,7 @@ const ActivitiesList = () => {
     <>
       <Box
         as="img"
-        sx={{ width: '100vw', height: '45vh' }}
+        sx={{ width: '100vw', height: 'auto' }}
         src="/images/actividades1.jpg"
         alt="actividades"
       />

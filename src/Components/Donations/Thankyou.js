@@ -17,6 +17,7 @@ const Thankyou = () => {
           backgroundSize: 'cover',
           padding: '50px 30px',
           textAlign: 'center',
+          minHeight: '70vh',
         }}
       >
         <h3 className="tenkiuH3">

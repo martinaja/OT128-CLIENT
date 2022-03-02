@@ -70,7 +70,7 @@ const CustomCard = ({
           {parse(
             String(
               description
-                ? description.slice(0, 70).concat('...')
+                ? description.slice(0, 50).concat('...')
                 : 'no se proporsionó descripción',
             ),
           )}
