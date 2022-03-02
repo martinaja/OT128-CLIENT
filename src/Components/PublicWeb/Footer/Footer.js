@@ -69,7 +69,7 @@ function Footer() {
                 <span>SomosMás</span>
               </a>
             </Box>
-            {!isUserSubscribe ? (
+            {!userSubscribe ? (
               <FooterSuscribe setUserSubscribe={setUserSubscribe} />
             ) : (
               <h4 className={style.h4Text}>
