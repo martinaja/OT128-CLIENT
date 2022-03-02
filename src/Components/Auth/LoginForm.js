@@ -65,6 +65,7 @@ export const FormLogic = ({ classes, authData }) => {
           alignItems: 'center',
           justifyContent: 'space-between',
           padding: '2rem',
+          minHeight: '75vh',
         }}
       >
         <CssBaseline />

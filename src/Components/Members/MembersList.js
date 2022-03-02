@@ -42,7 +42,7 @@ export const MembersList = () => {
 
   return (
     <>
-      <Box sx={{ m: 2 }}>
+      <Box sx={{ m: 2, margin: '2rem 0' }}>
         <h2 style={{ margin: '35px 0' }}>Integran nuestra organización</h2>
         <Grid
           sx={{ justifyContent: 'space-evenly' }}

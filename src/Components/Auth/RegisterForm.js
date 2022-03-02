@@ -53,6 +53,7 @@ const FormLogic = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '1rem',
+        minHeight: '75vh',
       }}
     >
       <CssBaseline />

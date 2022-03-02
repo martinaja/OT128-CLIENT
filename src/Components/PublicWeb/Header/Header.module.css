@@ -231,10 +231,20 @@
 }
 
 .sidebarBtnWrap {
-  display: flex;
+  display: grid;
   row-gap: 1rem;
   flex-direction: column;
   align-items: center;
+  gap: 2rem;
+  justify-content: center;
+}
+@media screen and (min-width: 700px) {
+  .sidebarBtnWrap {
+    display: flex;
+    row-gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .sidebarRoute {
@@ -295,7 +305,7 @@
 @media screen and (min-width: 700px) {
   .sidebarBtnWrap {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     column-gap: 1rem;
   }
 }
