@@ -10,7 +10,6 @@
 }
 
 .logo {
-  width: 100%;
   height: 4rem;
   margin: 1rem 0;
 }
@@ -61,23 +60,18 @@
   color: #eee;
   text-decoration: none;
   display: inline-flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.social__icon span {
+  margin-left: 0.5rem;
 }
 
 @media screen and (max-width: 800px) {
   .social__icon span {
     display: none;
   }
-}
-
-.social__tags {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 2rem;
 }
 
 .social__copyrights {
@@ -131,8 +125,14 @@
 .social__tags {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-around;
+  margin: 1rem 0;
+}
+
+@media screen and (min-width: 768px) {
+  .social__tags {
+    justify-content: space-evenly;
+  }
 }
 
 .social__tags__color {
@@ -173,13 +173,6 @@
   color: #eee;
 }
 
-.social__tags {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 @media screen and (max-width: 768px) {
   .col {
     display: flex;
@@ -196,4 +189,8 @@
     margin-bottom: 0rem !important;
     background-color: #35858b;
   }
+}
+
+.h4Text {
+  font-size: 1.5rem;
 }
