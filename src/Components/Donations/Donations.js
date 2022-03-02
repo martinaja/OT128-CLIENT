@@ -7,7 +7,7 @@ const Donations = () => {
     <>
       <Box
         as="img"
-        sx={{ width: '99.1vw'}}
+        sx={{ width: '100vw'}}
         src="/images/donaciones.png"
         alt="donaciones"
       />
