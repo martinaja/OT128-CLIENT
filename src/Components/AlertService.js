@@ -74,7 +74,7 @@ export function alertDonationsMP(image) {
         imageUrl: image,
         confirmButtonText: 'Ok',
         preConfirm: () => {
-         <Redirect to='/#/gracias' />
+          return window.location.replace('/#/gracias')
         },
       })
     }
