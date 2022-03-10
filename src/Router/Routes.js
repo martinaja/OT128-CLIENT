@@ -1,4 +1,4 @@
-import { Route, Redirect, BrowserRouter, Switch } from 'react-router-dom'
+import { Route, Redirect, HashRouter, Switch } from 'react-router-dom'
 import { PublicRoutes } from './PublicRoutes'
 import { PrivateRoutes } from './PrivateRoutes'
 import SchoolCampaign from '../Campaigns/School/SchoolCampaign'
@@ -7,7 +7,7 @@ import NotFound from '../Components/NotFound/NotFound'
 
 export const Routes = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route
           exact
