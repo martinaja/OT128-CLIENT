@@ -72,6 +72,6 @@ export const Routes = () => {
           <Redirect to="/404" />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
